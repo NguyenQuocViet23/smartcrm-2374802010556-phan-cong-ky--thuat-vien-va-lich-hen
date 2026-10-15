@@ -1,0 +1,425 @@
+<mxfile host="Electron" modified="2026-10-15T06:36:23.633Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.6.4 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="EfuvDmpMj70I0VzcMzq6" version="24.6.4" type="device" pages="2">
+  <diagram id="p0" name="ERD L04">
+    <mxGraphModel dx="5685" dy="2090" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c2" value="ERD – Luồng L04: Phân công kỹ thuật viên và lịch hẹn (PostgreSQL 16, chuẩn 3NF, 6 bảng)" style="text;fontStyle=1;fontSize=15;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="5" width="1000" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="service_center" value="service_center" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#e1d5e7;strokeColor=#333333;html=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="60" width="290" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="service_center.center_id" value="PK  center_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="service_center" vertex="1">
+          <mxGeometry y="30" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="service_center.center_code" value="UQ  center_code : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="service_center" vertex="1">
+          <mxGeometry y="52" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="service_center.center_name" value="    center_name : VARCHAR(120) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="service_center" vertex="1">
+          <mxGeometry y="74" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="service_center.city" value="    city : VARCHAR(60) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="service_center" vertex="1">
+          <mxGeometry y="96" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician" value="technician" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#333333;html=1;" parent="1" vertex="1">
+          <mxGeometry x="470" y="60" width="310" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="technician.technician_id" value="PK  technician_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="technician" vertex="1">
+          <mxGeometry y="30" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician.technician_code" value="UQ  technician_code : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="technician" vertex="1">
+          <mxGeometry y="52" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician.full_name" value="    full_name : VARCHAR(120) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="technician" vertex="1">
+          <mxGeometry y="74" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician.center_id" value="FK  center_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="technician" vertex="1">
+          <mxGeometry y="96" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician.level" value="    level : VARCHAR(10) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="technician" vertex="1">
+          <mxGeometry y="118" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician.is_active" value="    is_active : BOOLEAN NN =TRUE" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="technician" vertex="1">
+          <mxGeometry y="140" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician_skill" value="technician_skill" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#333333;html=1;" parent="1" vertex="1">
+          <mxGeometry x="960" y="60" width="310" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="technician_skill.technician_id" value="PK,FK technician_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="technician_skill" vertex="1">
+          <mxGeometry y="30" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician_skill.category_code" value="PK  category_code : VARCHAR(20) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="technician_skill" vertex="1">
+          <mxGeometry y="52" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="technician_skill.proficiency" value="    proficiency : SMALLINT NN 1..5" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="technician_skill" vertex="1">
+          <mxGeometry y="74" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket" value="ticket" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#333333;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-150" y="320" width="360" height="338" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.ticket_id" value="PK  ticket_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="30" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.ticket_code" value="UQ  ticket_code : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="52" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.center_id" value="FK  center_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="74" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.customer_name" value="    customer_name : VARCHAR(120) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="96" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.customer_phone" value="    customer_phone : VARCHAR(10) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="118" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.serial_no" value="    serial_no : VARCHAR(50) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="140" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.issue_desc" value="    issue_desc : TEXT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="162" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.category_code" value="    category_code : VARCHAR(20) CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="184" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.priority" value="    priority : VARCHAR(10) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="206" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.status" value="    status : VARCHAR(20) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="228" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.technician_id" value="FK  technician_id : BIGINT NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="250" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.received_at" value="    received_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="272" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.due_date" value="    due_date : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="294" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket.closed_at" value="    closed_at : TIMESTAMPTZ NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket" vertex="1">
+          <mxGeometry y="316" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment" value="appointment" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffe6cc;strokeColor=#333333;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="320" width="330" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.appointment_id" value="PK  appointment_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="30" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.ticket_id" value="FK  ticket_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="52" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.technician_id" value="FK  technician_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="74" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.appointment_type" value="    appointment_type : VARCHAR(10) NN GIAO|NHAN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="96" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.start_at" value="    start_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="118" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.end_at" value="    end_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="140" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.status" value="    status : VARCHAR(10) NN DA_HEN|DA_HUY" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="162" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.note" value="    note : VARCHAR(255) NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="184" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.created_by" value="    created_by : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="206" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment.created_at" value="    created_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="appointment" vertex="1">
+          <mxGeometry y="228" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log" value="ticket_status_log" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#333333;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="640" width="380" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.log_id" value="PK  log_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="30" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.ticket_id" value="FK  ticket_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="52" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.event_type" value="    event_type : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="74" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.from_status" value="    from_status : VARCHAR(20) NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="96" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.to_status" value="    to_status : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="118" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.from_technician_id" value="FK  from_technician_id : BIGINT NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="140" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.to_technician_id" value="FK  to_technician_id : BIGINT NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="162" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.changed_by" value="    changed_by : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="184" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.changed_at" value="    changed_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="206" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket_status_log.note" value="    note : VARCHAR(255) NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" parent="ticket_status_log" vertex="1">
+          <mxGeometry y="228" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="service_center.center_id" target="technician.center_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="service_center.center_id" target="ticket.center_id" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="250" />
+              <mxPoint x="390" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c5" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="technician.technician_id" target="technician_skill.technician_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="1 : N (0..1 KTV/phiếu)" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERzeroToOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="technician.technician_id" target="ticket.technician_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="ticket.ticket_code" target="appointment.ticket_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="technician.technician_id" target="appointment.technician_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="ticket.ticket_code" target="ticket_status_log.ticket_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c10" value="0..1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERzeroToOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="technician.technician_id" target="ticket_status_log.to_technician_id" edge="1">
+          <mxGeometry x="0.0067" y="10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="460" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c11" value="0..1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERzeroToOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" parent="1" source="technician.technician_id" target="ticket_status_log.from_technician_id" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c12" value="INDEX (gắn với NFR1 – hiệu năng)&lt;br&gt;idx_ticket_center_status_due  ON ticket (center_id, status, due_date)  → FR1/UC1: &amp;lt; 2 giây, 10.000 phiếu, phân trang 20 dòng&lt;br&gt;idx_ticket_tech_status_due    ON ticket (technician_id, status, due_date) → FR2 (khối lượng, A1), FR5/UC5&lt;br&gt;idx_technician_center_active  ON technician (center_id, is_active)       → FR2/UC2: &amp;lt; 1 giây, 38 kỹ thuật viên&lt;br&gt;idx_skill_category_prof       ON technician_skill (category_code, proficiency) → QT-08&lt;br&gt;idx_appointment_ticket        ON appointment (ticket_id) · ex_appointment_no_overlap (GiST: technician_id + khoảng thời gian) → FR7&lt;br&gt;idx_log_ticket_changed        ON ticket_status_log (ticket_id, changed_at) → FR3, FR4, FR8" style="text;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;strokeColor=#666666;spacing=6;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1280" y="240" width="560" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" value="CHÚ THÍCH&lt;br&gt;PK = khóa chính (khóa nhân tạo) · FK = khóa ngoại · UQ = UNIQUE · NN = NOT NULL · CHECK = ràng buộc giá trị&lt;br&gt;Đầu chân quạ (ERmany) = phía &quot;nhiều&quot;; gạch đơn = đúng một; vòng tròn+gạch = 0..1&lt;br&gt;Số điện thoại, mã phiếu là khóa nghiệp vụ → chỉ UNIQUE, không làm khóa chính&lt;br&gt;Không lưu giá trị tính được: khối lượng công việc, cờ quá hạn, số ngày xử lý đều tính khi truy vấn&lt;br&gt;customer_name, customer_phone là thông tin liên hệ chụp lại lúc tiếp nhận (L2 ghi, L04 chỉ đọc)&lt;br&gt;changed_by, created_by: mã nhân viên từ hệ thống đăng nhập, không có bảng nhân viên trong phạm vi L04" style="text;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;strokeColor=#999999;spacing=6;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1280" y="440" width="560" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c14" value="SOI 5 LỖI ERD&lt;br&gt;[1] Bảng cô lập: không có – 6 bảng đều nối bằng khóa ngoại&lt;br&gt;[2] Thiếu bảng lịch sử: có ticket_status_log&lt;br&gt;[3] Giá trị tính được: không lưu&lt;br&gt;[4] Thiếu index: đã có 6 index/ràng buộc&lt;br&gt;[5] Khóa nghiệp vụ làm khóa chính: không" style="text;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=10;strokeColor=#82b366;spacing=6;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1280" y="640" width="330" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Lm3S4MY0KwwYNlcrDMXf" name="Page-2">
+    <mxGraphModel dx="3218" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Wu84tIO8H2iusCXzbEio-1" value="ERD – Luồng L04: Phân công kỹ thuật viên và lịch hẹn (PostgreSQL 16, chuẩn 3NF, 6 bảng)" style="text;fontStyle=1;fontSize=15;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="5" width="1000" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-2" value="service_center" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#e1d5e7;strokeColor=#333333;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-190" y="50" width="290" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-3" value="PK  center_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-2">
+          <mxGeometry y="30" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-4" value="UQ  center_code : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-2">
+          <mxGeometry y="52" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-5" value="    center_name : VARCHAR(120) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-2">
+          <mxGeometry y="74" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-6" value="    city : VARCHAR(60) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-2">
+          <mxGeometry y="96" width="290" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-7" value="technician" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#333333;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="50" width="310" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-8" value="PK  technician_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-7">
+          <mxGeometry y="30" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-9" value="UQ  technician_code : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-7">
+          <mxGeometry y="52" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-10" value="    full_name : VARCHAR(120) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-7">
+          <mxGeometry y="74" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-11" value="FK  center_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-7">
+          <mxGeometry y="96" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-12" value="    level : VARCHAR(10) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-7">
+          <mxGeometry y="118" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-13" value="    is_active : BOOLEAN NN =TRUE" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-7">
+          <mxGeometry y="140" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-14" value="technician_skill" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#333333;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="50" width="310" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-15" value="PK,FK technician_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-14">
+          <mxGeometry y="30" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-16" value="PK  category_code : VARCHAR(20) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-14">
+          <mxGeometry y="52" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-17" value="    proficiency : SMALLINT NN 1..5" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-14">
+          <mxGeometry y="74" width="310" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-18" value="ticket" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#333333;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="310" width="360" height="338" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-19" value="PK  ticket_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="30" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-20" value="UQ  ticket_code : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="52" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-21" value="FK  center_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="74" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-22" value="    customer_name : VARCHAR(120) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="96" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-23" value="    customer_phone : VARCHAR(10) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="118" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-24" value="    serial_no : VARCHAR(50) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="140" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-25" value="    issue_desc : TEXT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="162" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-26" value="    category_code : VARCHAR(20) CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="184" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-27" value="    priority : VARCHAR(10) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="206" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-28" value="    status : VARCHAR(20) NN CHECK" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="228" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-29" value="FK  technician_id : BIGINT NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="250" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-30" value="    received_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="272" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-31" value="    due_date : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="294" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-32" value="    closed_at : TIMESTAMPTZ NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-18">
+          <mxGeometry y="316" width="360" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-33" value="appointment" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#ffe6cc;strokeColor=#333333;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="310" width="330" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-34" value="PK  appointment_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="30" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-35" value="FK  ticket_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="52" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-36" value="FK  technician_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="74" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-37" value="    appointment_type : VARCHAR(10) NN GIAO|NHAN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="96" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-38" value="    start_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="118" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-39" value="    end_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="140" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-40" value="    status : VARCHAR(10) NN DA_HEN|DA_HUY" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="162" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-41" value="    note : VARCHAR(255) NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="184" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-42" value="    created_by : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="206" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-43" value="    created_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-33">
+          <mxGeometry y="228" width="330" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-44" value="ticket_status_log" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#fff2cc;strokeColor=#333333;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="630" width="380" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-45" value="PK  log_id : BIGSERIAL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;fontStyle=1;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="30" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-46" value="FK  ticket_id : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="52" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-47" value="    event_type : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="74" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-48" value="    from_status : VARCHAR(20) NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="96" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-49" value="    to_status : VARCHAR(20) NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="118" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-50" value="FK  from_technician_id : BIGINT NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="140" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-51" value="FK  to_technician_id : BIGINT NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="162" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-52" value="    changed_by : BIGINT NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="184" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-53" value="    changed_at : TIMESTAMPTZ NN" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="206" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-54" value="    note : VARCHAR(255) NULL" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=middle;spacingLeft=6;fontSize=10;fontFamily=Courier New;html=1;" vertex="1" parent="Wu84tIO8H2iusCXzbEio-44">
+          <mxGeometry y="228" width="380" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-55" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-3" target="Wu84tIO8H2iusCXzbEio-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-56" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-3" target="Wu84tIO8H2iusCXzbEio-21">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="240" />
+              <mxPoint x="160" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-57" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-8" target="Wu84tIO8H2iusCXzbEio-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-58" value="1 : N (0..1 KTV/phiếu)" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERzeroToOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-8" target="Wu84tIO8H2iusCXzbEio-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-59" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-20" target="Wu84tIO8H2iusCXzbEio-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-60" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-8" target="Wu84tIO8H2iusCXzbEio-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-61" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERmandOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-20" target="Wu84tIO8H2iusCXzbEio-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-62" value="0..1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERzeroToOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-8" target="Wu84tIO8H2iusCXzbEio-51">
+          <mxGeometry x="0.0067" y="10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="450" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wu84tIO8H2iusCXzbEio-63" value="0..1 : N" style="edgeStyle=entityRelationEdgeStyle;endArrow=ERmany;endFill=0;startArrow=ERzeroToOne;startFill=0;fontSize=10;labelBackgroundColor=#ffffff;html=1;" edge="1" parent="1" source="Wu84tIO8H2iusCXzbEio-8" target="Wu84tIO8H2iusCXzbEio-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
