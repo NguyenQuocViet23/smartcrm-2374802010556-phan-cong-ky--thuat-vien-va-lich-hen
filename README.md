@@ -250,6 +250,18 @@ Các test UI thao tác trên đăng nhập/đăng xuất, lọc và phân trang 
 python -m pytest -v
 ```
 
+Lệnh kiểm thử sẽ tự xóa ảnh cũ, chụp kết quả từng test và sinh:
+
+- `export/test-evidence/_summary.png` và ảnh PNG từng test case.
+- `export/testcase.md`, gồm đầy đủ số liệu, chi tiết từng test và cảnh báo.
+
+Để dùng thư mục xuất khác, đặt biến `EXPORT_DIR` trước khi chạy:
+
+```powershell
+$env:EXPORT_DIR="export"
+python -m pytest -v
+```
+
 Các test backend dùng `TestClient` để kiểm tra API và validation; lần xác minh gần nhất đạt `25 passed`. Lệnh này không cần frontend hoặc PostgreSQL.
 
 Lần xác minh gần nhất: bộ UI chạy ở chế độ headed đạt `3 passed`; `npm run build` thành công. Test UI giả lập **không thay thế** 18 acceptance test tích hợp với PostgreSQL và dữ liệu thật. Hiện chưa có thư mục `tests\service`, và ảnh UI PASS chưa được tự động lưu vào `docs/test-evidence/`.
