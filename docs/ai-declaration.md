@@ -37,3 +37,9 @@
 ## 4. Cam kết
 
 Em đã đọc, hiểu và chịu trách nhiệm về toàn bộ nội dung nộp. Các phần có sự hỗ trợ của công cụ AI được khai báo ở trên. [Ký tên / ghi rõ họ tên sau khi đã kiểm chứng.]
+
+## 5. Bổ sung sử dụng công cụ AI – Buổi 10
+
+| Công cụ | Dùng vào việc gì | Cách tự kiểm chứng |
+|---|---|---|
+| Copilot SDK trong VS Code | Khảo sát repo, xây phần seed/backend/frontend có thể kiểm chứng, viết test tiện ích/API, cập nhật README và ghi nhận giới hạn do thiếu CSV/PostgreSQL | Chạy `python -m pytest -v`, `npm run build`, rà `fetch(` trong `pages/` và `components`; không đánh dấu TC01–TC18 hoàn tất khi chưa có dữ liệu/CSDL cần thiết |

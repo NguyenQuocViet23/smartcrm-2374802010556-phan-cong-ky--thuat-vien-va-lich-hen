@@ -13,8 +13,11 @@ venv/
 
 # Dữ liệu & model lớn
 data/raw/
+data/processed/demo_accounts.json
 models/*.pkl
 models/*.pt
+*.csv
+!data/sample/*.csv
 
 # IDE / OS
 .vscode/
