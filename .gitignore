@@ -10,6 +10,7 @@ dist/
 __pycache__/
 .venv/
 venv/
+reports/*.csv
 
 # Dữ liệu & model lớn
 data/raw/
