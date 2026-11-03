@@ -186,6 +186,18 @@ npm run dev
 
 Đặt bộ CSV case-study được cấp trên LMS vào `data/raw/`. Repo hiện có `service_centers.csv`, `issue_categories.csv`, `technicians.csv`, `technician_skills.csv`, `tickets_history.csv`, `customers_raw.csv`; **chưa có** `ticket_status_log.csv`, `appointments.csv` hoặc `gen_sample.py`/`tools/gen_sample.py`.
 
+Để dựng lại toàn bộ dữ liệu từ một clone mới, đặt bộ CSV đầy đủ vào `data/raw/` và chạy lần lượt từng lệnh sau từ thư mục gốc:
+
+```powershell
+psql -U postgres -d smartcrm -f db/schema.sql
+python scripts/load_catalog.py
+python scripts/load_tickets.py
+python scripts/gen_appointments.py
+python scripts/load_appointments.py
+```
+
+Pipeline trên dùng seed `20260901` cho 30 phiếu MOI và seed `20261102` cho 300 lịch hẹn. `data/sample/appointments.csv` là tệp mẫu; dữ liệu đầy đủ case-study được đặt tại `data/raw/`. Toàn bộ báo cáo seed nằm trong `reports/`, trong đó `reports/moi_tickets_seed20260901.csv` chứa seed MOI.
+
 Kết quả khảo sát thực tế: 7.800 ticket nối được với khách qua `tickets_history.customer_id → customers_raw.record_id`; 483 phiếu không có số điện thoại hợp lệ sau chuẩn hóa và cần reject theo QT-02. Status hiện có trong CSV đã là mã không dấu; bộ chuẩn hóa chấp nhận cả mã này và alias có dấu theo prompt.
 
 Seed đầy đủ hiện **chưa thể chạy**. Mặc định script dừng nếu không có mapping đã xác minh cho log và lịch hẹn; không tự sinh các dòng thay thế. Khi đã có đủ nguồn và mapping, lệnh dự kiến:

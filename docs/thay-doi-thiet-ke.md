@@ -43,3 +43,42 @@ Các thay đổi dưới đây chỉ bổ sung hành vi nằm trong phạm vi đ
 - **Quyết định:** **GIỮ** – seed mặc định dừng trước khi ghi dữ liệu nếu pipeline không thể bảo đảm nhập đủ log và lịch hẹn; `--allow-incomplete` chỉ dành cho nạp bảng lõi và trả mã thoát không thành công để tránh hiểu nhầm là dữ liệu hoàn chỉnh.
 - **Lý do:** Prompt yêu cầu dữ liệu thật, không cho tạo vài dòng giả và yêu cầu không tuyên bố test PASS khi không chạy được.
 - **Ảnh hưởng:** Báo cáo nạp dữ liệu đánh dấu chưa nạp; TC01–TC18, ảnh kiểm thử, reset và clone sạch chưa được xác minh.
+
+Seed 20260901, 30 phiếu MOI, cách cắt dòng log MOI → DA_PHAN_CONG.
+483 phiếu (6,2%) bị loại vì thiếu số điện thoại, kèm lý do không tạo số giả.
+ticket_status_log.csv được sao chép từ thư mục dataset vào data/raw/.
+
+## TD-07 – Loại phiếu thiếu số điện thoại hợp lệ
+
+- **Vấn đề phát hiện:** Có 483 phiếu (6,2% của 7.800) không có `customer_phone` hợp lệ trong tập dữ liệu nguồn.
+- **Quyết định:** **SỬA** – loại 483 phiếu vì `customer_phone` là NOT NULL và bắt buộc khớp QT-02 (`^0[0-9]{9}$`); không tạo số điện thoại giả. Loại kèm 2.363 dòng trong `ticket_status_log`.
+- **Lý do:** Không thể nạp hợp lệ các phiếu thiếu dữ liệu bắt buộc mà không vi phạm schema và QT-02.
+- **Ảnh hưởng:** Kết quả nạp giữ 7.317 phiếu và 35.719 dòng log.
+
+## TD-08 – Seed phiếu MOI 20260901
+
+- **Vấn đề phát hiện:** Cần tạo tập MOI ổn định để phục vụ demo seed `20260901`.
+- **Quyết định:** **SỬA** – chọn 30 phiếu MOI, mỗi trung tâm 5 phiếu, từ pool 227 phiếu `DA_PHAN_CONG` hợp lệ; lưu danh sách tại `reports/moi_tickets_seed20260901.csv`. Cắt log từ thời điểm chuyển sang `DA_PHAN_CONG` để lịch sử kết thúc ở `MOI`.
+- **Lý do:** Tập mẫu cố định giúp lặp lại được seed và lịch sử không còn trạng thái sau `MOI`.
+- **Ảnh hưởng:** Không thêm dòng chuyển `DA_PHAN_CONG -> MOI`, vì vi phạm QT-06.
+
+## TD-09 – Sinh lịch hẹn thay thế gen_sample.py
+
+- **Vấn đề phát hiện:** `gen_sample.py` có thể sinh dữ liệu không tương thích schema và không mô phỏng quy tắc L04.
+- **Quyết định:** **GIỮ** schema hiện tại và sử dụng `scripts/gen_appointments.py` cho seed `20261102`; sinh 300 lịch gồm 270 `DA_HEN` và 30 `DA_HUY`, từ 2026-11-03 đến 2027-01-30, thứ Hai–thứ Bảy, khung 08:00–17:30 theo slot 30 phút, từ pool 943 phiếu `DA_PHAN_CONG`/`DANG_XU_LY`/`CHO_LINH_KIEN`; `appointment.technician_id` phải bằng `ticket.technician_id`.
+- **Lý do:** `gen_sample.py` sinh các status `DA_DAT`, `DA_XAC_NHAN`, `HOAN_TAT`, `KHACH_HUY`, `KHACH_KHONG_DEN`, các loại không có trong schema và khung 2 giờ; thiếu các trường bắt buộc; gắn KTV/trung tâm ngẫu nhiên độc lập; không chống trùng lịch và không lọc trạng thái phiếu. Schema chỉ nhận `DA_HEN`/`DA_HUY` và `GIAO`/`NHAN`.
+- **Ảnh hưởng:** Tệp mẫu được giữ tại `data/sample/appointments.csv`; dữ liệu sinh tuân đúng trạng thái, loại lịch, khoảng thời gian, pool phiếu và KTV của phiếu.
+
+## TD-10 – Không tạo lịch cho phiếu HOAN_TAT
+
+- **Vấn đề phát hiện:** Để tạo lịch cho phiếu cần kiểm tra điều kiện trạng thái của SRS UC6 và cách đối chiếu với tiêu chí GWT trong tài liệu L04.
+- **Quyết định:** **GIỮ** – không tạo lịch cho phiếu `HOAN_TAT`.
+- **Lý do:** SRS UC6 chỉ cho phép đặt lịch từ trạng thái `DA_PHAN_CONG` trở đi nhưng không bao gồm sau khi hoàn tất.
+- **Ảnh hưởng:** `L04_TieuChi_GWT EX-7.3` hiện mới chỉ từ chối `MOI`, `DA_DONG`, `DA_HUY` và đang mâu thuẫn SRS; điểm này cần sửa ở BT3.
+
+## TD-11 – Chuẩn hoá kiểu dữ liệu nạp
+
+- **Vấn đề phát hiện:** Một số trường nguồn có kiểu/xuất dữ liệu không khớp lược đồ PostgreSQL hoặc cần ánh xạ danh mục qua mã.
+- **Quyết định:** **SỬA** – ép trực tiếp `changed_by` sang BIGINT khi cả 60 giá trị quan sát đều là số nguyên; kiểm tra rồi chuyển kiểu `is_active`, `proficiency` trong khoảng 1..5 và `level`. Ánh xạ `category_id` sang `category_code` bằng `issue_categories.csv`.
+- **Lý do:** Các phép đổi kiểu phải được kiểm chứng trước khi nạp, tránh tạo dữ liệu ngoại lệ hoặc giá trị giả.
+- **Ảnh hưởng:** Giảm lỗi ép kiểu khi nạp và bảo đảm danh mục phiếu có mã category đúng schema.
