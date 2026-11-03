@@ -25,6 +25,7 @@ EXPORT_DIR = Path(os.getenv("EXPORT_DIR", ROOT / "export"))
 if not EXPORT_DIR.is_absolute():
     EXPORT_DIR = ROOT / EXPORT_DIR
 EVIDENCE_DIR = EXPORT_DIR / "test-evidence"
+ACTIVE_RUN_DIR: Path | None = None
 
 
 def _font(size: int, bold: bool = False) -> ImageFont.ImageFont:
@@ -102,13 +103,21 @@ def _git_value(*args: str) -> str:
 
 
 def clean_evidence() -> None:
-    EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
-    for image in EVIDENCE_DIR.glob("*"):
-        if image.is_file() and image.suffix.lower() in {".png", ".jpg", ".jpeg"}:
-            image.unlink()
-    report = EXPORT_DIR / "testcase.md"
-    if report.exists():
-        report.unlink()
+    """Evidence cleanup is deliberately disabled for normal pytest runs."""
+    return None
+
+
+def configure_evidence() -> None:
+    global ACTIVE_RUN_DIR, EVIDENCE_DIR
+    if os.getenv("EVIDENCE") != "1":
+        ACTIVE_RUN_DIR = None
+        EVIDENCE_DIR = EXPORT_DIR / "test-evidence"
+        return
+
+    run_id = datetime.now().astimezone().strftime("%Y%m%d-%H%M%S")
+    ACTIVE_RUN_DIR = EXPORT_DIR / "test-evidence" / f"run-{run_id}"
+    ACTIVE_RUN_DIR.mkdir(parents=True, exist_ok=True)
+    EVIDENCE_DIR = ACTIVE_RUN_DIR
 
 
 def screenshot_ui(page: Any, test_id: str, title: str, status: str) -> list[Path]:
@@ -117,6 +126,13 @@ def screenshot_ui(page: Any, test_id: str, title: str, status: str) -> list[Path
     path = EVIDENCE_DIR / f"{test_id}_{slugify(title)}{suffix}.png"
     page.screenshot(path=str(path), full_page=True)
     return [path]
+
+
+def capture_ui_notification(page: Any, test_id: str, step: str) -> Path:
+    EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
+    path = EVIDENCE_DIR / f"{test_id}_{slugify(step)}.png"
+    page.screenshot(path=str(path), full_page=True)
+    return path
 
 
 def save_summary(results: list[dict[str, Any]]) -> None:
@@ -254,4 +270,4 @@ def write_report(results: list[dict[str, Any]], session: pytest.Session) -> None
         "- Tùy thư mục xuất: Windows PowerShell: `$env:EXPORT_DIR=\"export\"` rồi chạy lại pytest.",
         "",
     ])
-    (EXPORT_DIR / "testcase.md").write_text("\n".join(lines), encoding="utf-8")
+    (EXPORT_DIR / "testcase.generated.md").write_text("\n".join(lines), encoding="utf-8")

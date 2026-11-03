@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+import os
+import re
 from typing import Any
+from urllib.parse import unquote, urlparse
 
 import pytest
 
 from tests.evidence import (
+    EVIDENCE_DIR,
     clean_evidence,
+    configure_evidence,
     render_test_evidence,
     save_summary,
     screenshot_ui,
@@ -17,12 +22,52 @@ from tests.evidence import (
 RESULTS_KEY = pytest.StashKey[list[dict[str, Any]]]()
 
 
+def database_name_from_url(database_url: str) -> str:
+    parsed = urlparse(database_url)
+    if parsed.scheme and parsed.hostname is not None:
+        return unquote(parsed.path.lstrip("/")).split("?", 1)[0]
+    match = re.search(r"(?:^|[/?])([^/?]+)$", database_url)
+    return unquote(match.group(1) if match else database_url)
+
+
+def validate_test_database(database_url: str) -> str:
+    database_name = database_name_from_url(database_url)
+    if not database_name.endswith("_test"):
+        raise RuntimeError("Từ chối chạy: tên database phải kết thúc bằng _test")
+    return database_name
+
+
+def get_test_database_url() -> str:
+    configured_url = os.getenv("TEST_DATABASE_URL")
+    if configured_url:
+        validate_test_database(configured_url)
+        return configured_url
+
+    database_name = os.getenv("TEST_DB_NAME")
+    if database_name:
+        validate_test_database(database_name)
+        host = os.getenv("DB_HOST", "localhost")
+        port = os.getenv("DB_PORT", "5432")
+        user = os.getenv("DB_USER", "postgres")
+        password = os.getenv("DB_PASSWORD")
+        auth = user + (f":{password}" if password else "")
+        return f"postgresql://{auth}@{host}:{port}/{database_name}"
+
+    raise RuntimeError("Từ chối chạy: chưa cấu hình TEST_DATABASE_URL hoặc TEST_DB_NAME")
+
+
+@pytest.fixture
+def test_database_url() -> str:
+    return get_test_database_url()
+
+
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "tc(case_id): identify a Buoi 10 test case")
     config.stash[RESULTS_KEY] = []
 
 
 def pytest_sessionstart(session: pytest.Session) -> None:
+    configure_evidence()
     clean_evidence()
 
 
@@ -63,14 +108,19 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
     node_path = item.nodeid
     is_ui = bool(item.get_closest_marker("ui"))
     images = []
-    if is_ui:
+    evidence_enabled = os.getenv("EVIDENCE") == "1"
+    if evidence_enabled and is_ui:
         page = item.funcargs.get("page")
         if page is not None:
             try:
                 images = screenshot_ui(page, test_id, title, status)
+                images = [
+                    *sorted(EVIDENCE_DIR.glob(f"{test_id}_*.png")),
+                    *images,
+                ]
             except Exception as error:
                 failure = f"{failure}\nKhông thể chụp ảnh UI: {error}" if failure else f"Không thể chụp ảnh UI: {error}"
-    else:
+    elif evidence_enabled:
         images = [
             render_test_evidence(
                 test_id, title, status, duration, details, failure
@@ -102,7 +152,7 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
 
 def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
     results = session.config.stash[RESULTS_KEY]
-    if results:
+    if os.getenv("EVIDENCE") == "1" and results:
         save_summary(results)
         write_report(results, session)
 
