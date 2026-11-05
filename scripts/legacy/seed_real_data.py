@@ -18,7 +18,7 @@ from typing import Any
 from dotenv import load_dotenv
 from sqlalchemy import URL, create_engine, make_url, text
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SEED = 20261023
 TIMEZONE = timezone(timedelta(hours=7))
 ALLOWED_CATEGORIES = {
@@ -388,6 +388,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    if os.getenv("ALLOW_LEGACY_SEED") != "1":
+        print(
+            "Cảnh báo: Script cũ, upsert đè lên service_center, technician, "
+            "technician_skill, ticket; pipeline hiện hành: load_catalog -> load_tickets -> "
+            "gen_appointments -> load_appointments",
+            file=sys.stderr,
+        )
+        return 1
     load_dotenv(ROOT / ".env")
     args = build_parser().parse_args()
     csv_dir = args.csv_dir.resolve()
