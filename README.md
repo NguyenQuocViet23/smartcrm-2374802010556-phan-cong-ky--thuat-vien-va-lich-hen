@@ -189,27 +189,36 @@ npm run dev
 Để dựng lại toàn bộ dữ liệu từ một clone mới, đặt bộ CSV đầy đủ vào `data/raw/` và chạy lần lượt từng lệnh sau từ thư mục gốc:
 
 ```powershell
+createdb smartcrm
 psql -U postgres -d smartcrm -f db/schema.sql
 python scripts/load_catalog.py
 python scripts/load_tickets.py
 python scripts/gen_appointments.py
 python scripts/load_appointments.py
+python scripts/generate_demo_accounts.py
 ```
 
-Pipeline trên dùng seed `20260901` cho 30 phiếu MOI và seed `20261102` cho 300 lịch hẹn. `data/sample/appointments.csv` là tệp mẫu; dữ liệu đầy đủ case-study được đặt tại `data/raw/`. Toàn bộ báo cáo seed nằm trong `reports/`, trong đó `reports/moi_tickets_seed20260901.csv` chứa seed MOI.
+Sau đó chạy backend và frontend ở hai terminal riêng. Pipeline trên dùng seed `20260901` cho 30 phiếu MOI và seed `20261102` cho 300 lịch hẹn, từ `2026-11-03` đến `2027-01-30`. `data/sample/appointments.csv` là tệp mẫu; dữ liệu đầy đủ case-study được đặt tại `data/raw/`. Toàn bộ báo cáo seed nằm trong `reports/`, trong đó `reports/moi_tickets_seed20260901.csv` chứa seed MOI.
+
+Hai chế độ cơ sở dữ liệu:
+
+- PostgreSQL cài trên máy: `DB_PORT=5432`, database chính `smartcrm`, có thể khác database Docker.
+- PostgreSQL trong Docker: cổng host mặc định `DB_HOST_PORT=5433`; khi chạy script nạp dữ liệu từ máy chủ, đặt `DB_PORT=5433`. Database trong Docker là database riêng, ban đầu trống, không phải database `smartcrm` đang dùng trên máy PostgreSQL.
 
 Kết quả khảo sát thực tế: 7.800 ticket nối được với khách qua `tickets_history.customer_id → customers_raw.record_id`; 483 phiếu không có số điện thoại hợp lệ sau chuẩn hóa và cần reject theo QT-02. Status hiện có trong CSV đã là mã không dấu; bộ chuẩn hóa chấp nhận cả mã này và alias có dấu theo prompt.
 
 Seed đầy đủ hiện **chưa thể chạy**. Mặc định script dừng nếu không có mapping đã xác minh cho log và lịch hẹn; không tự sinh các dòng thay thế. Khi đã có đủ nguồn và mapping, lệnh dự kiến:
 
 ```powershell
-python scripts\seed_real_data.py --csv-dir data\raw --seed 20261023
+$env:ALLOW_LEGACY_SEED="1"
+python scripts\legacy\seed_real_data.py --csv-dir data\raw --seed 20261023
 ```
 
 Chỉ để kiểm tra các bảng lõi trong môi trường thử nghiệm sau khi đã áp dụng migration (không dùng cho TC01–TC18):
 
 ```powershell
-python scripts\seed_real_data.py --csv-dir data\raw --seed 20261023 --allow-incomplete --db-url $env:TEST_DATABASE_URL
+$env:ALLOW_LEGACY_SEED="1"
+python scripts\legacy\seed_real_data.py --csv-dir data\raw --seed 20261023 --allow-incomplete --db-url $env:TEST_DATABASE_URL
 ```
 
 `--allow-incomplete` báo seed là chưa hoàn chỉnh và trả mã thoát `2`. `data/sample/` hiện chưa chứa CSV; không dùng thư mục này để khẳng định có thể chạy nhanh. Báo cáo số liệu: [docs/bao-cao-nap-du-lieu.md](docs/bao-cao-nap-du-lieu.md).
@@ -283,3 +292,8 @@ Các blockers trước khi có thể xác nhận đủ 18 acceptance test tích 
 ## 6. Khai báo sử dụng công cụ AI
 
 Claude đã hỗ trợ bản nháp SRS và sơ đồ theo khai báo ban đầu trong `docs/ai-declaration.md`. Copilot SDK trong VS Code được dùng để đọc prompt, triển khai các phần có thể xác minh, viết kiểm tra và cập nhật tài liệu. Kết quả chạy được ghi riêng; các phần thiếu dữ liệu hoặc chưa chạy không được khai báo là hoàn thành.
+
+| Công cụ AI | Dùng vào việc gì | Cách tự kiểm chứng |
+|---|---|---|
+| Claude | Viết prompt và hỗ trợ phần script nạp dữ liệu | Đối chiếu schema, xem diff Git, chạy truy vấn SELECT bất biến; không xem kết quả là hoàn thành nếu thiếu dữ liệu hoặc validation |
+| GitHub Copilot | Sinh dữ liệu lịch hẹn, kiểm tra tài liệu và dữ liệu; hỗ trợ chỉnh sửa script, test, README | Kiểm chứng bằng số liệu SELECT, truy vấn bất biến, đối chiếu SRS/schema và xem `git diff` trước khi commit |
