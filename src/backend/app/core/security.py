@@ -8,6 +8,7 @@ import hashlib
 import hmac
 import json
 import os
+import secrets
 import time
 from pathlib import Path
 from typing import Any
@@ -20,6 +21,14 @@ from app.core.errors import APIError
 ROOT = Path(__file__).resolve().parents[4]
 ACCOUNTS_PATH = ROOT / "data" / "processed" / "demo_accounts.json"
 bearer = HTTPBearer(auto_error=False)
+
+
+def make_password_hash(password: str) -> str:
+    salt = secrets.token_hex(16)
+    digest = hashlib.pbkdf2_hmac(
+        "sha256", password.encode("utf-8"), salt.encode("ascii"), 310_000
+    ).hex()
+    return f"pbkdf2_sha256$310000${salt}${digest}"
 
 
 def _b64encode(value: bytes) -> str:
@@ -95,7 +104,7 @@ def load_demo_accounts() -> list[dict[str, Any]]:
         payload = json.loads(ACCOUNTS_PATH.read_text(encoding="utf-8"))
     except FileNotFoundError as exc:
         raise RuntimeError(
-            "Demo accounts are missing; run scripts/seed_real_data.py first."
+            "Demo accounts are missing; run scripts/generate_demo_accounts.py first."
         ) from exc
     accounts = payload.get("accounts")
     if not isinstance(accounts, list):
