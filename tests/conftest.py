@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import re
+import sys
 from contextlib import contextmanager
 from typing import Any
 from urllib.parse import unquote, urlparse
@@ -189,7 +190,13 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
             "missing_marker": missing_marker,
         }
     )
-    print(f"[{test_id}] {status}  {title}  ({duration:.3f}s)")
+    _echo(f"[{test_id}] {status}  {title}  ({duration:.3f}s)")
+
+
+def _echo(line: str) -> None:
+    """Print a Vietnamese test title even when stdout is not UTF-8 (e.g. cp1252 pipes)."""
+    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+    print(line.encode(encoding, errors="replace").decode(encoding))
 
 
 def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
