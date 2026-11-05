@@ -11,20 +11,19 @@ from app.core.database import get_engine
 from app.core.errors import APIError
 from app.core.security import current_user, require_role
 from app.schemas.tickets import AssignmentRequest, StatusRequest, TechnicianChangeRequest
+from app.services.ticket_rules import (
+    VALID_STATUSES,
+    check_status_transition,
+    check_technician_change,
+    check_technician_eligible,
+    is_assignable,
+    normalize_target_status,
+    require_change_reason,
+)
 
 router = APIRouter(prefix="/api/tickets", tags=["tickets"])
 MANAGER = Depends(require_role("QUAN_LY"))
 TECHNICIAN = Depends(require_role("KY_THUAT_VIEN"))
-VALID_STATUSES = {
-    "MOI", "DA_PHAN_CONG", "DANG_XU_LY", "CHO_LINH_KIEN",
-    "HOAN_TAT", "DA_DONG", "DA_HUY",
-}
-TRANSITIONS = {
-    "DA_PHAN_CONG": {"DANG_XU_LY"},
-    "DANG_XU_LY": {"CHO_LINH_KIEN", "HOAN_TAT"},
-    "CHO_LINH_KIEN": {"HOAN_TAT"},
-}
-ACTIVE_WORK_STATUSES = ("DA_PHAN_CONG", "DANG_XU_LY", "CHO_LINH_KIEN")
 
 
 def _ticket(connection: Any, ticket_id: int, lock: bool = False) -> Any:
@@ -106,20 +105,7 @@ def _check_assignment(connection: Any, ticket: Any, technician_id: int) -> Any:
     ).mappings().first()
     if technician is None:
         raise APIError(404, "TECHNICIAN_NOT_FOUND", "Không tìm thấy kỹ thuật viên.")
-    if (
-        technician["center_id"] != ticket["center_id"]
-        or not technician["is_active"]
-        or technician["proficiency"] is None
-        or technician["proficiency"] < 3
-    ):
-        proficiency = technician["proficiency"]
-        raise APIError(
-            400,
-            "TECHNICIAN_NOT_ELIGIBLE",
-            f"Kỹ thuật viên không đủ điều kiện: tay nghề {ticket['category_code']} "
-            f"= {proficiency if proficiency is not None else 'không có'} (< 3) "
-            "hoặc khác trung tâm/đã nghỉ việc.",
-        )
+    check_technician_eligible(ticket, technician)
     return technician
 
 
@@ -225,7 +211,7 @@ def assign_ticket(
     with get_engine().begin() as connection:
         ticket = _ticket(connection, ticket_id, lock=True)
         _check_scope(user, ticket)
-        if ticket["status"] != "MOI" or ticket["technician_id"] is not None:
+        if not is_assignable(ticket):
             current = connection.execute(
                 text("SELECT technician_code FROM technician WHERE technician_id = :id"),
                 {"id": ticket["technician_id"]},
@@ -267,18 +253,11 @@ def change_assignment(
     payload: TechnicianChangeRequest,
     user: dict[str, Any] = MANAGER,
 ) -> dict[str, Any]:
-    reason = payload.reason.strip()
-    if not reason:
-        raise APIError(400, "REASON_REQUIRED", "Lý do đổi kỹ thuật viên là bắt buộc.")
+    reason = require_change_reason(payload.reason)
     with get_engine().begin() as connection:
         ticket = _ticket(connection, ticket_id, lock=True)
         _check_scope(user, ticket)
-        if ticket["status"] in {"HOAN_TAT", "DA_DONG", "DA_HUY"}:
-            raise APIError(409, "TICKET_NOT_CHANGEABLE", "Không thể đổi kỹ thuật viên cho phiếu đã kết thúc.")
-        if ticket["technician_id"] is None:
-            raise APIError(409, "TICKET_NOT_ASSIGNED", "Phiếu chưa được phân công.")
-        if ticket["technician_id"] == payload.technician_id:
-            raise APIError(400, "SAME_TECHNICIAN", "Kỹ thuật viên mới phải khác người hiện tại.")
+        check_technician_change(ticket, payload.technician_id)
         _check_assignment(connection, ticket, payload.technician_id)
         connection.execute(
             text("UPDATE ticket SET technician_id = :new_id WHERE ticket_id = :ticket_id"),
@@ -311,18 +290,11 @@ def update_ticket_status(
     payload: StatusRequest,
     user: dict[str, Any] = TECHNICIAN,
 ) -> dict[str, Any]:
-    target = payload.to_status.strip().upper()
-    if target not in {"DANG_XU_LY", "CHO_LINH_KIEN", "HOAN_TAT"}:
-        raise APIError(400, "INVALID_STATUS", "Trạng thái đích không hợp lệ.")
+    target = normalize_target_status(payload.to_status)
     with get_engine().begin() as connection:
         ticket = _ticket(connection, ticket_id, lock=True)
         _check_scope(user, ticket)
-        if target not in TRANSITIONS.get(ticket["status"], set()):
-            raise APIError(
-                409,
-                "INVALID_STATUS_TRANSITION",
-                f"Không thể chuyển từ {ticket['status']} sang {target}.",
-            )
+        check_status_transition(ticket["status"], target)
         updated = connection.execute(
             text(
                 "UPDATE ticket SET status = :status WHERE ticket_id = :ticket_id "
