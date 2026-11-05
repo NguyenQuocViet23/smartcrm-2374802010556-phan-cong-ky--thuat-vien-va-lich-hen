@@ -21,6 +21,7 @@ from tests.evidence import (
 )
 
 RESULTS_KEY = pytest.StashKey[list[dict[str, Any]]]()
+SYSTEM_RESULTS_KEY = pytest.StashKey[list[dict[str, Any]]]()
 
 
 def database_name_from_url(database_url: str) -> str:
@@ -113,6 +114,7 @@ def test_database_url() -> str:
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "tc(case_id): identify a Buoi 10 test case")
     config.stash[RESULTS_KEY] = []
+    config.stash[SYSTEM_RESULTS_KEY] = []
 
 
 def pytest_sessionstart(session: pytest.Session) -> None:
@@ -127,6 +129,11 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
     reports = getattr(item, "_buoi10_reports", {})
     reports[report.when] = report
     setattr(item, "_buoi10_reports", reports)
+    is_system = item.get_closest_marker("system") is not None
+    if is_system and report.when == "call" and report.failed:
+        from tests.system_report import capture_failure
+
+        capture_failure(item)
     if report.when != "teardown":
         return
     marker = item.get_closest_marker("tc")
@@ -190,6 +197,10 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
             "missing_marker": missing_marker,
         }
     )
+    if is_system:
+        from tests.system_report import record_result
+
+        item.config.stash[SYSTEM_RESULTS_KEY].append(record_result(item, status, duration, failure))
     _echo(f"[{test_id}] {status}  {title}  ({duration:.3f}s)")
 
 
@@ -203,6 +214,16 @@ def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
     results = session.config.stash[RESULTS_KEY]
     if os.getenv("EVIDENCE") == "1" and results:
         write_report(results, session)
+    system_results = session.config.stash[SYSTEM_RESULTS_KEY]
+    if system_results:
+        from tests.system_report import write_testcase_report
+
+        passed = sum(r["status"] == "PASS" for r in system_results)
+        failed = sum(r["status"] == "FAIL" for r in system_results)
+        seconds = sum(r["duration"] for r in system_results)
+        summary = f"{passed} passed" + (f", {failed} failed" if failed else "") + f" in {seconds:.2f}s"
+        path = write_testcase_report(system_results, session, summary)
+        _echo(f"Đã ghi báo cáo {path.relative_to(path.parents[2])}")
 
 
 def pytest_terminal_summary(terminalreporter: Any, exitstatus: int, config: pytest.Config) -> None:

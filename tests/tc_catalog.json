@@ -1,0 +1,431 @@
+{
+  "TC01": {
+    "name": "Gợi ý kỹ thuật viên đúng thứ tự khối lượng công việc",
+    "type": "Luồng đúng",
+    "trace": "US2 · FR2 · AC2.1 · QT-08, A1, A4, A6",
+    "function": "tests/service/test_suggestion.py::test_tc01_goi_y_dung_thu_tu",
+    "channel": "Giao diện React – M2 (đăng nhập Quản lý)",
+    "given": [
+      "Dữ liệu thật đã nạp. Tự tìm trong dữ liệu một cặp (trung tâm A, nhóm sự cố X) có ≥ 3 kỹ thuật viên đang làm việc với tay nghề ≥ 3.",
+      "Tạo 1 phiếu MỚI thuộc trung tâm A, nhóm X (trong giao dịch thử, sẽ rollback).",
+      "Trong giao dịch thử: vô hiệu hóa các phiếu đang giữ thật của 3 kỹ thuật viên đó rồi tạo phiếu để khối lượng lần lượt là 5, 2, 8; tắt (is_active = false) các kỹ thuật viên đủ điều kiện còn lại."
+    ],
+    "when": [
+      "Quản lý trung tâm A gọi GET /api/tickets/{ticket_id}/technician-suggestions."
+    ],
+    "then": [
+      "HTTP 200; danh sách đúng 3 kỹ thuật viên theo thứ tự khối lượng 2 → 5 → 8.",
+      "Mỗi dòng có technician_code, full_name, proficiency (≥ 3) và workload."
+    ],
+    "images": [
+      "TC01_goi_y_dung_thu_tu.png"
+    ],
+    "must_see": "Góc trên có mã TC01 và nhãn PASS màu xanh. Ô Actual liệt kê 3 kỹ thuật viên với workload 2 → 5 → 8 theo đúng thứ tự tăng dần."
+  },
+  "TC02": {
+    "name": "Gợi ý loại bỏ kỹ thuật viên không đủ điều kiện",
+    "type": "Ngoại lệ",
+    "trace": "US2 · FR2 · AC2.2 · QT-08, A6",
+    "function": "tests/service/test_suggestion.py::test_tc02_goi_y_loai_ktv_khong_du_dieu_kien",
+    "channel": "Giao diện React – M2",
+    "given": [
+      "Cùng kịch bản TC01 (trung tâm A, nhóm X, phiếu MỚI).",
+      "Thêm trong giao dịch thử: 1 kỹ thuật viên trung tâm A có tay nghề nhóm X = 2; 1 kỹ thuật viên trung tâm B có tay nghề nhóm X = 5; 1 kỹ thuật viên trung tâm A đủ tay nghề nhưng is_active = false."
+    ],
+    "when": [
+      "Quản lý trung tâm A mở gợi ý cho phiếu."
+    ],
+    "then": [
+      "HTTP 200; cả 3 kỹ thuật viên nói trên KHÔNG xuất hiện trong danh sách.",
+      "Danh sách chỉ gồm người cùng trung tâm A, đang làm việc, tay nghề ≥ 3."
+    ],
+    "images": [
+      "TC02_goi_y_loai_ktv_khong_du_dieu_kien.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual cho thấy 3 mã kỹ thuật viên bị loại không có trong danh sách."
+  },
+  "TC03": {
+    "name": "Gợi ý trả danh sách rỗng kèm lý do khi không có kỹ thuật viên phù hợp",
+    "type": "Ngoại lệ",
+    "trace": "US2 · FR2 · AC2.3 · QT-08",
+    "function": "tests/service/test_suggestion.py::test_tc03_goi_y_rong_khong_co_ktv",
+    "channel": "Giao diện React – M2",
+    "given": [
+      "Phiếu MỚI thuộc trung tâm A, nhóm sự cố Y.",
+      "Trong giao dịch thử: hạ tay nghề nhóm Y của mọi kỹ thuật viên trung tâm A xuống < 3."
+    ],
+    "when": [
+      "Quản lý trung tâm A mở gợi ý cho phiếu."
+    ],
+    "then": [
+      "HTTP 200 (không phải lỗi); suggestions là danh sách rỗng.",
+      "Có trường message nêu rõ lý do (không có người cùng trung tâm đủ tay nghề ≥ 3).",
+      "Phiếu vẫn ở trạng thái MOI, không có kỹ thuật viên."
+    ],
+    "images": [
+      "TC03_goi_y_rong_khong_co_ktv.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có suggestions = [], dòng message nêu lý do và status phiếu = MOI."
+  },
+  "TC04": {
+    "name": "Phân công kỹ thuật viên thành công và ghi lịch sử trạng thái",
+    "type": "Luồng đúng",
+    "trace": "US3 · FR3, FR8 · AC3.1 · QT-06, QT-07, QT-08",
+    "function": "tests/service/test_assignment.py::test_tc04_phan_cong_thanh_cong",
+    "channel": "Giao diện React – M2",
+    "given": [
+      "Phiếu MỚI thuộc trung tâm A, nhóm X, chưa có kỹ thuật viên.",
+      "Kỹ thuật viên P đứng đầu danh sách gợi ý (cùng trung tâm, tay nghề ≥ 3, đang làm việc).",
+      "Ghi nhận trước số dòng ticket_status_log của phiếu."
+    ],
+    "when": [
+      "Quản lý trung tâm A gọi POST /api/tickets/{ticket_id}/assignment với {\"technician_id\": P}."
+    ],
+    "then": [
+      "HTTP 201; phản hồi có status = DA_PHAN_CONG, technician_id = P, assigned_by, assigned_at.",
+      "Trong CSDL: ticket.status = DA_PHAN_CONG và ticket.technician_id = P.",
+      "ticket_status_log tăng đúng 1 dòng: event_type = TRANG_THAI, from_status = MOI, to_status = DA_PHAN_CONG, to_technician_id = P, có changed_by và changed_at."
+    ],
+    "images": [
+      "TC04_phan_cong_thanh_cong.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có HTTP 201, status DA_PHAN_CONG và số dòng log trước/sau chênh đúng 1."
+  },
+  "TC05": {
+    "name": "Biên: kỹ thuật viên có tay nghề đúng bằng 3 được phân công",
+    "type": "Biên",
+    "trace": "US3 · FR3 · QT-08",
+    "function": "tests/service/test_assignment.py::test_tc05_bien_tay_nghe_bang_3",
+    "channel": "Giao diện React – M2",
+    "given": [
+      "Phiếu MỚI thuộc trung tâm A, nhóm X.",
+      "Kỹ thuật viên Q cùng trung tâm A, đang làm việc, tay nghề nhóm X đặt đúng = 3 (trong giao dịch thử)."
+    ],
+    "when": [
+      "Quản lý trung tâm A phân công Q cho phiếu."
+    ],
+    "then": [
+      "HTTP 201; phiếu chuyển sang DA_PHAN_CONG với technician_id = Q (ngưỡng ≥ 3 là ngưỡng đóng, giá trị 3 hợp lệ)."
+    ],
+    "images": [
+      "TC05_bien_tay_nghe_bang_3.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Given ghi rõ proficiency = 3; ô Actual có HTTP 201."
+  },
+  "TC06": {
+    "name": "Biên: kỹ thuật viên có tay nghề bằng 2 bị từ chối",
+    "type": "Biên",
+    "trace": "US3 · FR3 · AC3.2 · QT-08",
+    "function": "tests/service/test_assignment.py::test_tc06_bien_tay_nghe_bang_2",
+    "channel": "Swagger /docs (giao diện không cho chọn người không đủ tay nghề)",
+    "given": [
+      "Phiếu MỚI thuộc trung tâm A, nhóm X.",
+      "Kỹ thuật viên R cùng trung tâm A, đang làm việc, tay nghề nhóm X = 2.",
+      "Ghi nhận trước số dòng ticket_status_log."
+    ],
+    "when": [
+      "Quản lý trung tâm A gửi yêu cầu phân công R cho phiếu."
+    ],
+    "then": [
+      "HTTP 400, mã lỗi TECHNICIAN_NOT_ELIGIBLE, message nêu rõ tay nghề < 3.",
+      "Phiếu vẫn status = MOI, technician_id = NULL; ticket_status_log không tăng dòng nào."
+    ],
+    "images": [
+      "TC06_bien_tay_nghe_bang_2.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh (test PASS nghĩa là hệ thống đã từ chối đúng). Ô Actual có HTTP 400, TECHNICIAN_NOT_ELIGIBLE, status MOI và log không đổi."
+  },
+  "TC07": {
+    "name": "Từ chối phân công khi phiếu đã được phân công",
+    "type": "Ngoại lệ",
+    "trace": "US3 · FR3 · AC3.3 · QT-06, QT-07, NFR2",
+    "function": "tests/service/test_assignment.py::test_tc07_phan_cong_phieu_da_co_ktv",
+    "channel": "Giao diện React – M2, hai phiên trình duyệt (2 Quản lý cùng trung tâm)",
+    "given": [
+      "Phiếu đã được phân công cho kỹ thuật viên P (status DA_PHAN_CONG) qua đúng nghiệp vụ.",
+      "Kỹ thuật viên Q khác, đủ điều kiện, cùng trung tâm."
+    ],
+    "when": [
+      "Một quản lý khác của cùng trung tâm gọi POST /assignment với technician_id = Q cho cùng phiếu."
+    ],
+    "then": [
+      "HTTP 409, mã lỗi TICKET_ALREADY_ASSIGNED, message có mã kỹ thuật viên hiện tại (P).",
+      "Phiếu vẫn technician_id = P; ticket_status_log không tăng thêm dòng."
+    ],
+    "images": [
+      "TC07_phan_cong_phieu_da_co_ktv.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có HTTP 409, TICKET_ALREADY_ASSIGNED và technician_id vẫn là P."
+  },
+  "TC08": {
+    "name": "Đặt lịch hẹn giao/nhận thiết bị hợp lệ",
+    "type": "Luồng đúng",
+    "trace": "US6 · FR6 · AC6.1 · A2, QT-13",
+    "function": "tests/service/test_appointment.py::test_tc08_dat_lich_hop_le",
+    "channel": "Giao diện React – M3 (đăng nhập kỹ thuật viên K, biểu mẫu lịch hẹn)",
+    "given": [
+      "Phiếu đã gán kỹ thuật viên K (DA_PHAN_CONG); K chưa có lịch nào vào ngày làm việc D (Thứ Hai–Thứ Bảy, cách hôm nay ≥ 30 ngày để không đụng lịch hẹn mẫu)."
+    ],
+    "when": [
+      "Kỹ thuật viên K (hoặc Quản lý) gọi POST /api/appointments với appointment_type = NHAN, 09:00–09:30 ngày D."
+    ],
+    "then": [
+      "HTTP 201; phản hồi có status = DA_HEN, technician_id = K, appointment_type = NHAN, start_at/end_at đúng khung 09:00–09:30.",
+      "Lịch hẹn xuất hiện trong danh sách lịch hẹn của phiếu và của K."
+    ],
+    "images": [
+      "TC08_dat_lich_hop_le.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có HTTP 201, status DA_HEN và khung giờ 09:00–09:30."
+  },
+  "TC09": {
+    "name": "Từ chối đặt lịch hẹn trùng khung giờ",
+    "type": "Ngoại lệ",
+    "trace": "US6 · FR7 · AC6.2 · A3, NFR2",
+    "function": "tests/service/test_appointment.py::test_tc09_dat_lich_trung",
+    "channel": "Giao diện React – M3",
+    "given": [
+      "Kỹ thuật viên K đã có lịch hẹn DA_HEN 09:00–09:30 vào ngày làm việc D (Thứ Hai–Thứ Bảy, cách hôm nay ≥ 30 ngày để không đụng lịch hẹn mẫu).",
+      "Ghi nhận trước số dòng bảng appointment."
+    ],
+    "when": [
+      "Đặt thêm lịch hẹn cho K khung 09:15–09:45 cùng ngày."
+    ],
+    "then": [
+      "HTTP 409, mã lỗi APPOINTMENT_OVERLAP.",
+      "Trường conflicts liệt kê lịch bị trùng (appointment_id, ticket_code, start_at, end_at).",
+      "Số dòng bảng appointment không đổi (không lưu lịch mới)."
+    ],
+    "images": [
+      "TC09_dat_lich_trung.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có HTTP 409, APPOINTMENT_OVERLAP, conflicts có lịch 09:00–09:30 và số dòng appointment không đổi."
+  },
+  "TC10": {
+    "name": "Biên: lịch hẹn liền kề (kết thúc = bắt đầu) không bị coi là trùng",
+    "type": "Biên",
+    "trace": "US6 · FR7 · A3",
+    "function": "tests/service/test_appointment.py::test_tc10_bien_lich_lien_ke",
+    "channel": "Giao diện React – M3",
+    "given": [
+      "Kỹ thuật viên K đã có lịch DA_HEN 09:00–09:30 vào ngày làm việc D (Thứ Hai–Thứ Bảy, cách hôm nay ≥ 30 ngày để không đụng lịch hẹn mẫu)."
+    ],
+    "when": [
+      "Đặt thêm lịch hẹn cho K khung 09:30–10:00 cùng ngày."
+    ],
+    "then": [
+      "HTTP 201; lịch mới được lưu (khoảng nửa mở [start, end) nên không giao nhau).",
+      "K có đúng 2 lịch DA_HEN trong ngày D; ràng buộc EXCLUDE của CSDL không báo lỗi."
+    ],
+    "images": [
+      "TC10_bien_lich_lien_ke.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có HTTP 201 và hai khung 09:00–09:30, 09:30–10:00 cùng tồn tại."
+  },
+  "TC11": {
+    "name": "Từ chối chuyển trạng thái lùi, nhảy bước hoặc giá trị không hợp lệ",
+    "type": "Ngoại lệ",
+    "trace": "US7 · FR8 · QT-06",
+    "function": "tests/service/test_status.py::test_tc11_chuyen_trang_thai_lui",
+    "channel": "Swagger /docs (đăng nhập kỹ thuật viên K, endpoint PATCH status)",
+    "given": [
+      "Kỹ thuật viên K có phiếu T1 ở trạng thái HOAN_TAT và phiếu T2 ở trạng thái DA_PHAN_CONG.",
+      "Ghi nhận trước số dòng ticket_status_log của T1, T2."
+    ],
+    "when": [
+      "(a) K gọi PATCH /api/tickets/{T1}/status với to_status = DANG_XU_LY (lùi).",
+      "(b) K gọi PATCH /api/tickets/{T2}/status với to_status = HOAN_TAT (nhảy bước).",
+      "(c) K gọi PATCH /api/tickets/{T2}/status với to_status = \"ABC\"."
+    ],
+    "then": [
+      "(a) và (b): HTTP 409; trạng thái phiếu giữ nguyên; log không tăng.",
+      "(c): HTTP 400 (giá trị trạng thái không hợp lệ); T2 vẫn DA_PHAN_CONG."
+    ],
+    "images": [
+      "TC11_chuyen_trang_thai_lui.png",
+      "TC11_chuyen_trang_thai_lui_b.png",
+      "TC11_chuyen_trang_thai_lui_c.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual liệt kê 3 kết quả: 409, 409, 400 và trạng thái giữ nguyên."
+  },
+  "TC12": {
+    "name": "Đổi kỹ thuật viên: bắt buộc có lý do, lý do rỗng bị từ chối",
+    "type": "Dữ liệu sai",
+    "trace": "US4 · FR4 · QT-07 · EX-5.1",
+    "function": "tests/service/test_assignment.py::test_tc12_doi_ktv_thieu_ly_do",
+    "channel": "Giao diện React – M2 (chế độ đổi kỹ thuật viên); bước (a),(b) nếu giao diện chặn trước khi gọi API thì dùng Swagger để lấy mã 400 thật",
+    "given": [
+      "Phiếu DA_PHAN_CONG đang gán cho kỹ thuật viên K1; kỹ thuật viên K2 đủ điều kiện cùng trung tâm.",
+      "Ghi nhận trước số dòng ticket_status_log."
+    ],
+    "when": [
+      "(a) Quản lý gọi PUT /api/tickets/{id}/assignment với technician_id = K2, reason = \"\".",
+      "(b) Như (a) nhưng reason = \"   \" (chỉ khoảng trắng).",
+      "(c) Như (a) nhưng reason = \"Kỹ thuật viên cũ nghỉ phép\"."
+    ],
+    "then": [
+      "(a) và (b): HTTP 400; phiếu vẫn thuộc K1; log không tăng.",
+      "(c): HTTP 200; phiếu chuyển sang K2, trạng thái phiếu không lùi; log tăng đúng 1 dòng event_type = DOI_KTV, from_technician_id = K1, to_technician_id = K2, note = lý do."
+    ],
+    "images": [
+      "TC12_doi_ktv_thieu_ly_do.png",
+      "TC12_doi_ktv_thieu_ly_do_a.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có 2 lần 400 (lý do rỗng) rồi 200 (lý do hợp lệ) và dòng log DOI_KTV."
+  },
+  "TC13": {
+    "name": "Che số điện thoại và phân quyền theo vai trò",
+    "type": "Ngoại lệ",
+    "trace": "US5 · FR5 · QT-14, QT-15 · NFR3",
+    "function": "tests/service/test_access.py::test_tc13_che_so_dien_thoai_va_phan_quyen",
+    "channel": "Giao diện React – M3 (a), M2 hoặc M1 của Quản lý (b), M3 mở phiếu người khác (c)",
+    "given": [
+      "Phiếu T1 gán cho kỹ thuật viên K, khách có số điện thoại 10 chữ số; phiếu T2 gán cho kỹ thuật viên K' khác.",
+      "Có Quản lý trung tâm của trung tâm chứa T1."
+    ],
+    "when": [
+      "(a) K gọi GET /api/technicians/me/tickets.",
+      "(b) Quản lý gọi GET /api/tickets/{T1} (hoặc danh sách phiếu).",
+      "(c) K gọi GET /api/tickets/{T2}."
+    ],
+    "then": [
+      "(a) Số điện thoại dạng che 3 số đầu + **** + 3 số cuối (ví dụ 090****456); 0 phiếu của người khác trong phản hồi.",
+      "(b) Số điện thoại hiển thị đầy đủ cho Quản lý.",
+      "(c) HTTP 403."
+    ],
+    "images": [
+      "TC13_che_so_dien_thoai_va_phan_quyen.png",
+      "TC13_che_so_dien_thoai_va_phan_quyen_b.png",
+      "TC13_che_so_dien_thoai_va_phan_quyen_c.png"
+    ],
+    "must_see": "Nhãn PASS màu xanh. Ô Actual có số điện thoại dạng che cho kỹ thuật viên, dạng đầy đủ cho Quản lý và HTTP 403 ở bước (c)."
+  },
+  "TC14": {
+    "name": "Giao diện M1: trạng thái đang tải",
+    "type": "Luồng đúng",
+    "trace": "US1 · FR1 · yêu cầu 3 trạng thái (Buổi 10)",
+    "function": "tests/ui/test_states.py::test_tc14_ui_trang_thai_dang_tai",
+    "channel": "Giao diện React – M1",
+    "given": [
+      "Đăng nhập bằng Quản lý của trung tâm có phiếu MỚI (dữ liệu thật).",
+      "Playwright làm chậm phản hồi GET /api/tickets 3 giây."
+    ],
+    "when": [
+      "Mở màn hình M1 – Phiếu chờ phân công."
+    ],
+    "then": [
+      "Trong lúc chờ thấy vùng [data-testid=state-loading] với chữ \"Đang tải dữ liệu…\"; chụp ảnh đúng lúc này.",
+      "Sau khi dữ liệu về: vùng đang tải biến mất, bảng hiển thị ≥ 1 dòng phiếu thật."
+    ],
+    "images": [
+      "TC14_ui_trang_thai_dang_tai.png"
+    ],
+    "must_see": "Ảnh chụp màn hình trình duyệt tại M1. Thấy thông báo \"Đang tải dữ liệu…\" và chưa có bảng phiếu."
+  },
+  "TC15": {
+    "name": "Giao diện M1: trạng thái rỗng (không có phiếu chờ phân công)",
+    "type": "Ngoại lệ",
+    "trace": "US1 · FR1 · EX-1.1",
+    "function": "tests/ui/test_states.py::test_tc15_ui_trang_thai_rong",
+    "channel": "Giao diện React – M1",
+    "given": [
+      "Đăng nhập bằng Quản lý của trung tâm không có phiếu MỚI nào (script nạp dữ liệu cố ý chừa 1 trung tâm)."
+    ],
+    "when": [
+      "Mở màn hình M1."
+    ],
+    "then": [
+      "Hiển thị vùng [data-testid=state-empty] với chữ \"Không có phiếu chờ phân công\".",
+      "Không có vùng lỗi [data-testid=state-error]; không hiển thị thông báo đỏ."
+    ],
+    "images": [
+      "TC15_ui_trang_thai_rong.png"
+    ],
+    "must_see": "Ảnh chụp M1 với thông báo \"Không có phiếu chờ phân công\". Không có dải lỗi đỏ."
+  },
+  "TC16": {
+    "name": "Giao diện M1: trạng thái lỗi và nút Thử lại",
+    "type": "Ngoại lệ",
+    "trace": "US1 · FR1 · NFR2 · EX-7b",
+    "function": "tests/ui/test_states.py::test_tc16_ui_trang_thai_loi",
+    "channel": "Giao diện React – M1",
+    "given": [
+      "Đăng nhập Quản lý của trung tâm có phiếu MỚI.",
+      "Playwright chặn (abort) GET /api/tickets để mô phỏng backend không phản hồi."
+    ],
+    "when": [
+      "Mở M1; sau đó bỏ chặn và bấm nút \"Thử lại\"."
+    ],
+    "then": [
+      "Hiển thị vùng [data-testid=state-error] có thông báo lỗi dễ hiểu và nút \"Thử lại\" ([data-testid=retry-button]); chụp ảnh 1.",
+      "Sau khi bỏ chặn và bấm Thử lại: bảng phiếu thật hiển thị; chụp ảnh 2."
+    ],
+    "images": [
+      "TC16_ui_trang_thai_loi_1_loi.png",
+      "TC16_ui_trang_thai_loi_2_thu_lai.png"
+    ],
+    "must_see": "Thấy dải thông báo lỗi và nút \"Thử lại\". | Dải lỗi đã biến mất; bảng phiếu thật hiển thị."
+  },
+  "TC17": {
+    "name": "Giao diện: xử lý 401 (hết phiên) và đăng nhập sai",
+    "type": "Ngoại lệ",
+    "trace": "NFR3 · yêu cầu đăng nhập và 401 (Buổi 10)",
+    "function": "tests/ui/test_states.py::test_tc17_ui_het_phien_dang_nhap_401",
+    "channel": "Giao diện React – trang đăng nhập và M1",
+    "given": [
+      "Đang đăng nhập (có token trong trình duyệt).",
+      "Playwright cho GET /api/tickets trả HTTP 401."
+    ],
+    "when": [
+      "(a) Mở M1 khi API trả 401.",
+      "(b) Tại trang đăng nhập, nhập sai mật khẩu."
+    ],
+    "then": [
+      "(a) Token bị xóa khỏi bộ nhớ trình duyệt và giao diện chuyển về trang đăng nhập; chụp ảnh 1.",
+      "(b) Trang đăng nhập hiển thị thông báo lỗi \"Sai tên đăng nhập hoặc mật khẩu\", không bị lặp chuyển trang; chụp ảnh 2."
+    ],
+    "images": [
+      "TC17_ui_het_phien_dang_nhap_401_1_ve_dang_nhap.png",
+      "TC17_ui_het_phien_dang_nhap_401_2_sai_mat_khau.png"
+    ],
+    "must_see": "Địa chỉ trang là trang đăng nhập; token đã bị xóa. | Thấy thông báo lỗi tại biểu mẫu đăng nhập."
+  },
+  "TC18": {
+    "name": "End-to-end luồng chính: phân công → đặt lịch hẹn → cập nhật trạng thái đến HOÀN TẤT",
+    "type": "Luồng đúng",
+    "trace": "US1–US7 · FR1–FR8 · UC1–UC7 · NFR4",
+    "function": "tests/ui/test_e2e_main_flow.py::test_tc18_ui_e2e_luong_chinh",
+    "channel": "Giao diện React – M1 → M2 → M3",
+    "given": [
+      "Dữ liệu thật đã nạp; đã chạy bước tạo phiếu MỚI; có Quản lý và kỹ thuật viên phù hợp (tài khoản trong data/processed/demo_accounts.json)."
+    ],
+    "when": [
+      "b1: Quản lý đăng nhập, mở M1.",
+      "b2: Bấm \"Phân công\" ở dòng phiếu đầu tiên, mở M2 và xem danh sách gợi ý.",
+      "b3: Chọn kỹ thuật viên đầu danh sách, bấm \"Xác nhận phân công\".",
+      "b4: Bấm \"Đặt lịch hẹn\", chọn loại, ngày D, 09:00–09:30, bấm \"Lưu lịch hẹn\".",
+      "b5: Đăng xuất, đăng nhập bằng kỹ thuật viên vừa được phân công, mở M3.",
+      "b6: Chọn phiếu, bấm \"Bắt đầu sửa\".",
+      "b7: Bấm \"Hoàn tất\"."
+    ],
+    "then": [
+      "b1: M1 chỉ có phiếu MỚI của trung tâm, sắp CAO → TRUNG_BINH → THAP.",
+      "b2: M2 hiển thị thông tin phiếu và bảng gợi ý (tay nghề ≥ 3, khối lượng tăng dần).",
+      "b3: Thông báo thành công; trạng thái phiếu ĐÃ PHÂN CÔNG; bảng lịch sử thêm 1 dòng.",
+      "b4: Lịch hẹn lưu thành công, hiển thị với trạng thái ĐÃ HẸN.",
+      "b5: M3 của kỹ thuật viên có phiếu vừa nhận, số điện thoại dạng che.",
+      "b6: Trạng thái ĐANG XỬ LÝ. b7: Trạng thái HOÀN TẤT.",
+      "Kiểm CSDL cuối luồng: ticket.status = HOAN_TAT; ticket_status_log có đủ MOI → DA_PHAN_CONG → DANG_XU_LY → HOAN_TAT; có 1 lịch hẹn DA_HEN."
+    ],
+    "images": [
+      "TC18_ui_e2e_luong_chinh_b1_danh_sach_M1.png",
+      "TC18_ui_e2e_luong_chinh_b2_goi_y_M2.png",
+      "TC18_ui_e2e_luong_chinh_b3_phan_cong_xong.png",
+      "TC18_ui_e2e_luong_chinh_b4_dat_lich_xong.png",
+      "TC18_ui_e2e_luong_chinh_b5_phieu_cua_toi_M3.png",
+      "TC18_ui_e2e_luong_chinh_b6_dang_xu_ly.png",
+      "TC18_ui_e2e_luong_chinh_b7_hoan_tat.png"
+    ],
+    "must_see": "Chỉ có phiếu MỚI, sắp theo mức ưu tiên rồi hạn cam kết. | Bảng gợi ý có tay nghề ≥ 3 và khối lượng tăng dần. | Thông báo thành công, trạng thái ĐÃ PHÂN CÔNG, bảng lịch sử có dòng mới. | Lịch hẹn mới có trạng thái ĐÃ HẸN. | Phiếu vừa nhận có trong danh sách; số điện thoại dạng che. | Cột trạng thái hiển thị ĐANG XỬ LÝ. | Cột trạng thái hiển thị HOÀN TẤT, ghi chú thành công."
+  }
+}
