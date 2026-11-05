@@ -109,5 +109,4 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
 | Hủy lịch hẹn trên giao diện | Hoãn | Wireframe không có thao tác hủy (TD-05) |
 | Màn hình thứ tư trở đi, trang chi tiết phiếu riêng | Cắt | Chi tiết phiếu đã nằm trong M2 và M3; ưu tiên luồng chính chạy end-to-end |
 | TC01–TC18 (acceptance test theo báo cáo Word) | Hoãn sang Buổi 12 | Ưu tiên test lớp nghiệp vụ và một test e2e luồng chính trên dữ liệu thật |
-| Thông báo xác nhận sau khi đặt lịch ở M2, nhãn mức ưu tiên ở M3 | Hoãn | Không chặn luồng chính; ghi trong `docs/tich-hop-end-to-end.md` |
 | Khoá phiên bản thư viện (`requirements*.txt`, Docker) | Hoãn sang Buổi 11 | Nội dung quản lý phụ thuộc của Buổi 11 |

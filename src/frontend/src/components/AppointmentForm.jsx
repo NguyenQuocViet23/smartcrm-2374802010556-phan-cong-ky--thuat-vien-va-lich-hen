@@ -15,7 +15,8 @@ export default function AppointmentForm({ ticketId, onSaved, onCancel }) {
   const [note, setNote] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
-  const [created, setCreated] = useState(false);
+  // The appointment returned by the API once it is saved; a retry then only reloads.
+  const [created, setCreated] = useState(null);
 
   const end = (() => {
     const [hours, minutes] = start.split(':').map(Number);
@@ -34,19 +35,20 @@ export default function AppointmentForm({ ticketId, onSaved, onCancel }) {
     setBusy(true);
     setError(null);
     try {
-      if (!created) {
+      let appointment = created;
+      if (!appointment) {
         const startAt = new Date(`${date}T${start}:00+07:00`).toISOString();
         const endAt = new Date(`${date}T${end}:00+07:00`).toISOString();
-        await createAppointment({
+        appointment = await createAppointment({
           ticket_id: ticketId,
           appointment_type: appointmentType,
           start_at: startAt,
           end_at: endAt,
           note: note.trim() || null,
         });
-        setCreated(true);
+        setCreated(appointment);
       }
-      await onSaved();
+      await onSaved(appointment);
     } catch (requestError) {
       setError(requestError);
     } finally {

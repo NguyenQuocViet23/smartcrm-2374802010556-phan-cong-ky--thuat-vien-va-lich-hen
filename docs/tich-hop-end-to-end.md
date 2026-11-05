@@ -32,12 +32,9 @@ Tài liệu ghi lại cách ghép các module thành luồng chính L04, các ch
 | 2 | M3 của KT033 dài 437 dòng (≈ 20.000 px), phiếu cần làm bị chìm | Logic / ý nghĩa | Dữ liệu thật: mỗi KTV giữ trung bình 192, tối đa 443 phiếu, phần lớn `DA_DONG`; màn hình không có cách lọc | Thêm ô lọc "Trạng thái" (mặc định Tất cả). Không ẩn phiếu đã đóng/đã hủy vì KTV vẫn có quyền xem phiếu của chính mình – TD-13 |
 | 3 | pytest dừng với `INTERNALERROR UnicodeEncodeError` khi tên test có tiếng Việt | Logic (môi trường) | Hook in kết quả dùng `print` trên stdout cp1252 (pipe của Git Bash) | Mã hoá an toàn trong `tests/conftest.py` |
 | 4 | TC21 (UI giả lập) báo `strict mode violation` sau khi thêm bộ lọc | Test | Locator `get_by_text("HOÀN TẤT")` không phân biệt hoa thường, khớp cả `<option>Hoàn tất</option>` | Đổi sang ô bảng khớp chính xác, giữ nguyên ý nghĩa kiểm tra |
-
-Ghi nhận, chưa sửa (không chặn luồng chính):
-
-- M2: đặt lịch thành công chỉ đóng form, không có thông báo xác nhận; lịch hẹn chỉ thấy ở M3.
-- M3: chọn một phiếu làm danh sách tải lại (`load` phụ thuộc `selected`), gây nhấp nháy "Đang tải dữ liệu…".
-- M3 hiển thị mức ưu tiên dạng mã (`TRUNG_BINH`), M1 hiển thị nhãn (`TRUNG BÌNH`).
+| 5 | M2: đặt lịch thành công chỉ đóng form, không có thông báo | Logic (giao diện) | Form không trả lịch vừa tạo cho trang cha | Form trả lịch API vừa tạo; M2 hiện "Đã đặt lịch GIAO lúc 08:00–08:30 ngày …" (E2E_06b) |
+| 6 | M3: chọn phiếu hoặc đổi trạng thái làm cả danh sách nhấp nháy "Đang tải dữ liệu…" | Logic (giao diện) | `load` phụ thuộc `selected`, mỗi lần chọn phiếu tải lại và bật trạng thái đang tải | `load` không phụ thuộc `selected`; đổi trạng thái làm mới ngầm. Test e2e theo dõi DOM bằng `MutationObserver` và fail nếu trạng thái đang tải xuất hiện (đã thử: hành vi cũ làm test fail) |
+| 7 | M3 hiển thị mức ưu tiên dạng mã `TRUNG_BINH`, M1 hiển thị `TRUNG BÌNH` | Hợp đồng dữ liệu | Nhãn chỉ khai báo trong M1 | Nhãn dùng chung `src/frontend/src/labels.js` cho M1, M2, M3 |
 
 ## 4. Chạy toàn luồng trên dữ liệu thật
 
@@ -59,7 +56,7 @@ python -m pytest tests\e2e -m e2e
 | – | Tắt backend, đổi bộ lọc | "Không thể kết nối máy chủ. Vui lòng thử lại." + nút Thử lại; bật lại, bấm Thử lại → danh sách trở lại | E2E_03 |
 | 3 | Mở `BH-005310/2025` | 2 gợi ý: KT033 (tay nghề 5, khối lượng 61), KT020 (5, 76) | E2E_04 |
 | 4 | Chọn KT033, Xác nhận phân công | Trạng thái ĐÃ PHÂN CÔNG; log `MOI → DA_PHAN_CONG`; SQL xác nhận `ticket.technician_id` = KT033 | E2E_05 |
-| 5 | GIAO, khung trống đầu tiên của KT033 ngày 11/12/2026 08:00–08:30 | SQL: 1 lịch `GIAO`/`DA_HEN` đúng giờ | E2E_06 |
+| 5 | GIAO, khung trống đầu tiên của KT033 ngày 11/12/2026 08:00–08:30 | Thông báo "Đã đặt lịch GIAO lúc 08:00–08:30 ngày 11/12/2026."; SQL: 1 lịch `GIAO`/`DA_HEN` đúng giờ | E2E_06, E2E_06b |
 | 6 | `KT033`, lọc "Đang làm" | Thấy phiếu và lịch hẹn ĐÃ HẸN; SĐT khách bị che | E2E_07 |
 | 7 | Ghi chú "Đã kiểm tra thiết bị", Bắt đầu sửa → Hoàn tất | Phiếu HOÀN TẤT, nút Đặt lịch ẩn; SQL: log `DA_PHAN_CONG → DANG_XU_LY` (có ghi chú) và `DANG_XU_LY → HOAN_TAT` | E2E_08 |
 | – | Lọc "Đã đóng" | 359 / 437 phiếu, đúng bằng số phiếu `DA_DONG` của KT033 trong DB | E2E_09 |

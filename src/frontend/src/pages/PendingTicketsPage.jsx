@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { listTickets } from '../api/tickets.api.js';
 import AppHeader from '../components/AppHeader.jsx';
 import DataState from '../components/DataState.jsx';
+import { priorityLabel } from '../labels.js';
 
 const priorities = ['CAO', 'TRUNG_BINH', 'THAP'];
-const priorityLabel = { CAO: 'CAO', TRUNG_BINH: 'TRUNG BÌNH', THAP: 'THẤP' };
 
 export default function PendingTicketsPage({ user, onLogout }) {
   const [items, setItems] = useState([]);

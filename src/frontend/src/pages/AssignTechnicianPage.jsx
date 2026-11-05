@@ -4,6 +4,17 @@ import { assignTicket, changeAssignment, getSuggestions, getTicket } from '../ap
 import AppHeader from '../components/AppHeader.jsx';
 import AppointmentForm from '../components/AppointmentForm.jsx';
 import DataState from '../components/DataState.jsx';
+import { priorityLabel } from '../labels.js';
+
+function appointmentSavedMessage(appointment) {
+  if (!appointment?.start_at) return 'Đã đặt lịch hẹn.';
+  const start = new Date(appointment.start_at);
+  const end = new Date(appointment.end_at);
+  return `Đã đặt lịch ${appointment.appointment_type === 'NHAN' ? 'NHẬN' : 'GIAO'} lúc `
+    + `${start.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}–`
+    + `${end.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })} `
+    + `ngày ${start.toLocaleDateString('vi-VN')}.`;
+}
 
 const statusLabel = {
   MOI: 'MỚI', DA_PHAN_CONG: 'ĐÃ PHÂN CÔNG', DANG_XU_LY: 'ĐANG XỬ LÝ',
@@ -23,6 +34,7 @@ export default function AssignTechnicianPage({ user, onLogout }) {
   const [actionError, setActionError] = useState(null);
   const [busy, setBusy] = useState(false);
   const [showAppointment, setShowAppointment] = useState(false);
+  const [appointmentNotice, setAppointmentNotice] = useState('');
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -87,7 +99,7 @@ export default function AssignTechnicianPage({ user, onLogout }) {
                 <span>Serial</span><strong>{ticket.serial_no}</strong>
                 <span>Mô tả lỗi</span><strong>{ticket.issue_desc}</strong>
                 <span>Nhóm sự cố</span><strong>{ticket.category_code}</strong>
-                <span>Mức ưu tiên</span><strong>{ticket.priority}</strong>
+                <span>Mức ưu tiên</span><strong>{priorityLabel[ticket.priority] || ticket.priority}</strong>
                 <span>Hạn cam kết</span><strong>{new Date(ticket.due_date).toLocaleString('vi-VN')}</strong>
                 <span>Trạng thái</span><strong>{statusLabel[ticket.status]}</strong>
                 {ticket.technician && <><span>Kỹ thuật viên hiện tại</span><strong>{ticket.technician.technician_code} · {ticket.technician.full_name}</strong></>}
@@ -121,11 +133,12 @@ export default function AssignTechnicianPage({ user, onLogout }) {
                 <button className="button" disabled={busy || !selectedId || ticket.status === 'HOAN_TAT' || (ticket.technician_id != null && !reason.trim())} onClick={saveAssignment}>
                   {ticket.technician_id == null ? 'Xác nhận phân công' : 'Lưu đổi kỹ thuật viên'}
                 </button>
-                {ticket.technician_id != null && <button className="button secondary" onClick={() => setShowAppointment((value) => !value)}>Đặt lịch hẹn</button>}
+                {ticket.technician_id != null && <button className="button secondary" onClick={() => { setAppointmentNotice(''); setShowAppointment((value) => !value); }}>Đặt lịch hẹn</button>}
                 <button className="button secondary" onClick={() => navigate('/tickets')}>Hủy</button>
               </div>
             </section>
-            {showAppointment && <AppointmentForm ticketId={Number(id)} onSaved={async () => { setShowAppointment(false); }} onCancel={() => setShowAppointment(false)} />}
+            {appointmentNotice && <div className="notice success" role="status">{appointmentNotice}</div>}
+            {showAppointment && <AppointmentForm ticketId={Number(id)} onSaved={async (appointment) => { setShowAppointment(false); setAppointmentNotice(appointmentSavedMessage(appointment)); }} onCancel={() => setShowAppointment(false)} />}
             <section className="panel table-wrap">
               <h3>Lịch sử trạng thái</h3>
               <table><thead><tr><th>Thời điểm</th><th>Sự kiện</th><th>Từ → Đến</th><th>Kỹ thuật viên cũ → mới</th><th>Ghi chú</th></tr></thead>

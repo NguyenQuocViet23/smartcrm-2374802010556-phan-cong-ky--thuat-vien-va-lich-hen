@@ -4,6 +4,7 @@ import { getTicket, getTicketAppointments, updateStatus } from '../api/tickets.a
 import AppHeader from '../components/AppHeader.jsx';
 import AppointmentForm from '../components/AppointmentForm.jsx';
 import DataState from '../components/DataState.jsx';
+import { priorityLabel } from '../labels.js';
 
 const statusLabel = {
   MOI: 'MỚI', DA_PHAN_CONG: 'ĐÃ PHÂN CÔNG', DANG_XU_LY: 'ĐANG XỬ LÝ',
@@ -39,36 +40,41 @@ export default function MyTicketsPage({ user, onLogout }) {
   const [statusFilter, setStatusFilter] = useState('');
   const visibleTickets = tickets.filter((ticket) => matchesFilter(ticket, statusFilter));
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  // A silent refresh keeps the list and the selected ticket on screen (no loading state).
+  const load = useCallback(async ({ silent = false } = {}) => {
+    if (!silent) setLoading(true);
     setError(null);
     try {
       const result = await getMyTickets();
       setTickets(result);
-      if (selected && !result.some((ticket) => ticket.ticket_id === selected.ticket_id)) {
-        setSelected(null);
-        setAppointments([]);
-      }
+      setSelected((current) => (
+        current && !result.some((ticket) => ticket.ticket_id === current.ticket_id) ? null : current
+      ));
     } catch (requestError) {
       setError(requestError);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
-  }, [selected]);
+  }, []);
 
   useEffect(() => { load(); }, [load]);
+  useEffect(() => { if (!selected) setAppointments([]); }, [selected]);
 
   async function selectTicket(ticket) {
-    setSelected(await getTicket(ticket.ticket_id));
-    setAppointments(await getTicketAppointments(ticket.ticket_id));
-    setActionError(null);
+    try {
+      setSelected(await getTicket(ticket.ticket_id));
+      setAppointments(await getTicketAppointments(ticket.ticket_id));
+      setActionError(null);
+    } catch (requestError) {
+      setActionError(requestError);
+    }
   }
 
   async function changeStatus(status) {
     try {
       await updateStatus(selected.ticket_id, status, note);
       setNote('');
-      await load();
+      await load({ silent: true });
       await selectTicket({ ticket_id: selected.ticket_id });
     } catch (requestError) {
       setActionError(requestError);
@@ -97,12 +103,12 @@ export default function MyTicketsPage({ user, onLogout }) {
           error={error}
           isEmpty={!visibleTickets.length}
           emptyMessage={tickets.length ? 'Không có phiếu ở trạng thái đã chọn' : 'Chưa có phiếu được giao'}
-          onRetry={load}
+          onRetry={() => load()}
         >
           <section className="panel table-wrap">
             <table><thead><tr><th>Mã phiếu</th><th>Nhóm sự cố</th><th>Ưu tiên</th><th>Hạn cam kết</th><th>Trạng thái</th><th>SĐT khách</th></tr></thead>
               <tbody>{visibleTickets.map((ticket) => <tr key={ticket.ticket_id} className={selected?.ticket_id === ticket.ticket_id ? 'selected' : ''} onClick={() => selectTicket(ticket)}>
-                <td><button className="link-button" onClick={(event) => { event.stopPropagation(); selectTicket(ticket); }}>{ticket.ticket_code}</button></td><td>{ticket.category_code}</td><td>{ticket.priority}</td>
+                <td><button className="link-button" onClick={(event) => { event.stopPropagation(); selectTicket(ticket); }}>{ticket.ticket_code}</button></td><td>{ticket.category_code}</td><td>{priorityLabel[ticket.priority] || ticket.priority}</td>
                 <td>{new Date(ticket.due_date).toLocaleString('vi-VN')}{ticket.is_overdue && <strong className="overdue"> QUÁ HẠN</strong>}</td>
                 <td>{statusLabel[ticket.status] || ticket.status}</td><td>{ticket.customer_phone}</td>
               </tr>)}</tbody>

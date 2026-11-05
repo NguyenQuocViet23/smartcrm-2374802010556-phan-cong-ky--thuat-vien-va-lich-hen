@@ -230,6 +230,11 @@ def test_main_flow_from_assignment_to_completion(page: Page, backend: Backend) -
     shot(page, "06_M2_dat_lich_hen")
     page.get_by_role("button", name="Lưu lịch hẹn").click()
     expect(page.get_by_role("button", name="Lưu lịch hẹn")).to_be_hidden()
+    end = slot + timedelta(minutes=30)
+    expect(page.get_by_role("status")).to_contain_text(
+        f"Đã đặt lịch GIAO lúc {slot:%H:%M}–{end:%H:%M}"
+    )
+    shot(page, "06b_M2_dat_lich_thanh_cong")
     with _work_connection() as connection:
         appointment = connection.execute(
             """SELECT appointment_type, status, start_at FROM appointment
@@ -245,6 +250,17 @@ def test_main_flow_from_assignment_to_completion(page: Page, backend: Backend) -
     expect(page).to_have_url(f"{UI_URL}/my-tickets")
     status_filter = page.get_by_label("Trạng thái")
     status_filter.select_option("DANG_LAM")
+    expect(page.get_by_role("button", name=ticket_code)).to_be_visible()
+    expect(page.get_by_role("cell", name="TRUNG_BINH", exact=True)).to_have_count(0)
+    # From here on, record whether the full-page loading state ever appears (flicker).
+    page.evaluate(
+        """() => {
+            window.__sawLoading = false;
+            new MutationObserver(() => {
+                if (document.querySelector('[data-testid="state-loading"]')) window.__sawLoading = true;
+            }).observe(document.body, { childList: true, subtree: true });
+        }"""
+    )
     page.get_by_role("button", name=ticket_code).click()
     expect(page.get_by_role("heading", name=ticket_code)).to_be_visible()
     expect(page.get_by_role("cell", name="ĐÃ HẸN")).to_be_visible()
@@ -255,6 +271,7 @@ def test_main_flow_from_assignment_to_completion(page: Page, backend: Backend) -
     page.get_by_role("button", name="Bắt đầu sửa").click()
     page.get_by_role("button", name="Hoàn tất").click()
     expect(page.get_by_role("button", name="Đặt lịch hẹn")).to_be_hidden()
+    assert page.evaluate("window.__sawLoading") is False, "M3 nhấp nháy trạng thái Đang tải khi chọn phiếu/đổi trạng thái"
     status_filter.select_option("HOAN_TAT")
     expect(page.get_by_role("row", name=ticket_code)).to_contain_text("HOÀN TẤT")
     shot(page, "08_M3_hoan_tat_phieu")
