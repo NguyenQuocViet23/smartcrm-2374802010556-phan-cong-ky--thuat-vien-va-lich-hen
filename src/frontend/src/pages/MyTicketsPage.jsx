@@ -6,9 +6,21 @@ import AppointmentForm from '../components/AppointmentForm.jsx';
 import DataState from '../components/DataState.jsx';
 
 const statusLabel = {
-  DA_PHAN_CONG: 'ĐÃ PHÂN CÔNG', DANG_XU_LY: 'ĐANG XỬ LÝ',
+  MOI: 'MỚI', DA_PHAN_CONG: 'ĐÃ PHÂN CÔNG', DANG_XU_LY: 'ĐANG XỬ LÝ',
   CHO_LINH_KIEN: 'CHỜ LINH KIỆN', HOAN_TAT: 'HOÀN TẤT',
+  DA_DONG: 'ĐÃ ĐÓNG', DA_HUY: 'ĐÃ HỦY',
 };
+const IN_PROGRESS = ['DA_PHAN_CONG', 'DANG_XU_LY', 'CHO_LINH_KIEN'];
+// Technicians keep access to all their own tickets, including closed and cancelled ones.
+const statusFilters = [
+  ['', 'Tất cả'],
+  ['DANG_LAM', 'Đang làm'],
+  ['HOAN_TAT', 'Hoàn tất'],
+  ['DA_DONG', 'Đã đóng'],
+  ['DA_HUY', 'Đã hủy'],
+];
+const matchesFilter = (ticket, filter) =>
+  !filter || (filter === 'DANG_LAM' ? IN_PROGRESS.includes(ticket.status) : ticket.status === filter);
 const nextStatus = {
   DA_PHAN_CONG: [['DANG_XU_LY', 'Bắt đầu sửa']],
   DANG_XU_LY: [['CHO_LINH_KIEN', 'Thiếu linh kiện'], ['HOAN_TAT', 'Hoàn tất']],
@@ -24,6 +36,8 @@ export default function MyTicketsPage({ user, onLogout }) {
   const [note, setNote] = useState('');
   const [actionError, setActionError] = useState(null);
   const [showAppointment, setShowAppointment] = useState(false);
+  const [statusFilter, setStatusFilter] = useState('');
+  const visibleTickets = tickets.filter((ticket) => matchesFilter(ticket, statusFilter));
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -70,10 +84,24 @@ export default function MyTicketsPage({ user, onLogout }) {
     <>
       <AppHeader title="Phiếu của tôi" user={user} onLogout={onLogout} />
       <main className="page">
-        <DataState loading={loading} error={error} isEmpty={!tickets.length} emptyMessage="Chưa có phiếu được giao" onRetry={load}>
+        <section className="filters panel">
+          <label>Trạng thái
+            <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)}>
+              {statusFilters.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+            </select>
+          </label>
+          {!loading && !error && <span>Hiển thị {visibleTickets.length} / {tickets.length} phiếu</span>}
+        </section>
+        <DataState
+          loading={loading}
+          error={error}
+          isEmpty={!visibleTickets.length}
+          emptyMessage={tickets.length ? 'Không có phiếu ở trạng thái đã chọn' : 'Chưa có phiếu được giao'}
+          onRetry={load}
+        >
           <section className="panel table-wrap">
             <table><thead><tr><th>Mã phiếu</th><th>Nhóm sự cố</th><th>Ưu tiên</th><th>Hạn cam kết</th><th>Trạng thái</th><th>SĐT khách</th></tr></thead>
-              <tbody>{tickets.map((ticket) => <tr key={ticket.ticket_id} className={selected?.ticket_id === ticket.ticket_id ? 'selected' : ''} onClick={() => selectTicket(ticket)}>
+              <tbody>{visibleTickets.map((ticket) => <tr key={ticket.ticket_id} className={selected?.ticket_id === ticket.ticket_id ? 'selected' : ''} onClick={() => selectTicket(ticket)}>
                 <td><button className="link-button" onClick={(event) => { event.stopPropagation(); selectTicket(ticket); }}>{ticket.ticket_code}</button></td><td>{ticket.category_code}</td><td>{ticket.priority}</td>
                 <td>{new Date(ticket.due_date).toLocaleString('vi-VN')}{ticket.is_overdue && <strong className="overdue"> QUÁ HẠN</strong>}</td>
                 <td>{statusLabel[ticket.status] || ticket.status}</td><td>{ticket.customer_phone}</td>

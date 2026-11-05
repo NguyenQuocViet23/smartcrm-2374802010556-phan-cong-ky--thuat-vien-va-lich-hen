@@ -421,7 +421,7 @@ def test_technician_status_transitions_and_appointment_errors(page: Page) -> Non
 
     page.get_by_role("button", name="Thiếu linh kiện").click()
     page.get_by_role("button", name="Hoàn tất").click()
-    expect(page.get_by_text("HOÀN TẤT")).to_be_visible()
+    expect(page.get_by_role("cell", name="HOÀN TẤT", exact=True)).to_be_visible()
     expect(page.get_by_role("button", name="Đặt lịch hẹn")).to_have_count(0)
 
     page.get_by_role("button", name="Đăng xuất").click()
