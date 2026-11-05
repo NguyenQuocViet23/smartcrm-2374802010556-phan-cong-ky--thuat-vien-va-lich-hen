@@ -77,4 +77,11 @@ Ngày 06/11/2026: clone repo vào một thư mục trống, làm đúng từng l
 | 23–26 (backend, frontend) | `QL_TT01`, `KT033` đăng nhập được; `KT001` (đã nghỉ) bị 401 |
 | Mục 5: unit / UI / integration / e2e | 65 passed / 3 passed / 4 passed / 1 passed |
 
-Bản clone được lấy từ repo cục bộ ở commit đã kiểm tra; cần lặp lại từ GitHub sau khi push.
+Lần đầu bản clone được lấy từ repo cục bộ. Sau khi push, lặp lại từ GitHub (commit `3b5fe4b`, đúng URL trong README):
+
+| Bước | Kết quả |
+|---|---|
+| 1–23 | Như trên: đủ 6 bảng ở hai database, 41 tài khoản |
+| Mục 5 lần đầu | **Lỗi** `DLL load failed ... The filename or extension is too long`: thư mục clone dài 174 ký tự, tệp sâu nhất trong `.venv` vượt 260 ký tự → thêm lưu ý "clone vào đường dẫn ngắn" ở README mục 3 |
+| Mục 5, clone lại vào đường dẫn 97 ký tự | unit 65 passed, UI 3 passed, integration 4 passed, e2e 1 passed |
+| Mục 3.3 Docker Compose (trên repo gốc) | Container chạy, migration tự áp dụng; nạp đủ 6 bảng qua cổng 5433; đăng nhập `QL_TT01` trên giao diện thấy 5 phiếu MOI. Bước sinh tài khoản từ chối ghi đè tệp đã có → README ghi rõ bỏ qua bước này nếu đã có tệp |

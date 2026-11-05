@@ -41,6 +41,8 @@ Cần cài sẵn: **Git**, **Python 3.11+**, **Node.js LTS**, **PostgreSQL 16+**
 
 Mỗi bước là một lệnh, chạy từ thư mục gốc repo trừ khi có ghi chú khác.
 
+> **Windows:** clone vào thư mục có đường dẫn ngắn (ví dụ `D:\Projects`). Tên repo đã dài 66 ký tự; nếu đường dẫn tới thư mục repo vượt khoảng 130 ký tự, tệp trong `.venv` vượt giới hạn 260 ký tự và pytest báo `DLL load failed ... The filename or extension is too long`.
+
 ### 3.1. Windows PowerShell
 
 ```powershell
