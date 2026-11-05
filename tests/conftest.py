@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import os
 import re
+from contextlib import contextmanager
 from typing import Any
 from urllib.parse import unquote, urlparse
 
 import pytest
+import psycopg
 
 from tests.evidence import (
     EVIDENCE_DIR,
@@ -54,6 +56,54 @@ def get_test_database_url() -> str:
         return f"postgresql://{auth}@{host}:{port}/{database_name}"
 
     raise RuntimeError("Từ chối chạy: chưa cấu hình TEST_DATABASE_URL hoặc TEST_DB_NAME")
+
+
+WORK_DATABASE = "smartcrm_work_test"
+
+
+def clone_work_database(database_name: str) -> None:
+    if database_name != WORK_DATABASE:
+        raise RuntimeError("Chỉ được tạo database làm việc cố định smartcrm_work_test.")
+
+    from app.core.database import get_engine
+
+    try:
+        get_engine().dispose()
+    except Exception:
+        pass
+    get_engine.cache_clear()
+    source_url = get_test_database_url()
+    source = urlparse(source_url)
+    maintenance_url = source._replace(path="/postgres", query="").geturl()
+    with psycopg.connect(maintenance_url, autocommit=True) as connection:
+        try:
+            connection.execute("DROP DATABASE IF EXISTS smartcrm_work_test")
+            connection.execute(
+                "CREATE DATABASE smartcrm_work_test TEMPLATE smartcrm_test"
+            )
+        except psycopg.OperationalError as error:
+            if "being accessed by other users" in str(error).lower():
+                raise RuntimeError(
+                    "Không thể tạo smartcrm_work_test từ template: đóng tab Query Tool và Disconnect database smartcrm_test, rồi chạy lại."
+                ) from error
+            raise
+
+
+def database_counts(database_url: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    with psycopg.connect(database_url) as connection:
+        for table in (
+            "service_center",
+            "technician",
+            "technician_skill",
+            "ticket",
+            "ticket_status_log",
+            "appointment",
+        ):
+            counts[table] = connection.execute(
+                f"SELECT count(*) FROM {table}"
+            ).fetchone()[0]
+    return counts
 
 
 @pytest.fixture
