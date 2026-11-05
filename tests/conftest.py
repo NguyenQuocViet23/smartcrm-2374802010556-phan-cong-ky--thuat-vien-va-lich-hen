@@ -15,8 +15,6 @@ from tests.evidence import (
     EVIDENCE_DIR,
     clean_evidence,
     configure_evidence,
-    render_test_evidence,
-    save_summary,
     screenshot_ui,
     write_report,
 )
@@ -170,12 +168,6 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
                 ]
             except Exception as error:
                 failure = f"{failure}\nKhông thể chụp ảnh UI: {error}" if failure else f"Không thể chụp ảnh UI: {error}"
-    elif evidence_enabled:
-        images = [
-            render_test_evidence(
-                test_id, title, status, duration, details, failure
-            )
-        ]
     item.config.stash[RESULTS_KEY].append(
         {
             "id": test_id,
@@ -203,7 +195,6 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]):
 def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
     results = session.config.stash[RESULTS_KEY]
     if os.getenv("EVIDENCE") == "1" and results:
-        save_summary(results)
         write_report(results, session)
 
 
