@@ -135,7 +135,24 @@ cd src/frontend && npm ci && npm run dev               # terminal 2
 
 ### 3.3. Tùy chọn: Docker Compose
 
-`docker compose up -d --build` dựng PostgreSQL (cổng host `5433`), backend (tự chạy migration) và frontend. Compose **không** tự nạp dữ liệu: sau khi container chạy, thực hiện bước 13–16 ở mục 3.1 với `$env:DB_PORT = "5433"` (backend đọc `data/processed/demo_accounts.json` qua volume ở mỗi lần đăng nhập). Database trong Docker là database riêng, ban đầu trống. Phần này chưa được chạy lại trong lần cập nhật README gần nhất (Docker daemon không chạy trên máy kiểm tra); cách chạy được kiểm chứng là mục 3.1.
+Thay cho bước 10–26 của mục 3.1; vẫn cần bước 1–9 (mã nguồn, `.env`, môi trường Python để chạy script nạp dữ liệu, CSV). Cần Docker Desktop đang chạy; cổng 5173, 8000, 5433 phải trống.
+
+```powershell
+# 1. Dựng PostgreSQL (cổng host 5433), backend (tự chạy migration) và frontend
+docker compose up -d --build
+# 2. Trỏ các script nạp dữ liệu vào PostgreSQL trong Docker
+$env:DB_PORT = "5433"
+# 3–5. Nạp dữ liệu
+python scripts\load_catalog.py
+python scripts\load_tickets.py
+python scripts\load_appointments.py
+# 6. Sinh tài khoản demo (bỏ qua nếu data\processed\demo_accounts.json đã có từ mục 3.1)
+python scripts\generate_demo_accounts.py
+# 7. Trả lại cổng mặc định
+Remove-Item Env:DB_PORT
+```
+
+Mở http://localhost:5173. Database trong Docker là database riêng, ban đầu trống; Compose không tự nạp dữ liệu. Backend đọc `data/processed/demo_accounts.json` qua volume ở mỗi lần đăng nhập. Dừng: `docker compose down` (dữ liệu giữ trong volume `postgres_data`). Đã kiểm chứng ngày 06/11/2026: nạp đủ 6 bảng, đăng nhập `QL_TT01` trên giao diện thấy 5 phiếu MOI.
 
 ### 3.4. Sinh lại lịch hẹn (không bắt buộc)
 
