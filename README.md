@@ -285,6 +285,17 @@ python -m pytest -v
 
 Các test backend dùng `TestClient` để kiểm tra API và validation; lần xác minh gần nhất đạt `25 passed`. Lệnh này không cần frontend hoặc PostgreSQL.
 
+#### Kiểm thử integration dữ liệu thật
+
+Chỉ đọc chạy trực tiếp trên `smartcrm_test`; test ghi tạo lại database làm việc cố định `smartcrm_work_test` từ template `smartcrm_test` trước mỗi test ghi:
+
+```powershell
+$env:TEST_DB_NAME="smartcrm_test"
+python -m pytest tests/integration/test_tc22_tc25.py -m integration -q
+```
+
+Database `smartcrm` không được dùng bởi integration này. Nếu PostgreSQL báo database nguồn đang có kết nối khác hoặc database làm việc đang được sử dụng, đóng tab Query Tool/Disconnect database tương ứng rồi chạy lại; test không tự ngắt kết nối của người khác.
+
 Lần xác minh gần nhất: bộ UI chạy ở chế độ headed đạt `3 passed`; `npm run build` thành công. Test UI giả lập **không thay thế** 18 acceptance test tích hợp với PostgreSQL và dữ liệu thật. Hiện chưa có thư mục `tests\service`, và ảnh UI PASS chưa được tự động lưu vào `docs/test-evidence/`.
 
 Các blockers trước khi có thể xác nhận đủ 18 acceptance test tích hợp gồm: bổ sung `ticket_status_log.csv` và dữ liệu/script lịch hẹn; chạy PostgreSQL; hoàn thiện nhập log/lịch hẹn, sinh phiếu MỚI và reset dữ liệu; tạo test TC01–TC18; nạp dữ liệu thật vào hai database.

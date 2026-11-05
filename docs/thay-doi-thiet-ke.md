@@ -82,3 +82,10 @@ ticket_status_log.csv được sao chép từ thư mục dataset vào data/raw/.
 - **Quyết định:** **SỬA** – ép trực tiếp `changed_by` sang BIGINT khi cả 60 giá trị quan sát đều là số nguyên; kiểm tra rồi chuyển kiểu `is_active`, `proficiency` trong khoảng 1..5 và `level`. Ánh xạ `category_id` sang `category_code` bằng `issue_categories.csv`.
 - **Lý do:** Các phép đổi kiểu phải được kiểm chứng trước khi nạp, tránh tạo dữ liệu ngoại lệ hoặc giá trị giả.
 - **Ảnh hưởng:** Giảm lỗi ép kiểu khi nạp và bảo đảm danh mục phiếu có mã category đúng schema.
+
+## TD-12 – Cô lập integration trên PostgreSQL
+
+- **Vấn đề phát hiện:** Test ghi nghiệp vụ có thể thay đổi dữ liệu `smartcrm` hoặc dữ liệu chuẩn `smartcrm_test`.
+- **Quyết định:** **SỬA** – test chỉ đọc chạy trên `smartcrm_test`; test ghi tạo lại database cố định `smartcrm_work_test` từ template `smartcrm_test` trước mỗi test. Guard chỉ cho phép tên database làm việc chính xác `smartcrm_work_test` và test cổng từ chối các tên không kết thúc bằng `_test`.
+- **Lý do:** Mỗi test ghi cần dữ liệu nguồn ổn định, có thể lặp lại, đồng thời bảo vệ database dữ liệu thật.
+- **Ảnh hưởng:** Fixture cần kết nối bảo trì tới database `postgres`, dispose engine SQLAlchemy trước DROP/CREATE và kiểm tra số dòng `smartcrm_test`/`smartcrm` trước và sau phiên kiểm thử.
