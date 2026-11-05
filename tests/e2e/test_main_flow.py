@@ -210,7 +210,8 @@ def test_main_flow_from_assignment_to_completion(page: Page, backend: Backend) -
     # 5. Xác nhận phân công cho người đầu danh sách.
     page.get_by_role("button", name="Xác nhận phân công").click()
     expect(page.get_by_text("ĐÃ PHÂN CÔNG").first).to_be_visible()
-    expect(page.get_by_text(f"{technician_code} ·")).to_be_visible()
+    expect(page.locator(".detail-grid").get_by_text(f"{technician_code} ·")).to_be_visible()
+    expect(page.get_by_role("status")).to_contain_text(f"Đã phân công phiếu cho kỹ thuật viên {technician_code}")
     shot(page, "05_M2_phan_cong_thanh_cong")
     with _work_connection() as connection:
         status, technician_id, assigned_code = connection.execute(

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { assignTicket, changeAssignment, getSuggestions, getTicket } from '../api/tickets.api.js';
+import { assignTicket, changeAssignment, getSuggestions, getTicket, getTicketAppointments } from '../api/tickets.api.js';
 import AppHeader from '../components/AppHeader.jsx';
 import AppointmentForm from '../components/AppointmentForm.jsx';
 import DataState from '../components/DataState.jsx';
@@ -21,6 +21,7 @@ const statusLabel = {
   CHO_LINH_KIEN: 'CHỜ LINH KIỆN', HOAN_TAT: 'HOÀN TẤT',
   DA_DONG: 'ĐÃ ĐÓNG', DA_HUY: 'ĐÃ HỦY',
 };
+const eventLabel = { TRANG_THAI: 'ĐỔI TRẠNG THÁI', DOI_KTV: 'ĐỔI KỸ THUẬT VIÊN' };
 
 export default function AssignTechnicianPage({ user, onLogout }) {
   const { id } = useParams();
@@ -34,10 +35,23 @@ export default function AssignTechnicianPage({ user, onLogout }) {
   const [actionError, setActionError] = useState(null);
   const [busy, setBusy] = useState(false);
   const [showAppointment, setShowAppointment] = useState(false);
-  const [appointmentNotice, setAppointmentNotice] = useState('');
+  const [notice, setNotice] = useState('');
+  const [appointments, setAppointments] = useState([]);
+  const [appointmentsError, setAppointmentsError] = useState(false);
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  // Appointments are secondary information: a failure here must not hide the ticket.
+  const loadAppointments = useCallback(async () => {
+    try {
+      setAppointments(await getTicketAppointments(id));
+      setAppointmentsError(false);
+    } catch {
+      setAppointmentsError(true);
+    }
+  }, [id]);
+
+  // A silent refresh keeps the page on screen (no loading state) after a save.
+  const load = useCallback(async ({ silent = false } = {}) => {
+    if (!silent) setLoading(true);
     setError(null);
     try {
       const [details, choices] = await Promise.all([getTicket(id), getSuggestions(id)]);
@@ -47,23 +61,29 @@ export default function AssignTechnicianPage({ user, onLogout }) {
     } catch (requestError) {
       setError(requestError);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
-  }, [id]);
+    loadAppointments();
+  }, [id, loadAppointments]);
 
   useEffect(() => { load(); }, [load]);
 
   async function saveAssignment() {
     setBusy(true);
     setActionError(null);
+    setNotice('');
+    const chosen = suggestions.find((item) => String(item.technician_id) === selectedId);
+    const chosenLabel = chosen ? `${chosen.technician_code} · ${chosen.full_name}` : `#${selectedId}`;
     try {
       if (ticket.technician_id == null) {
         await assignTicket(id, Number(selectedId));
+        setNotice(`Đã phân công phiếu cho kỹ thuật viên ${chosenLabel}.`);
       } else {
         await changeAssignment(id, Number(selectedId), reason);
+        setNotice(`Đã đổi kỹ thuật viên sang ${chosenLabel}.`);
       }
       setReason('');
-      await load();
+      await load({ silent: true });
     } catch (requestError) {
       setActionError(requestError);
     } finally {
@@ -89,7 +109,7 @@ export default function AssignTechnicianPage({ user, onLogout }) {
     <>
       <AppHeader title={ticket?.technician_id ? 'Đổi kỹ thuật viên' : 'Phân công kỹ thuật viên'} user={user} onLogout={onLogout} />
       <main className="page">
-        <DataState loading={loading} error={error} onRetry={load}>
+        <DataState loading={loading} error={error} onRetry={() => load()}>
           {ticket && <>
             <section className="panel ticket-details">
               <h2>{ticket.ticket_code}</h2>
@@ -133,17 +153,30 @@ export default function AssignTechnicianPage({ user, onLogout }) {
                 <button className="button" disabled={busy || !selectedId || ticket.status === 'HOAN_TAT' || (ticket.technician_id != null && !reason.trim())} onClick={saveAssignment}>
                   {ticket.technician_id == null ? 'Xác nhận phân công' : 'Lưu đổi kỹ thuật viên'}
                 </button>
-                {ticket.technician_id != null && <button className="button secondary" onClick={() => { setAppointmentNotice(''); setShowAppointment((value) => !value); }}>Đặt lịch hẹn</button>}
+                {ticket.technician_id != null && <button className="button secondary" onClick={() => { setNotice(''); setShowAppointment((value) => !value); }}>Đặt lịch hẹn</button>}
                 <button className="button secondary" onClick={() => navigate('/tickets')}>Hủy</button>
               </div>
             </section>
-            {appointmentNotice && <div className="notice success" role="status">{appointmentNotice}</div>}
-            {showAppointment && <AppointmentForm ticketId={Number(id)} onSaved={async (appointment) => { setShowAppointment(false); setAppointmentNotice(appointmentSavedMessage(appointment)); }} onCancel={() => setShowAppointment(false)} />}
+            {notice && <div className="notice success" role="status">{notice}</div>}
+            {showAppointment && <AppointmentForm ticketId={Number(id)} onSaved={async (appointment) => { setShowAppointment(false); setNotice(appointmentSavedMessage(appointment)); await loadAppointments(); }} onCancel={() => setShowAppointment(false)} />}
+            {(appointments.length > 0 || appointmentsError) && <section className="panel table-wrap">
+              <h3>Lịch hẹn của phiếu</h3>
+              {appointmentsError ? <p className="notice error">Không tải được lịch hẹn.</p> : (
+                <table><thead><tr><th>Giờ</th><th>Loại</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead>
+                  <tbody>{appointments.map((appointment) => <tr key={appointment.appointment_id}>
+                    <td>{new Date(appointment.start_at).toLocaleString('vi-VN')}–{new Date(appointment.end_at).toLocaleTimeString('vi-VN')}</td>
+                    <td>{appointment.appointment_type === 'NHAN' ? 'NHẬN' : 'GIAO'}</td>
+                    <td>{appointment.status === 'DA_HEN' ? 'ĐÃ HẸN' : 'ĐÃ HỦY'}</td>
+                    <td>{appointment.note || ''}</td>
+                  </tr>)}</tbody>
+                </table>
+              )}
+            </section>}
             <section className="panel table-wrap">
               <h3>Lịch sử trạng thái</h3>
               <table><thead><tr><th>Thời điểm</th><th>Sự kiện</th><th>Từ → Đến</th><th>Kỹ thuật viên cũ → mới</th><th>Ghi chú</th></tr></thead>
                 <tbody>{ticket.status_history.map((event) => <tr key={event.log_id}>
-                  <td>{new Date(event.changed_at).toLocaleString('vi-VN')}</td><td>{event.event_type}</td><td>{event.from_status ? `${statusLabel[event.from_status]} → ` : ''}{statusLabel[event.to_status]}</td>
+                  <td>{new Date(event.changed_at).toLocaleString('vi-VN')}</td><td>{eventLabel[event.event_type] || event.event_type}</td><td>{event.from_status ? `${statusLabel[event.from_status]} → ` : ''}{statusLabel[event.to_status]}</td>
                   <td>{event.from_technician_code || '—'} → {event.to_technician_code || '—'}</td><td>{event.note || ''}</td>
                 </tr>)}</tbody>
               </table>

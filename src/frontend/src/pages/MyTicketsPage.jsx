@@ -38,6 +38,7 @@ export default function MyTicketsPage({ user, onLogout }) {
   const [actionError, setActionError] = useState(null);
   const [showAppointment, setShowAppointment] = useState(false);
   const [statusFilter, setStatusFilter] = useState('');
+  const [notice, setNotice] = useState('');
   const visibleTickets = tickets.filter((ticket) => matchesFilter(ticket, statusFilter));
 
   // A silent refresh keeps the list and the selected ticket on screen (no loading state).
@@ -60,7 +61,8 @@ export default function MyTicketsPage({ user, onLogout }) {
   useEffect(() => { load(); }, [load]);
   useEffect(() => { if (!selected) setAppointments([]); }, [selected]);
 
-  async function selectTicket(ticket) {
+  async function selectTicket(ticket, { keepNotice = false } = {}) {
+    if (!keepNotice) setNotice('');
     try {
       setSelected(await getTicket(ticket.ticket_id));
       setAppointments(await getTicketAppointments(ticket.ticket_id));
@@ -71,11 +73,13 @@ export default function MyTicketsPage({ user, onLogout }) {
   }
 
   async function changeStatus(status) {
+    setNotice('');
     try {
       await updateStatus(selected.ticket_id, status, note);
       setNote('');
+      setNotice(`Đã chuyển trạng thái sang ${statusLabel[status]}.`);
       await load({ silent: true });
-      await selectTicket({ ticket_id: selected.ticket_id });
+      await selectTicket({ ticket_id: selected.ticket_id }, { keepNotice: true });
     } catch (requestError) {
       setActionError(requestError);
     }
@@ -120,7 +124,9 @@ export default function MyTicketsPage({ user, onLogout }) {
               <span>Khách hàng</span><strong>{selected.customer_name}</strong>
               <span>Serial</span><strong>{selected.serial_no}</strong>
               <span>Mô tả lỗi</span><strong>{selected.issue_desc}</strong>
+              <span>Trạng thái</span><strong>{statusLabel[selected.status] || selected.status}</strong>
             </div>
+            {notice && <div className="notice success" role="status">{notice}</div>}
             <label>Ghi chú (tối đa 255 ký tự)
               <input maxLength="255" value={note} onChange={(event) => setNote(event.target.value)} />
             </label>
