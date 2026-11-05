@@ -66,3 +66,18 @@ python -m pytest tests\e2e -m e2e
 | – | Token không hợp lệ | API trả 401 → token bị xoá, về trang đăng nhập | E2E_10 |
 
 Tên phiếu, kỹ thuật viên và khung giờ được test chọn từ dữ liệu thật ở mỗi lần chạy, nên có thể khác bảng trên nếu dữ liệu nguồn thay đổi.
+
+## 5. Thử clone mới và chạy theo README
+
+Ngày 06/11/2026: clone repo vào một thư mục trống, làm đúng từng lệnh README mục 3.1 (Windows PowerShell, venv mới, `npm ci` mới, bộ 7 CSV từ LMS). Khác biệt duy nhất: dùng database `smartcrm_clone`/`smartcrm_clone_test` để không ghi đè database đang có.
+
+| Bước README | Kết quả |
+|---|---|
+| 1–9 (clone, `.env`, venv, thư viện, Chromium, chép CSV) | Lần đầu **lỗi** ở bước 9: thư mục `data/raw/` không có trong bản clone vì bị `.gitignore` bỏ cả thư mục → sửa bằng `data/raw/.gitkeep`; lần hai chạy được |
+| 10–15 (tạo DB, migrate, nạp dữ liệu) | Đúng 6 / 38 / 159 / 7.317 / 35.719 / 300 dòng; bất biến đều 0; chạy lại các loader không nhân đôi dòng |
+| 16 (tài khoản demo) | 41 tài khoản (không có 3 KTV đã nghỉ) → **sửa README** mục 4 vốn ghi `KT001 … KT038` |
+| 17–22 (database kiểm thử) | Số dòng giống database chính |
+| 23–26 (backend, frontend) | `QL_TT01`, `KT033` đăng nhập được; `KT001` (đã nghỉ) bị 401 |
+| Mục 5: unit / UI / integration / e2e | 65 passed / 3 passed / 4 passed / 1 passed |
+
+Bản clone được lấy từ repo cục bộ ở commit đã kiểm tra; cần lặp lại từ GitHub sau khi push.

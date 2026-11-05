@@ -103,7 +103,9 @@ npm ci
 npm run dev
 ```
 
-Kết quả mong đợi sau bước 13–15 (in ra màn hình và kiểm chứng ở [docs/bao-cao-nap-du-lieu.md](docs/bao-cao-nap-du-lieu.md)): `service_center` 6, `technician` 38, `technician_skill` 159, `ticket` 7.317, `ticket_status_log` 35.719, `appointment` 300. Các script dùng `ON CONFLICT DO NOTHING`, chạy lại không nhân đôi dòng. Nếu `psql` báo database đã tồn tại ở bước 10–11 thì bỏ qua bước đó.
+Kết quả mong đợi sau bước 13–15 (in ra màn hình và kiểm chứng ở [docs/bao-cao-nap-du-lieu.md](docs/bao-cao-nap-du-lieu.md)): `service_center` 6, `technician` 38, `technician_skill` 159, `ticket` 7.317, `ticket_status_log` 35.719, `appointment` 300. Các script dùng `ON CONFLICT DO NOTHING`, chạy lại không nhân đôi dòng. Ở bước 10–11 `psql` hỏi mật khẩu của user PostgreSQL; nếu báo database đã tồn tại thì bỏ qua bước đó.
+
+Mục 3.1 và các lệnh kiểm thử ở mục 5 đã được chạy lại trên một thư mục clone trống ngày 06/11/2026 (kết quả: [docs/tich-hop-end-to-end.md](docs/tich-hop-end-to-end.md) mục 5).
 
 ### 3.2. macOS / Linux
 
@@ -146,7 +148,9 @@ Mật khẩu mọi tài khoản demo là giá trị `DEMO_PASSWORD` trong `.env`
 | Vai trò | Tên đăng nhập | Màn hình |
 |---|---|---|
 | Quản lý trung tâm | `QL_TT01` … `QL_TT06` | M1 Phiếu chờ phân công → M2 Phân công kỹ thuật viên |
-| Kỹ thuật viên | `KT001` … `KT038` (mã `technician_code`) | M3 Phiếu của tôi |
+| Kỹ thuật viên | Mã `technician_code` từ `KT001` đến `KT038`, trừ 3 người đã nghỉ việc (`KT001`, `KT011`, `KT031`) | M3 Phiếu của tôi |
+
+Bước 16 sinh 41 tài khoản (6 quản lý + 35 kỹ thuật viên đang làm việc); đăng nhập bằng mã của kỹ thuật viên đã nghỉ trả lỗi 401.
 
 Quản lý chỉ thấy phiếu của trung tâm mình; kỹ thuật viên chỉ thấy phiếu của chính mình (kể cả phiếu đã đóng/đã hủy, lọc bằng ô "Trạng thái").
 
