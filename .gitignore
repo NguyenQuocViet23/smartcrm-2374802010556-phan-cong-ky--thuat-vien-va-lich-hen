@@ -13,7 +13,9 @@ venv/
 reports/*.csv
 
 # Dữ liệu & model lớn
-data/raw/
+# data/raw/ được giữ (qua .gitkeep) để clone mới có chỗ chép CSV từ LMS
+data/raw/*
+!data/raw/.gitkeep
 data/processed/demo_accounts.json
 models/*.pkl
 models/*.pt
