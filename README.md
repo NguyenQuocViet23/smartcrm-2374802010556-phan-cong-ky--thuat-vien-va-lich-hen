@@ -4,307 +4,182 @@
 **Sinh viên:** Nguyễn Quốc Việt – MSSV 2374802010556
 **Track:** SE · Chuyên đề Tốt nghiệp 1 – Trường ĐH Văn Lang
 
-## 1. Mô tả bài toán
+## 1. Mô tả bài toán và phạm vi
 
 Smart CRM hỗ trợ Quản lý trung tâm phân công phiếu bảo hành cho kỹ thuật viên cùng trung tâm, đủ tay nghề; hỗ trợ đặt lịch giao/nhận thiết bị và giúp Kỹ thuật viên cập nhật trạng thái phiếu. Hạn cam kết được đọc/hiển thị, không sửa trong luồng L04.
 
 Luồng trạng thái: `MOI → DA_PHAN_CONG → DANG_XU_LY → CHO_LINH_KIEN → HOAN_TAT` (có thể đi thẳng `DANG_XU_LY → HOAN_TAT`).
 
-## 2. Phạm vi
+**Trong phạm vi:** danh sách phiếu mới, gợi ý kỹ thuật viên theo trung tâm/tay nghề/khối lượng, phân công và đổi kỹ thuật viên, phiếu của tôi, lịch hẹn giao/nhận có chống trùng, cập nhật trạng thái, xác thực demo, ba màn hình M1/M2/M3.
 
-**Trong phạm vi:** danh sách phiếu mới, gợi ý kỹ thuật viên theo trung tâm/tay nghề/khối lượng, phân công và đổi kỹ thuật viên, phiếu của tôi, lịch hẹn giao/nhận có chống trùng, cập nhật trạng thái, xác thực demo, M1/M2/M3.
+**Ngoài phạm vi:** UC8/báo cáo khối lượng toàn trung tâm, tiếp nhận phiếu L2, tồn kho/linh kiện, SMS/Zalo, điều chuyển trung tâm, hủy lịch hẹn trên UI, đóng/hủy phiếu. Phần đã cắt và lý do: [docs/thay-doi-thiet-ke.md](docs/thay-doi-thiet-ke.md).
 
-**Ngoài phạm vi:** UC8/báo cáo khối lượng toàn trung tâm, tiếp nhận phiếu L2, tồn kho/linh kiện, SMS/Zalo, điều chuyển trung tâm, hủy lịch hẹn trên UI, đóng/hủy phiếu.
-
-## 3. Công nghệ và cấu trúc
+## 2. Công nghệ và cấu trúc
 
 | Thành phần | Công nghệ |
 |---|---|
-| Backend | Python, FastAPI, SQLAlchemy, psycopg |
-| Cơ sở dữ liệu | PostgreSQL 16 |
-| Frontend | React, Vite, React Router |
-| Kiểm thử | pytest, TestClient, pytest-playwright, Pillow |
-| Triển khai | Docker Compose |
+| Backend | Python 3.11+, FastAPI, SQLAlchemy, psycopg |
+| Cơ sở dữ liệu | PostgreSQL 16 trở lên (đã chạy thử trên 18) |
+| Frontend | React, Vite, React Router (Node.js LTS) |
+| Kiểm thử | pytest, TestClient, pytest-playwright (Chromium) |
+| Triển khai | Docker Compose (tùy chọn) |
 
 ```text
 db/                         schema 6 bảng và migration
-data/raw/                   CSV case-study (không commit)
-data/sample/                mẫu dữ liệu (hiện chưa có CSV)
-scripts/                    migration và seed
-src/backend/app/            routers, schemas, services/repositories hiện có
-src/frontend/src/           API client, components, pages
-tests/                      kiểm thử
-docs/                       SRS, sơ đồ, báo cáo và ảnh kiểm thử
+data/raw/                   CSV case-study lấy từ LMS (không commit)
+data/sample/appointments.csv  lịch hẹn sinh với seed 20261102 (có commit)
+scripts/                    migration, nạp dữ liệu, sinh tài khoản demo
+src/backend/app/            routers (HTTP), services (quy tắc nghiệp vụ), core
+src/frontend/src/           api/ (client.js + *.api.js), components/, pages/
+tests/                      unit test; ui/ (API giả lập); integration/; e2e/
+docs/                       SRS, sơ đồ, báo cáo, ảnh minh chứng (docs/test-evidence/)
 ```
 
-## 4. Yêu cầu môi trường và cấu hình
+## 3. Các bước dựng hệ thống
 
-- Python 3.11 trở lên, Node.js LTS (Docker frontend dùng Node 22), Git.
-- PostgreSQL 16 hoặc Docker Desktop với Docker Compose v2.
-- Chromium nếu chạy kiểm thử UI bằng Playwright.
-- Sao chép `.env.example` thành `.env`, sau đó điền `DB_USER`, `DB_PASSWORD`, `SECRET_KEY` (ít nhất 32 ký tự), `DEMO_PASSWORD`, và `TEST_DATABASE_URL`. Không commit `.env`.
-- API dùng `DATABASE_URL` nếu đặt; nếu không, dùng `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`.
-- Tài khoản demo được sinh trong `data/processed/demo_accounts.json`, mật khẩu được hash PBKDF2; file này không được commit.
+Cần cài sẵn: **Git**, **Python 3.11+**, **Node.js LTS**, **PostgreSQL 16+** (lệnh `psql` có trong PATH) và **bộ 7 tệp CSV case-study** tải từ LMS: `service_centers.csv`, `issue_categories.csv`, `technicians.csv`, `technician_skills.csv`, `tickets_history.csv`, `ticket_status_log.csv`, `customers_raw.csv`. Bộ CSV này không nằm trong repo (`data/raw/` bị `.gitignore`).
 
-## 5. Cài đặt, chạy và kiểm thử
+Mỗi bước là một lệnh, chạy từ thư mục gốc repo trừ khi có ghi chú khác.
 
-### 5.1. Lấy mã nguồn
-
-Chạy từ thư mục cha mà bạn muốn đặt repo.
-
-**Windows PowerShell**
+### 3.1. Windows PowerShell
 
 ```powershell
+# 1. Lấy mã nguồn
 git clone https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git
-```
-```powershell
+# 2. Vào thư mục repo
 Set-Location smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen
-```
-```powershell
+# 3. Tạo tệp cấu hình
 Copy-Item .env.example .env
+# 4. Điền DB_USER, DB_PASSWORD, SECRET_KEY (≥ 32 ký tự), DEMO_PASSWORD rồi lưu lại
+notepad .env
+# 5. Tạo môi trường ảo Python
+py -m venv .venv
+# 6. Kích hoạt môi trường ảo
+.\.venv\Scripts\Activate.ps1
+# 7. Cài thư viện backend và kiểm thử
+python -m pip install -r requirements-dev.txt
+# 8. Cài trình duyệt Chromium cho kiểm thử giao diện
+python -m playwright install chromium
+# 9. Chép 7 tệp CSV từ LMS vào data\raw\ (thay <thư-mục-CSV> bằng nơi bạn đã tải về)
+Copy-Item <thư-mục-CSV>\*.csv data\raw\
+# 10. Tạo database chính
+psql -U postgres -c "CREATE DATABASE smartcrm;"
+# 11. Tạo database kiểm thử
+psql -U postgres -c "CREATE DATABASE smartcrm_test;"
+# 12. Tạo 6 bảng trong database chính
+python scripts\migrate.py
+# 13. Nạp trung tâm, kỹ thuật viên, tay nghề
+python scripts\load_catalog.py
+# 14. Nạp phiếu và lịch sử trạng thái (tạo 30 phiếu MOI, seed 20260901)
+python scripts\load_tickets.py
+# 15. Nạp 300 lịch hẹn từ data\sample\appointments.csv
+python scripts\load_appointments.py
+# 16. Sinh tài khoản demo vào data\processed\demo_accounts.json
+python scripts\generate_demo_accounts.py
+# 17. Chuyển sang database kiểm thử cho các bước 18–21
+$env:DB_NAME = "smartcrm_test"
+# 18. Tạo 6 bảng trong database kiểm thử
+python scripts\migrate.py
+# 19. Nạp danh mục vào database kiểm thử
+python scripts\load_catalog.py
+# 20. Nạp phiếu vào database kiểm thử
+python scripts\load_tickets.py
+# 21. Nạp lịch hẹn vào database kiểm thử
+python scripts\load_appointments.py
+# 22. Trở lại database chính
+Remove-Item Env:DB_NAME
+# 23. Chạy backend (giữ cửa sổ này mở) → http://localhost:8000/docs
+python -m uvicorn app.main:app --app-dir src\backend
 ```
 
-**macOS / Linux**
+Mở **cửa sổ PowerShell thứ hai** tại thư mục gốc repo:
+
+```powershell
+# 24. Vào thư mục frontend
+Set-Location src\frontend
+# 25. Cài thư viện frontend
+npm ci
+# 26. Chạy frontend → mở http://localhost:5173
+npm run dev
+```
+
+Kết quả mong đợi sau bước 13–15 (in ra màn hình và kiểm chứng ở [docs/bao-cao-nap-du-lieu.md](docs/bao-cao-nap-du-lieu.md)): `service_center` 6, `technician` 38, `technician_skill` 159, `ticket` 7.317, `ticket_status_log` 35.719, `appointment` 300. Các script dùng `ON CONFLICT DO NOTHING`, chạy lại không nhân đôi dòng. Nếu `psql` báo database đã tồn tại ở bước 10–11 thì bỏ qua bước đó.
+
+### 3.2. macOS / Linux
 
 ```bash
 git clone https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git
-```
-```bash
 cd smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen
-```
-```bash
-cp .env.example .env
-```
-
-### 5.2. Cách 1 – Docker Compose
-
-Điền `.env` trước khi chạy. Từ thư mục gốc repo:
-
-```powershell
-docker compose up -d --build
-```
-
-Frontend: http://localhost:5173 · Backend: http://localhost:8000 · Swagger: http://localhost:8000/docs
-
-Compose tự khởi động PostgreSQL, áp dụng migration rồi chạy API và Vite. Docker không tự nạp dữ liệu mẫu: cần đủ CSV và seed thành công mới có thể đăng nhập demo. **Hiện dữ liệu log/lịch hẹn còn thiếu nên luồng demo đầy đủ chưa khả dụng.**
-
-### 5.3. Cách 2 – Chạy thủ công trên Windows
-
-Từ thư mục gốc repo:
-
-```powershell
-py -m venv .venv
-```
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-```powershell
-python -m pip install -r requirements-dev.txt
-```
-```powershell
-psql -U postgres -c "CREATE DATABASE smartcrm;"
-```
-```powershell
-psql -U postgres -c "CREATE DATABASE smartcrm_test;"
-```
-```powershell
-python scripts\migrate.py
-```
-```powershell
-$env:DB_NAME = "smartcrm_test"
-```
-```powershell
-python scripts\migrate.py
-```
-```powershell
-$env:DB_NAME = "smartcrm"
-```
-
-Khởi động backend trong cửa sổ terminal thứ nhất:
-
-```powershell
-python -m uvicorn app.main:app --app-dir src\backend --reload
-```
-
-Từ thư mục gốc, terminal thứ hai:
-
-```powershell
-Set-Location src\frontend
-```
-```powershell
-npm ci
-```
-```powershell
-npm run dev
-```
-
-### 5.4. Chạy thủ công trên macOS / Linux
-
-Từ thư mục gốc repo:
-
-```bash
+cp .env.example .env                      # rồi điền DB_USER, DB_PASSWORD, SECRET_KEY, DEMO_PASSWORD
 python3 -m venv .venv
-```
-```bash
 source .venv/bin/activate
-```
-```bash
 python -m pip install -r requirements-dev.txt
-```
-```bash
+python -m playwright install chromium
+cp <thư-mục-CSV>/*.csv data/raw/
 createdb smartcrm
-```
-```bash
 createdb smartcrm_test
-```
-```bash
 python scripts/migrate.py
-```
-```bash
-DB_NAME=smartcrm_test python scripts/migrate.py
-```
-
-Khởi động API trong terminal thứ nhất:
-
-```bash
-python -m uvicorn app.main:app --app-dir src/backend --reload
-```
-
-Khởi động UI trong terminal thứ hai:
-
-```bash
-cd src/frontend
-```
-```bash
-npm ci
-```
-```bash
-npm run dev
-```
-
-### 5.5. Dữ liệu và seed
-
-Đặt bộ CSV case-study được cấp trên LMS vào `data/raw/`. Repo hiện có `service_centers.csv`, `issue_categories.csv`, `technicians.csv`, `technician_skills.csv`, `tickets_history.csv`, `customers_raw.csv`; **chưa có** `ticket_status_log.csv`, `appointments.csv` hoặc `gen_sample.py`/`tools/gen_sample.py`.
-
-Để dựng lại toàn bộ dữ liệu từ một clone mới, đặt bộ CSV đầy đủ vào `data/raw/` và chạy lần lượt từng lệnh sau từ thư mục gốc:
-
-```powershell
-createdb smartcrm
-psql -U postgres -d smartcrm -f db/schema.sql
 python scripts/load_catalog.py
 python scripts/load_tickets.py
-python scripts/gen_appointments.py
 python scripts/load_appointments.py
 python scripts/generate_demo_accounts.py
+DB_NAME=smartcrm_test python scripts/migrate.py
+DB_NAME=smartcrm_test python scripts/load_catalog.py
+DB_NAME=smartcrm_test python scripts/load_tickets.py
+DB_NAME=smartcrm_test python scripts/load_appointments.py
+python -m uvicorn app.main:app --app-dir src/backend   # terminal 1
+cd src/frontend && npm ci && npm run dev               # terminal 2
 ```
 
-Sau đó chạy backend và frontend ở hai terminal riêng. Pipeline trên dùng seed `20260901` cho 30 phiếu MOI và seed `20261102` cho 300 lịch hẹn, từ `2026-11-03` đến `2027-01-30`. `data/sample/appointments.csv` là tệp mẫu; dữ liệu đầy đủ case-study được đặt tại `data/raw/`. Toàn bộ báo cáo seed nằm trong `reports/`, trong đó `reports/moi_tickets_seed20260901.csv` chứa seed MOI.
+### 3.3. Tùy chọn: Docker Compose
 
-Hai chế độ cơ sở dữ liệu:
+`docker compose up -d --build` dựng PostgreSQL (cổng host `5433`), backend (tự chạy migration) và frontend. Compose **không** tự nạp dữ liệu: sau khi container chạy, thực hiện bước 13–16 ở mục 3.1 với `$env:DB_PORT = "5433"` (backend đọc `data/processed/demo_accounts.json` qua volume ở mỗi lần đăng nhập). Database trong Docker là database riêng, ban đầu trống. Phần này chưa được chạy lại trong lần cập nhật README gần nhất (Docker daemon không chạy trên máy kiểm tra); cách chạy được kiểm chứng là mục 3.1.
 
-- PostgreSQL cài trên máy: `DB_PORT=5432`, database chính `smartcrm`, có thể khác database Docker.
-- PostgreSQL trong Docker: cổng host mặc định `DB_HOST_PORT=5433`; khi chạy script nạp dữ liệu từ máy chủ, đặt `DB_PORT=5433`. Database trong Docker là database riêng, ban đầu trống, không phải database `smartcrm` đang dùng trên máy PostgreSQL.
+### 3.4. Sinh lại lịch hẹn (không bắt buộc)
 
-Kết quả khảo sát thực tế: 7.800 ticket nối được với khách qua `tickets_history.customer_id → customers_raw.record_id`; 483 phiếu không có số điện thoại hợp lệ sau chuẩn hóa và cần reject theo QT-02. Status hiện có trong CSV đã là mã không dấu; bộ chuẩn hóa chấp nhận cả mã này và alias có dấu theo prompt.
+`data/sample/appointments.csv` đã được sinh sẵn. Muốn sinh lại từ database đã nạp phiếu (seed `20261102`, 270 `DA_HEN` + 30 `DA_HUY`, từ 2026-11-03 đến 2027-01-30): `python scripts\gen_appointments.py`. Lý do không dùng `gen_sample.py` của case-study: TD-09.
 
-Seed đầy đủ hiện **chưa thể chạy**. Mặc định script dừng nếu không có mapping đã xác minh cho log và lịch hẹn; không tự sinh các dòng thay thế. Khi đã có đủ nguồn và mapping, lệnh dự kiến:
+## 4. Đăng nhập và API
 
-```powershell
-$env:ALLOW_LEGACY_SEED="1"
-python scripts\legacy\seed_real_data.py --csv-dir data\raw --seed 20261023
-```
+Mật khẩu mọi tài khoản demo là giá trị `DEMO_PASSWORD` trong `.env`.
 
-Chỉ để kiểm tra các bảng lõi trong môi trường thử nghiệm sau khi đã áp dụng migration (không dùng cho TC01–TC18):
+| Vai trò | Tên đăng nhập | Màn hình |
+|---|---|---|
+| Quản lý trung tâm | `QL_TT01` … `QL_TT06` | M1 Phiếu chờ phân công → M2 Phân công kỹ thuật viên |
+| Kỹ thuật viên | `KT001` … `KT038` (mã `technician_code`) | M3 Phiếu của tôi |
 
-```powershell
-$env:ALLOW_LEGACY_SEED="1"
-python scripts\legacy\seed_real_data.py --csv-dir data\raw --seed 20261023 --allow-incomplete --db-url $env:TEST_DATABASE_URL
-```
-
-`--allow-incomplete` báo seed là chưa hoàn chỉnh và trả mã thoát `2`. `data/sample/` hiện chưa chứa CSV; không dùng thư mục này để khẳng định có thể chạy nhanh. Báo cáo số liệu: [docs/bao-cao-nap-du-lieu.md](docs/bao-cao-nap-du-lieu.md).
-
-### 5.6. Đăng nhập và API
-
-Sau khi seed tạo tài khoản, tên đăng nhập Quản lý có dạng `QL_<center_code>`; Kỹ thuật viên dùng `technician_code`. Mật khẩu là giá trị `DEMO_PASSWORD` trong `.env`. Tệp tài khoản cục bộ nằm ở `data/processed/demo_accounts.json`.
+Quản lý chỉ thấy phiếu của trung tâm mình; kỹ thuật viên chỉ thấy phiếu của chính mình (kể cả phiếu đã đóng/đã hủy, lọc bằng ô "Trạng thái").
 
 | Phương thức | Endpoint | Nghiệp vụ |
 |---|---|---|
 | POST / GET | `/api/auth/login`, `/api/auth/me` | Đăng nhập và thông tin phiên |
-| GET | `/api/tickets` | Danh sách phiếu theo trung tâm |
+| GET | `/api/tickets`, `/api/tickets/{id}` | Danh sách phiếu theo trung tâm, chi tiết phiếu |
 | GET | `/api/tickets/{id}/technician-suggestions` | Gợi ý kỹ thuật viên |
 | POST / PUT | `/api/tickets/{id}/assignment` | Phân công / đổi người |
 | GET | `/api/technicians/me/tickets` | Phiếu của kỹ thuật viên |
-| POST | `/api/appointments` | Đặt lịch giao/nhận |
+| POST / GET | `/api/appointments`, `/api/tickets/{id}/appointments` | Đặt lịch giao/nhận, xem lịch của phiếu |
 | PATCH | `/api/tickets/{id}/status` | Cập nhật trạng thái |
 
-### 5.7. Kiểm thử, bằng chứng và trạng thái hiện tại
+## 5. Kiểm thử và minh chứng
 
-#### Kiểm thử giao diện bằng Playwright
+| Nhóm | Lệnh | Cần gì | Kết quả gần nhất |
+|---|---|---|---|
+| Unit (quy tắc nghiệp vụ, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 65 passed |
+| UI với API giả lập (TC19–TC21) | `python -m pytest tests\ui -m ui` | Frontend đang chạy | 3 passed |
+| Integration PostgreSQL (TC22–TC25) | `$env:TEST_DB_NAME="smartcrm_test"; python -m pytest tests\integration -m integration` | `smartcrm`, `smartcrm_test` đã nạp | 4 passed |
+| **End-to-end luồng chính** | `$env:TEST_DB_NAME="smartcrm_test"; python -m pytest tests\e2e -m e2e` | Frontend đang chạy, cổng 8000 trống | 1 passed |
 
-Cài Chromium một lần cho môi trường Python hiện tại:
-
-```powershell
-python -m playwright install chromium
-```
-
-Để chạy test giao diện và quan sát cửa sổ Chromium:
-
-1. Mở terminal thứ nhất tại thư mục gốc repo, khởi động frontend:
-
-   ```powershell
-   Set-Location src\frontend
-   npm ci
-   npm run dev
-   ```
-
-2. Đợi Vite sẵn sàng tại `http://localhost:5173`, rồi mở terminal thứ hai tại thư mục gốc repo và chạy:
-
-   ```powershell
-   python -m pytest tests\ui -v -m ui --headed --slowmo 500
-   ```
-
-Các test UI thao tác trên đăng nhập/đăng xuất, lọc và phân trang phiếu, điều hướng phân công, đặt lịch, cập nhật trạng thái; đồng thời kiểm tra đăng nhập sai, lỗi API/mất kết nối, lịch bị trùng, ngày/giờ không hợp lệ và khả năng thử lại. API được giả lập nên nhóm này không cần backend, PostgreSQL, tài khoản demo hoặc dữ liệu thật. `--headed` mở cửa sổ Chromium, còn `--slowmo 500` làm chậm thao tác để dễ quan sát. Bỏ `--headed` để chạy Chromium ẩn hoặc bỏ `--slowmo 500` để chạy nhanh hơn. Các test có marker `ui` được loại khỏi lệnh pytest mặc định để `python -m pytest -v` không yêu cầu frontend đang chạy.
-
-#### Kiểm thử backend
-
-```powershell
-python -m pytest -v
-```
-
-Lệnh kiểm thử sẽ tự xóa ảnh cũ, chụp kết quả từng test và sinh:
-
-- `export/test-evidence/_summary.png` và ảnh PNG từng test case.
-- `export/testcase.md`, gồm đầy đủ số liệu, chi tiết từng test và cảnh báo.
-
-Để dùng thư mục xuất khác, đặt biến `EXPORT_DIR` trước khi chạy:
-
-```powershell
-$env:EXPORT_DIR="export"
-python -m pytest -v
-```
-
-Các test backend dùng `TestClient` để kiểm tra API và validation; lần xác minh gần nhất đạt `25 passed`. Lệnh này không cần frontend hoặc PostgreSQL.
-
-#### Kiểm thử integration dữ liệu thật
-
-Chỉ đọc chạy trực tiếp trên `smartcrm_test`; test ghi tạo lại database làm việc cố định `smartcrm_work_test` từ template `smartcrm_test` trước mỗi test ghi:
-
-```powershell
-$env:TEST_DB_NAME="smartcrm_test"
-python -m pytest tests/integration/test_tc22_tc25.py -m integration -q
-```
-
-Database `smartcrm` không được dùng bởi integration này. Nếu PostgreSQL báo database nguồn đang có kết nối khác hoặc database làm việc đang được sử dụng, đóng tab Query Tool/Disconnect database tương ứng rồi chạy lại; test không tự ngắt kết nối của người khác.
-
-Lần xác minh gần nhất: bộ UI chạy ở chế độ headed đạt `3 passed`; `npm run build` thành công. Test UI giả lập **không thay thế** 18 acceptance test tích hợp với PostgreSQL và dữ liệu thật. Hiện chưa có thư mục `tests\service`, và ảnh UI PASS chưa được tự động lưu vào `docs/test-evidence/`.
-
-Các blockers trước khi có thể xác nhận đủ 18 acceptance test tích hợp gồm: bổ sung `ticket_status_log.csv` và dữ liệu/script lịch hẹn; chạy PostgreSQL; hoàn thiện nhập log/lịch hẹn, sinh phiếu MỚI và reset dữ liệu; tạo test TC01–TC18; nạp dữ liệu thật vào hai database.
+- Unit test cho lớp nghiệp vụ nằm ở `tests/test_ticket_rules.py` (vòng đời trạng thái, điều kiện kỹ thuật viên, phạm vi xem phiếu) và `tests/test_appointment_validation.py` (giờ làm việc, biên 17:30–18:00), gồm ba loại: luồng đúng, giá trị biên, dữ liệu sai.
+- Test e2e tự tạo lại database làm việc `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend trên đó (không đụng `smartcrm`), điều khiển giao diện thật, kiểm tra kết quả bằng SQL và lưu ảnh vào [docs/test-evidence/](docs/test-evidence/). Diễn giải luồng, đầu vào/đầu ra và các chỗ đứt gãy: [docs/tich-hop-end-to-end.md](docs/tich-hop-end-to-end.md).
+- Thêm `--headed --slowmo 500` để xem trình duyệt chạy. Đặt `EVIDENCE=1` để sinh báo cáo `export/testcase.md` và ảnh chụp trình duyệt của test UI vào `export/test-evidence/`.
+- Integration/e2e báo database nguồn đang có kết nối khác: đóng Query Tool/Disconnect database tương ứng rồi chạy lại.
 
 ## 6. Khai báo sử dụng công cụ AI
 
-Claude đã hỗ trợ bản nháp SRS và sơ đồ theo khai báo ban đầu trong `docs/ai-declaration.md`. Copilot SDK trong VS Code được dùng để đọc prompt, triển khai các phần có thể xác minh, viết kiểm tra và cập nhật tài liệu. Kết quả chạy được ghi riêng; các phần thiếu dữ liệu hoặc chưa chạy không được khai báo là hoàn thành.
+Chi tiết theo BT1: [docs/ai-declaration.md](docs/ai-declaration.md). Kết quả chạy được ghi riêng; phần chưa chạy không được khai báo là hoàn thành.
 
 | Công cụ AI | Dùng vào việc gì | Cách tự kiểm chứng |
 |---|---|---|
-| Claude | Viết prompt và hỗ trợ phần script nạp dữ liệu | Đối chiếu schema, xem diff Git, chạy truy vấn SELECT bất biến; không xem kết quả là hoàn thành nếu thiếu dữ liệu hoặc validation |
-| GitHub Copilot | Sinh dữ liệu lịch hẹn, kiểm tra tài liệu và dữ liệu; hỗ trợ chỉnh sửa script, test, README | Kiểm chứng bằng số liệu SELECT, truy vấn bất biến, đối chiếu SRS/schema và xem `git diff` trước khi commit |
+| Claude | Bản nháp SRS, sơ đồ; viết prompt và hỗ trợ script nạp dữ liệu | Đối chiếu schema, xem diff Git, chạy truy vấn SELECT bất biến |
+| GitHub Copilot | Sinh dữ liệu lịch hẹn, kiểm tra tài liệu và dữ liệu; hỗ trợ chỉnh sửa script, test, README | Số liệu SELECT, truy vấn bất biến, đối chiếu SRS/schema, `git diff` trước khi commit |
+| Claude Code | Rà checklist Buổi 10; tách quy tắc nghiệp vụ sang `services/ticket_rules.py` và viết unit test; viết test e2e; bộ lọc trạng thái M3; cập nhật README và tài liệu | Chạy lại unit/UI/integration/e2e, xem từng ảnh minh chứng, đối chiếu số dòng bằng SQL, xem `git diff` |

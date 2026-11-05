@@ -1,6 +1,6 @@
 # Thay đổi thiết kế – Buổi 10
 
-Các thay đổi dưới đây chỉ bổ sung hành vi nằm trong phạm vi được phép ở Prompt Copilot Buổi 10. Lược đồ sáu bảng trong `db/schema.sql` được giữ nguyên.
+Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10), mỗi mục ghi vấn đề, quyết định (SỬA/GIỮ), lý do và ảnh hưởng. Lược đồ sáu bảng trong `db/schema.sql` được giữ nguyên.
 
 ## TD-01 – Bổ sung API xác thực và truy vấn phiếu
 
@@ -43,10 +43,7 @@ Các thay đổi dưới đây chỉ bổ sung hành vi nằm trong phạm vi đ
 - **Quyết định:** **GIỮ** – seed mặc định dừng trước khi ghi dữ liệu nếu pipeline không thể bảo đảm nhập đủ log và lịch hẹn; `--allow-incomplete` chỉ dành cho nạp bảng lõi và trả mã thoát không thành công để tránh hiểu nhầm là dữ liệu hoàn chỉnh.
 - **Lý do:** Prompt yêu cầu dữ liệu thật, không cho tạo vài dòng giả và yêu cầu không tuyên bố test PASS khi không chạy được.
 - **Ảnh hưởng:** Báo cáo nạp dữ liệu đánh dấu chưa nạp; TC01–TC18, ảnh kiểm thử, reset và clone sạch chưa được xác minh.
-
-Seed 20260901, 30 phiếu MOI, cách cắt dòng log MOI → DA_PHAN_CONG.
-483 phiếu (6,2%) bị loại vì thiếu số điện thoại, kèm lý do không tạo số giả.
-ticket_status_log.csv được sao chép từ thư mục dataset vào data/raw/.
+- **Cập nhật (đã giải quyết):** `ticket_status_log.csv` được bổ sung từ bộ dataset vào `data/raw/`; lịch hẹn sinh bằng `scripts/gen_appointments.py` (TD-09). Pipeline `load_catalog` → `load_tickets` → `load_appointments` thay cho seed cũ (đã chuyển sang `scripts/legacy/`) và đã nạp đủ sáu bảng (xem TD-07, TD-08, `docs/bao-cao-nap-du-lieu.md`). TC01–TC18 vẫn chưa được viết (TD-15).
 
 ## TD-07 – Loại phiếu thiếu số điện thoại hợp lệ
 
@@ -89,3 +86,28 @@ ticket_status_log.csv được sao chép từ thư mục dataset vào data/raw/.
 - **Quyết định:** **SỬA** – test chỉ đọc chạy trên `smartcrm_test`; test ghi tạo lại database cố định `smartcrm_work_test` từ template `smartcrm_test` trước mỗi test. Guard chỉ cho phép tên database làm việc chính xác `smartcrm_work_test` và test cổng từ chối các tên không kết thúc bằng `_test`.
 - **Lý do:** Mỗi test ghi cần dữ liệu nguồn ổn định, có thể lặp lại, đồng thời bảo vệ database dữ liệu thật.
 - **Ảnh hưởng:** Fixture cần kết nối bảo trì tới database `postgres`, dispose engine SQLAlchemy trước DROP/CREATE và kiểm tra số dòng `smartcrm_test`/`smartcrm` trước và sau phiên kiểm thử.
+
+## TD-13 – Bộ lọc trạng thái ở M3 "Phiếu của tôi"
+
+- **Vấn đề phát hiện:** Chạy luồng chính trên dữ liệu thật, mỗi kỹ thuật viên giữ trung bình 192 phiếu (tối đa 443), phần lớn đã `DA_DONG`. M3 liệt kê tất cả, không lọc được; frontend thiếu nhãn cho `DA_DONG`/`DA_HUY` nên hiện mã thô.
+- **Quyết định:** **SỬA** – thêm ô lọc "Trạng thái" phía giao diện (Tất cả · Đang làm · Hoàn tất · Đã đóng · Đã hủy), mặc định Tất cả; bổ sung nhãn tiếng Việt cho mọi trạng thái. **GIỮ** API `GET /api/technicians/me/tickets` trả đủ phiếu của chính kỹ thuật viên.
+- **Lý do:** Kỹ thuật viên vẫn có quyền xem phiếu đã đóng/đã hủy của chính mình, nhưng không được xem phiếu của tài khoản khác. Lọc giúp tìm phiếu cần làm mà không ẩn dữ liệu.
+- **Ảnh hưởng:** Không đổi API hay schema. Quy tắc phạm vi xem phiếu có unit test (`tests/test_ticket_rules.py`); test e2e kiểm số dòng lọc "Đã đóng" bằng đúng số phiếu `DA_DONG` của kỹ thuật viên trong DB.
+
+## TD-14 – Tách quy tắc nghiệp vụ khỏi router
+
+- **Vấn đề phát hiện:** Quy tắc vòng đời trạng thái, điều kiện kỹ thuật viên (tay nghề ≥ 3, cùng trung tâm, đang làm việc), điều kiện đổi kỹ thuật viên và phạm vi xem phiếu nằm lẫn với SQL trong `routers/tickets.py`, nên chỉ kiểm được khi có PostgreSQL.
+- **Quyết định:** **SỬA** – chuyển các quy tắc thành hàm thuần trong `src/backend/app/services/ticket_rules.py`; router chỉ đọc/ghi dữ liệu và gọi các hàm này.
+- **Lý do:** Unit test cho lớp nghiệp vụ không cần cơ sở dữ liệu (yêu cầu Buổi 10).
+- **Ảnh hưởng:** Phản hồi API giữ nguyên (mã lỗi, thông báo, thứ tự kiểm tra); đã chạy lại integration TC22–TC25 và e2e để xác nhận.
+
+## TD-15 – Phần đã cắt hoặc hoãn trong Sprint 2
+
+| Hạng mục | Quyết định | Lý do |
+|---|---|---|
+| UC8 – khối lượng toàn trung tâm | Hoãn | Mức COULD, ngoài wireframe M1–M3 (TD-05) |
+| Hủy lịch hẹn trên giao diện | Hoãn | Wireframe không có thao tác hủy (TD-05) |
+| Màn hình thứ tư trở đi, trang chi tiết phiếu riêng | Cắt | Chi tiết phiếu đã nằm trong M2 và M3; ưu tiên luồng chính chạy end-to-end |
+| TC01–TC18 (acceptance test theo báo cáo Word) | Hoãn sang Buổi 12 | Ưu tiên test lớp nghiệp vụ và một test e2e luồng chính trên dữ liệu thật |
+| Thông báo xác nhận sau khi đặt lịch ở M2, nhãn mức ưu tiên ở M3 | Hoãn | Không chặn luồng chính; ghi trong `docs/tich-hop-end-to-end.md` |
+| Khoá phiên bản thư viện (`requirements*.txt`, Docker) | Hoãn sang Buổi 11 | Nội dung quản lý phụ thuộc của Buổi 11 |
