@@ -12,7 +12,8 @@ from sqlalchemy.exc import IntegrityError
 from app.core.database import get_engine
 from app.core.errors import APIError
 from app.core.security import current_user
-from app.routers.tickets import _check_scope, _ticket
+from app.routers.tickets import _ticket
+from app.services.ticket_rules import check_ticket_scope
 from app.schemas.tickets import AppointmentRequest
 
 router = APIRouter(prefix="/api/appointments", tags=["appointments"])
@@ -103,7 +104,7 @@ def create_appointment(
     try:
         with get_engine().begin() as connection:
             ticket = _ticket(connection, payload.ticket_id, lock=True)
-            _check_scope(user, ticket)
+            check_ticket_scope(user, ticket)
             if ticket["technician_id"] is None:
                 raise APIError(
                     400,

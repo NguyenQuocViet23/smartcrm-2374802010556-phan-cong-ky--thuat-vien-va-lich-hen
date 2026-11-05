@@ -5,6 +5,7 @@ import pytest
 from app.core.errors import APIError
 from app.services.ticket_rules import (
     check_status_transition,
+    check_ticket_scope,
     check_technician_change,
     check_technician_eligible,
     is_assignable,
@@ -17,6 +18,37 @@ TICKET = {"center_id": 1, "category_code": "MAN_HINH", "status": "MOI", "technic
 
 def technician(**overrides):
     return {"center_id": 1, "is_active": True, "proficiency": 4, **overrides}
+
+
+# --- Phạm vi xem phiếu -------------------------------------------------------
+
+TECHNICIAN_USER = {"role": "KY_THUAT_VIEN", "center_id": 1, "technician_id": 7}
+MANAGER_USER = {"role": "QUAN_LY", "center_id": 1, "technician_id": None}
+
+
+@pytest.mark.parametrize("status", ["DANG_XU_LY", "HOAN_TAT", "DA_DONG", "DA_HUY"])
+def test_technician_sees_own_ticket_in_any_status(status: str) -> None:
+    """Luồng đúng: KTV xem được phiếu của chính mình, kể cả phiếu đã đóng hoặc đã huỷ"""
+    check_ticket_scope(TECHNICIAN_USER, {**TICKET, "status": status, "technician_id": 7})
+
+
+@pytest.mark.parametrize("owner", [8, None], ids=["phieu-cua-ktv-khac", "phieu-chua-giao"])
+def test_technician_cannot_see_ticket_of_another_account(owner) -> None:
+    """Dữ liệu sai: KTV không xem được phiếu của tài khoản khác hoặc phiếu chưa giao cho mình"""
+    with pytest.raises(APIError) as error:
+        check_ticket_scope(TECHNICIAN_USER, {**TICKET, "status": "DA_DONG", "technician_id": owner})
+
+    assert error.value.status_code == 403
+    assert error.value.code == "FORBIDDEN"
+
+
+def test_manager_sees_only_own_center() -> None:
+    """Giá trị biên: quản lý xem được phiếu cùng trung tâm nhưng không xem được trung tâm khác"""
+    check_ticket_scope(MANAGER_USER, TICKET)
+    with pytest.raises(APIError) as error:
+        check_ticket_scope(MANAGER_USER, {**TICKET, "center_id": 2})
+
+    assert error.value.status_code == 403
 
 
 # --- Vòng đời trạng thái phiếu -------------------------------------------

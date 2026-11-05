@@ -26,6 +26,24 @@ CLOSED_STATUSES = {"HOAN_TAT", "DA_DONG", "DA_HUY"}
 MIN_PROFICIENCY = 3
 
 
+def check_ticket_scope(user: Mapping[str, Any], ticket: Mapping[str, Any]) -> None:
+    """A manager sees only tickets of their center; a technician only their own tickets.
+
+    Closed (DA_DONG) and cancelled (DA_HUY) tickets stay visible to their owner.
+    """
+    if user["role"] == "QUAN_LY" and ticket["center_id"] != user["center_id"]:
+        raise APIError(403, "FORBIDDEN", "Bạn không có quyền xem phiếu của trung tâm này")
+    if (
+        user["role"] == "KY_THUAT_VIEN"
+        and ticket["technician_id"] != user.get("technician_id")
+    ):
+        raise APIError(
+            403,
+            "FORBIDDEN",
+            "Bạn không phải kỹ thuật viên phụ trách phiếu này",
+        )
+
+
 def normalize_target_status(raw_status: str) -> str:
     """Return the upper-case target status or reject one a technician cannot set."""
     target = raw_status.strip().upper()

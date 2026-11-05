@@ -13,6 +13,7 @@ from app.core.security import current_user, require_role
 from app.schemas.tickets import AssignmentRequest, StatusRequest, TechnicianChangeRequest
 from app.services.ticket_rules import (
     VALID_STATUSES,
+    check_ticket_scope,
     check_status_transition,
     check_technician_change,
     check_technician_eligible,
@@ -35,20 +36,6 @@ def _ticket(connection: Any, ticket_id: int, lock: bool = False) -> Any:
     if ticket is None:
         raise APIError(404, "TICKET_NOT_FOUND", "Không tìm thấy phiếu.")
     return ticket
-
-
-def _check_scope(user: dict[str, Any], ticket: Any) -> None:
-    if user["role"] == "QUAN_LY" and ticket["center_id"] != user["center_id"]:
-        raise APIError(403, "FORBIDDEN", "Bạn không có quyền xem phiếu của trung tâm này")
-    if (
-        user["role"] == "KY_THUAT_VIEN"
-        and ticket["technician_id"] != user.get("technician_id")
-    ):
-        raise APIError(
-            403,
-            "FORBIDDEN",
-            "Bạn không phải kỹ thuật viên phụ trách phiếu này",
-        )
 
 
 def _mask_phone(phone: str) -> str:
@@ -163,7 +150,7 @@ def technician_suggestions(
 ) -> dict[str, Any]:
     with get_engine().connect() as connection:
         ticket = _ticket(connection, ticket_id)
-        _check_scope(user, ticket)
+        check_ticket_scope(user, ticket)
         suggestions = connection.execute(
             text(
                 """SELECT t.technician_id, t.technician_code, t.full_name, t.level,
@@ -198,7 +185,7 @@ def technician_suggestions(
 def get_ticket(ticket_id: int, user: dict[str, Any] = Depends(current_user)) -> dict[str, Any]:
     with get_engine().connect() as connection:
         ticket = _ticket(connection, ticket_id)
-        _check_scope(user, ticket)
+        check_ticket_scope(user, ticket)
         return _ticket_detail(connection, ticket, user)
 
 
@@ -210,7 +197,7 @@ def assign_ticket(
 ) -> dict[str, Any]:
     with get_engine().begin() as connection:
         ticket = _ticket(connection, ticket_id, lock=True)
-        _check_scope(user, ticket)
+        check_ticket_scope(user, ticket)
         if not is_assignable(ticket):
             current = connection.execute(
                 text("SELECT technician_code FROM technician WHERE technician_id = :id"),
@@ -256,7 +243,7 @@ def change_assignment(
     reason = require_change_reason(payload.reason)
     with get_engine().begin() as connection:
         ticket = _ticket(connection, ticket_id, lock=True)
-        _check_scope(user, ticket)
+        check_ticket_scope(user, ticket)
         check_technician_change(ticket, payload.technician_id)
         _check_assignment(connection, ticket, payload.technician_id)
         connection.execute(
@@ -293,7 +280,7 @@ def update_ticket_status(
     target = normalize_target_status(payload.to_status)
     with get_engine().begin() as connection:
         ticket = _ticket(connection, ticket_id, lock=True)
-        _check_scope(user, ticket)
+        check_ticket_scope(user, ticket)
         check_status_transition(ticket["status"], target)
         updated = connection.execute(
             text(
@@ -329,7 +316,7 @@ def ticket_appointments(
 ) -> list[dict[str, Any]]:
     with get_engine().connect() as connection:
         ticket = _ticket(connection, ticket_id)
-        _check_scope(user, ticket)
+        check_ticket_scope(user, ticket)
         rows = connection.execute(
             text(
                 """SELECT appointment_id, ticket_id, technician_id, appointment_type,
