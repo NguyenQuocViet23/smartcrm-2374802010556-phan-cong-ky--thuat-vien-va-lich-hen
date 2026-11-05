@@ -2,7 +2,7 @@
 
 import pytest
 
-from scripts.seed_real_data import normalize_phone, normalize_status
+from scripts.legacy.seed_real_data import normalize_phone, normalize_status
 
 
 @pytest.mark.parametrize(
