@@ -108,5 +108,16 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
 | UC8 – khối lượng toàn trung tâm | Hoãn | Mức COULD, ngoài wireframe M1–M3 (TD-05) |
 | Hủy lịch hẹn trên giao diện | Hoãn | Wireframe không có thao tác hủy (TD-05) |
 | Màn hình thứ tư trở đi, trang chi tiết phiếu riêng | Cắt | Chi tiết phiếu đã nằm trong M2 và M3; ưu tiên luồng chính chạy end-to-end |
-| TC01–TC18 (acceptance test theo báo cáo Word) | Hoãn sang Buổi 12 | Ưu tiên test lớp nghiệp vụ và một test e2e luồng chính trên dữ liệu thật |
 | Khoá phiên bản thư viện (`requirements*.txt`, Docker) | Hoãn sang Buổi 11 | Nội dung quản lý phụ thuộc của Buổi 11 |
+## TD-16 – Cách chạy 18 test case TC01–TC18 trên hệ thống thật
+
+- **Vấn đề phát hiện:** Đặc tả 18 test (báo cáo Word Buổi 10) giả định một số điều kiện không khớp hệ thống thật: test nghiệp vụ chạy trong giao dịch rồi rollback, ảnh kết quả nhóm A là thẻ PASS/FAIL vẽ bằng Pillow, dữ liệu nạp chừa một trung tâm không có phiếu MỚI, và giao diện cho phép nhập 09:15 hay lý do rỗng.
+- **Quyết định:** **SỬA cách chạy, GIỮ nguyên mã, tên, loại, truy vết và kỳ vọng** (lưu nguyên văn ở `tests/tc_catalog.json`):
+  - Trình duyệt và backend dùng kết nối riêng nên không rollback được: mỗi test tạo lại `smartcrm_work_test` từ `smartcrm_test` và khởi động backend trên bản sao đó; kịch bản (khối lượng 5/2/8, tay nghề 2 hoặc 3, KTV nghỉ việc…) dựng bằng SQL trên bản sao từ bản ghi thật.
+  - Ảnh chỉ chụp bằng `page.screenshot()` trên giao diện React hoặc Swagger của backend thật; không còn ảnh vẽ, `_summary.png`, `results.json`. Báo cáo tự sinh: `docs/test-evidence/testcase.md`.
+  - Dùng Swagger ở bước mà giao diện chặn trước khi gọi API: TC06 (M2 chỉ cho chọn người tay nghề ≥ 3), TC09 (ô giờ bước 30 phút không nhận 09:15), TC11 (M3 chỉ hiện nút chuyển hợp lệ), TC12 (a) (nút Lưu bị vô hiệu khi lý do rỗng), TC13 (c) (M3 không có đường mở phiếu người khác).
+  - TC15: pipeline giữ 5 phiếu MOI ở mọi trung tâm, nên test xoá 5 phiếu MOI của trung tâm cuối trên bản sao.
+  - TC07: dữ liệu demo có một tài khoản Quản lý mỗi trung tâm, nên hai phiên trình duyệt dùng cùng tài khoản đó.
+  - `page.route` chỉ dùng cho TC14 (giữ request 3 giây), TC16 (abort), TC17 (trả 401).
+- **Lý do:** Giữ nguyên ý nghĩa kiểm thử và dữ liệu thật, đồng thời mọi ảnh là ảnh trình duyệt thật và chạy lại được nhiều lần.
+- **Ảnh hưởng:** Lệnh `python -m pytest -m system` (cần frontend đang chạy, cổng 8000 trống) cho 18 passed. Để đáp ứng kỳ vọng b3/b4/b7 của TC18 và TC12, giao diện được bổ sung: thông báo thành công khi phân công/đổi KTV/đổi trạng thái, bảng lịch hẹn ở M2, nhãn "ĐỔI KỸ THUẬT VIÊN" trong lịch sử.

@@ -35,6 +35,7 @@ Tài liệu ghi lại cách ghép các module thành luồng chính L04, các ch
 | 5 | M2: đặt lịch thành công chỉ đóng form, không có thông báo | Logic (giao diện) | Form không trả lịch vừa tạo cho trang cha | Form trả lịch API vừa tạo; M2 hiện "Đã đặt lịch GIAO lúc 08:00–08:30 ngày …" (E2E_06b) |
 | 6 | M3: chọn phiếu hoặc đổi trạng thái làm cả danh sách nhấp nháy "Đang tải dữ liệu…" | Logic (giao diện) | `load` phụ thuộc `selected`, mỗi lần chọn phiếu tải lại và bật trạng thái đang tải | `load` không phụ thuộc `selected`; đổi trạng thái làm mới ngầm. Test e2e theo dõi DOM bằng `MutationObserver` và fail nếu trạng thái đang tải xuất hiện (đã thử: hành vi cũ làm test fail) |
 | 7 | M3 hiển thị mức ưu tiên dạng mã `TRUNG_BINH`, M1 hiển thị `TRUNG BÌNH` | Hợp đồng dữ liệu | Nhãn chỉ khai báo trong M1 | Nhãn dùng chung `src/frontend/src/labels.js` cho M1, M2, M3 |
+| 8 | Đối chiếu kỳ vọng TC18 (b3, b4, b7) và TC12: M2 không báo phân công/đổi KTV thành công, không có bảng lịch hẹn, lịch sử hiện mã `DOI_KTV`; M3 không báo đổi trạng thái | Hợp đồng dữ liệu (nhãn) và giao diện | Màn hình chưa hiển thị đủ kết quả mà đặc tả kiểm thử yêu cầu | Thêm thông báo thành công ở M2/M3, bảng "Lịch hẹn của phiếu" ở M2, nhãn "ĐỔI KỸ THUẬT VIÊN"; kiểm chứng bằng TC12, TC18 |
 
 ## 4. Chạy toàn luồng trên dữ liệu thật
 

@@ -31,7 +31,7 @@ data/sample/appointments.csv  lịch hẹn sinh với seed 20261102 (có commit)
 scripts/                    migration, nạp dữ liệu, sinh tài khoản demo
 src/backend/app/            routers (HTTP), services (quy tắc nghiệp vụ), core
 src/frontend/src/           api/ (client.js + *.api.js), components/, pages/
-tests/                      unit test; ui/ (API giả lập); integration/; e2e/
+tests/                      unit test; service/ + ui/ (TC01–TC18 trên hệ thống thật); ui/ (TC19–TC21, API giả lập); integration/; e2e/
 docs/                       SRS, sơ đồ, báo cáo, ảnh minh chứng (docs/test-evidence/)
 ```
 
@@ -188,10 +188,12 @@ Quản lý chỉ thấy phiếu của trung tâm mình; kỹ thuật viên chỉ
 | Nhóm | Lệnh | Cần gì | Kết quả gần nhất |
 |---|---|---|---|
 | Unit (quy tắc nghiệp vụ, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 65 passed |
+| **18 test case TC01–TC18** (nghiệp vụ + giao diện + e2e, dữ liệu thật) | `$env:TEST_DB_NAME="smartcrm_test"; python -m pytest -m system` | Frontend đang chạy, cổng 8000 trống | 18 passed (~4 phút) |
 | UI với API giả lập (TC19–TC21) | `python -m pytest tests\ui -m ui` | Frontend đang chạy | 3 passed |
 | Integration PostgreSQL (TC22–TC25) | `$env:TEST_DB_NAME="smartcrm_test"; python -m pytest tests\integration -m integration` | `smartcrm`, `smartcrm_test` đã nạp | 4 passed |
 | **End-to-end luồng chính** | `$env:TEST_DB_NAME="smartcrm_test"; python -m pytest tests\e2e -m e2e` | Frontend đang chạy, cổng 8000 trống | 1 passed |
 
+- TC01–TC18 (`tests/service/`, `tests/ui/test_states.py`, `tests/ui/test_e2e_main_flow.py`) giữ nguyên mã, tên và kỳ vọng của báo cáo Word Buổi 10 (`tests/tc_catalog.json`). Mỗi test tạo lại `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend trên bản sao, thao tác trên giao diện React thật (hoặc Swagger ở bước giao diện chặn trước), kiểm tra bằng API và SQL. Kết quả: 31 ảnh `docs/test-evidence/TCxx_*.png` và báo cáo tự sinh [docs/test-evidence/testcase.md](docs/test-evidence/testcase.md). Cách chạy từng test và lý do: TD-16 trong [docs/thay-doi-thiet-ke.md](docs/thay-doi-thiet-ke.md).
 - Unit test cho lớp nghiệp vụ nằm ở `tests/test_ticket_rules.py` (vòng đời trạng thái, điều kiện kỹ thuật viên, phạm vi xem phiếu) và `tests/test_appointment_validation.py` (giờ làm việc, biên 17:30–18:00), gồm ba loại: luồng đúng, giá trị biên, dữ liệu sai.
 - Test e2e tự tạo lại database làm việc `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend trên đó (không đụng `smartcrm`), điều khiển giao diện thật, kiểm tra kết quả bằng SQL và lưu ảnh vào [docs/test-evidence/](docs/test-evidence/). Diễn giải luồng, đầu vào/đầu ra và các chỗ đứt gãy: [docs/tich-hop-end-to-end.md](docs/tich-hop-end-to-end.md).
 - Thêm `--headed --slowmo 500` để xem trình duyệt chạy. Đặt `EVIDENCE=1` để sinh báo cáo `export/testcase.md` và ảnh chụp trình duyệt của test UI vào `export/test-evidence/`.
