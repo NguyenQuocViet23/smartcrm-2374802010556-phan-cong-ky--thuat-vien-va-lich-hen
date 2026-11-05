@@ -3,6 +3,7 @@ from urllib.parse import parse_qs, urlparse
 
 import pytest
 from playwright.sync_api import Page, expect
+from tests.evidence import capture_ui_notification
 
 BASE_URL = "http://localhost:5173"
 API_URL = "http://localhost:8000/api/**"
@@ -59,6 +60,7 @@ def suggestion(technician_id: int, workload: int) -> dict:
 
 
 @pytest.mark.ui
+@pytest.mark.tc("TC19")
 def test_manager_login_filters_pagination_navigation_and_logout(page: Page) -> None:
     ticket_requests = 0
     ticket_queries = []
@@ -123,6 +125,7 @@ def test_manager_login_filters_pagination_navigation_and_logout(page: Page) -> N
     password.fill("wrong-password")
     login_button.click()
     expect(page.get_by_role("alert")).to_contain_text("Sai tên đăng nhập hoặc mật khẩu")
+    capture_ui_notification(page, "TC19", "b1_thong_bao_dang_nhap_sai")
 
     password.fill("valid-password")
     login_button.click()
@@ -130,6 +133,7 @@ def test_manager_login_filters_pagination_navigation_and_logout(page: Page) -> N
     expect(page.get_by_test_id("state-error")).to_contain_text(
         "Máy chủ tạm thời không phản hồi."
     )
+    capture_ui_notification(page, "TC19", "b2_thong_bao_loi_may_chu")
 
     page.get_by_test_id("retry-button").click()
     expect(page.get_by_text("BH-2026-00101")).to_be_visible()
@@ -156,6 +160,7 @@ def test_manager_login_filters_pagination_navigation_and_logout(page: Page) -> N
 
 
 @pytest.mark.ui
+@pytest.mark.tc("TC20")
 def test_assignment_errors_reason_validation_and_appointment_buttons(page: Page) -> None:
     assigned = False
     assignment_attempts = 0
@@ -247,10 +252,12 @@ def test_assignment_errors_reason_validation_and_appointment_buttons(page: Page)
     confirm = page.get_by_role("button", name="Xác nhận phân công")
     confirm.click()
     expect(page.get_by_role("alert")).to_contain_text("Chưa lưu được (mất kết nối).")
+    capture_ui_notification(page, "TC20", "b1_thong_bao_mat_ket_noi")
     page.get_by_role("button", name="Thử lại").click()
     expect(page.get_by_role("alert")).to_contain_text(
         "Kỹ thuật viên không đủ điều kiện nhận phiếu."
     )
+    capture_ui_notification(page, "TC20", "b2_thong_bao_ktv_khong_du_dieu_kien")
     confirm.click()
 
     save_change = page.get_by_role("button", name="Lưu đổi kỹ thuật viên")
@@ -287,6 +294,7 @@ def test_assignment_errors_reason_validation_and_appointment_buttons(page: Page)
     page.get_by_label("Giờ bắt đầu").fill("09:00")
     page.get_by_role("button", name="Lưu lịch hẹn").click()
     expect(page.get_by_text("Khung giờ này đã có lịch hẹn.")).to_be_visible()
+    capture_ui_notification(page, "TC20", "b3_thong_bao_trung_lich_hen")
     expect(page.get_by_text("BH-2026-00007")).to_be_visible()
     page.get_by_role("button", name="11:00–11:30").click()
     expect(page.get_by_label("Giờ bắt đầu")).to_have_value("11:00")
@@ -297,6 +305,7 @@ def test_assignment_errors_reason_validation_and_appointment_buttons(page: Page)
 
 
 @pytest.mark.ui
+@pytest.mark.tc("TC21")
 def test_technician_status_transitions_and_appointment_errors(page: Page) -> None:
     status = "DA_PHAN_CONG"
     status_attempts = 0
@@ -390,6 +399,7 @@ def test_technician_status_transitions_and_appointment_errors(page: Page) -> Non
     expect(page.get_by_role("alert")).to_contain_text(
         "Không thể chuyển trạng thái theo yêu cầu."
     )
+    capture_ui_notification(page, "TC21", "b1_thong_bao_chuyen_trang_thai_loi")
     assert status_payloads[0]["note"] == "Đã kiểm tra thiết bị"
     page.get_by_role("button", name="Bắt đầu sửa").click()
     expect(page.get_by_role("button", name="Thiếu linh kiện")).to_be_visible()
@@ -401,9 +411,11 @@ def test_technician_status_transitions_and_appointment_errors(page: Page) -> Non
     date_input.fill("2026-11-23")
     page.get_by_role("button", name="Lưu lịch hẹn").click()
     expect(page.get_by_text("Khung giờ này đã có lịch hẹn.")).to_be_visible()
+    capture_ui_notification(page, "TC21", "b2_thong_bao_trung_lich_hen")
     page.get_by_role("button", name="13:00–13:30").click()
     page.get_by_role("button", name="Lưu lịch hẹn").click()
     expect(page.get_by_text("Không tải được lịch hẹn.")).to_be_visible()
+    capture_ui_notification(page, "TC21", "b3_thong_bao_loi_tai_lich_hen")
     page.get_by_role("button", name="Tải lại lịch hẹn").click()
     expect(page.get_by_text("ĐÃ HẸN")).to_be_visible()
 
