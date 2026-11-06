@@ -43,7 +43,7 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
 - **Quyết định:** **GIỮ** – seed mặc định dừng trước khi ghi dữ liệu nếu pipeline không thể bảo đảm nhập đủ log và lịch hẹn; `--allow-incomplete` chỉ dành cho nạp bảng lõi và trả mã thoát không thành công để tránh hiểu nhầm là dữ liệu hoàn chỉnh.
 - **Lý do:** Prompt yêu cầu dữ liệu thật, không cho tạo vài dòng giả và yêu cầu không tuyên bố test PASS khi không chạy được.
 - **Ảnh hưởng:** Báo cáo nạp dữ liệu đánh dấu chưa nạp; TC01–TC18, ảnh kiểm thử, reset và clone sạch chưa được xác minh.
-- **Cập nhật (đã giải quyết):** `ticket_status_log.csv` được bổ sung từ bộ dataset vào `data/raw/`; lịch hẹn sinh bằng `scripts/gen_appointments.py` (TD-09). Pipeline `load_catalog` → `load_tickets` → `load_appointments` thay cho seed cũ (đã chuyển sang `scripts/legacy/`) và đã nạp đủ sáu bảng (xem TD-07, TD-08, `docs/bao-cao-nap-du-lieu.md`). TC01–TC18 vẫn chưa được viết (TD-15).
+- **Cập nhật (đã giải quyết):** `ticket_status_log.csv` được bổ sung từ bộ dataset vào `data/raw/`; lịch hẹn sinh bằng `scripts/gen_appointments.py` (TD-09). Pipeline `load_catalog` → `load_tickets` → `load_appointments` thay cho seed cũ (đã xoá ở Buổi 12, TD-19) và đã nạp đủ sáu bảng (xem TD-07, TD-08, `docs/bao-cao-nap-du-lieu.md`). TC01–TC18 đã viết và chạy ở Buổi 10 (TD-16).
 
 ## TD-07 – Loại phiếu thiếu số điện thoại hợp lệ
 
@@ -106,7 +106,7 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
 | Hạng mục | Quyết định | Lý do |
 |---|---|---|
 | UC8 – khối lượng toàn trung tâm | Hoãn | Mức COULD, ngoài wireframe M1–M3 (TD-05) |
-| Hủy lịch hẹn trên giao diện | Hoãn | Wireframe không có thao tác hủy (TD-05) |
+| Nút hủy lịch hẹn trên giao diện | Hoãn | Wireframe không có thao tác hủy (TD-05); từ Buổi 12 đã có API hủy mềm `DELETE /api/appointments/{id}` (TD-17) |
 | Màn hình thứ tư trở đi, trang chi tiết phiếu riêng | Cắt | Chi tiết phiếu đã nằm trong M2 và M3; ưu tiên luồng chính chạy end-to-end |
 | Khoá phiên bản thư viện (`requirements*.txt`, Docker) | Hoãn sang Buổi 11 | Nội dung quản lý phụ thuộc của Buổi 11 |
 ## TD-16 – Cách chạy 18 test case TC01–TC18 trên hệ thống thật
@@ -121,3 +121,26 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
   - `page.route` chỉ dùng cho TC14 (giữ request 3 giây), TC16 (abort), TC17 (trả 401).
 - **Lý do:** Giữ nguyên ý nghĩa kiểm thử và dữ liệu thật, đồng thời mọi ảnh là ảnh trình duyệt thật và chạy lại được nhiều lần.
 - **Ảnh hưởng:** Lệnh `python -m pytest -m system` (cần frontend đang chạy, cổng 8000 trống) cho 18 passed. Để đáp ứng kỳ vọng b3/b4/b7 của TC18 và TC12, giao diện được bổ sung: thông báo thành công khi phân công/đổi KTV/đổi trạng thái, bảng lịch hẹn ở M2, nhãn "ĐỔI KỸ THUẬT VIÊN" trong lịch sử.
+
+## TD-17 – CRUD đủ cho hai thực thể Phiếu và Lịch hẹn (Buổi 12)
+
+- **Vấn đề phát hiện:** Tiêu chí S1 của BT2 (track SE) yêu cầu đủ CRUD cho ít nhất hai thực thể; API chỉ có tạo/xem lịch hẹn và xem/đổi trạng thái phiếu.
+- **Quyết định:** **SỬA** – bổ sung:
+  - Phiếu: `POST /api/tickets` (Quản lý tạo phiếu MỚI ở trung tâm của mình, chuẩn hoá SĐT theo QT-02, sinh mã `BH-<id 6 số>/<năm>`, ghi log), `PUT /api/tickets/{id}` (sửa thông tin khi còn MỚI), `DELETE /api/tickets/{id}` (hủy mềm: `DA_HUY`, `closed_at`, ghi log `MOI → DA_HUY`, chỉ khi còn MỚI).
+  - Lịch hẹn: `GET /api/appointments` (Quản lý: lịch của trung tâm; KTV: lịch của mình), `GET /api/appointments/{id}`, `PUT /api/appointments/{id}` (đổi loại/giờ/ghi chú, kiểm lại giờ làm việc và chống trùng, theo KTV hiện tại của phiếu), `DELETE /api/appointments/{id}` (hủy mềm `DA_HUY`, giải phóng khung giờ).
+- **Lý do:** QT-13 cấm xoá vật lý phiếu và lịch sử, lịch hẹn hủy chỉ đánh dấu, nên "Delete" là hủy mềm. Tạo phiếu ở đây là bản tối giản phục vụ CRUD; luồng tiếp nhận đầy đủ (L2) vẫn ngoài phạm vi.
+- **Ảnh hưởng:** Không đổi schema (`DA_HUY` đã có ở cả hai bảng). Quy tắc mới là hàm thuần trong `ticket_rules.py`, `appointment_rules.py` có unit test; `tests/integration/test_crud.py` chạy đủ vòng tạo → đọc → sửa → hủy trên PostgreSQL.
+
+## TD-18 – Tách ba lớp và lỗi miền không chứa mã HTTP (Buổi 12)
+
+- **Vấn đề phát hiện:** Tiêu chí C2 yêu cầu service không có req/res/mã trạng thái HTTP; mã cũ để SQL trong router và `ticket_rules.py` raise `APIError(409, …)`.
+- **Quyết định:** **SỬA** – `routers/` chỉ nhận request và gọi service; `services/` (`ticket_service`, `appointment_service`, `ticket_rules`, `appointment_rules`) chứa nghiệp vụ và raise `DomainError(kind, code, message)` với `kind` ∈ {INVALID, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, CONFLICT, UNAVAILABLE}; `repositories/` chứa toàn bộ SQL; chỉ `app/main.py` ánh xạ `kind` → mã HTTP. Thêm xử lý CSDL tắt (503 `DATABASE_UNAVAILABLE`) và lỗi ngoài dự kiến (500 `INTERNAL_ERROR`, không lộ traceback, ghi log).
+- **Lý do:** Tách lớp để test nghiệp vụ không cần CSDL/HTTP và để suy giảm có kiểm soát khi CSDL tắt.
+- **Ảnh hưởng:** Phản hồi API (mã lỗi, thông báo, mã HTTP) giữ nguyên, kiểm bằng 18 TC, e2e và integration chạy lại sau khi tách.
+
+## TD-19 – Bộ dữ liệu mẫu trong repo, dựng hệ thống một lệnh, khoá phiên bản (Buổi 12)
+
+- **Vấn đề phát hiện:** Giảng viên clone repo theo tag `v0.2` và chạy theo README tại lớp; bộ CSV case-study không nằm trong repo nên bản clone chạy lên nhưng trống. `requirements.txt` chưa khoá phiên bản.
+- **Quyết định:** **SỬA** – thêm `data/sample/` (462 KB) do `scripts/make_sample_data.py` trích từ dữ liệu thật: đủ trung tâm, KTV, tay nghề; mọi phiếu ĐÃ PHÂN CÔNG (để 30 phiếu MOI theo seed 20260901 trùng dữ liệu đầy đủ); mọi phiếu mà `appointments.csv` tham chiếu. Loader dùng `data/raw/` khi đủ 7 CSV, ngược lại dùng bộ mẫu (`scripts/data_source.py`). `scripts/setup_all.py` tạo database nếu chưa có → migrate → nạp → tạo tài khoản, chạy lại không nhân đôi. Khoá `requirements*.txt` bằng `pip freeze` từ venv sạch; `.env.example` đủ tên biến với giá trị mẫu. Xoá `scripts/legacy/seed_real_data.py` (đã thay bằng pipeline mới), chuyển phần ánh xạ trạng thái có dấu sang `load_tickets.py`.
+- **Lý do:** Mục CỐT LÕI C1 (clone chạy theo README) và C5 (chạy lại không nhân đôi).
+- **Ảnh hưởng:** Bộ mẫu cho 939 phiếu, 3.237 dòng log, 300 lịch hẹn; fixture integration chấp nhận cả số dòng của bộ mẫu và bộ đầy đủ; `tests/integration/test_idempotent_load.py` chạy `setup_all.py` hai lần và so số dòng.
