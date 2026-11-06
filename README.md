@@ -61,7 +61,7 @@ py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 # 7. Cài thư viện (phiên bản đã khoá)
 python -m pip install -r requirements-dev.txt
-# 8. Chạy kiểm thử đơn vị: phải thấy "99 passed"
+# 8. Chạy kiểm thử đơn vị: phải thấy "100 passed"
 python -m pytest
 # 9. Dựng database: tạo DB smartcrm nếu chưa có, migrate, nạp dữ liệu, tạo tài khoản demo
 python scripts\setup_all.py
@@ -144,7 +144,7 @@ Lỗi trả về dạng `{"error": "<MÃ>", "message": "<thông báo>"}`: dữ l
 
 | Nhóm | Lệnh | Cần gì | Kết quả gần nhất |
 |---|---|---|---|
-| **Unit** (quy tắc nghiệp vụ, ánh xạ lỗi, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 99 passed |
+| **Unit** (quy tắc nghiệp vụ, ánh xạ lỗi, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 100 passed |
 | Integration PostgreSQL (CRUD, chạy lại không nhân đôi, TC22–TC25) | `python scripts\setup_all.py --with-test-db` một lần, rồi `python -m pytest tests\integration -m integration` | PostgreSQL | 7 passed |
 | **18 test case TC01–TC18** (nghiệp vụ + giao diện + e2e) | `python -m pytest -m system` | Frontend đang chạy, cổng 8000 trống, `smartcrm_test` đã nạp | 18 passed (~4 phút) |
 | End-to-end luồng chính (có tắt backend thật) | `python -m pytest tests\e2e -m e2e` | như trên | 1 passed |
