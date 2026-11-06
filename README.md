@@ -157,6 +157,7 @@ Lỗi trả về dạng `{"error": "<MÃ>", "message": "<thông báo>"}`: dữ l
 
 ## 6. Tài liệu
 
+- Báo cáo Bài tập 2: [docs/BT2_2374802010556_NguyenQuocViet.pdf](docs/BT2_2374802010556_NguyenQuocViet.pdf) (ảnh minh chứng gốc: [docs/bt2-evidence/](docs/bt2-evidence/))
 - Thay đổi so với thiết kế BT1: [docs/thay-doi-thiet-ke.md](docs/thay-doi-thiet-ke.md) (TD-01 … TD-19)
 - Nhật ký lỗi: [docs/bug-log.md](docs/bug-log.md)
 - Khai báo sử dụng công cụ AI: [docs/ai-disclosure.md](docs/ai-disclosure.md)
