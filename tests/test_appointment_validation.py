@@ -4,8 +4,8 @@ from datetime import datetime, time, timedelta
 
 import pytest
 
-from app.core.errors import APIError
-from app.routers.appointments import LOCAL_TIME, _validate_slot
+from app.domain.errors import DomainError, ErrorKind
+from app.services.appointment_rules import LOCAL_TIME, validate_slot
 
 
 def _next_business_date(days_ahead: int = 35):
@@ -20,7 +20,7 @@ def test_valid_future_half_hour_at_start_of_working_day() -> None:
     start = datetime.combine(appointment_date, time(8), tzinfo=LOCAL_TIME)
     end = start + timedelta(minutes=30)
 
-    validated_start, validated_end = _validate_slot(start, end)
+    validated_start, validated_end = validate_slot(start, end)
 
     assert validated_start == start
     assert validated_end == end
@@ -31,7 +31,7 @@ def test_adjacent_half_hour_can_end_at_closing_time() -> None:
     start = datetime.combine(appointment_date, time(17, 30), tzinfo=LOCAL_TIME)
     end = datetime.combine(appointment_date, time(18), tzinfo=LOCAL_TIME)
 
-    assert _validate_slot(start, end) == (start, end)
+    assert validate_slot(start, end) == (start, end)
 
 
 def test_sunday_appointment_is_rejected() -> None:
@@ -40,8 +40,8 @@ def test_sunday_appointment_is_rejected() -> None:
         appointment_date += timedelta(days=1)
     start = datetime.combine(appointment_date, time(9), tzinfo=LOCAL_TIME)
 
-    with pytest.raises(APIError) as error:
-        _validate_slot(start, start + timedelta(minutes=30))
+    with pytest.raises(DomainError) as error:
+        validate_slot(start, start + timedelta(minutes=30))
 
-    assert error.value.status_code == 400
+    assert error.value.kind is ErrorKind.INVALID
     assert error.value.code == "OUTSIDE_WORKING_HOURS"

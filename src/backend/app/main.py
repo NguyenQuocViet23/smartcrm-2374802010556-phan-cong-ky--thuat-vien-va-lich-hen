@@ -1,17 +1,35 @@
-"""FastAPI application entry point."""
+"""FastAPI application entry point.
+
+This is the only place that turns a ``DomainError`` into an HTTP status.
+"""
+
+import logging
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse, PlainTextResponse
+from sqlalchemy.exc import InterfaceError, OperationalError
 
 from app.core.errors import APIError
+from app.domain.errors import DomainError, ErrorKind
 from app.routers.appointments import router as appointments_router
 from app.routers.auth import router as auth_router
 from app.routers.health import router as health_router
 from app.routers.technicians import router as technicians_router
 from app.routers.tickets import router as tickets_router
+
+logger = logging.getLogger("smartcrm")
+
+HTTP_STATUS = {
+    ErrorKind.INVALID: 400,
+    ErrorKind.UNAUTHENTICATED: 401,
+    ErrorKind.FORBIDDEN: 403,
+    ErrorKind.NOT_FOUND: 404,
+    ErrorKind.CONFLICT: 409,
+    ErrorKind.UNAVAILABLE: 503,
+}
 
 app = FastAPI(title="Smart CRM")
 app.add_middleware(
@@ -37,6 +55,37 @@ def handle_api_error(_, error: APIError) -> JSONResponse:
             "message": error.message,
             **error.details,
         }),
+    )
+
+
+def _error_response(status_code: int, code: str, message: str, **details) -> JSONResponse:
+    return JSONResponse(
+        status_code=status_code,
+        content=jsonable_encoder({"error": code, "message": message, **details}),
+    )
+
+
+@app.exception_handler(DomainError)
+def handle_domain_error(_, error: DomainError) -> JSONResponse:
+    return _error_response(HTTP_STATUS[error.kind], error.code, error.message, **error.details)
+
+
+@app.exception_handler(OperationalError)
+@app.exception_handler(InterfaceError)
+def handle_database_unavailable(_, error: Exception) -> JSONResponse:
+    logger.error("Database unavailable: %s", error.__class__.__name__)
+    return _error_response(
+        HTTP_STATUS[ErrorKind.UNAVAILABLE],
+        "DATABASE_UNAVAILABLE",
+        "Cơ sở dữ liệu tạm thời không khả dụng. Vui lòng thử lại sau.",
+    )
+
+
+@app.exception_handler(Exception)
+def handle_unexpected_error(_, error: Exception) -> JSONResponse:
+    logger.exception("Unhandled error")
+    return _error_response(
+        500, "INTERNAL_ERROR", "Hệ thống gặp sự cố ngoài dự kiến. Vui lòng thử lại sau."
     )
 
 

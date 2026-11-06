@@ -2,7 +2,7 @@
 
 import pytest
 
-from app.core.errors import APIError
+from app.domain.errors import DomainError, ErrorKind
 from app.services.ticket_rules import (
     check_status_transition,
     check_ticket_scope,
@@ -35,20 +35,20 @@ def test_technician_sees_own_ticket_in_any_status(status: str) -> None:
 @pytest.mark.parametrize("owner", [8, None], ids=["phieu-cua-ktv-khac", "phieu-chua-giao"])
 def test_technician_cannot_see_ticket_of_another_account(owner) -> None:
     """Dữ liệu sai: KTV không xem được phiếu của tài khoản khác hoặc phiếu chưa giao cho mình"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_ticket_scope(TECHNICIAN_USER, {**TICKET, "status": "DA_DONG", "technician_id": owner})
 
-    assert error.value.status_code == 403
+    assert error.value.kind is ErrorKind.FORBIDDEN
     assert error.value.code == "FORBIDDEN"
 
 
 def test_manager_sees_only_own_center() -> None:
     """Giá trị biên: quản lý xem được phiếu cùng trung tâm nhưng không xem được trung tâm khác"""
     check_ticket_scope(MANAGER_USER, TICKET)
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_ticket_scope(MANAGER_USER, {**TICKET, "center_id": 2})
 
-    assert error.value.status_code == 403
+    assert error.value.kind is ErrorKind.FORBIDDEN
 
 
 # --- Vòng đời trạng thái phiếu -------------------------------------------
@@ -70,10 +70,10 @@ def test_forward_status_transition_is_allowed(current: str, target: str) -> None
 
 def test_backward_status_transition_is_rejected() -> None:
     """Dữ liệu sai: chuyển lùi DANG_XU_LY → DA_PHAN_CONG bị từ chối"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_status_transition("DANG_XU_LY", "DA_PHAN_CONG")
 
-    assert error.value.status_code == 409
+    assert error.value.kind is ErrorKind.CONFLICT
     assert error.value.code == "INVALID_STATUS_TRANSITION"
     assert error.value.message == "Không thể chuyển từ DANG_XU_LY sang DA_PHAN_CONG."
 
@@ -81,7 +81,7 @@ def test_backward_status_transition_is_rejected() -> None:
 @pytest.mark.parametrize("current", ["MOI", "HOAN_TAT", "DA_DONG", "DA_HUY"])
 def test_unassigned_or_finished_ticket_cannot_start_work(current: str) -> None:
     """Giá trị biên: phiếu chưa phân công hoặc đã kết thúc không thể chuyển sang DANG_XU_LY"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_status_transition(current, "DANG_XU_LY")
 
     assert error.value.code == "INVALID_STATUS_TRANSITION"
@@ -95,10 +95,10 @@ def test_target_status_is_trimmed_and_upper_cased() -> None:
 @pytest.mark.parametrize("raw", ["DA_PHAN_CONG", "DA_DONG", "XONG", ""])
 def test_technician_cannot_set_other_target_status(raw: str) -> None:
     """Dữ liệu sai: kỹ thuật viên không được đặt trạng thái ngoài DANG_XU_LY/CHO_LINH_KIEN/HOAN_TAT"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         normalize_target_status(raw)
 
-    assert error.value.status_code == 400
+    assert error.value.kind is ErrorKind.INVALID
     assert error.value.code == "INVALID_STATUS"
 
 
@@ -117,10 +117,10 @@ def test_technician_with_proficiency_exactly_three_is_eligible() -> None:
 )
 def test_technician_below_proficiency_three_is_rejected(proficiency, shown: str) -> None:
     """Giá trị biên: tay nghề 2 hoặc không có kỹ năng nhóm sự cố thì không đủ điều kiện"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_technician_eligible(TICKET, technician(proficiency=proficiency))
 
-    assert error.value.status_code == 400
+    assert error.value.kind is ErrorKind.INVALID
     assert error.value.code == "TECHNICIAN_NOT_ELIGIBLE"
     assert f"tay nghề MAN_HINH {shown}" in error.value.message
 
@@ -132,10 +132,10 @@ def test_technician_below_proficiency_three_is_rejected(proficiency, shown: str)
 )
 def test_technician_from_other_center_or_inactive_is_rejected(overrides: dict) -> None:
     """Dữ liệu sai: kỹ thuật viên khác trung tâm hoặc đã nghỉ việc bị từ chối dù đủ tay nghề"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_technician_eligible(TICKET, technician(**overrides))
 
-    assert error.value.status_code == 400
+    assert error.value.kind is ErrorKind.INVALID
     assert error.value.code == "TECHNICIAN_NOT_ELIGIBLE"
 
 
@@ -156,7 +156,7 @@ def test_change_reason_is_trimmed() -> None:
 
 def test_blank_change_reason_is_rejected() -> None:
     """Dữ liệu sai: lý do đổi kỹ thuật viên chỉ có khoảng trắng bị từ chối"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         require_change_reason("   ")
 
     assert error.value.code == "REASON_REQUIRED"
@@ -178,7 +178,7 @@ def test_assigned_open_ticket_can_change_technician() -> None:
 )
 def test_invalid_technician_change_is_rejected(ticket: dict, new_technician_id: int, code: str) -> None:
     """Dữ liệu sai: không đổi kỹ thuật viên cho phiếu đã kết thúc, chưa phân công hoặc trùng người cũ"""
-    with pytest.raises(APIError) as error:
+    with pytest.raises(DomainError) as error:
         check_technician_change(ticket, new_technician_id)
 
     assert error.value.code == code
