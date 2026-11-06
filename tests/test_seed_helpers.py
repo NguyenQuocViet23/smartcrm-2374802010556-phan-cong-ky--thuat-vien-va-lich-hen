@@ -1,8 +1,8 @@
-"""Unit tests for deterministic CSV normalization helpers."""
+"""Unit tests for the CSV normalization helpers of scripts/load_tickets.py."""
 
 import pytest
 
-from scripts.legacy.seed_real_data import normalize_phone, normalize_status
+from scripts.load_tickets import normalize_phone, normalize_status
 
 
 @pytest.mark.parametrize(
@@ -27,10 +27,11 @@ def test_normalize_phone(source: str, expected: str | None) -> None:
         ("CHO_LINH_KIEN", "CHO_LINH_KIEN"),
         ("ĐANG_XỬ_LÝ", "DANG_XU_LY"),
         ("DA_DONG", "DA_DONG"),
+        ("  ", None),
     ],
 )
 def test_normalize_status_accepts_source_and_database_codes(
-    source: str, expected: str
+    source: str, expected: str | None
 ) -> None:
     assert normalize_status(source) == expected
 

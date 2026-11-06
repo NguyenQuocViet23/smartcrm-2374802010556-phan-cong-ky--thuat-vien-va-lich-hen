@@ -69,8 +69,8 @@ def clone_work_database(database_name: str) -> None:
 
     try:
         get_engine().dispose()
-    except Exception:
-        pass
+    except Exception as error:  # the engine may never have connected; report and continue
+        print(f"Bỏ qua lỗi khi đóng kết nối cũ: {error}", file=sys.stderr)
     get_engine.cache_clear()
     source_url = get_test_database_url()
     source = urlparse(source_url)

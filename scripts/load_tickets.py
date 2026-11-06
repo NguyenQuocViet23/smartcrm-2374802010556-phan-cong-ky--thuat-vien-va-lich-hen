@@ -61,9 +61,28 @@ def normalize_phone(value: str) -> str | None:
     return value if re.fullmatch(r"0[0-9]{9}", value) else None
 
 
+ALLOWED_STATUSES = {
+    "MOI", "DA_PHAN_CONG", "DANG_XU_LY", "CHO_LINH_KIEN", "HOAN_TAT", "DA_DONG", "DA_HUY",
+}
+# Accented source labels are accepted and mapped to the database codes (TD-03).
+STATUS_ALIASES = {
+    "ĐÃ_ĐÓNG": "DA_DONG",
+    "ĐANG_XỬ_LÝ": "DANG_XU_LY",
+    "CHỜ_LINH_KIỆN": "CHO_LINH_KIEN",
+    "HOÀN_TẤT": "HOAN_TAT",
+    "ĐÃ_PHÂN_CÔNG": "DA_PHAN_CONG",
+}
+
+
 def normalize_status(value: str) -> str | None:
-    value = value.strip()
-    return value if value else None
+    """Empty means "no status" (first log row); otherwise return a valid database code."""
+    value = value.strip().upper()
+    if not value:
+        return None
+    mapped = STATUS_ALIASES.get(value, value)
+    if mapped not in ALLOWED_STATUSES:
+        raise ValueError(f"Unsupported ticket status: {value!r}")
+    return mapped
 
 
 def write_rejects(rows: list[dict[str, str]]) -> None:
