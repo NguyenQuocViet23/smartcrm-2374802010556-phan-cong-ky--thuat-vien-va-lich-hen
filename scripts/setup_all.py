@@ -5,7 +5,7 @@ status log → load appointments → create demo accounts (kept if they already 
 
 Usage:
     python scripts/setup_all.py                  # database DB_NAME from .env
-    python scripts/setup_all.py --with-test-db   # also smartcrm_test, for integration/system tests
+    python scripts/setup_all.py --with-test-db   # also TEST_DB_NAME (default smartcrm_test) for tests
 """
 
 from __future__ import annotations
@@ -23,7 +23,6 @@ from psycopg import sql
 ROOT = Path(__file__).resolve().parents[1]
 ACCOUNTS = ROOT / "data" / "processed" / "demo_accounts.json"
 LOADERS = ("migrate.py", "load_catalog.py", "load_tickets.py", "load_appointments.py")
-TEST_DB = "smartcrm_test"
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -68,8 +67,12 @@ def build(database: str) -> None:
 def main() -> int:
     load_dotenv(ROOT / ".env")
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--with-test-db", action="store_true", help=f"dựng thêm database {TEST_DB}")
+    parser.add_argument("--with-test-db", action="store_true",
+                        help="dựng thêm database kiểm thử TEST_DB_NAME (mặc định smartcrm_test)")
     args = parser.parse_args()
+    test_db = os.getenv("TEST_DB_NAME") or "smartcrm_test"
+    if args.with_test_db and not test_db.endswith("_test"):
+        raise SystemExit("Dừng: TEST_DB_NAME phải kết thúc bằng _test.")
 
     main_db = os.getenv("DB_NAME", "smartcrm")
     build(main_db)
@@ -78,7 +81,7 @@ def main() -> int:
     else:
         run("generate_demo_accounts.py", main_db)
     if args.with_test_db:
-        build(TEST_DB)
+        build(test_db)
     print("\nHOÀN TẤT: chạy backend và frontend theo README.")
     return 0
 
