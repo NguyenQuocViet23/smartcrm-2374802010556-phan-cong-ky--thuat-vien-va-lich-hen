@@ -82,3 +82,19 @@ def test_invalid_ticket_payload_is_rejected_before_the_service(client, headers, 
 
     assert response.status_code == 400
     assert response.json()["error"] == "VALIDATION_ERROR"
+
+
+def test_database_connection_has_a_timeout(monkeypatch) -> None:
+    """Giá trị biên: kết nối CSDL có thời gian chờ (mặc định 3 giây) để API không treo khi CSDL tắt"""
+    from app.core import database
+
+    captured = {}
+    monkeypatch.setattr(database, "create_engine", lambda url, **kwargs: captured.update(kwargs) or object())
+    monkeypatch.delenv("DB_CONNECT_TIMEOUT", raising=False)
+    database.get_engine.cache_clear()
+    try:
+        database.get_engine()
+    finally:
+        database.get_engine.cache_clear()
+
+    assert captured["connect_args"] == {"connect_timeout": 3}

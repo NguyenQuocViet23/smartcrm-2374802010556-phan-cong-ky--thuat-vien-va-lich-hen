@@ -63,3 +63,14 @@ Repo: https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--t
 - **Cách sửa:** `DomainError(kind, code, message)` không có số HTTP; SQL chuyển sang `repositories/`; chỉ `app/main.py` ánh xạ `kind` → HTTP (TD-18).
 - **Xác nhận:** hai lệnh `grep` trên trả rỗng; 18 TC, e2e, integration vẫn pass nên phản hồi API không đổi.
 - **Commit:** [ee4013f](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/ee4013f)
+
+## BUG-07 – API treo vài phút khi cơ sở dữ liệu không kết nối được
+
+- **Triệu chứng:** thử "suy giảm có kiểm soát" bằng cách cho backend trỏ tới cổng CSDL không có PostgreSQL; `GET /api/tickets` không trả lời sau hơn 2 phút.
+- **Tái lập:** đặt `DB_PORT=1`, chạy backend, đăng nhập rồi gọi `GET /api/tickets`.
+- **Khoanh vùng:** đo riêng `psycopg.connect(port=1)`: không có `connect_timeout` thì treo > 2 phút; có `connect_timeout=3` thì báo lỗi sau 3 giây (6 giây với `localhost` vì thử cả IPv6 và IPv4).
+- **Nguyên nhân:** engine SQLAlchemy không đặt thời gian chờ kết nối; trên Windows kết nối tới cổng đóng không bị từ chối ngay.
+- **Cách sửa:** `get_engine()` truyền `connect_args={"connect_timeout": DB_CONNECT_TIMEOUT}` (mặc định 3 giây, khai báo trong `.env.example`).
+- **Xác nhận:** gọi lại API: HTTP 503 `DATABASE_UNAVAILABLE` sau 3,0 giây, có dòng log; unit test `test_database_connection_has_a_timeout`.
+- **Commit:** xem lịch sử commit của `src/backend/app/core/database.py` (thông điệp "fix: bound the database connect time").
+
