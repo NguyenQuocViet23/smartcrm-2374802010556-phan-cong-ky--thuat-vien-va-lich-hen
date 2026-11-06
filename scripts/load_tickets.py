@@ -14,7 +14,12 @@ import psycopg
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[1]
-RAW_DIR = ROOT / "data" / "raw"
+try:
+    from data_source import describe, resolve_data_dir
+except ImportError:  # imported as scripts.<module> (tests)
+    from scripts.data_source import describe, resolve_data_dir
+
+RAW_DIR = resolve_data_dir()
 REPORT_DIR = ROOT / "reports"
 REJECTS_FILE = REPORT_DIR / "load_tickets_rejects.csv"
 MOI_FILE = REPORT_DIR / "moi_tickets_seed20260901.csv"
@@ -88,6 +93,7 @@ def positive_integer(value: str, field: str) -> int:
 
 
 def main() -> int:
+    print(describe(RAW_DIR))
     ticket_rows = read_csv("tickets_history.csv")
     customer_rows = read_csv("customers_raw.csv")
     category_rows = read_csv("issue_categories.csv")

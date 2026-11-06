@@ -19,25 +19,31 @@ from tests.conftest import (
 )
 
 
+# Row counts after scripts/setup_all.py, for each data source it can load.
 EXPECTED_COUNTS = {
-    "service_center": 6,
-    "technician": 38,
-    "technician_skill": 159,
-    "ticket": 7317,
-    "ticket_status_log": 35719,
-    "appointment": 300,
+    "dữ liệu case-study (data/raw)": {
+        "service_center": 6, "technician": 38, "technician_skill": 159,
+        "ticket": 7317, "ticket_status_log": 35719, "appointment": 300,
+    },
+    "bộ mẫu trong repo (data/sample)": {
+        "service_center": 6, "technician": 38, "technician_skill": 159,
+        "ticket": 939, "ticket_status_log": 3237, "appointment": 300,
+    },
 }
+
+
+def check_known_dataset(name: str, counts: dict[str, int]) -> None:
+    if counts not in EXPECTED_COUNTS.values():
+        raise AssertionError(f"Số dòng {name} không khớp bộ dữ liệu nào đã biết: {counts}")
 
 
 @pytest.fixture(scope="session", autouse=True)
 def verify_integration_sources() -> None:
     source_url = get_test_database_url()
-    if database_counts(source_url) != EXPECTED_COUNTS:
-        raise AssertionError(f"Số dòng smartcrm_test không khớp: {database_counts(source_url)}")
+    check_known_dataset("smartcrm_test", database_counts(source_url))
     source = urlparse(source_url)
     smartcrm_url = source._replace(path="/smartcrm").geturl()
-    if database_counts(smartcrm_url) != EXPECTED_COUNTS:
-        raise AssertionError(f"Số dòng smartcrm không khớp: {database_counts(smartcrm_url)}")
+    check_known_dataset("smartcrm", database_counts(smartcrm_url))
 
 
 @pytest.fixture

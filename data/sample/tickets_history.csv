@@ -1,0 +1,966 @@
+ticket_id,ticket_code,customer_id,serial_no,product_id,center_id,issue_desc,category_id,priority,status,technician_id,received_at,due_date,closed_at,is_warranty
+1,BH-000001/2025,14159,SN541017338391,21,5,kh noi cam sac khong vao dien bi tu tuan truoc,3,TRUNG_BINH,DA_PHAN_CONG,31,2025-02-23 12:30,2025-02-26 12:30,,true
+5,BH-000005/2025,21320,SN667990926428,264,1,khách báo màn hình bị ám vàng một góc mới bị 2 ngày nay,1,THAP,HOAN_TAT,20,2025-04-16 16:00,2025-04-21 16:00,,true
+9,BH-000009/2026,22048,SN263659927827,115,2,may bi sạc rất chậm mất cả đêm khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,8,2026-08-02 11:00,2026-08-05 11:00,,false
+17,BH-000017/2026,42899,SN532591791583,222,5,TÌNH TRẠNG: PIN SỤT 20% CHỈ SAU VÀI PHÚT XẢY RA SAU KHI RƠI,2,TRUNG_BINH,DA_PHAN_CONG,17,2026-05-21 16:30,2026-05-24 16:30,,true
+18,BH-000018/2026,17466,SN752797804681,48,2,khách báo sạc vào nhưng không nhận cáp mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,29,2026-05-02 10:00,2026-05-05 10:00,,true
+44,BH-000044/2026,51304,SN220496885154,30,4,may bi sạc rất chậm mất cả đêm,3,THAP,DA_PHAN_CONG,6,2026-04-29 17:00,2026-05-04 17:00,,true
+46,BH-000046/2025,43194,SN344744514548,81,1,kh nói màn hình chớp tắt liên tục bị từ tuần trước,1,CAO,DA_PHAN_CONG,20,2025-08-03 08:45,2025-08-04 08:45,,false
+58,BH-000058/2026,48490,SN370637672501,32,4,khách hàng phản ánh máy phồng pin cấn màn hình đã thử khởi động lại không được,2,THAP,CHO_LINH_KIEN,21,2026-04-23 15:30,2026-04-28 15:30,,true
+84,BH-000084/2025,12876,SN247238153243,302,5,tình trạng: cổng sạc bám bụi không tiếp xúc mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,17,2025-03-04 13:45,2025-03-07 13:45,,false
+96,BH-000096/2026,38846,SN707802312936,51,2,tình trạng: máy treo logo không vào được hệ điều hành mới bị 2 ngày nay,4,THAP,CHO_LINH_KIEN,30,2026-02-25 14:45,2026-03-02 14:45,,true
+102,BH-000102/2025,51186,SN217757884453,130,2,cam ung cho duoc cho khong may con bao hanh,1,CAO,DANG_XU_LY,25,2025-12-27 13:30,2025-12-28 13:30,,true
+106,BH-000106/2025,25755,SN737584289372,24,4,khách hàng phản ánh nút nguồn bị kẹt,6,TRUNG_BINH,CHO_LINH_KIEN,15,2025-11-12 17:45,2025-11-15 17:45,,false
+113,BH-000113/2026,31750,SN316371716985,164,4,khách báo màn hình chớp tắt liên tục đã thử khởi động lại không được,1,CAO,DA_PHAN_CONG,6,2026-08-25 14:15,2026-08-26 14:15,,true
+145,BH-000145/2025,2363,SN648389889843,225,5,MAY BI KHÔNG CÀI ĐƯỢC ỨNG DỤNG BÁO LỖI XẢY RA SAU KHI RƠI,4,THAP,CHO_LINH_KIEN,26,2025-09-23 12:15,2025-09-28 12:15,,true
+153,BH-000153/2026,48386,SN791466907755,180,1,kh noi pin nong bat thuong khi dung bi tu tuan truoc,2,TRUNG_BINH,DA_PHAN_CONG,1,2026-07-26 17:30,2026-07-29 17:30,,true
+166,BH-000166/2024,5241,SN720007416818,46,3,khách báo cảm ứng loạn không bấm được máy còn bảo hành,1,CAO,DA_PHAN_CONG,32,2024-09-22 08:00,2024-09-23 08:00,,false
+176,BH-000176/2024,3360,SN590461629323,315,6,may bi màn hình bị sọc dọc đã thử khởi động lại không được,1,CAO,DA_DONG,28,2024-10-23 15:30,2024-10-24 15:30,2024-10-25 02:25,true
+187,BH-000187/2025,46551,SN857556168071,85,3,khach hang phan anh may treo logo khong vao duoc he dieu hanh,4,THAP,DANG_XU_LY,32,2025-09-07 14:15,2025-09-12 14:15,,true
+194,BH-000194/2025,26240,SN431536869113,75,2,màn hình chớp tắt liên tục,1,CAO,DA_PHAN_CONG,30,2025-02-16 17:00,2025-02-17 17:00,,true
+198,BH-000198/2025,15607,SN526835476345,105,5,khách báo màn hình bị sọc dọc bị từ tuần trước,1,THAP,DA_DONG,9,2025-03-19 12:45,2025-03-24 12:45,2025-03-21 20:26,true
+204,BH-000204/2025,52163,SN107959864674,176,5,khách báo màn hình xuất hiện vệt mực loang đã thử khởi động lại không được,1,TRUNG_BINH,DA_DONG,35,2025-03-29 12:00,2025-04-01 12:00,2025-04-01 01:03,true
+205,BH-000205/2026,18542,SN777058747574,76,6,kh nói máy vào nước màn hình loang ố đã thử khởi động lại không được,5,CAO,DA_DONG,18,2026-07-18 10:15,2026-07-19 10:15,2026-07-18 23:54,true
+207,BH-000207/2025,1852,SN848492347405,187,1,khách hàng phản ánh wifi không kết nối được sau cập nhật đã thử khởi động lại không được,4,THAP,DA_PHAN_CONG,33,2025-12-17 16:45,2025-12-22 16:45,,false
+210,BH-000210/2026,7674,SN246579972100,316,1,khách báo máy treo logo không vào được hệ điều hành máy còn bảo hành,4,THAP,DA_PHAN_CONG,20,2026-04-28 14:00,2026-05-03 14:00,,true
+212,BH-000212/2026,45411,SN118971409109,146,6,may bi may roi vao nuoc khong len nguon khach chua tung sua o dau,5,CAO,DA_PHAN_CONG,11,2026-07-17 12:30,2026-07-18 12:30,,true
+214,BH-000214/2024,34094,SN227360518625,244,6,tình trạng: màn hình đen không lên bị từ tuần trước,1,CAO,CHO_LINH_KIEN,10,2024-12-04 11:30,2024-12-05 11:30,,true
+221,BH-000221/2025,47241,SN870082640931,193,5,khach bao pin sut 20% chi sau vai phut,2,TRUNG_BINH,DANG_XU_LY,7,2025-11-28 13:00,2025-12-01 13:00,,true
+226,BH-000226/2026,35230,SN593257727417,95,1,may bi chan sac long phai giu moi sac duoc da thu khoi dong lai khong duoc,3,TRUNG_BINH,DA_PHAN_CONG,33,2026-06-08 09:00,2026-06-11 09:00,,true
+230,BH-000230/2026,9584,SN121229187450,184,6,khách báo cổng sạc bám bụi không tiếp xúc đã thử khởi động lại không được,3,TRUNG_BINH,DA_DONG,13,2026-03-19 09:30,2026-03-22 09:30,2026-03-21 19:39,true
+231,BH-000231/2025,49,SN290576547180,218,6,may bi màn hình bị sọc dọc bị từ tuần trước,1,CAO,DANG_XU_LY,23,2025-07-22 16:30,2025-07-23 16:30,,true
+237,BH-000237/2026,34111,SN567058365775,153,4,MAY BI SẠC RẤT CHẬM MẤT CẢ ĐÊM KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,3,TRUNG_BINH,CHO_LINH_KIEN,2,2026-01-11 17:15,2026-01-14 17:15,,true
+249,BH-000249/2025,52805,SN762046607341,237,5,khách hàng phản ánh báo pin sai phần trăm nhảy loạn xảy ra sau khi rơi,2,TRUNG_BINH,DANG_XU_LY,26,2025-01-25 13:45,2025-01-28 13:45,,true
+254,BH-000254/2025,14582,SN125745826679,189,6,kh nói máy tự khởi động lại nhiều lần trong ngày mới bị 2 ngày nay,4,THAP,DA_DONG,10,2025-09-28 16:45,2025-10-03 16:45,2025-09-30 19:40,true
+279,BH-000279/2025,16907,SN368958790955,309,2,tình trạng: điểm chết trên màn hình đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,29,2025-05-31 12:15,2025-06-01 12:15,,false
+299,BH-000299/2026,18177,SN897119013837,33,5,may bi cắm sạc không vào điện,3,TRUNG_BINH,DANG_XU_LY,7,2026-01-10 12:00,2026-01-13 12:00,,false
+313,BH-000313/2025,51157,SN222782109847,133,2,khách báo pin nóng bất thường khi dùng khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,12,2025-09-19 10:00,2025-09-22 10:00,,true
+319,BH-000319/2025,19167,SN611135706098,274,6,KHÁCH HÀNG PHẢN ÁNH CẢM ỨNG CHỖ ĐƯỢC CHỖ KHÔNG ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,1,CAO,HOAN_TAT,13,2025-06-02 14:30,2025-06-03 14:30,,true
+327,BH-000327/2025,48511,SN260889672473,246,5,cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DA_PHAN_CONG,7,2025-10-25 12:30,2025-10-28 12:30,,true
+334,BH-000334/2024,43420,SN188032851410,82,6,khach bao pin sut 20% chi sau vai phut bi tu tuan truoc,2,TRUNG_BINH,DA_DONG,18,2024-12-19 16:30,2024-12-22 16:30,2024-12-21 05:06,true
+351,BH-000351/2025,8357,SN232488612031,165,4,tình trạng: cắm sạc không vào điện khách chưa từng sửa ở đâu,3,TRUNG_BINH,HOAN_TAT,6,2025-03-14 16:15,2025-03-17 16:15,,true
+359,BH-000359/2025,25449,SN333739713998,227,5,báo pin sai phần trăm nhảy loạn,2,TRUNG_BINH,DA_PHAN_CONG,35,2025-02-13 09:15,2025-02-16 09:15,,true
+376,BH-000376/2026,39600,SN293255862764,186,3,kh nói cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,HOAN_TAT,37,2026-07-27 10:15,2026-07-28 10:15,,true
+378,BH-000378/2024,44051,SN342435666464,217,1,may bi máy không giữ được pin qua đêm,2,TRUNG_BINH,DA_DONG,20,2024-09-01 10:15,2024-09-04 10:15,2024-09-02 18:55,false
+379,BH-000379/2026,53841,SN181984277517,174,4,tình trạng: cắm sạc máy nóng bất thường máy còn bảo hành,3,TRUNG_BINH,DA_DONG,6,2026-06-22 09:45,2026-06-25 09:45,2026-06-24 13:57,true
+382,BH-000382/2024,40664,SN309434407554,81,3,khach bao may co tieng keu la ben trong xay ra sau khi roi,6,TRUNG_BINH,DA_PHAN_CONG,37,2024-12-14 15:45,2024-12-17 15:45,,true
+385,BH-000385/2025,30486,SN144275613350,166,1,MAY BI MÀN HÌNH BỊ ÁM VÀNG MỘT GÓC MỚI BỊ 2 NGÀY NAY,1,CAO,DANG_XU_LY,33,2025-01-17 09:30,2025-01-18 09:30,,false
+401,BH-000401/2025,26089,SN635525893256,212,1,khách hàng phản ánh cắm sạc máy nóng bất thường mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,20,2025-03-18 15:30,2025-03-21 15:30,,true
+413,BH-000413/2025,7409,SN451909161028,294,3,KH NOI PIN TUT RAT NHANH DUNG 2 TIENG DA HET MOI BI 2 NGAY NAY,2,TRUNG_BINH,CHO_LINH_KIEN,27,2025-10-11 12:45,2025-10-14 12:45,,true
+414,BH-000414/2025,50177,SN590193666661,158,4,khách hàng phản ánh cảm ứng chỗ được chỗ không xảy ra sau khi rơi,1,CAO,CHO_LINH_KIEN,21,2025-07-24 13:30,2025-07-25 13:30,,true
+428,BH-000428/2024,27986,SN357658273114,189,5,màn hình bị sọc dọc mới bị 2 ngày nay,1,CAO,DANG_XU_LY,26,2024-12-29 16:30,2024-12-30 16:30,,true
+429,BH-000429/2025,47331,SN237935550477,157,6,kh nói báo pin sai phần trăm nhảy loạn máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,13,2025-06-01 14:30,2025-06-04 14:30,,true
+430,BH-000430/2026,12543,SN882963079350,176,3,khách hàng phản ánh wifi không kết nối được sau cập nhật bị từ tuần trước,4,THAP,DA_PHAN_CONG,38,2026-01-02 16:30,2026-01-07 16:30,,false
+445,BH-000445/2024,38606,SN400256844053,101,3,may bi không cài được ứng dụng báo lỗi xảy ra sau khi rơi,4,THAP,DA_DONG,3,2024-11-18 08:15,2024-11-23 08:15,2024-11-21 09:50,false
+449,BH-000449/2025,21908,SN412919279926,76,6,may bi cong sac bi gay chan khach chua tung sua o dau,3,THAP,CHO_LINH_KIEN,18,2025-03-10 14:30,2025-03-15 14:30,,true
+450,BH-000450/2025,5183,SN912976941116,290,5,cam ung cho duoc cho khong may con bao hanh,1,CAO,CHO_LINH_KIEN,9,2025-10-31 15:00,2025-11-01 15:00,,false
+464,BH-000464/2026,39118,SN676414648592,124,2,may bi sac rat cham mat ca dem,3,TRUNG_BINH,DA_DONG,25,2026-06-08 14:45,2026-06-11 14:45,2026-06-11 04:22,true
+479,BH-000479/2025,52801,SN873879262248,35,2,khách hàng phản ánh máy phồng pin cấn màn hình khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_DONG,12,2025-11-20 10:00,2025-11-23 10:00,2025-11-22 23:23,false
+488,BH-000488/2026,53455,SN190493518005,191,6,may bi máy treo logo không vào được hệ điều hành khách chưa từng sửa ở đâu,4,THAP,DANG_XU_LY,10,2026-08-09 16:45,2026-08-14 16:45,,true
+500,BH-000500/2026,50129,SN583138500880,154,2,màn hình xuất hiện vệt mực loang máy còn bảo hành,1,CAO,DA_PHAN_CONG,25,2026-02-22 12:30,2026-02-23 12:30,,false
+503,BH-000503/2025,25826,SN701368861687,212,3,may bi máy vào nước màn hình loang ố bị từ tuần trước,5,CAO,DANG_XU_LY,22,2025-11-19 13:00,2025-11-20 13:00,,true
+511,BH-000511/2026,40823,SN933414633344,210,1,may bi báo pin sai phần trăm nhảy loạn bị từ tuần trước,2,TRUNG_BINH,DA_DONG,20,2026-08-18 16:15,2026-08-21 16:15,2026-08-20 20:13,true
+514,BH-000514/2026,12227,SN555765605424,173,1,may bi pin chai chi con dung duoc nua ngay bi tu tuan truoc,2,THAP,DANG_XU_LY,20,2026-03-29 14:30,2026-04-03 14:30,,true
+520,BH-000520/2025,53622,SN466134879848,149,6,khách hàng phản ánh sạc vào nhưng không nhận cáp máy còn bảo hành,3,TRUNG_BINH,DANG_XU_LY,28,2025-09-21 09:30,2025-09-24 09:30,,true
+535,BH-000535/2026,11822,SN165696632422,311,3,khách hàng phản ánh màn hình đen không lên bị từ tuần trước,1,CAO,DA_PHAN_CONG,38,2026-04-27 10:00,2026-04-28 10:00,,true
+554,BH-000554/2025,41771,SN376700602718,159,2,KH NÓI PIN SỤT 20% CHỈ SAU VÀI PHÚT MÁY CÒN BẢO HÀNH,2,CAO,DA_DONG,5,2025-05-22 16:45,2025-05-23 16:45,2025-05-24 18:36,true
+566,BH-000566/2026,28796,SN601985609386,242,5,tình trạng: màn hình chớp tắt liên tục xảy ra sau khi rơi,1,CAO,DA_DONG,35,2026-03-23 13:15,2026-03-24 13:15,2026-03-24 05:59,false
+567,BH-000567/2026,51046,SN282309011918,179,1,man hinh bi soc doc may con bao hanh,1,CAO,DANG_XU_LY,20,2026-06-12 13:15,2026-06-13 13:15,,true
+571,BH-000571/2024,45760,SN312953323911,270,5,kh nói sạc đầy nhưng dùng 30 phút là sập nguồn mới bị 2 ngày nay,2,CAO,DA_DONG,7,2024-11-23 09:00,2024-11-24 09:00,2024-11-23 16:03,true
+572,BH-000572/2026,1018,SN739212555941,191,2,màn hình bị ám vàng một góc mới bị 2 ngày nay,1,CAO,HOAN_TAT,5,2026-02-02 17:45,2026-02-03 17:45,,true
+580,BH-000580/2024,12635,SN804621193311,279,1,màn hình bị ám vàng một góc khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,20,2024-11-02 16:00,2024-11-03 16:00,,true
+583,BH-000583/2026,46184,SN138207617827,183,3,may bi màn hình bị hở sáng viền dưới mới bị 2 ngày nay,1,CAO,DANG_XU_LY,19,2026-07-21 14:30,2026-07-22 14:30,,true
+591,BH-000591/2026,42718,SN957745182478,10,5,may bi máy có tiếng kêu lạ bên trong mới bị 2 ngày nay,6,TRUNG_BINH,DA_PHAN_CONG,24,2026-01-13 17:45,2026-01-16 17:45,,false
+598,BH-000598/2025,52423,SN345220884387,91,6,tình trạng: máy tự tắt khi còn 30% pin,2,TRUNG_BINH,DA_PHAN_CONG,28,2025-04-06 13:00,2025-04-09 13:00,,true
+599,BH-000599/2025,23542,SN183706128511,244,1,khach bao ung dung tu thoat lien tuc bi tu tuan truoc,4,THAP,DANG_XU_LY,33,2025-05-31 12:45,2025-06-05 12:45,,true
+601,BH-000601/2025,28535,SN768627942038,224,5,màn hình xuất hiện vệt mực loang mới bị 2 ngày nay,1,CAO,HOAN_TAT,35,2025-05-01 14:30,2025-05-02 14:30,,false
+604,BH-000604/2026,19443,SN812129109112,31,6,khách báo máy chạy chậm giật lag sau khi cập nhật khách chưa từng sửa ở đâu,4,THAP,HOAN_TAT,10,2026-02-08 15:00,2026-02-13 15:00,,true
+608,BH-000608/2025,17830,SN826594177524,188,5,khách báo chân sạc lỏng phải giữ mới sạc được mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,31,2025-12-06 11:15,2025-12-09 11:15,,true
+622,BH-000622/2025,34676,SN780840507240,291,4,wifi không kết nối được sau cập nhật xảy ra sau khi rơi,4,CAO,DA_PHAN_CONG,2,2025-08-18 16:00,2025-08-19 16:00,,true
+625,BH-000625/2025,42496,SN523348651739,78,4,KHACH BAO MAY TREO LOGO KHONG VAO DUOC HE DIEU HANH KHACH CHUA TUNG SUA O DAU,4,THAP,CHO_LINH_KIEN,14,2025-10-13 10:00,2025-10-18 10:00,,true
+626,BH-000626/2025,5723,SN110903585886,197,4,tình trạng: pin tụt rất nhanh dùng 2 tiếng đã hết đã thử khởi động lại không được,2,TRUNG_BINH,DANG_XU_LY,15,2025-10-14 11:00,2025-10-17 11:00,,true
+628,BH-000628/2024,16935,SN136343886489,87,3,loa ngoài rè không nghe rõ mới bị 2 ngày nay,6,TRUNG_BINH,DA_DONG,38,2024-09-18 09:45,2024-09-21 09:45,2024-09-20 03:53,true
+651,BH-000651/2025,41712,SN244235242264,191,1,pin tụt rất nhanh dùng 2 tiếng đã hết máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,33,2025-07-22 15:15,2025-07-25 15:15,,true
+656,BH-000656/2025,49281,SN502797404067,265,6,kh nói cắm sạc không vào điện xảy ra sau khi rơi,3,CAO,DANG_XU_LY,11,2025-07-28 09:30,2025-07-29 09:30,,true
+685,BH-000685/2026,2262,SN380642482306,158,1,may bi máy treo logo không vào được hệ điều hành khách chưa từng sửa ở đâu,4,THAP,CHO_LINH_KIEN,33,2026-01-28 09:30,2026-02-02 09:30,,true
+689,BH-000689/2025,10693,SN585928599667,69,5,pin chai chỉ còn dùng được nửa ngày khách chưa từng sửa ở đâu,2,TRUNG_BINH,CHO_LINH_KIEN,9,2025-01-25 11:00,2025-01-28 11:00,,false
+691,BH-000691/2025,34685,SN754265952885,140,5,khách báo máy không giữ được pin qua đêm bị từ tuần trước,2,CAO,HOAN_TAT,24,2025-07-06 14:45,2025-07-07 14:45,,true
+693,BH-000693/2025,26001,SN679064996257,7,6,kh nói cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,10,2025-11-25 08:30,2025-11-28 08:30,,true
+697,BH-000697/2024,35378,SN160551902451,38,6,may bi rơi bồn rửa máy chập chờn,5,CAO,DANG_XU_LY,28,2024-09-30 17:30,2024-10-01 17:30,,true
+715,BH-000715/2025,24788,SN571057787766,284,4,kh nói điện thoại dính nước mưa loa bị rè,5,CAO,DANG_XU_LY,34,2025-07-10 16:30,2025-07-11 16:30,,true
+717,BH-000717/2025,21076,SN240049795948,258,2,tình trạng: cảm ứng loạn không bấm được bị từ tuần trước,1,THAP,CHO_LINH_KIEN,29,2025-06-15 13:00,2025-06-20 13:00,,true
+720,BH-000720/2025,53592,SN372201566882,137,1,tình trạng: cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,1,2025-04-27 10:15,2025-04-30 10:15,,true
+732,BH-000732/2024,16216,SN525136742977,135,4,KH NOI CAM UNG LOAN KHONG BAM DUOC KHACH CHUA TUNG SUA O DAU,1,CAO,HOAN_TAT,15,2024-10-04 11:45,2024-10-05 11:45,,true
+744,BH-000744/2026,42168,SN130949097363,120,6,TÌNH TRẠNG: PIN NÓNG BẤT THƯỜNG KHI DÙNG XẢY RA SAU KHI RƠI,2,TRUNG_BINH,HOAN_TAT,23,2026-05-22 16:45,2026-05-25 16:45,,true
+763,BH-000763/2024,41768,SN105054644106,176,2,khách hàng phản ánh cổng sạc bị gãy chân đã thử khởi động lại không được,3,TRUNG_BINH,DA_PHAN_CONG,30,2024-09-24 12:15,2024-09-27 12:15,,false
+781,BH-000781/2025,30909,SN770117091520,137,4,may bi dính nước biển máy nóng và tắt xảy ra sau khi rơi,5,CAO,CHO_LINH_KIEN,15,2025-04-11 09:30,2025-04-12 09:30,,true
+787,BH-000787/2026,46834,SN774517130375,309,4,khach bao sac day nhung dung 30 phut la sap nguon may con bao hanh,2,TRUNG_BINH,DANG_XU_LY,4,2026-04-30 09:45,2026-05-03 09:45,,false
+788,BH-000788/2024,36234,SN657643956996,156,4,kh noi cam sac may nong bat thuong bi tu tuan truoc,3,TRUNG_BINH,HOAN_TAT,2,2024-11-20 15:30,2024-11-23 15:30,,true
+791,BH-000791/2025,29547,SN422215011014,161,6,KH NÓI MÀN HÌNH BỊ ÁM VÀNG MỘT GÓC,1,CAO,HOAN_TAT,11,2025-05-21 13:00,2025-05-22 13:00,,true
+795,BH-000795/2025,29736,SN126304617901,102,2,may bi điểm chết trên màn hình đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,5,2025-01-12 15:30,2025-01-13 15:30,,true
+818,BH-000818/2026,2750,SN511312691863,317,1,khách hàng phản ánh cắm sạc máy nóng bất thường mới bị 2 ngày nay,3,TRUNG_BINH,DA_DONG,33,2026-06-28 14:00,2026-07-01 14:00,2026-06-30 13:01,true
+832,BH-000832/2026,51924,SN771412835482,302,6,kh nói màn hình bị hở sáng viền dưới khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,11,2026-08-07 11:30,2026-08-08 11:30,,true
+836,BH-000836/2025,42644,SN267885679032,211,6,may bi sạc rất chậm mất cả đêm,3,TRUNG_BINH,DA_DONG,13,2025-06-03 17:30,2025-06-06 17:30,2025-06-04 16:27,true
+841,BH-000841/2026,40556,SN117458137097,271,3,khach bao may chay cham giat lag sau khi cap nhat bi tu tuan truoc,4,THAP,CHO_LINH_KIEN,37,2026-04-13 08:30,2026-04-18 08:30,,true
+861,BH-000861/2026,47070,SN126308939203,82,3,khách hàng phản ánh dính nước biển máy nóng và tắt mới bị 2 ngày nay,5,CAO,CHO_LINH_KIEN,22,2026-06-02 16:00,2026-06-03 16:00,,false
+879,BH-000879/2025,23068,SN817905466902,173,5,kh nói dính nước biển máy nóng và tắt bị từ tuần trước,5,CAO,DANG_XU_LY,24,2025-08-26 16:00,2025-08-27 16:00,,true
+881,BH-000881/2025,31896,SN944724305697,278,4,tình trạng: màn hình bị sọc dọc máy còn bảo hành,1,CAO,DANG_XU_LY,6,2025-11-25 12:15,2025-11-26 12:15,,false
+885,BH-000885/2024,7613,SN495822564777,150,5,tình trạng: wifi không kết nối được sau cập nhật đã thử khởi động lại không được,4,THAP,DA_DONG,31,2024-12-28 10:45,2025-01-02 10:45,2024-12-29 23:51,true
+896,BH-000896/2026,43233,SN653216550265,141,6,khách báo màn hình bị ám vàng một góc mới bị 2 ngày nay,1,CAO,DA_DONG,11,2026-03-25 09:00,2026-03-26 09:00,2026-03-26 00:31,true
+897,BH-000897/2026,12011,SN832501884065,278,1,máy tự tắt khi còn 30% pin khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,33,2026-04-12 08:30,2026-04-15 08:30,,false
+992,BH-000992/2026,39618,SN766236424454,77,1,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn,2,TRUNG_BINH,DA_PHAN_CONG,20,2026-03-23 16:00,2026-03-26 16:00,,false
+1017,BH-001017/2025,47933,SN379357071235,159,6,kh nói camera mở lên bị đen màn bị từ tuần trước,4,THAP,DANG_XU_LY,18,2025-03-17 16:45,2025-03-22 16:45,,true
+1037,BH-001037/2026,43742,SN477304847061,10,4,pin tụt rất nhanh dùng 2 tiếng đã hết mới bị 2 ngày nay,2,THAP,DANG_XU_LY,21,2026-01-23 08:30,2026-01-28 08:30,,false
+1038,BH-001038/2026,36141,SN364164295482,139,3,may bi sạc vào nhưng không nhận cáp máy còn bảo hành,3,TRUNG_BINH,DA_PHAN_CONG,27,2026-08-19 09:30,2026-08-22 09:30,,true
+1045,BH-001045/2025,33451,SN196733684159,208,2,khach bao man hinh chop tat lien tuc bi tu tuan truoc,1,CAO,DA_PHAN_CONG,8,2025-10-08 11:30,2025-10-09 11:30,,false
+1049,BH-001049/2026,28425,SN979436489071,181,3,tình trạng: mic gọi điện đối phương không nghe được mới bị 2 ngày nay,6,TRUNG_BINH,CHO_LINH_KIEN,38,2026-06-12 14:15,2026-06-15 14:15,,false
+1051,BH-001051/2026,36663,SN702814648200,175,4,khách hàng phản ánh màn hình nứt sau khi rơi mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,6,2026-02-13 14:15,2026-02-14 14:15,,true
+1056,BH-001056/2025,7200,SN896964491382,225,4,khách hàng phản ánh cắm sạc không vào điện máy còn bảo hành,3,TRUNG_BINH,DA_PHAN_CONG,21,2025-01-05 16:45,2025-01-08 16:45,,true
+1061,BH-001061/2026,45974,SN529426637973,166,4,khách hàng phản ánh sạc rất chậm mất cả đêm khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,15,2026-05-25 17:30,2026-05-28 17:30,,false
+1072,BH-001072/2025,23481,SN215500375073,126,6,khách báo màn hình đen không lên đã thử khởi động lại không được,1,CAO,DANG_XU_LY,18,2025-01-30 15:15,2025-01-31 15:15,,true
+1088,BH-001088/2026,52097,SN278073109118,215,5,may bi quên mật khẩu không mở được máy mới bị 2 ngày nay,4,THAP,DA_PHAN_CONG,26,2026-01-17 08:15,2026-01-22 08:15,,false
+1093,BH-001093/2025,43298,SN945540959720,114,1,máy rơi vào nước không lên nguồn,5,CAO,DA_DONG,20,2025-06-02 10:45,2025-06-03 10:45,2025-06-03 08:43,true
+1098,BH-001098/2026,27295,SN885591864671,121,1,khach hang phan anh wifi khong ket noi duoc sau cap nhat da thu khoi dong lai khong duoc,4,THAP,CHO_LINH_KIEN,20,2026-04-10 10:15,2026-04-15 10:15,,true
+1105,BH-001105/2025,14121,SN165966868957,113,1,may bi màn hình bị sọc dọc xảy ra sau khi rơi,1,CAO,DANG_XU_LY,20,2025-05-01 12:00,2025-05-02 12:00,,true
+1106,BH-001106/2025,39279,SN973610115022,201,5,pin chai chỉ còn dùng được nửa ngày bị từ tuần trước,2,TRUNG_BINH,DA_DONG,26,2025-02-26 14:00,2025-03-01 14:00,2025-03-01 07:09,true
+1121,BH-001121/2026,21978,SN725542997806,63,5,khách hàng phản ánh sạc rất chậm mất cả đêm mới bị 2 ngày nay,3,TRUNG_BINH,HOAN_TAT,9,2026-01-30 13:00,2026-02-02 13:00,,false
+1128,BH-001128/2025,46795,SN135241455513,185,2,kh noi sac day nhung dung 30 phut la sap nguon da thu khoi dong lai khong duoc,2,TRUNG_BINH,DA_DONG,8,2025-12-24 15:30,2025-12-27 15:30,2025-12-26 20:09,true
+1130,BH-001130/2026,11852,SN919713257878,288,3,tình trạng: sạc vào nhưng không nhận cáp khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,32,2026-07-17 15:30,2026-07-20 15:30,,true
+1131,BH-001131/2024,48671,SN649057604018,128,3,tình trạng: cắm sạc máy nóng bất thường mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,19,2024-10-11 11:45,2024-10-14 11:45,,true
+1134,BH-001134/2026,6002,SN365426194065,82,1,tinh trang: bao pin sai phan tram nhay loan da thu khoi dong lai khong duoc,2,TRUNG_BINH,HOAN_TAT,1,2026-03-28 08:45,2026-03-31 08:45,,true
+1139,BH-001139/2024,31186,SN133630488024,229,4,tình trạng: pin chai chỉ còn dùng được nửa ngày bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,14,2024-12-12 16:15,2024-12-15 16:15,,true
+1143,BH-001143/2025,30893,SN242065780869,249,4,khách hàng phản ánh pin tụt rất nhanh dùng 2 tiếng đã hết đã thử khởi động lại không được,2,TRUNG_BINH,HOAN_TAT,21,2025-12-28 09:00,2025-12-31 09:00,,true
+1144,BH-001144/2025,22517,SN842099365693,97,3,khách báo màn hình bị ám vàng một góc khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,32,2025-03-14 17:15,2025-03-15 17:15,,true
+1153,BH-001153/2025,29938,SN153382120081,136,1,kh nói cổng sạc bị gãy chân xảy ra sau khi rơi,3,TRUNG_BINH,DA_DONG,33,2025-05-23 09:30,2025-05-26 09:30,2025-05-24 16:22,true
+1178,BH-001178/2025,39960,SN656489780198,154,5,pin tụt rất nhanh dùng 2 tiếng đã hết khách chưa từng sửa ở đâu,2,TRUNG_BINH,HOAN_TAT,17,2025-12-08 14:15,2025-12-11 14:15,,false
+1193,BH-001193/2026,43654,SN910982803583,161,4,cảm ứng chỗ được chỗ không mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,16,2026-06-14 08:15,2026-06-15 08:15,,true
+1195,BH-001195/2026,35808,SN780350158647,202,6,kh noi cam ung loan khong bam duoc da thu khoi dong lai khong duoc,1,TRUNG_BINH,CHO_LINH_KIEN,28,2026-03-12 09:15,2026-03-15 09:15,,true
+1197,BH-001197/2026,20992,SN480407421324,187,6,tình trạng: sạc đầy nhưng dùng 30 phút là sập nguồn đã thử khởi động lại không được,2,TRUNG_BINH,CHO_LINH_KIEN,23,2026-02-13 08:30,2026-02-16 08:30,,true
+1202,BH-001202/2025,43871,SN260553124148,116,5,may bi man hinh nut sau khi roi bi tu tuan truoc,1,THAP,DA_DONG,17,2025-07-13 14:15,2025-07-18 14:15,2025-07-20 22:15,true
+1210,BH-001210/2024,39358,SN427603786492,297,3,pin sụt 20% chỉ sau vài phút,2,TRUNG_BINH,CHO_LINH_KIEN,22,2024-12-15 16:45,2024-12-18 16:45,,true
+1211,BH-001211/2025,26683,SN803475270857,37,4,khách báo máy phồng pin cấn màn hình xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,15,2025-10-02 16:45,2025-10-05 16:45,,true
+1217,BH-001217/2025,41408,SN488830533326,228,5,bao pin sai phan tram nhay loan bi tu tuan truoc,2,TRUNG_BINH,DA_PHAN_CONG,24,2025-08-07 11:30,2025-08-10 11:30,,true
+1227,BH-001227/2025,42708,SN931164271465,282,2,tình trạng: quên mật khẩu không mở được máy khách chưa từng sửa ở đâu,4,THAP,HOAN_TAT,5,2025-08-07 16:15,2025-08-12 16:15,,true
+1237,BH-001237/2025,2996,SN599521665884,139,2,may bi màn hình chớp tắt liên tục xảy ra sau khi rơi,1,CAO,DANG_XU_LY,30,2025-01-13 11:15,2025-01-14 11:15,,true
+1240,BH-001240/2025,23568,SN369536122740,299,4,tinh trang: chan sac long phai giu moi sac duoc may con bao hanh,3,TRUNG_BINH,DANG_XU_LY,14,2025-11-15 12:45,2025-11-18 12:45,,true
+1244,BH-001244/2025,27236,SN706803658839,98,6,may bi màn hình bị sọc dọc bị từ tuần trước,1,CAO,CHO_LINH_KIEN,28,2025-02-04 17:00,2025-02-05 17:00,,true
+1246,BH-001246/2025,14086,SN840851915957,55,6,khách báo pin nóng bất thường khi dùng máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,13,2025-02-21 15:15,2025-02-24 15:15,,true
+1252,BH-001252/2024,35339,SN173008381710,96,4,khách báo máy treo logo không vào được hệ điều hành đã thử khởi động lại không được,4,CAO,DANG_XU_LY,16,2024-12-20 13:45,2024-12-21 13:45,,true
+1253,BH-001253/2024,49642,SN849445023937,20,6,may bi máy phồng pin cấn màn hình,2,TRUNG_BINH,DANG_XU_LY,28,2024-09-19 12:45,2024-09-22 12:45,,true
+1259,BH-001259/2026,17942,SN910233087565,172,5,tình trạng: màn hình bị ám vàng một góc xảy ra sau khi rơi,1,CAO,DANG_XU_LY,24,2026-01-01 14:30,2026-01-02 14:30,,true
+1272,BH-001272/2025,33763,SN957298268407,140,3,MAY BI BAO PIN SAI PHAN TRAM NHAY LOAN XAY RA SAU KHI ROI,2,TRUNG_BINH,DANG_XU_LY,3,2025-01-05 12:00,2025-01-08 12:00,,false
+1277,BH-001277/2025,36290,SN333706081398,244,2,kh nói cắm sạc máy nóng bất thường,3,THAP,DA_PHAN_CONG,29,2025-09-12 13:45,2025-09-17 13:45,,true
+1291,BH-001291/2025,2159,SN622710181777,296,4,khach bao man hinh chop tat lien tuc bi tu tuan truoc,1,THAP,DA_PHAN_CONG,15,2025-02-23 16:30,2025-02-28 16:30,,true
+1292,BH-001292/2026,51819,SN246530709316,182,4,màn hình chớp tắt liên tục khách chưa từng sửa ở đâu,1,CAO,DA_DONG,21,2026-02-05 10:45,2026-02-06 10:45,2026-02-06 06:48,true
+1294,BH-001294/2025,46062,SN901704219282,275,5,tinh trang: man hinh den khong len da thu khoi dong lai khong duoc,1,CAO,HOAN_TAT,35,2025-09-04 16:30,2025-09-05 16:30,,true
+1295,BH-001295/2024,18527,SN836839272453,86,3,kh nói máy phồng pin cấn màn hình khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_DONG,32,2024-12-30 16:15,2025-01-02 16:15,2024-12-31 23:19,true
+1296,BH-001296/2024,7587,SN538483901173,298,4,may bi do nuoc ngot vao khong sac duoc xay ra sau khi roi,5,CAO,CHO_LINH_KIEN,15,2024-09-27 14:30,2024-09-28 14:30,,false
+1303,BH-001303/2025,18724,SN415262650749,51,2,khách báo máy treo logo không vào được hệ điều hành mới bị 2 ngày nay,4,THAP,DANG_XU_LY,8,2025-05-11 15:00,2025-05-16 15:00,,false
+1309,BH-001309/2024,49176,SN731893785758,180,1,KHACH HANG PHAN ANH DIEN THOAI DINH NUOC MUA LOA BI RE BI TU TUAN TRUOC,5,CAO,DA_PHAN_CONG,20,2024-09-19 09:00,2024-09-20 09:00,,false
+1310,BH-001310/2026,42341,SN808234535980,35,3,máy phồng pin cấn màn hình xảy ra sau khi rơi,2,TRUNG_BINH,DA_DONG,37,2026-06-09 15:00,2026-06-12 15:00,2026-06-12 07:58,true
+1318,BH-001318/2025,24347,SN715503791933,103,5,kh nói cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,9,2025-08-30 09:30,2025-09-02 09:30,,false
+1324,BH-001324/2025,49300,SN967728964793,150,1,màn hình bị ám vàng một góc,1,CAO,CHO_LINH_KIEN,20,2025-12-10 15:15,2025-12-11 15:15,,true
+1334,BH-001334/2025,3416,SN119106156455,1,2,kh nói máy vào nước màn hình loang ố bị từ tuần trước,5,CAO,CHO_LINH_KIEN,25,2025-02-14 16:30,2025-02-15 16:30,,true
+1338,BH-001338/2024,12572,SN989680745972,38,1,khách hàng phản ánh màn hình bị ám vàng một góc khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,1,2024-09-02 14:15,2024-09-03 14:15,,true
+1348,BH-001348/2026,33862,SN361255483056,135,5,KH NÓI MÀN HÌNH XUẤT HIỆN VỆT MỰC LOANG MỚI BỊ 2 NGÀY NAY,1,CAO,DA_PHAN_CONG,9,2026-03-15 08:30,2026-03-16 08:30,,true
+1353,BH-001353/2025,38970,SN684792540205,107,2,kh nói màn hình xuất hiện vệt mực loang mới bị 2 ngày nay,1,CAO,HOAN_TAT,25,2025-03-14 14:45,2025-03-15 14:45,,true
+1358,BH-001358/2024,7719,SN931184633591,215,2,khách báo loa ngoài rè không nghe rõ xảy ra sau khi rơi,6,TRUNG_BINH,DA_PHAN_CONG,30,2024-09-30 15:00,2024-10-03 15:00,,false
+1368,BH-001368/2025,20074,SN853945426445,317,3,khách hàng phản ánh màn hình bị hở sáng viền dưới máy còn bảo hành,1,CAO,DA_DONG,36,2025-04-16 15:45,2025-04-17 15:45,2025-04-17 00:51,true
+1396,BH-001396/2025,329,SN963000268801,166,5,may bi cổng sạc bám bụi không tiếp xúc khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,26,2025-02-05 11:45,2025-02-08 11:45,,true
+1397,BH-001397/2025,26445,SN975957716948,50,5,cắm sạc máy nóng bất thường mới bị 2 ngày nay,3,TRUNG_BINH,HOAN_TAT,26,2025-09-20 14:30,2025-09-23 14:30,,true
+1401,BH-001401/2026,1280,SN218165554363,228,6,KHÁCH BÁO MÀN HÌNH BỊ ÁM VÀNG MỘT GÓC BỊ TỪ TUẦN TRƯỚC,1,CAO,DA_DONG,13,2026-04-28 08:15,2026-04-29 08:15,2026-04-28 18:00,true
+1409,BH-001409/2025,4956,SN722646634669,150,6,KHÁCH BÁO PIN TỤT RẤT NHANH DÙNG 2 TIẾNG ĐÃ HẾT MÁY CÒN BẢO HÀNH,2,TRUNG_BINH,DANG_XU_LY,23,2025-09-08 16:45,2025-09-11 16:45,,false
+1423,BH-001423/2025,16847,SN276428640723,185,5,khach bao man hinh nut sau khi roi,1,CAO,CHO_LINH_KIEN,17,2025-05-08 10:00,2025-05-09 10:00,,true
+1424,BH-001424/2026,37535,SN523216956305,318,4,máy bị đổ nước ngọt vào không sạc được xảy ra sau khi rơi,5,CAO,DANG_XU_LY,14,2026-08-24 17:45,2026-08-25 17:45,,false
+1434,BH-001434/2025,35542,SN336988842814,237,3,khách hàng phản ánh pin tụt rất nhanh dùng 2 tiếng đã hết mới bị 2 ngày nay,2,TRUNG_BINH,HOAN_TAT,32,2025-12-05 13:00,2025-12-08 13:00,,true
+1435,BH-001435/2024,35502,SN989480388898,273,3,may bi may roi vao nuoc khong len nguon moi bi 2 ngay nay,5,TRUNG_BINH,DA_PHAN_CONG,22,2024-11-12 08:30,2024-11-15 08:30,,true
+1448,BH-001448/2025,21176,SN562623072443,184,1,máy bị đổ nước ngọt vào không sạc được đã thử khởi động lại không được,5,CAO,DA_PHAN_CONG,1,2025-12-03 14:15,2025-12-04 14:15,,true
+1450,BH-001450/2025,11565,SN212548089928,184,5,tình trạng: máy phồng pin cấn màn hình bị từ tuần trước,2,TRUNG_BINH,CHO_LINH_KIEN,9,2025-12-12 10:45,2025-12-15 10:45,,false
+1460,BH-001460/2025,891,SN344091685531,130,3,KHÁCH BÁO MÁY PHỒNG PIN CẤN MÀN HÌNH KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,2,TRUNG_BINH,DANG_XU_LY,22,2025-08-05 17:00,2025-08-08 17:00,,true
+1465,BH-001465/2026,8259,SN505769813736,199,5,kh noi may phong pin can man hinh,2,TRUNG_BINH,DANG_XU_LY,17,2026-02-28 14:00,2026-03-03 14:00,,true
+1470,BH-001470/2026,11866,SN729511227679,37,5,khách hàng phản ánh máy rơi vào nước không lên nguồn máy còn bảo hành,5,CAO,DANG_XU_LY,31,2026-04-09 10:15,2026-04-10 10:15,,true
+1472,BH-001472/2026,46685,SN315104284445,28,6,kh noi man hinh bi am vang mot goc xay ra sau khi roi,1,CAO,DA_PHAN_CONG,13,2026-08-07 15:30,2026-08-08 15:30,,true
+1473,BH-001473/2025,7050,SN506022650915,239,4,may bi man hinh bi soc doc bi tu tuan truoc,1,CAO,DA_DONG,15,2025-12-27 11:15,2025-12-28 11:15,2025-12-28 02:05,true
+1491,BH-001491/2026,24205,SN701885733687,138,2,khách báo cắm sạc không vào điện khách chưa từng sửa ở đâu,3,TRUNG_BINH,CHO_LINH_KIEN,30,2026-08-25 10:45,2026-08-28 10:45,,false
+1495,BH-001495/2025,46081,SN871177840573,18,6,kh noi man hinh xuat hien vet muc loang da thu khoi dong lai khong duoc,1,CAO,DA_DONG,10,2025-11-23 10:15,2025-11-24 10:15,2025-11-23 17:44,true
+1508,BH-001508/2026,52238,SN636456726330,90,5,khách hàng phản ánh cắm sạc báo lỗi phụ kiện đã thử khởi động lại không được,3,TRUNG_BINH,DA_PHAN_CONG,24,2026-05-05 16:45,2026-05-08 16:45,,false
+1515,BH-001515/2026,42512,SN288601919717,62,5,cắm sạc báo lỗi phụ kiện máy còn bảo hành,3,TRUNG_BINH,DANG_XU_LY,24,2026-04-22 17:15,2026-04-25 17:15,,true
+1529,BH-001529/2025,12266,SN711402989279,264,2,khách báo cổng sạc bị gãy chân đã thử khởi động lại không được,3,TRUNG_BINH,DA_PHAN_CONG,5,2025-08-13 17:15,2025-08-16 17:15,,true
+1540,BH-001540/2025,38361,SN116550619781,306,2,may bi dinh nuoc bien may nong va tat bi tu tuan truoc,5,CAO,HOAN_TAT,8,2025-07-19 16:30,2025-07-20 16:30,,true
+1543,BH-001543/2025,5131,SN879768945818,267,3,máy có tiếng kêu lạ bên trong xảy ra sau khi rơi,6,CAO,CHO_LINH_KIEN,19,2025-11-04 09:45,2025-11-05 09:45,,true
+1545,BH-001545/2025,2021,SN826115279928,13,5,màn hình chớp tắt liên tục mới bị 2 ngày nay,1,CAO,DA_PHAN_CONG,7,2025-10-23 11:30,2025-10-24 11:30,,true
+1581,BH-001581/2025,29450,SN419433293885,4,4,may bi màn hình bị sọc dọc xảy ra sau khi rơi,1,CAO,HOAN_TAT,2,2025-03-22 11:15,2025-03-23 11:15,,false
+1582,BH-001582/2026,30152,SN229430112855,125,5,KHÁCH BÁO CHÂN SẠC LỎNG PHẢI GIỮ MỚI SẠC ĐƯỢC BỊ TỪ TUẦN TRƯỚC,3,TRUNG_BINH,DANG_XU_LY,24,2026-08-06 11:00,2026-08-09 11:00,,true
+1594,BH-001594/2025,17366,SN593654242548,38,5,may bi báo pin sai phần trăm nhảy loạn máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,35,2025-03-01 17:45,2025-03-04 17:45,,true
+1606,BH-001606/2025,21658,SN408496668369,288,6,khách báo điểm chết trên màn hình,1,CAO,DA_PHAN_CONG,28,2025-04-21 15:15,2025-04-22 15:15,,false
+1610,BH-001610/2026,31631,SN853641183000,199,5,may bi điểm chết trên màn hình mới bị 2 ngày nay,1,CAO,DA_DONG,24,2026-06-22 17:00,2026-06-23 17:00,2026-06-23 08:19,false
+1611,BH-001611/2026,52589,SN498475258893,287,5,kh noi ung dung tu thoat lien tuc bi tu tuan truoc,4,THAP,DANG_XU_LY,17,2026-08-24 08:45,2026-08-29 08:45,,true
+1612,BH-001612/2025,36329,SN465346659247,284,3,cổng sạc bám bụi không tiếp xúc mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,32,2025-02-02 14:15,2025-02-05 14:15,,true
+1622,BH-001622/2025,44049,SN352219914837,305,2,kh nói máy chạy chậm giật lag sau khi cập nhật,4,THAP,DA_DONG,12,2025-04-09 15:30,2025-04-14 15:30,2025-04-15 23:43,false
+1629,BH-001629/2025,24476,SN903310950841,60,3,KH NÓI CAMERA MỞ LÊN BỊ ĐEN MÀN XẢY RA SAU KHI RƠI,4,THAP,HOAN_TAT,32,2025-03-31 17:30,2025-04-05 17:30,,true
+1644,BH-001644/2025,47520,SN869883675280,54,3,khách báo màn hình đen không lên mới bị 2 ngày nay,1,CAO,DA_DONG,32,2025-03-01 08:00,2025-03-02 08:00,2025-03-02 02:16,false
+1650,BH-001650/2026,32231,SN720959870802,219,5,khách hàng phản ánh máy tự khởi động lại nhiều lần trong ngày,4,THAP,DA_DONG,17,2026-04-26 08:45,2026-05-01 08:45,2026-04-27 16:36,false
+1672,BH-001672/2025,24099,SN223392191925,311,5,tình trạng: cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,CHO_LINH_KIEN,31,2025-10-19 11:45,2025-10-20 11:45,,true
+1681,BH-001681/2025,13093,SN188940283398,93,2,khách hàng phản ánh cảm ứng chỗ được chỗ không đã thử khởi động lại không được,1,CAO,DA_DONG,29,2025-10-18 15:15,2025-10-19 15:15,2025-10-19 03:54,false
+1684,BH-001684/2026,37626,SN612333845191,247,3,kh nói màn hình xuất hiện vệt mực loang khách chưa từng sửa ở đâu,1,CAO,CHO_LINH_KIEN,36,2026-06-01 09:45,2026-06-02 09:45,,false
+1688,BH-001688/2025,10131,SN261161728528,178,4,kh nói máy tự khởi động lại nhiều lần trong ngày máy còn bảo hành,4,THAP,DA_PHAN_CONG,34,2025-03-28 10:30,2025-04-02 10:30,,false
+1704,BH-001704/2026,52329,SN538626949643,216,5,kh nói dính nước biển máy nóng và tắt bị từ tuần trước,5,CAO,DA_PHAN_CONG,31,2026-07-24 15:30,2026-07-25 15:30,,false
+1713,BH-001713/2025,424,SN534733077605,81,6,dính nước biển máy nóng và tắt máy còn bảo hành,5,CAO,HOAN_TAT,10,2025-01-08 13:00,2025-01-09 13:00,,true
+1716,BH-001716/2026,34864,SN841374239156,197,3,tình trạng: điểm chết trên màn hình mới bị 2 ngày nay,1,CAO,DA_PHAN_CONG,32,2026-01-12 15:00,2026-01-13 15:00,,true
+1719,BH-001719/2026,8363,SN838531522237,157,1,man hinh bi ho sang vien duoi may con bao hanh,1,CAO,DA_PHAN_CONG,1,2026-02-04 15:15,2026-02-05 15:15,,true
+1721,BH-001721/2025,21145,SN766140700139,275,2,kh nói báo pin sai phần trăm nhảy loạn xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,5,2025-06-10 13:30,2025-06-13 13:30,,false
+1732,BH-001732/2026,39888,SN948735682268,112,4,kh nói chân sạc lỏng phải giữ mới sạc được bị từ tuần trước,3,TRUNG_BINH,DA_PHAN_CONG,34,2026-08-29 14:15,2026-09-01 14:15,,true
+1743,BH-001743/2025,37730,SN551005232094,113,4,khách hàng phản ánh máy chạy chậm giật lag sau khi cập nhật mới bị 2 ngày nay,4,THAP,DANG_XU_LY,2,2025-09-30 11:15,2025-10-05 11:15,,true
+1746,BH-001746/2025,15585,SN196187896458,150,4,kh nói màn hình chớp tắt liên tục bị từ tuần trước,1,CAO,DA_DONG,2,2025-06-17 17:30,2025-06-18 17:30,2025-06-18 10:32,true
+1769,BH-001769/2025,50814,SN104119844700,25,2,khách hàng phản ánh màn hình nứt sau khi rơi,1,CAO,HOAN_TAT,5,2025-08-30 17:30,2025-08-31 17:30,,true
+1794,BH-001794/2025,8474,SN491803787602,316,1,khách báo điện thoại dính nước mưa loa bị rè,5,CAO,CHO_LINH_KIEN,33,2025-09-18 12:15,2025-09-19 12:15,,true
+1819,BH-001819/2026,28141,SN145752725557,43,6,may bi cắm sạc không vào điện máy còn bảo hành,3,TRUNG_BINH,CHO_LINH_KIEN,28,2026-01-01 11:30,2026-01-04 11:30,,false
+1824,BH-001824/2026,5453,SN114150099173,192,5,kh nói pin nóng bất thường khi dùng bị từ tuần trước,2,TRUNG_BINH,DANG_XU_LY,24,2026-06-12 16:30,2026-06-15 16:30,,true
+1828,BH-001828/2026,35300,SN779405156411,31,4,TINH TRANG: MAY PHONG PIN CAN MAN HINH DA THU KHOI DONG LAI KHONG DUOC,2,TRUNG_BINH,CHO_LINH_KIEN,2,2026-03-14 14:45,2026-03-17 14:45,,true
+1833,BH-001833/2026,25725,SN403414812178,193,4,khách báo pin sụt 20% chỉ sau vài phút bị từ tuần trước,2,TRUNG_BINH,HOAN_TAT,4,2026-01-23 17:00,2026-01-26 17:00,,true
+1870,BH-001870/2026,26871,SN269159750033,127,5,cổng sạc bị gãy chân khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_DONG,24,2026-03-15 14:45,2026-03-18 14:45,2026-03-21 22:16,true
+1875,BH-001875/2026,52784,SN844680289143,70,3,may bi báo pin sai phần trăm nhảy loạn bị từ tuần trước,2,CAO,CHO_LINH_KIEN,36,2026-02-18 11:45,2026-02-19 11:45,,true
+1883,BH-001883/2026,53398,SN177999641572,264,2,tình trạng: màn hình nứt sau khi rơi khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,12,2026-08-07 08:15,2026-08-08 08:15,,false
+1888,BH-001888/2025,22780,SN189971226965,52,6,khách báo màn hình nứt sau khi rơi,1,CAO,DANG_XU_LY,13,2025-12-11 17:00,2025-12-12 17:00,,false
+1899,BH-001899/2024,24226,SN135000918427,166,4,KHACH BAO QUEN MAT KHAU KHONG MO DUOC MAY,4,TRUNG_BINH,CHO_LINH_KIEN,16,2024-09-08 17:45,2024-09-11 17:45,,true
+1900,BH-001900/2025,49681,SN910441214414,127,1,TÌNH TRẠNG: MÀN HÌNH ĐEN KHÔNG LÊN ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,1,CAO,DA_DONG,1,2025-11-03 14:00,2025-11-04 14:00,2025-11-04 19:42,true
+1902,BH-001902/2026,10233,SN391742951751,126,3,ứng dụng tự thoát liên tục đã thử khởi động lại không được,4,THAP,CHO_LINH_KIEN,22,2026-01-03 15:45,2026-01-08 15:45,,true
+1904,BH-001904/2025,45978,SN766440347623,279,2,tình trạng: báo pin sai phần trăm nhảy loạn mới bị 2 ngày nay,2,TRUNG_BINH,CHO_LINH_KIEN,29,2025-05-07 10:30,2025-05-10 10:30,,true
+1907,BH-001907/2025,29573,SN449031224381,232,4,camera sau bị mờ như có sương mới bị 2 ngày nay,6,THAP,CHO_LINH_KIEN,34,2025-07-20 15:45,2025-07-25 15:45,,true
+1914,BH-001914/2026,7563,SN682380237361,141,5,báo pin sai phần trăm nhảy loạn bị từ tuần trước,2,TRUNG_BINH,DANG_XU_LY,35,2026-04-25 08:30,2026-04-28 08:30,,true
+1915,BH-001915/2026,41560,SN472811545660,78,5,khách hàng phản ánh cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DA_DONG,31,2026-01-24 16:30,2026-01-27 16:30,2026-01-26 09:51,true
+1916,BH-001916/2025,12018,SN296239090359,193,1,MÀN HÌNH BỊ HỞ SÁNG VIỀN DƯỚI MỚI BỊ 2 NGÀY NAY,1,CAO,DANG_XU_LY,1,2025-11-16 11:45,2025-11-17 11:45,,true
+1925,BH-001925/2026,8173,SN680298910927,27,2,kh nói sạc đầy nhưng dùng 30 phút là sập nguồn đã thử khởi động lại không được,2,CAO,DANG_XU_LY,30,2026-05-08 08:30,2026-05-09 08:30,,false
+1928,BH-001928/2025,29574,SN583853732216,29,6,may co tieng keu la ben trong khach chua tung sua o dau,6,TRUNG_BINH,DANG_XU_LY,23,2025-05-24 17:45,2025-05-27 17:45,,true
+1932,BH-001932/2026,17625,SN863329478130,114,3,kh nói cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,CHO_LINH_KIEN,32,2026-08-29 17:30,2026-09-01 17:30,,true
+1934,BH-001934/2025,34334,SN163819098478,174,4,cảm ứng chỗ được chỗ không đã thử khởi động lại không được,1,TRUNG_BINH,CHO_LINH_KIEN,6,2025-11-29 10:00,2025-12-02 10:00,,true
+1935,BH-001935/2026,8733,SN646917719049,17,4,tình trạng: màn hình bị sọc dọc xảy ra sau khi rơi,1,CAO,DANG_XU_LY,2,2026-06-23 15:00,2026-06-24 15:00,,true
+1938,BH-001938/2025,8064,SN134405373671,293,3,kh nói màn hình nứt sau khi rơi khách chưa từng sửa ở đâu,1,CAO,DANG_XU_LY,27,2025-09-19 14:00,2025-09-20 14:00,,false
+1986,BH-001986/2025,4122,SN888374012134,215,2,KHÁCH BÁO CẮM SẠC KHÔNG VÀO ĐIỆN ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,3,TRUNG_BINH,DA_PHAN_CONG,25,2025-03-30 10:30,2025-04-02 10:30,,true
+1987,BH-001987/2025,19322,SN663485145564,24,3,tình trạng: màn hình bị sọc dọc khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,38,2025-02-04 12:30,2025-02-05 12:30,,false
+1994,BH-001994/2025,5902,SN449030505743,25,3,khách hàng phản ánh wifi không kết nối được sau cập nhật,4,THAP,DA_DONG,38,2025-03-21 08:45,2025-03-26 08:45,2025-03-23 01:43,true
+2003,BH-002003/2025,41033,SN439802430379,13,1,may bi cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,DA_PHAN_CONG,1,2025-01-04 12:30,2025-01-05 12:30,,true
+2005,BH-002005/2026,14700,SN300137670957,8,3,khách hàng phản ánh màn hình xuất hiện vệt mực loang bị từ tuần trước,1,TRUNG_BINH,DA_PHAN_CONG,3,2026-01-22 09:15,2026-01-25 09:15,,true
+2026,BH-002026/2025,10446,SN608678593439,171,3,MAY BI CAMERA SAU BI MO NHU CO SUONG KHACH CHUA TUNG SUA O DAU,6,TRUNG_BINH,DA_PHAN_CONG,38,2025-12-04 14:30,2025-12-07 14:30,,true
+2029,BH-002029/2025,52624,SN702448617334,86,3,khách hàng phản ánh cảm ứng chỗ được chỗ không,1,CAO,DA_DONG,19,2025-07-14 14:15,2025-07-15 14:15,2025-07-15 08:02,true
+2033,BH-002033/2025,28731,SN950588099523,29,5,pin tụt rất nhanh dùng 2 tiếng đã hết khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,9,2025-10-10 08:30,2025-10-13 08:30,,false
+2046,BH-002046/2025,6314,SN943026539159,203,1,KH NÓI PIN TỤT RẤT NHANH DÙNG 2 TIẾNG ĐÃ HẾT XẢY RA SAU KHI RƠI,2,TRUNG_BINH,DA_PHAN_CONG,33,2025-04-04 13:15,2025-04-07 13:15,,true
+2052,BH-002052/2025,50570,SN350771082315,147,4,KHÁCH HÀNG PHẢN ÁNH QUÊN MẬT KHẨU KHÔNG MỞ ĐƯỢC MÁY MÁY CÒN BẢO HÀNH,4,THAP,DA_PHAN_CONG,14,2025-08-25 16:15,2025-08-30 16:15,,true
+2060,BH-002060/2026,37962,SN123862002172,145,6,pin tụt rất nhanh dùng 2 tiếng đã hết khách chưa từng sửa ở đâu,2,TRUNG_BINH,CHO_LINH_KIEN,10,2026-03-12 17:15,2026-03-15 17:15,,true
+2069,BH-002069/2025,28510,SN941425080268,128,3,khách báo không nhận sim xảy ra sau khi rơi,6,TRUNG_BINH,HOAN_TAT,32,2025-06-15 13:15,2025-06-18 13:15,,true
+2074,BH-002074/2025,9137,SN306369586703,105,2,kh nói máy rung liên tục không dừng bị từ tuần trước,6,TRUNG_BINH,DA_PHAN_CONG,30,2025-08-11 08:15,2025-08-14 08:15,,true
+2078,BH-002078/2024,44191,SN774393795890,181,5,khach bao sac day nhung dung 30 phut la sap nguon khach chua tung sua o dau,2,TRUNG_BINH,CHO_LINH_KIEN,24,2024-12-13 12:00,2024-12-16 12:00,,true
+2083,BH-002083/2025,4352,SN133601925041,314,5,KHACH BAO KHONG CAI DUOC UNG DUNG BAO LOI XAY RA SAU KHI ROI,4,THAP,DA_PHAN_CONG,7,2025-09-21 11:30,2025-09-26 11:30,,true
+2102,BH-002102/2025,48265,SN500347026128,154,2,khách hàng phản ánh màn hình đen không lên máy còn bảo hành,1,CAO,DANG_XU_LY,12,2025-02-24 13:45,2025-02-25 13:45,,true
+2108,BH-002108/2026,49337,SN192927791858,317,3,tinh trang: man hinh chop tat lien tuc may con bao hanh,1,CAO,DA_PHAN_CONG,38,2026-02-04 13:15,2026-02-05 13:15,,true
+2116,BH-002116/2026,30903,SN747897657924,266,3,chân sạc lỏng phải giữ mới sạc được,3,TRUNG_BINH,DA_DONG,3,2026-05-21 13:30,2026-05-24 13:30,2026-05-25 23:52,true
+2121,BH-002121/2025,22432,SN542323313103,297,5,khach bao man hinh bi ho sang vien duoi,1,CAO,DA_PHAN_CONG,35,2025-01-14 10:45,2025-01-15 10:45,,true
+2126,BH-002126/2024,36439,SN832417423148,123,5,khách báo màn hình đen không lên đã thử khởi động lại không được,1,CAO,HOAN_TAT,7,2024-09-26 17:00,2024-09-27 17:00,,true
+2139,BH-002139/2025,28738,SN250159549947,304,2,khach hang phan anh wifi khong ket noi duoc sau cap nhat da thu khoi dong lai khong duoc,4,THAP,DA_PHAN_CONG,30,2025-10-13 09:45,2025-10-18 09:45,,true
+2142,BH-002142/2026,42360,SN689849264864,214,3,may bi màn hình xuất hiện vệt mực loang mới bị 2 ngày nay,1,CAO,DANG_XU_LY,22,2026-05-01 10:45,2026-05-02 10:45,,true
+2146,BH-002146/2026,30683,SN597833350664,4,5,tình trạng: máy tự khởi động lại nhiều lần trong ngày bị từ tuần trước,4,THAP,HOAN_TAT,31,2026-05-11 13:15,2026-05-16 13:15,,false
+2167,BH-002167/2025,13550,SN613837089299,43,6,khách hàng phản ánh màn hình bị sọc dọc xảy ra sau khi rơi,1,CAO,DANG_XU_LY,11,2025-08-29 12:30,2025-08-30 12:30,,true
+2168,BH-002168/2025,46122,SN322392177433,204,6,may bi may khong giu duoc pin qua dem,2,TRUNG_BINH,DANG_XU_LY,18,2025-10-02 09:30,2025-10-05 09:30,,false
+2176,BH-002176/2025,10653,SN150019702300,267,2,may bi camera sau bi mo nhu co suong bi tu tuan truoc,6,TRUNG_BINH,CHO_LINH_KIEN,25,2025-01-18 08:15,2025-01-21 08:15,,false
+2217,BH-002217/2026,43845,SN119873171487,233,3,kh nói máy treo logo không vào được hệ điều hành máy còn bảo hành,4,THAP,CHO_LINH_KIEN,27,2026-04-09 08:15,2026-04-14 08:15,,true
+2222,BH-002222/2024,29006,SN809957425639,152,6,kh noi may chay cham giat lag sau khi cap nhat bi tu tuan truoc,4,THAP,CHO_LINH_KIEN,13,2024-10-29 09:30,2024-11-03 09:30,,true
+2229,BH-002229/2025,36411,SN648280509623,288,3,máy tự tắt khi còn 30% pin bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,36,2025-11-14 09:15,2025-11-17 09:15,,true
+2232,BH-002232/2025,45877,SN377780777361,234,4,máy chạy chậm giật lag sau khi cập nhật máy còn bảo hành,4,THAP,DA_PHAN_CONG,15,2025-12-25 10:45,2025-12-30 10:45,,true
+2235,BH-002235/2025,25152,SN285888295098,261,3,màn hình bị ám vàng một góc đã thử khởi động lại không được,1,CAO,DA_DONG,38,2025-09-11 16:00,2025-09-12 16:00,2025-09-12 12:26,true
+2244,BH-002244/2026,17814,SN502547275753,278,2,khách hàng phản ánh máy bị đổ nước ngọt vào không sạc được xảy ra sau khi rơi,5,CAO,CHO_LINH_KIEN,5,2026-01-26 17:00,2026-01-27 17:00,,false
+2246,BH-002246/2025,24953,SN579485535114,55,5,màn hình bị hở sáng viền dưới đã thử khởi động lại không được,1,CAO,DA_DONG,31,2025-01-27 12:30,2025-01-28 12:30,2025-01-28 08:01,false
+2247,BH-002247/2025,37508,SN205643538001,315,3,khách báo màn hình bị sọc dọc bị từ tuần trước,1,CAO,DANG_XU_LY,22,2025-07-27 11:00,2025-07-28 11:00,,true
+2249,BH-002249/2025,11173,SN856772900203,310,5,may bi máy rung liên tục không dừng xảy ra sau khi rơi,6,TRUNG_BINH,HOAN_TAT,24,2025-06-13 16:45,2025-06-16 16:45,,true
+2251,BH-002251/2026,12317,SN783174151464,121,2,máy tự khởi động lại nhiều lần trong ngày,4,THAP,HOAN_TAT,25,2026-04-22 14:45,2026-04-27 14:45,,true
+2266,BH-002266/2025,41625,SN787792597704,75,6,may bi máy treo logo không vào được hệ điều hành khách chưa từng sửa ở đâu,4,THAP,DANG_XU_LY,10,2025-05-08 10:45,2025-05-13 10:45,,true
+2271,BH-002271/2025,41604,SN349704140046,29,5,may bi cảm ứng loạn không bấm được xảy ra sau khi rơi,1,CAO,DA_DONG,26,2025-02-13 09:15,2025-02-14 09:15,2025-02-14 00:26,true
+2272,BH-002272/2024,51639,SN660527051732,30,2,pin nóng bất thường khi dùng mới bị 2 ngày nay,2,TRUNG_BINH,HOAN_TAT,12,2024-10-25 12:00,2024-10-28 12:00,,true
+2287,BH-002287/2026,19416,SN803129022878,239,3,khach bao pin sut 20% chi sau vai phut bi tu tuan truoc,2,CAO,DANG_XU_LY,19,2026-05-10 10:30,2026-05-11 10:30,,false
+2296,BH-002296/2025,49727,SN930521467154,135,5,máy phồng pin cấn màn hình mới bị 2 ngày nay,2,TRUNG_BINH,DANG_XU_LY,9,2025-10-06 09:45,2025-10-09 09:45,,true
+2300,BH-002300/2025,44402,SN644540192564,75,3,khách hàng phản ánh màn hình bị hở sáng viền dưới máy còn bảo hành,1,TRUNG_BINH,HOAN_TAT,37,2025-09-01 13:45,2025-09-04 13:45,,false
+2304,BH-002304/2025,14080,SN739524801629,268,5,khách báo ứng dụng tự thoát liên tục xảy ra sau khi rơi,4,THAP,HOAN_TAT,17,2025-07-27 08:45,2025-08-01 08:45,,true
+2306,BH-002306/2026,38459,SN996517123457,314,4,may bi màn hình bị hở sáng viền dưới bị từ tuần trước,1,CAO,HOAN_TAT,34,2026-03-10 12:45,2026-03-11 12:45,,true
+2313,BH-002313/2025,9772,SN839856572743,141,5,khách báo màn hình bị hở sáng viền dưới đã thử khởi động lại không được,1,CAO,DANG_XU_LY,17,2025-02-06 09:15,2025-02-07 09:15,,true
+2326,BH-002326/2025,50922,SN577164683481,274,5,may bi camera sau bi mo nhu co suong bi tu tuan truoc,6,TRUNG_BINH,CHO_LINH_KIEN,7,2025-01-26 15:15,2025-01-29 15:15,,true
+2342,BH-002342/2025,44696,SN426310110515,188,6,máy tự tắt khi còn 30% pin đã thử khởi động lại không được,2,TRUNG_BINH,DA_DONG,18,2025-02-05 09:45,2025-02-08 09:45,2025-02-06 04:59,true
+2345,BH-002345/2025,6877,SN119920477069,14,2,khách hàng phản ánh cổng sạc bị gãy chân bị từ tuần trước,3,TRUNG_BINH,DA_DONG,8,2025-04-04 12:15,2025-04-07 12:15,2025-04-06 10:55,true
+2352,BH-002352/2026,48725,SN777642529465,315,6,khách hàng phản ánh cảm ứng loạn không bấm được xảy ra sau khi rơi,1,CAO,DA_PHAN_CONG,18,2026-02-21 14:15,2026-02-22 14:15,,true
+2353,BH-002353/2026,4012,SN898602442809,234,1,máy treo logo không vào được hệ điều hành máy còn bảo hành,4,THAP,DA_PHAN_CONG,1,2026-03-21 11:30,2026-03-26 11:30,,true
+2354,BH-002354/2024,5505,SN109048723317,107,2,may bi màn hình đen không lên đã thử khởi động lại không được,1,CAO,DANG_XU_LY,8,2024-09-22 11:15,2024-09-23 11:15,,false
+2361,BH-002361/2024,35658,SN901777143075,93,4,may bi sạc đầy nhưng dùng 30 phút là sập nguồn,2,TRUNG_BINH,DANG_XU_LY,15,2024-11-11 09:30,2024-11-14 09:30,,true
+2365,BH-002365/2026,32145,SN622255912034,215,4,khách báo rơi bồn rửa máy chập chờn đã thử khởi động lại không được,5,CAO,DA_DONG,21,2026-08-18 09:15,2026-08-19 09:15,2026-08-20 13:33,true
+2371,BH-002371/2026,38614,SN573631656822,197,2,KH NÓI CẮM SẠC KHÔNG VÀO ĐIỆN MỚI BỊ 2 NGÀY NAY,3,TRUNG_BINH,HOAN_TAT,30,2026-03-25 10:00,2026-03-28 10:00,,false
+2384,BH-002384/2025,27869,SN127232211241,211,3,kh nói cảm ứng chỗ được chỗ không máy còn bảo hành,1,CAO,HOAN_TAT,19,2025-02-15 09:45,2025-02-16 09:45,,true
+2386,BH-002386/2024,33129,SN694388401324,144,1,tình trạng: máy bị đổ nước ngọt vào không sạc được bị từ tuần trước,5,CAO,DA_PHAN_CONG,33,2024-12-02 13:00,2024-12-03 13:00,,false
+2389,BH-002389/2025,51537,SN516442043933,129,4,KHACH HANG PHAN ANH CAM UNG LOAN KHONG BAM DUOC MOI BI 2 NGAY NAY,1,CAO,DA_DONG,2,2025-06-09 15:30,2025-06-10 15:30,2025-06-10 05:19,true
+2392,BH-002392/2025,9161,SN368728071230,40,3,khách hàng phản ánh màn hình bị sọc dọc mới bị 2 ngày nay,1,TRUNG_BINH,HOAN_TAT,36,2025-08-16 14:15,2025-08-19 14:15,,true
+2394,BH-002394/2025,227,SN744079571124,200,6,quên mật khẩu không mở được máy xảy ra sau khi rơi,4,THAP,DA_DONG,11,2025-06-15 12:45,2025-06-20 12:45,2025-06-21 04:26,true
+2406,BH-002406/2026,37504,SN596977483007,40,2,KHÁCH HÀNG PHẢN ÁNH CỔNG SẠC BÁM BỤI KHÔNG TIẾP XÚC,3,TRUNG_BINH,DA_DONG,30,2026-05-16 15:15,2026-05-19 15:15,2026-05-17 14:37,true
+2409,BH-002409/2025,31271,SN179523786263,315,5,cảm ứng loạn không bấm được máy còn bảo hành,1,THAP,CHO_LINH_KIEN,31,2025-12-02 12:00,2025-12-07 12:00,,true
+2416,BH-002416/2026,23812,SN394308613595,175,6,kh noi man hinh bi am vang mot goc bi tu tuan truoc,1,CAO,DA_PHAN_CONG,18,2026-05-13 08:00,2026-05-14 08:00,,true
+2436,BH-002436/2025,48602,SN454980334671,233,1,MÀN HÌNH BỊ SỌC DỌC KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,1,CAO,DA_PHAN_CONG,33,2025-07-04 13:15,2025-07-05 13:15,,false
+2447,BH-002447/2025,12207,SN803577229390,1,4,may bi cắm sạc máy nóng bất thường bị từ tuần trước,3,TRUNG_BINH,HOAN_TAT,14,2025-11-23 11:15,2025-11-26 11:15,,false
+2454,BH-002454/2024,14479,SN292784687547,154,5,khách hàng phản ánh cảm ứng chỗ được chỗ không,1,CAO,DA_PHAN_CONG,24,2024-09-02 15:30,2024-09-03 15:30,,true
+2465,BH-002465/2025,17555,SN849380792450,112,3,khách hàng phản ánh báo pin sai phần trăm nhảy loạn xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,22,2025-09-16 13:45,2025-09-19 13:45,,true
+2477,BH-002477/2026,2121,SN603945657597,138,5,KH NÓI MÀN HÌNH XUẤT HIỆN VỆT MỰC LOANG MỚI BỊ 2 NGÀY NAY,1,CAO,HOAN_TAT,31,2026-05-16 16:45,2026-05-17 16:45,,true
+2481,BH-002481/2025,40790,SN742350280793,278,1,kh nói điện thoại dính nước mưa loa bị rè bị từ tuần trước,5,CAO,DA_PHAN_CONG,20,2025-12-15 11:15,2025-12-16 11:15,,true
+2488,BH-002488/2025,48350,SN805875822273,48,4,MAY BI PIN SỤT 20% CHỈ SAU VÀI PHÚT MÁY CÒN BẢO HÀNH,2,TRUNG_BINH,DA_DONG,15,2025-11-21 09:00,2025-11-24 09:00,2025-11-23 09:27,true
+2498,BH-002498/2026,5564,SN165435000221,226,1,may bi dính nước biển máy nóng và tắt đã thử khởi động lại không được,5,CAO,CHO_LINH_KIEN,1,2026-07-22 15:45,2026-07-23 15:45,,false
+2501,BH-002501/2025,34476,SN113187359027,191,4,MAY BI CẢM ỨNG LOẠN KHÔNG BẤM ĐƯỢC BỊ TỪ TUẦN TRƯỚC,1,THAP,DA_DONG,21,2025-04-27 09:45,2025-05-02 09:45,2025-05-05 01:15,false
+2503,BH-002503/2025,45330,SN444206978106,47,3,khách hàng phản ánh wifi không kết nối được sau cập nhật máy còn bảo hành,4,THAP,DA_DONG,22,2025-04-27 09:00,2025-05-02 09:00,2025-05-01 23:06,false
+2504,BH-002504/2026,1918,SN234033372210,259,3,cổng sạc bám bụi không tiếp xúc máy còn bảo hành,3,TRUNG_BINH,HOAN_TAT,36,2026-08-22 12:30,2026-08-25 12:30,,true
+2511,BH-002511/2026,21345,SN785637834866,60,5,may bi màn hình bị hở sáng viền dưới bị từ tuần trước,1,CAO,DA_DONG,9,2026-02-26 08:15,2026-02-27 08:15,2026-02-26 22:21,true
+2535,BH-002535/2025,40330,SN297150688378,91,4,may bi máy có tiếng kêu lạ bên trong máy còn bảo hành,6,TRUNG_BINH,HOAN_TAT,15,2025-01-08 14:00,2025-01-11 14:00,,false
+2557,BH-002557/2025,43613,SN257025168547,29,4,khách hàng phản ánh báo pin sai phần trăm nhảy loạn đã thử khởi động lại không được,2,TRUNG_BINH,DA_DONG,14,2025-03-31 17:30,2025-04-03 17:30,2025-04-03 05:35,true
+2579,BH-002579/2025,52204,SN814599076949,202,4,MAY BI MÀN HÌNH BỊ ÁM VÀNG MỘT GÓC MỚI BỊ 2 NGÀY NAY,1,CAO,HOAN_TAT,2,2025-06-21 16:15,2025-06-22 16:15,,true
+2583,BH-002583/2025,5808,SN920250867305,220,4,tình trạng: sạc vào nhưng không nhận cáp khách chưa từng sửa ở đâu,3,TRUNG_BINH,CHO_LINH_KIEN,4,2025-12-04 14:30,2025-12-07 14:30,,true
+2586,BH-002586/2025,6459,SN922790318629,73,6,kh nói sạc rất chậm mất cả đêm máy còn bảo hành,3,TRUNG_BINH,HOAN_TAT,23,2025-09-29 12:00,2025-10-02 12:00,,true
+2604,BH-002604/2024,53246,SN865133629535,151,6,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn,2,TRUNG_BINH,DA_DONG,28,2024-08-31 09:15,2024-09-03 09:15,2024-09-02 22:12,true
+2607,BH-002607/2024,2374,SN946973668658,175,2,khách báo ứng dụng tự thoát liên tục mới bị 2 ngày nay,4,THAP,DANG_XU_LY,29,2024-11-26 16:00,2024-12-01 16:00,,true
+2612,BH-002612/2025,51368,SN423724004982,118,6,khách báo cổng sạc bị gãy chân bị từ tuần trước,3,TRUNG_BINH,CHO_LINH_KIEN,28,2025-01-19 10:00,2025-01-22 10:00,,false
+2634,BH-002634/2025,10026,SN105676555128,169,2,MAY BI CAMERA SAU BI MO NHU CO SUONG KHACH CHUA TUNG SUA O DAU,6,TRUNG_BINH,DA_DONG,25,2025-03-24 10:45,2025-03-27 10:45,2025-03-26 15:08,false
+2640,BH-002640/2025,46716,SN801147995389,230,5,khách hàng phản ánh máy chạy chậm giật lag sau khi cập nhật mới bị 2 ngày nay,4,THAP,DA_PHAN_CONG,24,2025-03-28 11:45,2025-04-02 11:45,,true
+2641,BH-002641/2026,14507,SN177285319620,169,4,khách hàng phản ánh wifi không kết nối được sau cập nhật xảy ra sau khi rơi,4,CAO,HOAN_TAT,16,2026-08-11 13:00,2026-08-12 13:00,,true
+2644,BH-002644/2024,47699,SN703379500522,318,4,khách hàng phản ánh cảm ứng chỗ được chỗ không khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,6,2024-11-30 13:45,2024-12-01 13:45,,true
+2645,BH-002645/2024,42760,SN508488433734,209,6,tình trạng: màn hình chớp tắt liên tục khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,23,2024-12-04 15:15,2024-12-05 15:15,,false
+2655,BH-002655/2024,11515,SN706750731601,217,1,may bi màn hình bị hở sáng viền dưới máy còn bảo hành,1,CAO,DA_PHAN_CONG,1,2024-09-29 08:00,2024-09-30 08:00,,false
+2656,BH-002656/2025,16786,SN714854968428,113,3,CHÂN SẠC LỎNG PHẢI GIỮ MỚI SẠC ĐƯỢC XẢY RA SAU KHI RƠI,3,TRUNG_BINH,DA_PHAN_CONG,3,2025-05-13 12:45,2025-05-16 12:45,,true
+2658,BH-002658/2025,31791,SN587734037063,308,4,kh nói cảm ứng chỗ được chỗ không mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,6,2025-10-17 15:00,2025-10-18 15:00,,true
+2659,BH-002659/2026,18700,SN733485021412,91,3,khách báo màn hình đen không lên bị từ tuần trước,1,CAO,DANG_XU_LY,27,2026-03-19 13:15,2026-03-20 13:15,,true
+2673,BH-002673/2026,31883,SN639850858474,5,4,kh nói màn hình đen không lên xảy ra sau khi rơi,1,CAO,DANG_XU_LY,21,2026-04-26 15:00,2026-04-27 15:00,,true
+2677,BH-002677/2026,32481,SN120393949703,293,4,kh nói pin tụt rất nhanh dùng 2 tiếng đã hết khách chưa từng sửa ở đâu,2,TRUNG_BINH,CHO_LINH_KIEN,34,2026-05-13 15:30,2026-05-16 15:30,,true
+2678,BH-002678/2026,35365,SN696853290515,110,6,kh nói chân sạc lỏng phải giữ mới sạc được xảy ra sau khi rơi,3,TRUNG_BINH,CHO_LINH_KIEN,13,2026-08-05 13:30,2026-08-08 13:30,,true
+2704,BH-002704/2024,21216,SN626748521903,41,5,khách hàng phản ánh cổng sạc bám bụi không tiếp xúc,3,TRUNG_BINH,DA_DONG,24,2024-10-31 11:15,2024-11-03 11:15,2024-11-01 13:34,false
+2715,BH-002715/2025,52917,SN702887723029,204,6,may bi pin chai chi con dung duoc nua ngay da thu khoi dong lai khong duoc,2,TRUNG_BINH,HOAN_TAT,23,2025-09-03 16:30,2025-09-06 16:30,,false
+2720,BH-002720/2026,48880,SN683059531344,253,2,TÌNH TRẠNG: MÀN HÌNH ĐEN KHÔNG LÊN ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,1,TRUNG_BINH,CHO_LINH_KIEN,8,2026-01-09 10:30,2026-01-12 10:30,,true
+2722,BH-002722/2025,26543,SN619967014320,154,4,MAY BI PIN NÓNG BẤT THƯỜNG KHI DÙNG MỚI BỊ 2 NGÀY NAY,2,TRUNG_BINH,DA_PHAN_CONG,4,2025-03-04 08:45,2025-03-07 08:45,,false
+2730,BH-002730/2024,46513,SN669725398394,270,6,khách hàng phản ánh màn hình bị ám vàng một góc khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,18,2024-12-06 17:15,2024-12-07 17:15,,true
+2735,BH-002735/2025,42826,SN529306912366,121,6,khách báo cảm ứng loạn không bấm được xảy ra sau khi rơi,1,CAO,HOAN_TAT,28,2025-04-10 12:30,2025-04-11 12:30,,true
+2736,BH-002736/2025,13741,SN864190231642,162,3,cắm sạc báo lỗi phụ kiện đã thử khởi động lại không được,3,TRUNG_BINH,HOAN_TAT,36,2025-12-04 11:45,2025-12-07 11:45,,true
+2767,BH-002767/2024,32448,SN514751087426,214,5,tình trạng: máy treo logo không vào được hệ điều hành đã thử khởi động lại không được,4,THAP,DA_DONG,9,2024-11-19 12:45,2024-11-24 12:45,2024-11-24 02:27,true
+2771,BH-002771/2026,47360,SN336777126825,234,1,khách báo màn hình bị ám vàng một góc mới bị 2 ngày nay,1,CAO,DANG_XU_LY,33,2026-02-23 15:45,2026-02-24 15:45,,false
+2782,BH-002782/2026,48677,SN939401806488,136,4,kh nói điểm chết trên màn hình đã thử khởi động lại không được,1,CAO,DA_PHAN_CONG,14,2026-06-17 10:45,2026-06-18 10:45,,true
+2789,BH-002789/2024,40696,SN316649969560,22,1,pin chai chỉ còn dùng được nửa ngày khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,33,2024-10-06 17:30,2024-10-09 17:30,,true
+2790,BH-002790/2024,34334,SN916124270952,89,4,khách báo máy không giữ được pin qua đêm khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,16,2024-10-07 13:30,2024-10-10 13:30,,true
+2808,BH-002808/2026,49174,SN816444070757,228,2,tình trạng: máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,DANG_XU_LY,25,2026-02-06 08:00,2026-02-09 08:00,,true
+2814,BH-002814/2026,1839,SN107149177137,66,1,tình trạng: pin nóng bất thường khi dùng khách chưa từng sửa ở đâu,2,THAP,DA_DONG,1,2026-04-11 15:15,2026-04-16 15:15,2026-04-18 01:08,true
+2816,BH-002816/2026,42340,SN444549630869,152,6,khách hàng phản ánh máy vào nước màn hình loang ố xảy ra sau khi rơi,5,CAO,DA_DONG,28,2026-06-24 13:15,2026-06-25 13:15,2026-06-26 15:37,true
+2817,BH-002817/2025,11304,SN374192602727,127,5,khách hàng phản ánh không cài được ứng dụng báo lỗi,4,THAP,HOAN_TAT,7,2025-04-08 09:45,2025-04-13 09:45,,true
+2821,BH-002821/2026,51285,SN889930291790,130,2,pin nóng bất thường khi dùng bị từ tuần trước,2,TRUNG_BINH,DANG_XU_LY,5,2026-04-13 09:00,2026-04-16 09:00,,true
+2849,BH-002849/2025,1467,SN338247088037,317,3,kh nói không nhận sim xảy ra sau khi rơi,6,TRUNG_BINH,DANG_XU_LY,37,2025-01-17 17:00,2025-01-20 17:00,,true
+2879,BH-002879/2025,2312,SN701856852659,234,4,khách báo màn hình nứt sau khi rơi,1,CAO,DANG_XU_LY,16,2025-06-18 08:00,2025-06-19 08:00,,false
+2886,BH-002886/2026,36780,SN334188237378,266,3,báo pin sai phần trăm nhảy loạn mới bị 2 ngày nay,2,TRUNG_BINH,DA_PHAN_CONG,22,2026-02-12 08:30,2026-02-15 08:30,,true
+2887,BH-002887/2026,13834,SN248350850030,124,3,bao pin sai phan tram nhay loan xay ra sau khi roi,2,TRUNG_BINH,DA_PHAN_CONG,36,2026-02-06 13:30,2026-02-09 13:30,,true
+2919,BH-002919/2024,51661,SN965393072248,192,6,MÁY TỰ KHỞI ĐỘNG LẠI NHIỀU LẦN TRONG NGÀY,4,THAP,HOAN_TAT,28,2024-11-23 14:00,2024-11-28 14:00,,true
+2926,BH-002926/2025,45800,SN815873426785,116,5,máy treo logo không vào được hệ điều hành khách chưa từng sửa ở đâu,4,THAP,CHO_LINH_KIEN,9,2025-12-02 13:45,2025-12-07 13:45,,true
+2933,BH-002933/2026,52030,SN466033044327,50,6,kh nói pin chai chỉ còn dùng được nửa ngày xảy ra sau khi rơi,2,TRUNG_BINH,DANG_XU_LY,11,2026-04-28 12:00,2026-05-01 12:00,,true
+2939,BH-002939/2025,22091,SN949556289104,125,4,cổng sạc bị gãy chân bị từ tuần trước,3,TRUNG_BINH,CHO_LINH_KIEN,16,2025-09-25 11:15,2025-09-28 11:15,,true
+2944,BH-002944/2025,31296,SN902096715319,13,5,may bi man hinh chop tat lien tuc khach chua tung sua o dau,1,CAO,CHO_LINH_KIEN,9,2025-04-16 08:45,2025-04-17 08:45,,true
+2963,BH-002963/2026,37930,SN559268147950,244,5,may bi cảm ứng chỗ được chỗ không khách chưa từng sửa ở đâu,1,CAO,DANG_XU_LY,7,2026-04-15 11:00,2026-04-16 11:00,,true
+2967,BH-002967/2026,37149,SN443101168562,104,1,màn hình đen không lên mới bị 2 ngày nay,1,CAO,DANG_XU_LY,20,2026-01-02 13:45,2026-01-03 13:45,,true
+2971,BH-002971/2025,24266,SN774458146390,163,1,khách báo máy bị đổ nước ngọt vào không sạc được khách chưa từng sửa ở đâu,5,CAO,DANG_XU_LY,20,2025-08-30 08:15,2025-08-31 08:15,,false
+2980,BH-002980/2026,45407,SN472509582187,115,3,tình trạng: ứng dụng tự thoát liên tục đã thử khởi động lại không được,4,THAP,CHO_LINH_KIEN,36,2026-01-17 13:30,2026-01-22 13:30,,true
+2982,BH-002982/2026,40195,SN933187661341,319,1,kh nói cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,DA_PHAN_CONG,1,2026-05-07 17:15,2026-05-08 17:15,,true
+2995,BH-002995/2024,20016,SN796158533634,201,3,may bi máy treo logo không vào được hệ điều hành bị từ tuần trước,4,THAP,CHO_LINH_KIEN,3,2024-12-19 08:45,2024-12-24 08:45,,false
+3017,BH-003017/2024,11019,SN953115699714,255,3,tình trạng: màn hình nứt sau khi rơi mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,36,2024-12-24 09:30,2024-12-25 09:30,,true
+3022,BH-003022/2025,17235,SN879358175124,253,3,kh nói pin sụt 20% chỉ sau vài phút,2,TRUNG_BINH,DA_DONG,27,2025-03-10 11:30,2025-03-13 11:30,2025-03-14 20:05,false
+3028,BH-003028/2024,48148,SN224327134339,287,6,may bi máy treo logo không vào được hệ điều hành đã thử khởi động lại không được,4,THAP,CHO_LINH_KIEN,23,2024-10-18 17:45,2024-10-23 17:45,,true
+3043,BH-003043/2025,22317,SN458844819370,43,2,MÁY TỰ KHỞI ĐỘNG LẠI NHIỀU LẦN TRONG NGÀY,4,THAP,DANG_XU_LY,30,2025-08-27 11:00,2025-09-01 11:00,,true
+3046,BH-003046/2026,27690,SN278019582639,75,1,kh nói cắm sạc không vào điện bị từ tuần trước,3,TRUNG_BINH,DA_PHAN_CONG,20,2026-01-31 15:15,2026-02-03 15:15,,true
+3062,BH-003062/2026,11516,SN318171559157,277,4,may bi máy phồng pin cấn màn hình bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,16,2026-01-20 15:15,2026-01-23 15:15,,true
+3076,BH-003076/2025,13445,SN400589224635,73,4,khách hàng phản ánh màn hình bị ám vàng một góc xảy ra sau khi rơi,1,CAO,DANG_XU_LY,6,2025-07-14 17:15,2025-07-15 17:15,,true
+3090,BH-003090/2025,14125,SN776426181078,236,4,khách báo máy tự tắt khi còn 30% pin đã thử khởi động lại không được,2,TRUNG_BINH,CHO_LINH_KIEN,15,2025-07-10 15:30,2025-07-13 15:30,,true
+3096,BH-003096/2026,5035,SN825107599597,18,5,cảm ứng loạn không bấm được xảy ra sau khi rơi,1,CAO,DANG_XU_LY,9,2026-04-13 10:00,2026-04-14 10:00,,false
+3108,BH-003108/2026,31704,SN251445834648,116,4,kh noi man hinh bi am vang mot goc,1,CAO,DANG_XU_LY,21,2026-07-27 09:00,2026-07-28 09:00,,true
+3109,BH-003109/2025,27128,SN629308280836,29,2,may bi máy bị đổ nước ngọt vào không sạc được đã thử khởi động lại không được,5,CAO,DANG_XU_LY,29,2025-07-26 15:15,2025-07-27 15:15,,true
+3113,BH-003113/2024,28417,SN342527165304,205,3,tình trạng: máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,DA_DONG,19,2024-09-26 15:15,2024-09-29 15:15,2024-10-01 18:14,true
+3124,BH-003124/2025,15013,SN854715942221,175,4,tình trạng: sạc đầy nhưng dùng 30 phút là sập nguồn khách chưa từng sửa ở đâu,2,THAP,DANG_XU_LY,4,2025-10-19 08:45,2025-10-24 08:45,,true
+3131,BH-003131/2026,23929,SN326779138107,65,3,pin nóng bất thường khi dùng bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,27,2026-03-23 09:30,2026-03-26 09:30,,true
+3132,BH-003132/2025,37993,SN359104453985,319,6,tình trạng: chân sạc lỏng phải giữ mới sạc được khách chưa từng sửa ở đâu,3,TRUNG_BINH,HOAN_TAT,28,2025-12-17 14:30,2025-12-20 14:30,,true
+3136,BH-003136/2024,661,SN819832335898,216,2,kh nói màn hình nứt sau khi rơi mới bị 2 ngày nay,1,CAO,DA_PHAN_CONG,12,2024-12-10 10:30,2024-12-11 10:30,,true
+3137,BH-003137/2024,4922,SN848970675269,130,2,PIN TỤT RẤT NHANH DÙNG 2 TIẾNG ĐÃ HẾT KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,2,TRUNG_BINH,HOAN_TAT,12,2024-12-21 08:45,2024-12-24 08:45,,false
+3144,BH-003144/2026,9201,SN421901851084,189,4,khách hàng phản ánh máy vào nước màn hình loang ố máy còn bảo hành,5,THAP,DA_PHAN_CONG,34,2026-01-04 13:30,2026-01-09 13:30,,false
+3158,BH-003158/2026,3965,SN263848979729,259,3,pin tụt rất nhanh dùng 2 tiếng đã hết máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,37,2026-06-24 16:45,2026-06-27 16:45,,false
+3159,BH-003159/2025,43663,SN258393909230,65,4,khách báo cổng sạc bị gãy chân,3,TRUNG_BINH,DA_DONG,14,2025-02-13 10:30,2025-02-16 10:30,2025-02-15 09:04,true
+3166,BH-003166/2025,15973,SN382521810932,49,4,khách báo cổng sạc bị gãy chân máy còn bảo hành,3,TRUNG_BINH,HOAN_TAT,21,2025-07-21 12:00,2025-07-24 12:00,,true
+3168,BH-003168/2025,43074,SN317372070647,65,5,kh noi camera mo len bi den man xay ra sau khi roi,4,THAP,DANG_XU_LY,24,2025-08-14 10:00,2025-08-19 10:00,,false
+3214,BH-003214/2026,14408,SN654470307826,7,5,khách hàng phản ánh camera mở lên bị đen màn khách chưa từng sửa ở đâu,4,THAP,HOAN_TAT,24,2026-01-07 15:30,2026-01-12 15:30,,false
+3223,BH-003223/2026,34189,SN331278358947,309,5,kh nói chân sạc lỏng phải giữ mới sạc được xảy ra sau khi rơi,3,TRUNG_BINH,DA_PHAN_CONG,26,2026-02-10 12:00,2026-02-13 12:00,,false
+3227,BH-003227/2025,20457,SN247925886384,51,1,kh noi cam sac khong vao dien may con bao hanh,3,TRUNG_BINH,DA_PHAN_CONG,33,2025-10-26 15:15,2025-10-29 15:15,,false
+3229,BH-003229/2025,185,SN640915864722,53,2,khách hàng phản ánh màn hình đen không lên đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,12,2025-03-23 12:30,2025-03-24 12:30,,true
+3234,BH-003234/2025,18400,SN781521206348,16,1,khách hàng phản ánh cảm ứng loạn không bấm được khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,20,2025-04-10 12:15,2025-04-11 12:15,,true
+3247,BH-003247/2025,34422,SN630746826270,206,6,khách hàng phản ánh cảm ứng loạn không bấm được,1,CAO,DA_PHAN_CONG,23,2025-10-24 15:30,2025-10-25 15:30,,true
+3258,BH-003258/2026,6314,SN686779571335,298,4,TINH TRANG: PIN SUT 20% CHI SAU VAI PHUT MOI BI 2 NGAY NAY,2,TRUNG_BINH,DA_DONG,2,2026-07-08 11:30,2026-07-11 11:30,2026-07-10 03:24,true
+3261,BH-003261/2025,31051,SN128038621251,26,2,kh nói ứng dụng tự thoát liên tục đã thử khởi động lại không được,4,THAP,DA_DONG,29,2025-09-06 15:45,2025-09-11 15:45,2025-09-08 07:19,true
+3287,BH-003287/2025,12658,SN375354898074,271,4,may bi máy rung liên tục không dừng bị từ tuần trước,6,TRUNG_BINH,DANG_XU_LY,15,2025-12-20 12:00,2025-12-23 12:00,,true
+3292,BH-003292/2026,10565,SN114451665538,35,6,ứng dụng tự thoát liên tục đã thử khởi động lại không được,4,THAP,DANG_XU_LY,23,2026-04-23 09:00,2026-04-28 09:00,,true
+3302,BH-003302/2024,30653,SN837784154558,254,4,tình trạng: cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,DA_DONG,14,2024-10-27 09:45,2024-10-28 09:45,2024-10-28 03:12,true
+3311,BH-003311/2025,6380,SN499881205520,75,3,tình trạng: màn hình bị sọc dọc máy còn bảo hành,1,CAO,DA_PHAN_CONG,37,2025-03-26 16:45,2025-03-27 16:45,,true
+3315,BH-003315/2025,47783,SN195512874547,64,5,KHACH BAO KHONG CAI DUOC UNG DUNG BAO LOI XAY RA SAU KHI ROI,4,THAP,CHO_LINH_KIEN,35,2025-01-15 09:30,2025-01-20 09:30,,true
+3319,BH-003319/2025,32071,SN172437869339,58,4,KH NÓI DÍNH NƯỚC BIỂN MÁY NÓNG VÀ TẮT KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,5,THAP,DANG_XU_LY,2,2025-08-26 12:30,2025-08-31 12:30,,true
+3322,BH-003322/2026,30890,SN386712407670,280,5,kh noi cam ung loan khong bam duoc khach chua tung sua o dau,1,CAO,DA_DONG,31,2026-02-28 12:00,2026-03-01 12:00,2026-03-01 02:00,true
+3326,BH-003326/2026,50498,SN444935765757,100,3,may bi màn hình bị ám vàng một góc xảy ra sau khi rơi,1,THAP,DANG_XU_LY,22,2026-01-29 11:30,2026-02-03 11:30,,true
+3347,BH-003347/2025,13396,SN491665319673,298,2,khách báo dính nước biển máy nóng và tắt máy còn bảo hành,5,CAO,DA_DONG,12,2025-04-21 09:45,2025-04-22 09:45,2025-04-23 00:31,true
+3382,BH-003382/2025,9918,SN261499814285,237,3,tình trạng: màn hình đen không lên bị từ tuần trước,1,CAO,CHO_LINH_KIEN,37,2025-09-21 08:00,2025-09-22 08:00,,false
+3394,BH-003394/2024,23457,SN341468859287,94,1,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn máy còn bảo hành,2,TRUNG_BINH,CHO_LINH_KIEN,33,2024-08-30 08:30,2024-09-02 08:30,,true
+3411,BH-003411/2026,25377,SN409053653239,292,3,khách hàng phản ánh máy vào nước màn hình loang ố bị từ tuần trước,5,CAO,DANG_XU_LY,36,2026-07-10 16:30,2026-07-11 16:30,,true
+3416,BH-003416/2024,34548,SN999886903046,53,1,khách hàng phản ánh báo pin sai phần trăm nhảy loạn bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,20,2024-11-18 12:00,2024-11-21 12:00,,true
+3418,BH-003418/2025,2655,SN271488255546,77,5,tình trạng: quên mật khẩu không mở được máy bị từ tuần trước,4,THAP,DA_PHAN_CONG,9,2025-02-02 17:15,2025-02-07 17:15,,true
+3425,BH-003425/2024,20561,SN179940261124,165,6,may bi cắm sạc không vào điện,3,TRUNG_BINH,CHO_LINH_KIEN,23,2024-11-25 15:15,2024-11-28 15:15,,true
+3435,BH-003435/2026,33744,SN929530352718,165,5,khách báo sạc đầy nhưng dùng 30 phút là sập nguồn khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,7,2026-06-27 13:15,2026-06-30 13:15,,true
+3441,BH-003441/2025,8156,SN682554926289,25,5,khách hàng phản ánh cắm sạc báo lỗi phụ kiện xảy ra sau khi rơi,3,THAP,CHO_LINH_KIEN,24,2025-09-28 11:00,2025-10-03 11:00,,true
+3464,BH-003464/2025,49424,SN743056193836,77,5,kh nói cổng sạc bị gãy chân xảy ra sau khi rơi,3,TRUNG_BINH,CHO_LINH_KIEN,9,2025-11-09 11:00,2025-11-12 11:00,,true
+3467,BH-003467/2026,42450,SN486161041021,214,2,máy có tiếng kêu lạ bên trong khách chưa từng sửa ở đâu,6,TRUNG_BINH,DA_PHAN_CONG,12,2026-08-14 15:15,2026-08-17 15:15,,true
+3477,BH-003477/2026,23996,SN213374638298,71,2,tình trạng: cắm sạc máy nóng bất thường khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,30,2026-07-26 11:00,2026-07-29 11:00,,true
+3488,BH-003488/2026,50471,SN422417466528,257,3,kh nói chân sạc lỏng phải giữ mới sạc được bị từ tuần trước,3,TRUNG_BINH,CHO_LINH_KIEN,22,2026-04-30 16:30,2026-05-03 16:30,,false
+3493,BH-003493/2024,27900,SN314174392845,197,5,khách báo điểm chết trên màn hình khách chưa từng sửa ở đâu,1,CAO,CHO_LINH_KIEN,24,2024-11-14 16:45,2024-11-15 16:45,,true
+3511,BH-003511/2025,35720,SN706027229518,43,6,điện thoại dính nước mưa loa bị rè máy còn bảo hành,5,CAO,DA_PHAN_CONG,11,2025-09-24 16:45,2025-09-25 16:45,,true
+3518,BH-003518/2025,45055,SN327012111221,171,4,máy tự khởi động lại nhiều lần trong ngày,4,THAP,DA_DONG,2,2025-03-27 08:15,2025-04-01 08:15,2025-03-31 06:50,true
+3523,BH-003523/2025,11218,SN243247412525,310,6,khách hàng phản ánh rơi bồn rửa máy chập chờn xảy ra sau khi rơi,5,CAO,DA_DONG,23,2025-07-17 16:30,2025-07-18 16:30,2025-07-18 10:12,true
+3531,BH-003531/2026,46918,SN282556939936,17,1,tình trạng: máy không giữ được pin qua đêm mới bị 2 ngày nay,2,TRUNG_BINH,CHO_LINH_KIEN,1,2026-07-19 10:45,2026-07-22 10:45,,true
+3536,BH-003536/2025,19950,SN932415225552,80,3,may bi máy rung liên tục không dừng máy còn bảo hành,6,TRUNG_BINH,CHO_LINH_KIEN,38,2025-02-04 10:30,2025-02-07 10:30,,true
+3545,BH-003545/2024,1615,SN257691299532,101,3,khách hàng phản ánh cắm sạc máy nóng bất thường đã thử khởi động lại không được,3,TRUNG_BINH,HOAN_TAT,32,2024-09-16 16:45,2024-09-19 16:45,,true
+3565,BH-003565/2026,5348,SN363887628884,248,2,kh nói máy chạy chậm giật lag sau khi cập nhật đã thử khởi động lại không được,4,TRUNG_BINH,DA_DONG,30,2026-01-09 17:30,2026-01-12 17:30,2026-01-12 09:10,true
+3578,BH-003578/2026,3061,SN960858820108,2,2,MAY BI KHÔNG NHẬN SIM,6,TRUNG_BINH,DA_DONG,29,2026-07-13 09:00,2026-07-16 09:00,2026-07-14 09:22,false
+3583,BH-003583/2025,5079,SN353121672531,37,1,khách hàng phản ánh cổng sạc bị gãy chân mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,20,2025-03-20 10:30,2025-03-23 10:30,,true
+3594,BH-003594/2026,48100,SN834215927036,146,5,khach bao man hinh bi am vang mot goc khach chua tung sua o dau,1,CAO,DA_DONG,17,2026-02-05 17:15,2026-02-06 17:15,2026-02-06 05:34,true
+3596,BH-003596/2025,24392,SN620879701249,198,1,tình trạng: máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,DA_PHAN_CONG,33,2025-08-14 13:15,2025-08-17 13:15,,true
+3597,BH-003597/2026,7410,SN541005171813,142,3,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn,2,TRUNG_BINH,DA_PHAN_CONG,3,2026-07-06 15:30,2026-07-09 15:30,,false
+3600,BH-003600/2025,1193,SN119582736698,279,3,kh nói không nhận sim,6,TRUNG_BINH,HOAN_TAT,3,2025-01-25 13:15,2025-01-28 13:15,,true
+3608,BH-003608/2026,5766,SN907619681104,140,6,kh noi pin tut rat nhanh dung 2 tieng da het may con bao hanh,2,TRUNG_BINH,CHO_LINH_KIEN,28,2026-06-11 12:30,2026-06-14 12:30,,true
+3609,BH-003609/2026,25599,SN826314205376,162,3,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn mới bị 2 ngày nay,2,TRUNG_BINH,HOAN_TAT,3,2026-07-16 13:00,2026-07-19 13:00,,true
+3614,BH-003614/2026,40380,SN230506966266,5,4,tình trạng: màn hình đen không lên mới bị 2 ngày nay,1,CAO,DA_PHAN_CONG,34,2026-01-19 11:00,2026-01-20 11:00,,true
+3618,BH-003618/2026,22726,SN440332240696,314,3,kh nói điện thoại dính nước mưa loa bị rè mới bị 2 ngày nay,5,CAO,CHO_LINH_KIEN,37,2026-07-06 15:30,2026-07-07 15:30,,true
+3626,BH-003626/2026,53136,SN986713848777,33,1,khách báo màn hình bị sọc dọc,1,CAO,DA_PHAN_CONG,33,2026-01-21 09:30,2026-01-22 09:30,,true
+3628,BH-003628/2026,28698,SN666221511345,252,6,kh nói chân sạc lỏng phải giữ mới sạc được xảy ra sau khi rơi,3,TRUNG_BINH,HOAN_TAT,10,2026-01-11 16:30,2026-01-14 16:30,,true
+3650,BH-003650/2026,21808,SN191588844390,243,4,may bi màn hình nứt sau khi rơi khách chưa từng sửa ở đâu,1,THAP,HOAN_TAT,34,2026-02-24 12:30,2026-03-01 12:30,,true
+3653,BH-003653/2025,20776,SN159205746816,204,3,khách báo máy không giữ được pin qua đêm khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,3,2025-07-02 15:00,2025-07-05 15:00,,false
+3662,BH-003662/2025,36143,SN958149176118,145,2,khách báo máy bị đổ nước ngọt vào không sạc được đã thử khởi động lại không được,5,CAO,DA_PHAN_CONG,30,2025-07-24 08:00,2025-07-25 08:00,,true
+3663,BH-003663/2025,37615,SN261395403473,149,5,may bi cổng sạc bám bụi không tiếp xúc xảy ra sau khi rơi,3,TRUNG_BINH,HOAN_TAT,35,2025-07-27 12:45,2025-07-30 12:45,,false
+3664,BH-003664/2025,3844,SN749381804745,1,3,may bi màn hình chớp tắt liên tục xảy ra sau khi rơi,1,CAO,DA_DONG,22,2025-09-12 12:30,2025-09-13 12:30,2025-09-13 18:46,true
+3676,BH-003676/2025,41798,SN474811660681,218,4,khách báo cảm ứng loạn không bấm được đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,21,2025-04-26 10:45,2025-04-27 10:45,,false
+3677,BH-003677/2025,21865,SN327075810088,74,5,pin chai chỉ còn dùng được nửa ngày khách chưa từng sửa ở đâu,2,TRUNG_BINH,CHO_LINH_KIEN,35,2025-02-11 17:00,2025-02-14 17:00,,true
+3680,BH-003680/2025,14460,SN164712342340,49,2,may bi khong cai duoc ung dung bao loi bi tu tuan truoc,4,TRUNG_BINH,DA_DONG,5,2025-04-23 12:00,2025-04-26 12:00,2025-04-24 20:38,true
+3701,BH-003701/2026,27016,SN742427899054,270,2,tình trạng: loa ngoài rè không nghe rõ xảy ra sau khi rơi,6,TRUNG_BINH,HOAN_TAT,29,2026-07-09 17:00,2026-07-12 17:00,,true
+3704,BH-003704/2024,48755,SN675340782179,25,3,may bi pin chai chỉ còn dùng được nửa ngày xảy ra sau khi rơi,2,TRUNG_BINH,DANG_XU_LY,36,2024-08-30 12:15,2024-09-02 12:15,,false
+3707,BH-003707/2025,51968,SN687365023991,135,4,may bi máy tự khởi động lại nhiều lần trong ngày bị từ tuần trước,4,THAP,DA_DONG,4,2025-08-14 15:30,2025-08-19 15:30,2025-08-17 21:04,true
+3717,BH-003717/2026,41643,SN738554504670,234,5,cảm ứng loạn không bấm được khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,9,2026-03-06 12:30,2026-03-07 12:30,,true
+3730,BH-003730/2024,44045,SN354648209047,213,2,tình trạng: máy không giữ được pin qua đêm khách chưa từng sửa ở đâu,2,THAP,DA_DONG,25,2024-12-01 09:45,2024-12-06 09:45,2024-12-02 21:31,true
+3734,BH-003734/2026,36199,SN888618243711,135,5,loa ngoài rè không nghe rõ xảy ra sau khi rơi,6,TRUNG_BINH,CHO_LINH_KIEN,7,2026-01-24 13:15,2026-01-27 13:15,,true
+3740,BH-003740/2025,25259,SN990633665041,220,2,rơi bồn rửa máy chập chờn mới bị 2 ngày nay,5,CAO,HOAN_TAT,12,2025-04-24 14:30,2025-04-25 14:30,,true
+3766,BH-003766/2025,38241,SN644338376730,150,6,tình trạng: màn hình xuất hiện vệt mực loang khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,18,2025-10-02 14:30,2025-10-03 14:30,,true
+3780,BH-003780/2026,23470,SN889119092341,311,3,khach bao sac day nhung dung 30 phut la sap nguon khach chua tung sua o dau,2,TRUNG_BINH,CHO_LINH_KIEN,27,2026-04-20 17:30,2026-04-23 17:30,,true
+3792,BH-003792/2025,30999,SN344835629114,91,4,kh nói màn hình chớp tắt liên tục đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,4,2025-08-21 10:30,2025-08-22 10:30,,false
+3799,BH-003799/2026,52786,SN541569010863,132,5,tình trạng: pin nóng bất thường khi dùng,2,TRUNG_BINH,DA_DONG,7,2026-06-15 17:45,2026-06-18 17:45,2026-06-17 10:36,true
+3803,BH-003803/2025,8670,SN756640997067,266,6,kh nói màn hình đen không lên mới bị 2 ngày nay,1,CAO,DANG_XU_LY,11,2025-08-22 14:30,2025-08-23 14:30,,true
+3806,BH-003806/2026,41418,SN666175472914,188,3,kh nói máy vào nước màn hình loang ố bị từ tuần trước,5,CAO,DA_PHAN_CONG,36,2026-03-20 14:00,2026-03-21 14:00,,true
+3817,BH-003817/2024,38710,SN969727249201,213,5,tình trạng: điểm chết trên màn hình bị từ tuần trước,1,CAO,DA_PHAN_CONG,35,2024-11-20 16:45,2024-11-21 16:45,,true
+3825,BH-003825/2026,47832,SN175096212605,235,2,may bi pin tụt rất nhanh dùng 2 tiếng đã hết khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,29,2026-08-04 11:30,2026-08-07 11:30,,true
+3839,BH-003839/2026,50646,SN391288421570,316,3,khách báo pin chai chỉ còn dùng được nửa ngày mới bị 2 ngày nay,2,TRUNG_BINH,DANG_XU_LY,38,2026-02-16 17:30,2026-02-19 17:30,,true
+3845,BH-003845/2024,44283,SN195643314074,240,2,may bi máy tự tắt khi còn 30% pin máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,5,2024-09-28 12:00,2024-10-01 12:00,,true
+3854,BH-003854/2026,31962,SN619150193029,272,3,may bi màn hình bị hở sáng viền dưới khách chưa từng sửa ở đâu,1,CAO,DANG_XU_LY,27,2026-06-07 10:45,2026-06-08 10:45,,true
+3863,BH-003863/2025,8797,SN569654383969,196,4,kh nói máy rơi vào nước không lên nguồn khách chưa từng sửa ở đâu,5,CAO,DANG_XU_LY,4,2025-08-03 11:00,2025-08-04 11:00,,true
+3864,BH-003864/2025,11142,SN398150841781,203,2,pin tụt rất nhanh dùng 2 tiếng đã hết máy còn bảo hành,2,TRUNG_BINH,DANG_XU_LY,12,2025-06-02 17:45,2025-06-05 17:45,,true
+3865,BH-003865/2025,8851,SN559355380466,238,3,may bi wifi không kết nối được sau cập nhật khách chưa từng sửa ở đâu,4,THAP,DANG_XU_LY,32,2025-09-05 08:00,2025-09-10 08:00,,false
+3876,BH-003876/2025,16195,SN398753237326,135,6,khách báo chân sạc lỏng phải giữ mới sạc được mới bị 2 ngày nay,3,TRUNG_BINH,CHO_LINH_KIEN,10,2025-08-20 15:30,2025-08-23 15:30,,false
+3916,BH-003916/2025,49493,SN497189998706,39,4,mic gọi điện đối phương không nghe được khách chưa từng sửa ở đâu,6,TRUNG_BINH,DA_PHAN_CONG,16,2025-01-17 16:00,2025-01-20 16:00,,true
+3918,BH-003918/2025,20602,SN630005864715,300,6,khách báo điểm chết trên màn hình máy còn bảo hành,1,CAO,DANG_XU_LY,28,2025-01-29 13:00,2025-01-30 13:00,,true
+3922,BH-003922/2024,37449,SN700369868459,253,6,may bi máy phồng pin cấn màn hình bị từ tuần trước,2,TRUNG_BINH,CHO_LINH_KIEN,18,2024-09-08 15:45,2024-09-11 15:45,,false
+3923,BH-003923/2026,28748,SN803075134038,202,5,khách báo máy treo logo không vào được hệ điều hành đã thử khởi động lại không được,4,THAP,CHO_LINH_KIEN,7,2026-04-26 16:45,2026-05-01 16:45,,false
+3928,BH-003928/2026,47905,SN624902595098,100,3,may bi máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,HOAN_TAT,38,2026-02-23 10:30,2026-02-26 10:30,,true
+3942,BH-003942/2025,53676,SN290940312074,247,3,khách báo cổng sạc bị gãy chân,3,TRUNG_BINH,DA_DONG,37,2025-05-25 09:30,2025-05-28 09:30,2025-05-28 00:04,true
+3952,BH-003952/2025,12007,SN868815068936,272,6,may bi máy tự tắt khi còn 30% pin mới bị 2 ngày nay,2,TRUNG_BINH,HOAN_TAT,28,2025-03-04 10:00,2025-03-07 10:00,,true
+3955,BH-003955/2025,42169,SN433254439220,39,4,kh nói pin nóng bất thường khi dùng khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,15,2025-08-12 10:45,2025-08-15 10:45,,true
+3964,BH-003964/2025,32005,SN652988635227,53,3,khách hàng phản ánh máy rơi vào nước không lên nguồn máy còn bảo hành,5,THAP,DA_PHAN_CONG,3,2025-04-12 14:30,2025-04-17 14:30,,false
+3969,BH-003969/2024,9122,SN674662390508,314,5,KHÁCH BÁO ĐIỂM CHẾT TRÊN MÀN HÌNH MỚI BỊ 2 NGÀY NAY,1,TRUNG_BINH,DA_DONG,35,2024-12-13 08:15,2024-12-16 08:15,2024-12-15 17:40,true
+3976,BH-003976/2024,9501,SN642234212085,107,3,tình trạng: máy vào nước màn hình loang ố mới bị 2 ngày nay,5,THAP,HOAN_TAT,27,2024-08-30 10:45,2024-09-04 10:45,,true
+3978,BH-003978/2024,50190,SN403222226467,145,2,khách báo máy chạy chậm giật lag sau khi cập nhật máy còn bảo hành,4,THAP,HOAN_TAT,5,2024-10-21 08:00,2024-10-26 08:00,,true
+3980,BH-003980/2025,26201,SN538023486373,237,3,may bi báo pin sai phần trăm nhảy loạn máy còn bảo hành,2,TRUNG_BINH,CHO_LINH_KIEN,19,2025-10-10 10:45,2025-10-13 10:45,,true
+3983,BH-003983/2025,49181,SN788042352715,132,6,cổng sạc bị gãy chân máy còn bảo hành,3,THAP,DA_DONG,28,2025-08-05 13:30,2025-08-10 13:30,2025-08-07 18:24,true
+4004,BH-004004/2026,42858,SN942518010904,303,3,MAY BI KHÔNG CÀI ĐƯỢC ỨNG DỤNG BÁO LỖI XẢY RA SAU KHI RƠI,4,THAP,HOAN_TAT,3,2026-08-28 12:45,2026-09-02 12:45,,true
+4005,BH-004005/2025,32438,SN622543326015,12,3,MAY BI CẢM ỨNG CHỖ ĐƯỢC CHỖ KHÔNG BỊ TỪ TUẦN TRƯỚC,1,CAO,HOAN_TAT,27,2025-03-13 09:30,2025-03-14 09:30,,true
+4045,BH-004045/2025,2735,SN756307513700,72,5,khách báo cắm sạc không vào điện mới bị 2 ngày nay,3,TRUNG_BINH,DA_DONG,7,2025-07-11 10:45,2025-07-14 10:45,2025-07-12 21:44,true
+4051,BH-004051/2025,41655,SN605124041013,204,3,khách hàng phản ánh cổng sạc bám bụi không tiếp xúc khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,22,2025-06-23 14:45,2025-06-26 14:45,,false
+4053,BH-004053/2026,46559,SN773210300400,119,5,khach hang phan anh pin nong bat thuong khi dung may con bao hanh,2,TRUNG_BINH,CHO_LINH_KIEN,35,2026-07-18 10:00,2026-07-21 10:00,,true
+4074,BH-004074/2026,2590,SN639075786492,297,1,khách báo sạc rất chậm mất cả đêm,3,TRUNG_BINH,DANG_XU_LY,1,2026-08-04 10:30,2026-08-07 10:30,,true
+4075,BH-004075/2025,15533,SN347400129307,37,2,kh nói sạc đầy nhưng dùng 30 phút là sập nguồn xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,25,2025-08-28 14:30,2025-08-31 14:30,,false
+4080,BH-004080/2024,50691,SN605191639554,292,6,khách báo máy treo logo không vào được hệ điều hành đã thử khởi động lại không được,4,THAP,DA_PHAN_CONG,28,2024-09-04 08:15,2024-09-09 08:15,,true
+4083,BH-004083/2026,29810,SN614894152313,212,6,may bi cắm sạc không vào điện xảy ra sau khi rơi,3,TRUNG_BINH,DA_DONG,23,2026-02-16 15:15,2026-02-19 15:15,2026-02-18 01:53,true
+4087,BH-004087/2026,27986,SN698531056778,125,5,điện thoại dính nước mưa loa bị rè máy còn bảo hành,5,CAO,HOAN_TAT,17,2026-01-02 12:15,2026-01-03 12:15,,true
+4109,BH-004109/2024,9289,SN844169357182,23,1,may bi máy chạy chậm giật lag sau khi cập nhật bị từ tuần trước,4,THAP,DA_DONG,1,2024-10-28 08:15,2024-11-02 08:15,2024-10-31 20:57,true
+4116,BH-004116/2024,20286,SN191732261844,42,3,khách hàng phản ánh máy vào nước màn hình loang ố bị từ tuần trước,5,CAO,CHO_LINH_KIEN,27,2024-12-01 13:15,2024-12-02 13:15,,true
+4131,BH-004131/2026,45615,SN970442579468,65,6,màn hình bị ám vàng một góc đã thử khởi động lại không được,1,CAO,DANG_XU_LY,23,2026-08-14 11:15,2026-08-15 11:15,,true
+4139,BH-004139/2026,32248,SN596417458458,70,1,kh nói cảm ứng chỗ được chỗ không xảy ra sau khi rơi,1,CAO,HOAN_TAT,20,2026-04-11 10:15,2026-04-12 10:15,,false
+4146,BH-004146/2025,28180,SN699796319555,32,6,tình trạng: không nhận sim,6,TRUNG_BINH,DA_DONG,11,2025-05-03 15:15,2025-05-06 15:15,2025-05-04 19:05,true
+4156,BH-004156/2024,15030,SN169582015136,292,4,máy phồng pin cấn màn hình máy còn bảo hành,2,TRUNG_BINH,DANG_XU_LY,34,2024-11-29 12:00,2024-12-02 12:00,,true
+4169,BH-004169/2025,37585,SN721588924221,75,3,MAY BI MÁY KHÔNG GIỮ ĐƯỢC PIN QUA ĐÊM KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,2,TRUNG_BINH,DA_DONG,32,2025-09-20 08:15,2025-09-23 08:15,2025-09-21 21:14,true
+4194,BH-004194/2024,50390,SN162655402149,49,2,khách hàng phản ánh máy treo logo không vào được hệ điều hành,4,THAP,HOAN_TAT,8,2024-11-13 16:00,2024-11-18 16:00,,true
+4199,BH-004199/2025,29865,SN339342189265,43,2,kh noi cam ung loan khong bam duoc may con bao hanh,1,CAO,DANG_XU_LY,8,2025-08-03 10:45,2025-08-04 10:45,,true
+4200,BH-004200/2025,26388,SN463830194032,151,5,khách báo màn hình xuất hiện vệt mực loang đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,35,2025-02-20 15:15,2025-02-21 15:15,,true
+4202,BH-004202/2024,49852,SN794721136438,11,3,KH NÓI CẮM SẠC BÁO LỖI PHỤ KIỆN XẢY RA SAU KHI RƠI,3,TRUNG_BINH,DA_PHAN_CONG,38,2024-11-29 16:45,2024-12-02 16:45,,true
+4215,BH-004215/2024,41049,SN530784956252,21,5,kh nói pin sụt 20% chỉ sau vài phút bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,31,2024-09-14 10:45,2024-09-17 10:45,,true
+4223,BH-004223/2025,50621,SN659072268279,301,6,may bi pin nóng bất thường khi dùng đã thử khởi động lại không được,2,TRUNG_BINH,DANG_XU_LY,10,2025-04-09 17:45,2025-04-12 17:45,,false
+4231,BH-004231/2026,50052,SN933838285957,87,4,khách hàng phản ánh màn hình đen không lên khách chưa từng sửa ở đâu,1,CAO,CHO_LINH_KIEN,34,2026-01-11 17:45,2026-01-12 17:45,,true
+4233,BH-004233/2025,31791,SN552499763383,82,5,tình trạng: máy chạy chậm giật lag sau khi cập nhật khách chưa từng sửa ở đâu,4,TRUNG_BINH,DA_PHAN_CONG,35,2025-08-19 16:00,2025-08-22 16:00,,false
+4236,BH-004236/2024,39674,SN231357386631,65,6,tinh trang: may khong giu duoc pin qua dem bi tu tuan truoc,2,TRUNG_BINH,DA_DONG,23,2024-09-25 12:00,2024-09-28 12:00,2024-09-27 10:32,true
+4246,BH-004246/2025,9254,SN601763620760,38,4,TÌNH TRẠNG: DÍNH NƯỚC BIỂN MÁY NÓNG VÀ TẮT ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,5,CAO,HOAN_TAT,2,2025-12-12 13:00,2025-12-13 13:00,,false
+4259,BH-004259/2025,23523,SN181686560304,4,2,man hinh bi am vang mot goc moi bi 2 ngay nay,1,CAO,DANG_XU_LY,29,2025-11-29 10:00,2025-11-30 10:00,,false
+4263,BH-004263/2024,44603,SN783054634760,82,5,tình trạng: máy rơi vào nước không lên nguồn xảy ra sau khi rơi,5,CAO,HOAN_TAT,35,2024-12-03 11:15,2024-12-04 11:15,,true
+4266,BH-004266/2026,46518,SN281522540615,264,5,khách hàng phản ánh màn hình bị sọc dọc bị từ tuần trước,1,CAO,HOAN_TAT,9,2026-07-02 12:30,2026-07-03 12:30,,true
+4267,BH-004267/2025,34171,SN444548634901,209,5,may bi cảm ứng loạn không bấm được đã thử khởi động lại không được,1,CAO,DANG_XU_LY,24,2025-05-05 16:30,2025-05-06 16:30,,true
+4271,BH-004271/2024,25128,SN115470360117,272,4,may bi cắm sạc báo lỗi phụ kiện khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_DONG,15,2024-10-20 10:15,2024-10-23 10:15,2024-10-21 07:43,false
+4280,BH-004280/2026,21567,SN416759621197,90,5,khách hàng phản ánh cổng sạc bị gãy chân xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,35,2026-03-09 10:00,2026-03-12 10:00,,true
+4281,BH-004281/2025,21340,SN792900191589,67,5,MAY BI PIN CHAI CHỈ CÒN DÙNG ĐƯỢC NỬA NGÀY MÁY CÒN BẢO HÀNH,2,TRUNG_BINH,DA_DONG,31,2025-03-28 17:00,2025-03-31 17:00,2025-03-30 09:39,false
+4288,BH-004288/2025,49097,SN944038743684,119,5,khách hàng phản ánh dính nước biển máy nóng và tắt mới bị 2 ngày nay,5,CAO,DANG_XU_LY,35,2025-06-30 12:30,2025-07-01 12:30,,true
+4289,BH-004289/2024,41878,SN898904941039,45,2,khách hàng phản ánh máy chạy chậm giật lag sau khi cập nhật bị từ tuần trước,4,THAP,DANG_XU_LY,25,2024-12-21 14:45,2024-12-26 14:45,,false
+4293,BH-004293/2025,6198,SN401586096103,214,3,khách hàng phản ánh màn hình chớp tắt liên tục,1,CAO,HOAN_TAT,37,2025-12-12 10:45,2025-12-13 10:45,,true
+4305,BH-004305/2025,44607,SN422399421307,183,2,MAY BI PIN NONG BAT THUONG KHI DUNG XAY RA SAU KHI ROI,2,TRUNG_BINH,DA_DONG,8,2025-11-01 08:00,2025-11-04 08:00,2025-11-05 21:36,false
+4308,BH-004308/2026,28277,SN424012632294,110,6,cảm ứng chỗ được chỗ không,1,CAO,DANG_XU_LY,28,2026-04-09 13:30,2026-04-10 13:30,,true
+4322,BH-004322/2026,12214,SN339909155311,16,2,khách báo báo pin sai phần trăm nhảy loạn xảy ra sau khi rơi,2,TRUNG_BINH,DANG_XU_LY,29,2026-01-21 14:45,2026-01-24 14:45,,true
+4328,BH-004328/2025,4671,SN372765266911,135,4,khách báo điểm chết trên màn hình bị từ tuần trước,1,CAO,DA_DONG,6,2025-02-17 16:00,2025-02-18 16:00,2025-02-18 09:35,false
+4333,BH-004333/2025,6874,SN907044689120,100,5,màn hình đen không lên máy còn bảo hành,1,CAO,DANG_XU_LY,17,2025-11-06 15:30,2025-11-07 15:30,,true
+4338,BH-004338/2026,31905,SN442903815190,139,3,kh nói sạc rất chậm mất cả đêm máy còn bảo hành,3,TRUNG_BINH,DANG_XU_LY,37,2026-08-12 09:00,2026-08-15 09:00,,true
+4357,BH-004357/2024,28606,SN861746359231,163,1,man hinh den khong len da thu khoi dong lai khong duoc,1,CAO,DA_PHAN_CONG,20,2024-12-12 09:00,2024-12-13 09:00,,true
+4368,BH-004368/2025,9360,SN177110654511,142,4,máy không giữ được pin qua đêm mới bị 2 ngày nay,2,TRUNG_BINH,DA_DONG,34,2025-01-20 13:45,2025-01-23 13:45,2025-01-22 21:41,true
+4381,BH-004381/2024,41324,SN136802824317,253,6,may bi may khong giu duoc pin qua dem,2,TRUNG_BINH,DA_PHAN_CONG,10,2024-11-10 15:00,2024-11-13 15:00,,false
+4382,BH-004382/2026,5206,SN772566942564,16,3,kh nói điện thoại dính nước mưa loa bị rè đã thử khởi động lại không được,5,CAO,DA_DONG,19,2026-02-11 17:15,2026-02-12 17:15,2026-02-12 04:18,true
+4407,BH-004407/2024,37727,SN950525598103,49,3,màn hình bị hở sáng viền dưới đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,3,2024-10-11 15:45,2024-10-12 15:45,,true
+4410,BH-004410/2026,41049,SN768215595486,146,6,TINH TRANG: CHAN SAC LONG PHAI GIU MOI SAC DUOC,3,TRUNG_BINH,CHO_LINH_KIEN,18,2026-06-14 11:30,2026-06-17 11:30,,false
+4419,BH-004419/2025,29218,SN191448130009,312,4,kh nói máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,DANG_XU_LY,16,2025-08-19 08:30,2025-08-22 08:30,,true
+4434,BH-004434/2025,38896,SN743908098492,273,5,khách hàng phản ánh cổng sạc bám bụi không tiếp xúc bị từ tuần trước,3,TRUNG_BINH,HOAN_TAT,7,2025-03-18 14:15,2025-03-21 14:15,,true
+4435,BH-004435/2026,43756,SN282219846342,121,3,tình trạng: màn hình bị sọc dọc đã thử khởi động lại không được,1,CAO,HOAN_TAT,27,2026-05-13 13:30,2026-05-14 13:30,,true
+4445,BH-004445/2025,22514,SN707459842414,10,5,kh nói cắm sạc máy nóng bất thường bị từ tuần trước,3,TRUNG_BINH,DA_DONG,7,2025-03-31 10:15,2025-04-03 10:15,2025-04-03 00:12,false
+4453,BH-004453/2024,39665,SN844618995060,293,1,kh nói cắm sạc báo lỗi phụ kiện xảy ra sau khi rơi,3,TRUNG_BINH,CHO_LINH_KIEN,20,2024-11-27 09:45,2024-11-30 09:45,,true
+4454,BH-004454/2024,48906,SN220841041720,123,3,khách báo cổng sạc bị gãy chân,3,TRUNG_BINH,CHO_LINH_KIEN,3,2024-12-27 14:00,2024-12-30 14:00,,true
+4456,BH-004456/2025,22823,SN359389605152,248,3,MAY BI CAM UNG LOAN KHONG BAM DUOC MAY CON BAO HANH,1,CAO,DA_PHAN_CONG,3,2025-12-14 15:30,2025-12-15 15:30,,true
+4477,BH-004477/2025,42346,SN571757997762,160,5,khách báo màn hình bị sọc dọc,1,CAO,CHO_LINH_KIEN,24,2025-08-03 13:30,2025-08-04 13:30,,true
+4482,BH-004482/2026,29408,SN956388806344,51,2,may bi điểm chết trên màn hình đã thử khởi động lại không được,1,CAO,DANG_XU_LY,5,2026-03-21 16:45,2026-03-22 16:45,,false
+4484,BH-004484/2025,22941,SN785182207232,46,2,tình trạng: mic gọi điện đối phương không nghe được xảy ra sau khi rơi,6,TRUNG_BINH,CHO_LINH_KIEN,5,2025-02-26 16:15,2025-03-01 16:15,,true
+4495,BH-004495/2024,22890,SN202968870734,80,1,kh nói cảm ứng chỗ được chỗ không máy còn bảo hành,1,CAO,CHO_LINH_KIEN,1,2024-10-15 14:30,2024-10-16 14:30,,true
+4510,BH-004510/2024,35037,SN495210318702,217,1,màn hình bị hở sáng viền dưới bị từ tuần trước,1,CAO,HOAN_TAT,20,2024-11-09 12:15,2024-11-10 12:15,,true
+4515,BH-004515/2026,44687,SN226154303422,301,3,khách hàng phản ánh máy treo logo không vào được hệ điều hành bị từ tuần trước,4,THAP,DA_DONG,37,2026-08-25 15:30,2026-08-30 15:30,2026-08-27 16:57,true
+4521,BH-004521/2025,22581,SN435758416448,40,4,kh nói máy treo logo không vào được hệ điều hành máy còn bảo hành,4,TRUNG_BINH,DANG_XU_LY,4,2025-07-21 14:30,2025-07-24 14:30,,true
+4531,BH-004531/2024,41174,SN407466955822,261,2,pin sụt 20% chỉ sau vài phút,2,TRUNG_BINH,HOAN_TAT,30,2024-10-30 16:30,2024-11-02 16:30,,true
+4539,BH-004539/2025,48490,SN364371706151,87,5,khách hàng phản ánh điểm chết trên màn hình bị từ tuần trước,1,CAO,DA_DONG,35,2025-06-24 15:15,2025-06-25 15:15,2025-06-25 17:40,true
+4555,BH-004555/2026,7688,SN804353323544,241,2,khách báo rơi bồn rửa máy chập chờn mới bị 2 ngày nay,5,TRUNG_BINH,DANG_XU_LY,5,2026-07-20 17:00,2026-07-23 17:00,,true
+4557,BH-004557/2026,13689,SN297958417202,225,2,tình trạng: màn hình đen không lên mới bị 2 ngày nay,1,TRUNG_BINH,DA_DONG,29,2026-04-09 15:30,2026-04-12 15:30,2026-04-10 20:17,true
+4583,BH-004583/2024,19434,SN709682431578,94,4,tình trạng: máy vào nước màn hình loang ố mới bị 2 ngày nay,5,CAO,HOAN_TAT,34,2024-12-14 13:15,2024-12-15 13:15,,true
+4587,BH-004587/2026,24847,SN236501480340,100,2,khach hang phan anh sac rat cham mat ca dem,3,TRUNG_BINH,DANG_XU_LY,5,2026-01-11 17:15,2026-01-14 17:15,,true
+4589,BH-004589/2025,4939,SN650893207698,34,4,tình trạng: pin chai chỉ còn dùng được nửa ngày mới bị 2 ngày nay,2,TRUNG_BINH,DANG_XU_LY,34,2025-06-25 13:00,2025-06-28 13:00,,true
+4597,BH-004597/2026,44221,SN237484617984,217,6,may bi may tu tat khi con 30% pin xay ra sau khi roi,2,TRUNG_BINH,DANG_XU_LY,13,2026-01-22 14:00,2026-01-25 14:00,,true
+4603,BH-004603/2026,49476,SN243788089570,82,4,tình trạng: màn hình chớp tắt liên tục bị từ tuần trước,1,CAO,DA_DONG,16,2026-06-21 08:45,2026-06-22 08:45,2026-06-21 14:52,true
+4615,BH-004615/2025,15702,SN926990014593,11,6,khach hang phan anh man hinh bi am vang mot goc may con bao hanh,1,THAP,HOAN_TAT,13,2025-06-10 15:30,2025-06-15 15:30,,false
+4629,BH-004629/2025,16878,SN518869088171,295,5,tình trạng: máy rung liên tục không dừng,6,TRUNG_BINH,DA_PHAN_CONG,17,2025-05-17 08:00,2025-05-20 08:00,,false
+4634,BH-004634/2024,29367,SN503419686086,230,1,may bi máy bị đổ nước ngọt vào không sạc được bị từ tuần trước,5,CAO,DANG_XU_LY,33,2024-12-26 16:15,2024-12-27 16:15,,true
+4654,BH-004654/2024,22749,SN347332480966,13,3,khách hàng phản ánh cổng sạc bị gãy chân mới bị 2 ngày nay,3,TRUNG_BINH,DA_PHAN_CONG,38,2024-11-23 10:15,2024-11-26 10:15,,true
+4670,BH-004670/2025,27202,SN503740995467,296,2,pin tụt rất nhanh dùng 2 tiếng đã hết bị từ tuần trước,2,TRUNG_BINH,CHO_LINH_KIEN,5,2025-07-06 13:00,2025-07-09 13:00,,true
+4678,BH-004678/2026,19185,SN749199225222,208,6,tình trạng: màn hình bị ám vàng một góc bị từ tuần trước,1,CAO,DANG_XU_LY,18,2026-08-26 08:15,2026-08-27 08:15,,true
+4682,BH-004682/2026,154,SN903723569157,122,5,kh nói máy chạy chậm giật lag sau khi cập nhật xảy ra sau khi rơi,4,THAP,DANG_XU_LY,9,2026-07-21 08:00,2026-07-26 08:00,,true
+4684,BH-004684/2025,45127,SN386299696902,241,4,may bi máy không giữ được pin qua đêm,2,TRUNG_BINH,DA_DONG,6,2025-04-20 08:30,2025-04-23 08:30,2025-04-21 09:09,true
+4691,BH-004691/2025,18267,SN547674884475,91,2,may bi pin sụt 20% chỉ sau vài phút đã thử khởi động lại không được,2,TRUNG_BINH,CHO_LINH_KIEN,8,2025-09-03 15:15,2025-09-06 15:15,,true
+4707,BH-004707/2026,47984,SN950017988812,5,3,MAY BI KHÔNG CÀI ĐƯỢC ỨNG DỤNG BÁO LỖI XẢY RA SAU KHI RƠI,4,THAP,CHO_LINH_KIEN,27,2026-07-23 17:30,2026-07-28 17:30,,true
+4730,BH-004730/2025,21547,SN993994869537,20,1,kh nói màn hình bị hở sáng viền dưới mới bị 2 ngày nay,1,CAO,DA_PHAN_CONG,1,2025-11-17 11:15,2025-11-18 11:15,,true
+4732,BH-004732/2025,20198,SN109222192705,314,1,kh nói quên mật khẩu không mở được máy máy còn bảo hành,4,THAP,CHO_LINH_KIEN,33,2025-07-31 16:45,2025-08-05 16:45,,false
+4742,BH-004742/2026,22203,SN482838341181,237,4,khách báo quên mật khẩu không mở được máy bị từ tuần trước,4,CAO,DANG_XU_LY,6,2026-05-28 10:45,2026-05-29 10:45,,true
+4743,BH-004743/2025,29037,SN477293976142,16,6,man hinh xuat hien vet muc loang may con bao hanh,1,CAO,HOAN_TAT,13,2025-04-22 14:00,2025-04-23 14:00,,true
+4748,BH-004748/2024,6830,SN721863950319,13,4,máy bị đổ nước ngọt vào không sạc được xảy ra sau khi rơi,5,CAO,DANG_XU_LY,16,2024-11-12 15:30,2024-11-13 15:30,,true
+4752,BH-004752/2025,5079,SN284135252016,318,3,TÌNH TRẠNG: SẠC ĐẦY NHƯNG DÙNG 30 PHÚT LÀ SẬP NGUỒN ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,2,TRUNG_BINH,CHO_LINH_KIEN,19,2025-04-22 15:15,2025-04-25 15:15,,false
+4764,BH-004764/2025,16239,SN313864185586,269,4,KH NOI CAM UNG CHO DUOC CHO KHONG DA THU KHOI DONG LAI KHONG DUOC,1,THAP,DA_PHAN_CONG,4,2025-06-01 13:15,2025-06-06 13:15,,false
+4773,BH-004773/2024,25294,SN531846796670,244,3,khách hàng phản ánh cổng sạc bị gãy chân máy còn bảo hành,3,TRUNG_BINH,DANG_XU_LY,3,2024-10-19 09:30,2024-10-22 09:30,,true
+4781,BH-004781/2024,11177,SN403923316056,144,1,khách báo màn hình nứt sau khi rơi mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,20,2024-09-26 14:15,2024-09-27 14:15,,true
+4784,BH-004784/2024,41518,SN826037062093,41,1,khách báo máy phồng pin cấn màn hình máy còn bảo hành,2,TRUNG_BINH,DANG_XU_LY,20,2024-09-09 17:30,2024-09-12 17:30,,false
+4792,BH-004792/2026,11565,SN680051546517,218,3,kh nói máy tự tắt khi còn 30% pin đã thử khởi động lại không được,2,TRUNG_BINH,HOAN_TAT,22,2026-03-03 17:45,2026-03-06 17:45,,true
+4793,BH-004793/2026,18779,SN318955811235,190,2,khách báo màn hình bị sọc dọc đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,29,2026-06-14 12:00,2026-06-15 12:00,,true
+4795,BH-004795/2025,28293,SN920631537562,87,4,mic gọi điện đối phương không nghe được khách chưa từng sửa ở đâu,6,TRUNG_BINH,CHO_LINH_KIEN,14,2025-03-23 14:15,2025-03-26 14:15,,false
+4812,BH-004812/2026,10455,SN198816332239,202,1,may bi máy tự khởi động lại nhiều lần trong ngày máy còn bảo hành,4,THAP,DA_DONG,1,2026-07-23 16:30,2026-07-28 16:30,2026-07-25 15:36,false
+4815,BH-004815/2025,14019,SN502581470333,45,1,khách báo máy không giữ được pin qua đêm bị từ tuần trước,2,TRUNG_BINH,HOAN_TAT,33,2025-07-19 14:15,2025-07-22 14:15,,false
+4816,BH-004816/2026,41456,SN990171781398,102,3,kh noi cam ung loan khong bam duoc khach chua tung sua o dau,1,CAO,CHO_LINH_KIEN,38,2026-06-29 17:45,2026-06-30 17:45,,false
+4829,BH-004829/2026,14251,SN995270389469,16,3,khách hàng phản ánh cảm ứng loạn không bấm được bị từ tuần trước,1,TRUNG_BINH,DA_PHAN_CONG,38,2026-03-21 10:30,2026-03-24 10:30,,true
+4833,BH-004833/2024,23696,SN272063324133,101,2,KHÁCH BÁO CỔNG SẠC BÁM BỤI KHÔNG TIẾP XÚC KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,3,TRUNG_BINH,DA_PHAN_CONG,5,2024-09-29 14:00,2024-10-02 14:00,,true
+4838,BH-004838/2024,10959,SN910091385889,210,5,màn hình nứt sau khi rơi,1,CAO,DANG_XU_LY,35,2024-10-30 17:15,2024-10-31 17:15,,true
+4859,BH-004859/2024,11269,SN867744426033,10,6,khách báo cảm ứng loạn không bấm được,1,CAO,CHO_LINH_KIEN,11,2024-10-21 11:15,2024-10-22 11:15,,true
+4863,BH-004863/2026,53690,SN726624182746,303,3,MAY BI ĐIỆN THOẠI DÍNH NƯỚC MƯA LOA BỊ RÈ MỚI BỊ 2 NGÀY NAY,5,THAP,DANG_XU_LY,38,2026-06-10 12:00,2026-06-15 12:00,,true
+4865,BH-004865/2026,3682,SN611268354494,320,3,báo pin sai phần trăm nhảy loạn,2,TRUNG_BINH,CHO_LINH_KIEN,36,2026-06-27 10:00,2026-06-30 10:00,,true
+4867,BH-004867/2026,48332,SN642532600930,74,6,tình trạng: màn hình bị sọc dọc đã thử khởi động lại không được,1,CAO,DANG_XU_LY,13,2026-01-01 11:30,2026-01-02 11:30,,true
+4870,BH-004870/2026,18691,SN952993967310,305,4,may bi máy chạy chậm giật lag sau khi cập nhật máy còn bảo hành,4,THAP,DANG_XU_LY,15,2026-03-15 10:15,2026-03-20 10:15,,true
+4872,BH-004872/2024,957,SN901015134336,319,3,cảm ứng chỗ được chỗ không bị từ tuần trước,1,CAO,HOAN_TAT,19,2024-10-21 13:15,2024-10-22 13:15,,true
+4873,BH-004873/2024,5448,SN311313165686,97,6,kh nói dính nước biển máy nóng và tắt bị từ tuần trước,5,CAO,DA_PHAN_CONG,18,2024-10-12 13:00,2024-10-13 13:00,,true
+4888,BH-004888/2025,31391,SN631687799640,311,2,tình trạng: cổng sạc bị gãy chân đã thử khởi động lại không được,3,TRUNG_BINH,DANG_XU_LY,29,2025-07-14 17:30,2025-07-17 17:30,,true
+4909,BH-004909/2025,17465,SN747604348672,174,6,kh nói pin nóng bất thường khi dùng bị từ tuần trước,2,TRUNG_BINH,CHO_LINH_KIEN,28,2025-06-03 10:45,2025-06-06 10:45,,true
+4920,BH-004920/2026,42950,SN731597220428,45,6,tình trạng: pin nóng bất thường khi dùng mới bị 2 ngày nay,2,TRUNG_BINH,DANG_XU_LY,23,2026-03-14 14:15,2026-03-17 14:15,,false
+4923,BH-004923/2024,185,SN438526902938,217,4,khach hang phan anh camera mo len bi den man da thu khoi dong lai khong duoc,4,THAP,CHO_LINH_KIEN,6,2024-11-09 11:45,2024-11-14 11:45,,true
+4927,BH-004927/2025,39677,SN375860759266,320,4,kh nói máy vào nước màn hình loang ố bị từ tuần trước,5,CAO,DA_PHAN_CONG,14,2025-09-25 17:45,2025-09-26 17:45,,true
+4948,BH-004948/2025,11873,SN115561785153,134,3,cắm sạc máy nóng bất thường,3,TRUNG_BINH,DANG_XU_LY,3,2025-11-18 08:30,2025-11-21 08:30,,false
+4956,BH-004956/2024,52054,SN900223482279,221,1,KHÁCH BÁO MÁY PHỒNG PIN CẤN MÀN HÌNH,2,TRUNG_BINH,DA_PHAN_CONG,1,2024-12-16 10:00,2024-12-19 10:00,,true
+4960,BH-004960/2024,6005,SN624158776812,165,4,KHÁCH BÁO MÁY BỊ ĐỔ NƯỚC NGỌT VÀO KHÔNG SẠC ĐƯỢC KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,5,CAO,DA_DONG,16,2024-11-11 11:45,2024-11-12 11:45,2024-11-12 05:41,true
+4963,BH-004963/2025,21720,SN595338642916,174,1,KHACH HANG PHAN ANH MAN HINH BI HO SANG VIEN DUOI XAY RA SAU KHI ROI,1,CAO,HOAN_TAT,1,2025-03-29 16:15,2025-03-30 16:15,,true
+4986,BH-004986/2026,33057,SN791282762125,226,5,tình trạng: màn hình nứt sau khi rơi mới bị 2 ngày nay,1,CAO,HOAN_TAT,26,2026-02-17 13:00,2026-02-18 13:00,,true
+4998,BH-004998/2025,49813,SN299353381991,271,6,khách hàng phản ánh máy tự tắt khi còn 30% pin khách chưa từng sửa ở đâu,2,TRUNG_BINH,HOAN_TAT,23,2025-09-03 09:30,2025-09-06 09:30,,false
+5014,BH-005014/2025,5966,SN513199626260,115,1,kh noi cam ung cho duoc cho khong bi tu tuan truoc,1,CAO,DANG_XU_LY,20,2025-03-06 15:15,2025-03-07 15:15,,true
+5024,BH-005024/2024,11873,SN923394083665,232,3,khách báo máy không giữ được pin qua đêm khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,3,2024-09-17 08:00,2024-09-20 08:00,,true
+5025,BH-005025/2024,29,SN386348644011,221,4,may bi máy tự tắt khi còn 30% pin bị từ tuần trước,2,THAP,DA_PHAN_CONG,2,2024-12-11 14:30,2024-12-16 14:30,,false
+5031,BH-005031/2024,41655,SN794252462205,68,4,máy treo logo không vào được hệ điều hành máy còn bảo hành,4,TRUNG_BINH,DA_DONG,4,2024-09-26 08:45,2024-09-29 08:45,2024-09-28 15:56,true
+5060,BH-005060/2025,21473,SN412680083078,90,2,cắm sạc báo lỗi phụ kiện máy còn bảo hành,3,TRUNG_BINH,DA_DONG,30,2025-11-09 16:15,2025-11-12 16:15,2025-11-11 01:22,true
+5064,BH-005064/2025,14625,SN900142046426,263,4,tình trạng: báo pin sai phần trăm nhảy loạn,2,TRUNG_BINH,DA_PHAN_CONG,4,2025-07-07 10:00,2025-07-10 10:00,,true
+5067,BH-005067/2025,1882,SN880539214732,129,5,tình trạng: báo pin sai phần trăm nhảy loạn bị từ tuần trước,2,TRUNG_BINH,CHO_LINH_KIEN,17,2025-07-29 16:15,2025-08-01 16:15,,false
+5082,BH-005082/2025,8503,SN528349485347,61,1,khách hàng phản ánh pin sụt 20% chỉ sau vài phút bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,20,2025-03-30 14:30,2025-04-02 14:30,,true
+5083,BH-005083/2025,19905,SN617155199463,217,4,tình trạng: pin tụt rất nhanh dùng 2 tiếng đã hết đã thử khởi động lại không được,2,TRUNG_BINH,HOAN_TAT,4,2025-08-03 09:15,2025-08-06 09:15,,true
+5086,BH-005086/2026,14792,SN802182536442,266,6,may bi pin tụt rất nhanh dùng 2 tiếng đã hết máy còn bảo hành,2,TRUNG_BINH,DA_DONG,18,2026-02-03 13:00,2026-02-06 13:00,2026-02-05 16:58,true
+5109,BH-005109/2026,21984,SN858526617495,104,5,tình trạng: cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,HOAN_TAT,17,2026-02-23 09:45,2026-02-24 09:45,,true
+5111,BH-005111/2025,3614,SN490111901492,93,5,khách hàng phản ánh camera mở lên bị đen màn khách chưa từng sửa ở đâu,4,THAP,DANG_XU_LY,31,2025-01-19 12:15,2025-01-24 12:15,,false
+5115,BH-005115/2025,11707,SN611864733966,123,5,khách báo báo pin sai phần trăm nhảy loạn,2,TRUNG_BINH,DA_DONG,17,2025-09-25 16:30,2025-09-28 16:30,2025-10-02 23:16,true
+5117,BH-005117/2026,13806,SN733774486167,140,3,kh nói không cài được ứng dụng báo lỗi,4,THAP,HOAN_TAT,22,2026-07-29 09:30,2026-08-03 09:30,,true
+5134,BH-005134/2026,19132,SN970287397446,276,2,khách hàng phản ánh máy rơi vào nước không lên nguồn mới bị 2 ngày nay,5,TRUNG_BINH,DA_PHAN_CONG,8,2026-04-29 11:15,2026-05-02 11:15,,true
+5137,BH-005137/2026,37110,SN874992543324,84,4,khách báo rơi bồn rửa máy chập chờn mới bị 2 ngày nay,5,CAO,DANG_XU_LY,34,2026-04-01 13:30,2026-04-02 13:30,,true
+5151,BH-005151/2025,28706,SN113190955604,210,3,khách báo máy phồng pin cấn màn hình bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,22,2025-08-26 16:45,2025-08-29 16:45,,true
+5155,BH-005155/2026,7948,SN460709567868,125,3,khách hàng phản ánh sạc rất chậm mất cả đêm đã thử khởi động lại không được,3,TRUNG_BINH,DA_DONG,27,2026-03-18 14:00,2026-03-21 14:00,2026-03-20 12:06,true
+5158,BH-005158/2025,28114,SN632368148259,48,3,khach bao may phong pin can man hinh da thu khoi dong lai khong duoc,2,TRUNG_BINH,CHO_LINH_KIEN,32,2025-10-07 08:15,2025-10-10 08:15,,true
+5171,BH-005171/2026,20552,SN948342797463,89,4,pin sụt 20% chỉ sau vài phút xảy ra sau khi rơi,2,CAO,HOAN_TAT,21,2026-01-03 09:45,2026-01-04 09:45,,true
+5172,BH-005172/2025,38769,SN313683696506,311,5,tình trạng: cắm sạc báo lỗi phụ kiện đã thử khởi động lại không được,3,TRUNG_BINH,HOAN_TAT,31,2025-08-27 12:00,2025-08-30 12:00,,true
+5174,BH-005174/2024,4981,SN521362803938,180,3,tình trạng: điểm chết trên màn hình mới bị 2 ngày nay,1,TRUNG_BINH,HOAN_TAT,22,2024-12-31 15:45,2025-01-03 15:45,,false
+5182,BH-005182/2024,40061,SN557549449816,157,4,kh nói máy rung liên tục không dừng xảy ra sau khi rơi,6,TRUNG_BINH,DANG_XU_LY,2,2024-08-30 11:00,2024-09-02 11:00,,true
+5183,BH-005183/2025,48038,SN547234629375,181,6,khách hàng phản ánh máy treo logo không vào được hệ điều hành,4,THAP,DANG_XU_LY,23,2025-08-14 10:15,2025-08-19 10:15,,true
+5195,BH-005195/2024,970,SN746818938828,121,6,kh nói mic gọi điện đối phương không nghe được mới bị 2 ngày nay,6,TRUNG_BINH,DA_DONG,18,2024-11-27 13:00,2024-11-30 13:00,2024-11-30 01:13,true
+5203,BH-005203/2025,26629,SN828475938161,15,4,tình trạng: màn hình bị hở sáng viền dưới mới bị 2 ngày nay,1,CAO,DA_DONG,16,2025-08-30 12:15,2025-08-31 12:15,2025-09-01 10:08,false
+5205,BH-005205/2025,13879,SN422804046470,101,3,khách báo không nhận sim xảy ra sau khi rơi,6,TRUNG_BINH,CHO_LINH_KIEN,19,2025-09-27 12:45,2025-09-30 12:45,,true
+5206,BH-005206/2025,30342,SN905727461873,72,2,khach bao khong cai duoc ung dung bao loi,4,THAP,DA_DONG,5,2025-03-03 13:30,2025-03-08 13:30,2025-03-07 15:46,true
+5217,BH-005217/2024,40941,SN823426429801,103,4,tình trạng: máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,DA_DONG,6,2024-09-09 12:30,2024-09-12 12:30,2024-09-10 13:43,true
+5219,BH-005219/2025,41406,SN783893717405,33,2,sạc đầy nhưng dùng 30 phút là sập nguồn,2,TRUNG_BINH,DANG_XU_LY,5,2025-06-11 14:15,2025-06-14 14:15,,true
+5220,BH-005220/2025,50362,SN149195236390,103,3,khách báo cảm ứng chỗ được chỗ không,1,CAO,HOAN_TAT,36,2025-10-02 14:15,2025-10-03 14:15,,true
+5221,BH-005221/2025,43140,SN406643044251,256,3,màn hình nứt sau khi rơi khách chưa từng sửa ở đâu,1,CAO,DANG_XU_LY,38,2025-05-13 11:30,2025-05-14 11:30,,true
+5226,BH-005226/2025,14624,SN996015997010,239,5,báo pin sai phần trăm nhảy loạn xảy ra sau khi rơi,2,TRUNG_BINH,HOAN_TAT,7,2025-04-30 17:30,2025-05-03 17:30,,true
+5227,BH-005227/2025,15694,SN282093491116,197,6,khách hàng phản ánh màn hình bị hở sáng viền dưới xảy ra sau khi rơi,1,CAO,DA_PHAN_CONG,18,2025-11-26 13:15,2025-11-27 13:15,,true
+5240,BH-005240/2025,24510,SN992615922453,19,6,tình trạng: máy vào nước màn hình loang ố đã thử khởi động lại không được,5,TRUNG_BINH,CHO_LINH_KIEN,23,2025-03-04 08:15,2025-03-07 08:15,,true
+5247,BH-005247/2026,27170,SN294517774285,150,1,cảm ứng chỗ được chỗ không đã thử khởi động lại không được,1,CAO,DA_PHAN_CONG,20,2026-03-29 15:00,2026-03-30 15:00,,true
+5249,BH-005249/2026,41422,SN554001317107,234,3,tinh trang: dien thoai dinh nuoc mua loa bi re,5,CAO,DA_DONG,38,2026-03-26 13:45,2026-03-27 13:45,2026-03-27 07:20,false
+5253,BH-005253/2025,18761,SN902055433376,76,4,khách báo pin chai chỉ còn dùng được nửa ngày khách chưa từng sửa ở đâu,2,TRUNG_BINH,CHO_LINH_KIEN,21,2025-11-08 17:15,2025-11-11 17:15,,true
+5254,BH-005254/2024,50401,SN891105190176,175,1,khách hàng phản ánh màn hình nứt sau khi rơi xảy ra sau khi rơi,1,CAO,CHO_LINH_KIEN,20,2024-10-11 15:15,2024-10-12 15:15,,true
+5255,BH-005255/2025,41798,SN574530780385,180,6,khách báo máy phồng pin cấn màn hình xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,23,2025-11-12 08:45,2025-11-15 08:45,,true
+5261,BH-005261/2025,45968,SN879966130451,178,1,khách hàng phản ánh cổng sạc bám bụi không tiếp xúc,3,TRUNG_BINH,CHO_LINH_KIEN,33,2025-11-23 15:00,2025-11-26 15:00,,true
+5283,BH-005283/2025,52774,SN718992910144,260,2,kh nói cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,DANG_XU_LY,30,2025-06-17 10:00,2025-06-18 10:00,,true
+5287,BH-005287/2024,41345,SN923494051859,302,5,chân sạc lỏng phải giữ mới sạc được bị từ tuần trước,3,TRUNG_BINH,DANG_XU_LY,35,2024-09-25 15:30,2024-09-28 15:30,,true
+5288,BH-005288/2025,30803,SN852035720342,214,3,khách báo máy tự tắt khi còn 30% pin máy còn bảo hành,2,CAO,DA_PHAN_CONG,32,2025-08-15 11:30,2025-08-16 11:30,,true
+5291,BH-005291/2024,16582,SN811293650251,232,6,kh nói máy rơi vào nước không lên nguồn xảy ra sau khi rơi,5,CAO,DA_PHAN_CONG,11,2024-11-19 14:30,2024-11-20 14:30,,true
+5295,BH-005295/2025,5521,SN951570845715,229,4,khách báo cảm ứng loạn không bấm được máy còn bảo hành,1,CAO,DA_PHAN_CONG,15,2025-07-30 14:30,2025-07-31 14:30,,true
+5296,BH-005296/2024,15464,SN836929486993,46,2,cảm ứng chỗ được chỗ không,1,CAO,DANG_XU_LY,8,2024-10-28 17:30,2024-10-29 17:30,,true
+5308,BH-005308/2024,26500,SN797174265742,5,4,tình trạng: cắm sạc báo lỗi phụ kiện,3,TRUNG_BINH,DA_PHAN_CONG,2,2024-10-05 12:30,2024-10-08 12:30,,true
+5309,BH-005309/2025,11324,SN580274046891,320,2,khách báo sạc vào nhưng không nhận cáp mới bị 2 ngày nay,3,TRUNG_BINH,DA_PHAN_CONG,8,2025-03-02 09:30,2025-03-05 09:30,,true
+5310,BH-005310/2025,28230,SN649367951380,181,1,kh nói màn hình bị ám vàng một góc bị từ tuần trước,1,CAO,DA_PHAN_CONG,1,2025-10-07 10:00,2025-10-08 10:00,,true
+5314,BH-005314/2024,23001,SN435251753401,310,4,tình trạng: cổng sạc bám bụi không tiếp xúc,3,TRUNG_BINH,DA_PHAN_CONG,15,2024-10-31 15:15,2024-11-03 15:15,,false
+5316,BH-005316/2025,16571,SN174571283175,269,2,tình trạng: cảm ứng loạn không bấm được đã thử khởi động lại không được,1,CAO,HOAN_TAT,29,2025-10-01 09:00,2025-10-02 09:00,,true
+5317,BH-005317/2026,37002,SN639130348547,69,6,khách hàng phản ánh cổng sạc bám bụi không tiếp xúc bị từ tuần trước,3,TRUNG_BINH,CHO_LINH_KIEN,11,2026-06-05 16:30,2026-06-08 16:30,,false
+5321,BH-005321/2025,12996,SN236150748430,240,5,khách hàng phản ánh không cài được ứng dụng báo lỗi,4,THAP,DA_PHAN_CONG,9,2025-12-07 13:00,2025-12-12 13:00,,true
+5331,BH-005331/2025,46250,SN909861511935,236,4,quên mật khẩu không mở được máy xảy ra sau khi rơi,4,CAO,DA_DONG,34,2025-10-25 12:30,2025-10-26 12:30,2025-10-25 18:42,true
+5332,BH-005332/2025,18336,SN383219060884,298,6,may bi màn hình bị hở sáng viền dưới đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,28,2025-06-16 11:00,2025-06-17 11:00,,false
+5344,BH-005344/2025,27456,SN753562470270,142,3,TÌNH TRẠNG: CHÂN SẠC LỎNG PHẢI GIỮ MỚI SẠC ĐƯỢC ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,3,TRUNG_BINH,DA_PHAN_CONG,19,2025-11-10 08:30,2025-11-13 08:30,,true
+5350,BH-005350/2025,39308,SN288677656860,233,6,tình trạng: máy rung liên tục không dừng,6,TRUNG_BINH,DANG_XU_LY,18,2025-11-14 17:45,2025-11-17 17:45,,false
+5355,BH-005355/2026,49721,SN625774653557,32,3,kh nói màn hình bị sọc dọc máy còn bảo hành,1,CAO,DA_DONG,3,2026-08-01 11:15,2026-08-02 11:15,2026-08-01 18:23,false
+5369,BH-005369/2025,35268,SN860544906407,82,1,khách báo màn hình bị ám vàng một góc xảy ra sau khi rơi,1,CAO,HOAN_TAT,33,2025-05-13 13:15,2025-05-14 13:15,,true
+5370,BH-005370/2024,47589,SN132154008708,196,2,kh nói cảm ứng chỗ được chỗ không xảy ra sau khi rơi,1,CAO,HOAN_TAT,12,2024-10-03 15:30,2024-10-04 15:30,,true
+5371,BH-005371/2025,22576,SN827467622572,118,4,dính nước biển máy nóng và tắt máy còn bảo hành,5,CAO,CHO_LINH_KIEN,4,2025-11-13 10:45,2025-11-14 10:45,,true
+5376,BH-005376/2025,20972,SN705017622079,105,2,KH NÓI SẠC ĐẦY NHƯNG DÙNG 30 PHÚT LÀ SẬP NGUỒN XẢY RA SAU KHI RƠI,2,TRUNG_BINH,DA_DONG,12,2025-02-23 14:00,2025-02-26 14:00,2025-02-26 05:12,true
+5379,BH-005379/2025,14692,SN520638792615,171,5,pin sụt 20% chỉ sau vài phút,2,TRUNG_BINH,DA_PHAN_CONG,31,2025-08-01 14:00,2025-08-04 14:00,,true
+5386,BH-005386/2025,19665,SN944837934827,292,4,khách báo sạc vào nhưng không nhận cáp khách chưa từng sửa ở đâu,3,TRUNG_BINH,HOAN_TAT,4,2025-07-10 08:45,2025-07-13 08:45,,true
+5390,BH-005390/2025,31333,SN426476411215,163,2,may bi máy tự tắt khi còn 30% pin bị từ tuần trước,2,TRUNG_BINH,DANG_XU_LY,5,2025-10-07 08:15,2025-10-10 08:15,,true
+5418,BH-005418/2026,29122,SN526327784938,108,2,may bi máy tự tắt khi còn 30% pin đã thử khởi động lại không được,2,TRUNG_BINH,HOAN_TAT,25,2026-04-06 08:45,2026-04-09 08:45,,true
+5424,BH-005424/2026,49072,SN275789964198,88,3,kh nói máy tự khởi động lại nhiều lần trong ngày máy còn bảo hành,4,THAP,DA_PHAN_CONG,22,2026-06-29 10:00,2026-07-04 10:00,,true
+5425,BH-005425/2025,25178,SN635366723325,145,2,tình trạng: cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,12,2025-04-19 10:15,2025-04-22 10:15,,true
+5428,BH-005428/2024,10890,SN942642425127,35,1,cổng sạc bị gãy chân máy còn bảo hành,3,TRUNG_BINH,DA_PHAN_CONG,33,2024-11-14 16:45,2024-11-17 16:45,,false
+5438,BH-005438/2025,788,SN463587756561,218,3,khách báo cổng sạc bị gãy chân bị từ tuần trước,3,TRUNG_BINH,DA_DONG,3,2025-07-21 17:30,2025-07-24 17:30,2025-07-23 06:21,true
+5442,BH-005442/2026,3399,SN438570975740,300,2,khách hàng phản ánh màn hình đen không lên khách chưa từng sửa ở đâu,1,THAP,DA_PHAN_CONG,12,2026-08-19 17:45,2026-08-24 17:45,,true
+5443,BH-005443/2025,35372,SN646438986847,295,1,khách hàng phản ánh máy tự tắt khi còn 30% pin xảy ra sau khi rơi,2,CAO,CHO_LINH_KIEN,20,2025-04-20 11:45,2025-04-21 11:45,,true
+5448,BH-005448/2025,44621,SN722516409075,17,4,tình trạng: báo pin sai phần trăm nhảy loạn bị từ tuần trước,2,TRUNG_BINH,DA_DONG,34,2025-02-12 11:00,2025-02-15 11:00,2025-02-14 13:59,false
+5453,BH-005453/2026,39529,SN308547286271,173,4,khách báo sạc đầy nhưng dùng 30 phút là sập nguồn khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,21,2026-07-17 15:45,2026-07-20 15:45,,false
+5502,BH-005502/2026,46617,SN314683466159,60,4,tình trạng: máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,CHO_LINH_KIEN,6,2026-06-09 16:00,2026-06-12 16:00,,true
+5508,BH-005508/2025,46727,SN805930981845,204,4,pin tụt rất nhanh dùng 2 tiếng đã hết máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,6,2025-07-19 08:45,2025-07-22 08:45,,true
+5513,BH-005513/2025,18118,SN831620819470,88,5,may bi cổng sạc bám bụi không tiếp xúc khách chưa từng sửa ở đâu,3,TRUNG_BINH,CHO_LINH_KIEN,26,2025-12-17 17:00,2025-12-20 17:00,,true
+5518,BH-005518/2026,3099,SN806801153374,204,2,tình trạng: cảm ứng chỗ được chỗ không xảy ra sau khi rơi,1,CAO,HOAN_TAT,29,2026-02-22 15:45,2026-02-23 15:45,,false
+5523,BH-005523/2026,36289,SN993816623996,300,3,kh nói pin sụt 20% chỉ sau vài phút máy còn bảo hành,2,TRUNG_BINH,CHO_LINH_KIEN,32,2026-08-29 11:00,2026-09-01 11:00,,true
+5526,BH-005526/2026,33605,SN475103625971,283,6,TÌNH TRẠNG: MÀN HÌNH CHỚP TẮT LIÊN TỤC MỚI BỊ 2 NGÀY NAY,1,CAO,DA_PHAN_CONG,11,2026-03-12 16:30,2026-03-13 16:30,,false
+5532,BH-005532/2025,5206,SN352698347239,42,4,khách hàng phản ánh báo pin sai phần trăm nhảy loạn đã thử khởi động lại không được,2,CAO,DA_PHAN_CONG,6,2025-11-16 14:30,2025-11-17 14:30,,false
+5544,BH-005544/2026,8584,SN293636957707,175,2,khách báo màn hình đen không lên máy còn bảo hành,1,CAO,DANG_XU_LY,29,2026-05-27 13:00,2026-05-28 13:00,,true
+5545,BH-005545/2026,32892,SN873254950743,6,2,khách báo cổng sạc bị gãy chân đã thử khởi động lại không được,3,TRUNG_BINH,DA_DONG,8,2026-02-02 17:00,2026-02-05 17:00,2026-02-03 19:27,false
+5547,BH-005547/2025,2388,SN373887838552,227,6,MAY BI SẠC RẤT CHẬM MẤT CẢ ĐÊM ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,3,TRUNG_BINH,DA_DONG,18,2025-07-07 17:15,2025-07-10 17:15,2025-07-08 23:30,true
+5556,BH-005556/2026,34192,SN541849930511,173,4,KHÁCH BÁO MÁY PHỒNG PIN CẤN MÀN HÌNH ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,2,TRUNG_BINH,HOAN_TAT,6,2026-06-25 17:00,2026-06-28 17:00,,true
+5557,BH-005557/2024,37758,SN400944996105,180,3,khách báo màn hình xuất hiện vệt mực loang khách chưa từng sửa ở đâu,1,CAO,DA_DONG,27,2024-11-22 14:30,2024-11-23 14:30,2024-11-23 06:19,true
+5559,BH-005559/2025,39021,SN388395775773,46,1,CẮM SẠC MÁY NÓNG BẤT THƯỜNG,3,TRUNG_BINH,CHO_LINH_KIEN,20,2025-10-05 16:00,2025-10-08 16:00,,true
+5567,BH-005567/2026,20624,SN766271991132,314,4,may bi cảm ứng chỗ được chỗ không đã thử khởi động lại không được,1,CAO,DANG_XU_LY,6,2026-01-13 13:45,2026-01-14 13:45,,true
+5576,BH-005576/2025,20121,SN271372078632,267,1,khách báo màn hình đen không lên bị từ tuần trước,1,CAO,DANG_XU_LY,20,2025-07-19 09:15,2025-07-20 09:15,,false
+5581,BH-005581/2024,31391,SN755020167159,57,1,khach hang phan anh nut nguon bi ket,6,CAO,DA_PHAN_CONG,33,2024-10-15 13:00,2024-10-16 13:00,,true
+5583,BH-005583/2025,15701,SN279205918573,157,3,khách báo màn hình bị sọc dọc mới bị 2 ngày nay,1,CAO,DA_DONG,36,2025-08-31 09:30,2025-09-01 09:30,2025-09-01 06:40,true
+5584,BH-005584/2025,21624,SN620079935619,71,4,tình trạng: máy tự khởi động lại nhiều lần trong ngày khách chưa từng sửa ở đâu,4,THAP,CHO_LINH_KIEN,4,2025-01-06 12:15,2025-01-11 12:15,,true
+5594,BH-005594/2025,36485,SN251271534329,235,1,MAY BI CAMERA SAU BỊ MỜ NHƯ CÓ SƯƠNG KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,6,TRUNG_BINH,DA_PHAN_CONG,1,2025-06-26 08:30,2025-06-29 08:30,,true
+5595,BH-005595/2024,53866,SN758303292772,248,5,kh noi cam ung loan khong bam duoc xay ra sau khi roi,1,CAO,DA_DONG,9,2024-09-21 16:15,2024-09-22 16:15,2024-09-22 08:10,false
+5597,BH-005597/2025,19735,SN198127529159,276,4,khách báo điểm chết trên màn hình,1,CAO,DA_DONG,21,2025-01-11 16:30,2025-01-12 16:30,2025-01-12 07:36,false
+5599,BH-005599/2026,40153,SN757781934835,300,2,khách báo cảm ứng loạn không bấm được đã thử khởi động lại không được,1,TRUNG_BINH,DANG_XU_LY,5,2026-01-31 16:45,2026-02-03 16:45,,true
+5604,BH-005604/2025,47110,SN992189766864,155,6,CHÂN SẠC LỎNG PHẢI GIỮ MỚI SẠC ĐƯỢC XẢY RA SAU KHI RƠI,3,TRUNG_BINH,CHO_LINH_KIEN,13,2025-05-18 10:00,2025-05-21 10:00,,true
+5620,BH-005620/2025,17235,SN824227066812,150,1,tình trạng: màn hình bị sọc dọc,1,CAO,DA_PHAN_CONG,33,2025-04-04 09:45,2025-04-05 09:45,,true
+5623,BH-005623/2025,17100,SN516415649219,259,2,tinh trang: man hinh nut sau khi roi bi tu tuan truoc,1,CAO,HOAN_TAT,30,2025-02-15 11:15,2025-02-16 11:15,,true
+5646,BH-005646/2026,32688,SN130176900815,307,4,màn hình bị hở sáng viền dưới bị từ tuần trước,1,CAO,DA_DONG,4,2026-06-24 13:30,2026-06-25 13:30,2026-06-24 23:31,false
+5664,BH-005664/2024,40526,SN237842127921,167,6,kh nói máy bị đổ nước ngọt vào không sạc được đã thử khởi động lại không được,5,CAO,HOAN_TAT,18,2024-10-01 14:15,2024-10-02 14:15,,true
+5668,BH-005668/2025,21863,SN651972039730,78,4,KH NÓI MÀN HÌNH ĐEN KHÔNG LÊN BỊ TỪ TUẦN TRƯỚC,1,CAO,DA_PHAN_CONG,14,2025-03-09 16:45,2025-03-10 16:45,,false
+5669,BH-005669/2025,38236,SN674658285965,219,6,KH NÓI MIC GỌI ĐIỆN ĐỐI PHƯƠNG KHÔNG NGHE ĐƯỢC BỊ TỪ TUẦN TRƯỚC,6,TRUNG_BINH,DANG_XU_LY,10,2025-02-20 12:30,2025-02-23 12:30,,true
+5694,BH-005694/2025,40265,SN848700556081,163,3,khách báo máy không giữ được pin qua đêm khách chưa từng sửa ở đâu,2,TRUNG_BINH,DANG_XU_LY,38,2025-08-11 08:00,2025-08-14 08:00,,true
+5696,BH-005696/2026,22995,SN667983030465,174,1,may bi máy rơi vào nước không lên nguồn khách chưa từng sửa ở đâu,5,CAO,CHO_LINH_KIEN,20,2026-05-29 15:30,2026-05-30 15:30,,true
+5701,BH-005701/2026,28377,SN831466458175,212,1,khách hàng phản ánh sạc vào nhưng không nhận cáp,3,TRUNG_BINH,DA_PHAN_CONG,1,2026-06-11 09:30,2026-06-14 09:30,,true
+5705,BH-005705/2024,45161,SN894847850967,217,3,khach hang phan anh may phong pin can man hinh moi bi 2 ngay nay,2,THAP,HOAN_TAT,22,2024-08-30 16:15,2024-09-04 16:15,,true
+5713,BH-005713/2025,19844,SN741761130762,205,2,tình trạng: máy rung liên tục không dừng đã thử khởi động lại không được,6,TRUNG_BINH,DA_DONG,25,2025-03-27 17:30,2025-03-30 17:30,2025-03-30 00:33,true
+5719,BH-005719/2026,2364,SN778256474898,137,4,khách báo cảm ứng loạn không bấm được khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,14,2026-02-28 12:30,2026-03-01 12:30,,true
+5732,BH-005732/2026,4233,SN874691533382,26,5,khách báo cổng sạc bị gãy chân bị từ tuần trước,3,TRUNG_BINH,CHO_LINH_KIEN,26,2026-08-16 17:00,2026-08-19 17:00,,false
+5734,BH-005734/2024,20392,SN358865831633,30,3,kh nói màn hình chớp tắt liên tục mới bị 2 ngày nay,1,CAO,HOAN_TAT,19,2024-09-16 11:30,2024-09-17 11:30,,true
+5735,BH-005735/2025,4703,SN654133569745,238,2,tình trạng: màn hình chớp tắt liên tục bị từ tuần trước,1,CAO,CHO_LINH_KIEN,12,2025-04-23 11:00,2025-04-24 11:00,,true
+5752,BH-005752/2026,51870,SN901590235378,1,2,may bi màn hình bị ám vàng một góc xảy ra sau khi rơi,1,TRUNG_BINH,DA_PHAN_CONG,29,2026-04-10 15:15,2026-04-13 15:15,,true
+5757,BH-005757/2026,18463,SN370504259601,165,2,kh nói không cài được ứng dụng báo lỗi khách chưa từng sửa ở đâu,4,THAP,DA_PHAN_CONG,8,2026-01-14 12:00,2026-01-19 12:00,,true
+5758,BH-005758/2025,53322,SN887693859160,61,6,khách báo cắm sạc không vào điện khách chưa từng sửa ở đâu,3,THAP,CHO_LINH_KIEN,18,2025-03-08 11:15,2025-03-13 11:15,,true
+5772,BH-005772/2025,18825,SN386432734750,236,5,kh noi dinh nuoc bien may nong va tat xay ra sau khi roi,5,TRUNG_BINH,DANG_XU_LY,24,2025-10-20 11:45,2025-10-23 11:45,,false
+5777,BH-005777/2026,47332,SN111178877358,23,2,TINH TRANG: PIN TUT RAT NHANH DUNG 2 TIENG DA HET MOI BI 2 NGAY NAY,2,TRUNG_BINH,DA_PHAN_CONG,12,2026-07-15 14:45,2026-07-18 14:45,,false
+5804,BH-005804/2025,5892,SN233601545151,12,4,máy không giữ được pin qua đêm bị từ tuần trước,2,TRUNG_BINH,HOAN_TAT,16,2025-06-15 16:30,2025-06-18 16:30,,false
+5822,BH-005822/2025,20189,SN692215355641,211,3,tình trạng: cổng sạc bám bụi không tiếp xúc máy còn bảo hành,3,TRUNG_BINH,CHO_LINH_KIEN,3,2025-04-03 09:00,2025-04-06 09:00,,true
+5837,BH-005837/2026,40505,SN360793857873,33,6,mic gọi điện đối phương không nghe được khách chưa từng sửa ở đâu,6,TRUNG_BINH,HOAN_TAT,13,2026-06-23 11:00,2026-06-26 11:00,,false
+5838,BH-005838/2024,12820,SN700788401061,20,1,khach hang phan anh pin chai chi con dung duoc nua ngay da thu khoi dong lai khong duoc,2,TRUNG_BINH,CHO_LINH_KIEN,33,2024-12-21 09:45,2024-12-24 09:45,,true
+5847,BH-005847/2024,7069,SN821306369962,307,6,kh nói máy tự tắt khi còn 30% pin mới bị 2 ngày nay,2,TRUNG_BINH,CHO_LINH_KIEN,18,2024-12-11 16:45,2024-12-14 16:45,,true
+5851,BH-005851/2026,3921,SN956741243350,3,4,tình trạng: máy tự tắt khi còn 30% pin,2,THAP,DA_PHAN_CONG,15,2026-05-04 09:45,2026-05-09 09:45,,true
+5854,BH-005854/2025,20105,SN699028206662,232,1,tình trạng: màn hình xuất hiện vệt mực loang đã thử khởi động lại không được,1,CAO,DA_DONG,33,2025-03-28 15:00,2025-03-29 15:00,2025-03-29 08:09,true
+5856,BH-005856/2025,19085,SN355568523237,156,3,kh nói màn hình bị ám vàng một góc bị từ tuần trước,1,CAO,DA_PHAN_CONG,37,2025-09-08 08:30,2025-09-09 08:30,,true
+5876,BH-005876/2024,14921,SN728066315576,309,4,may bi chân sạc lỏng phải giữ mới sạc được máy còn bảo hành,3,TRUNG_BINH,CHO_LINH_KIEN,6,2024-12-07 08:45,2024-12-10 08:45,,true
+5879,BH-005879/2026,22990,SN868122923386,264,2,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,30,2026-06-04 17:15,2026-06-07 17:15,,false
+5887,BH-005887/2024,10611,SN584310315110,267,4,máy vào nước màn hình loang ố mới bị 2 ngày nay,5,CAO,CHO_LINH_KIEN,16,2024-11-13 12:30,2024-11-14 12:30,,true
+5888,BH-005888/2025,51490,SN692268723498,141,3,may bi man hinh xuat hien vet muc loang bi tu tuan truoc,1,CAO,DA_PHAN_CONG,36,2025-12-31 08:15,2026-01-01 08:15,,true
+5893,BH-005893/2025,20198,SN290093125306,10,1,TÌNH TRẠNG: CẮM SẠC MÁY NÓNG BẤT THƯỜNG ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,3,TRUNG_BINH,DA_PHAN_CONG,1,2025-03-15 11:45,2025-03-18 11:45,,false
+5897,BH-005897/2024,5373,SN807854411842,316,6,loa ngoài rè không nghe rõ xảy ra sau khi rơi,6,TRUNG_BINH,CHO_LINH_KIEN,18,2024-09-04 14:00,2024-09-07 14:00,,false
+5902,BH-005902/2025,10968,SN983045115168,14,5,kh nói điện thoại dính nước mưa loa bị rè đã thử khởi động lại không được,5,CAO,CHO_LINH_KIEN,26,2025-11-25 15:00,2025-11-26 15:00,,true
+5904,BH-005904/2025,47481,SN581921546696,124,5,khách hàng phản ánh sạc rất chậm mất cả đêm đã thử khởi động lại không được,3,TRUNG_BINH,DANG_XU_LY,31,2025-02-19 09:45,2025-02-22 09:45,,false
+5905,BH-005905/2025,24117,SN527347606230,45,6,may bi cổng sạc bị gãy chân,3,CAO,DA_PHAN_CONG,28,2025-07-24 13:15,2025-07-25 13:15,,true
+5910,BH-005910/2025,30504,SN204026134170,194,3,tình trạng: cắm sạc máy nóng bất thường xảy ra sau khi rơi,3,TRUNG_BINH,DA_DONG,37,2025-03-09 11:30,2025-03-12 11:30,2025-03-10 23:40,true
+5916,BH-005916/2025,24662,SN348301112899,90,2,kh nói cổng sạc bị gãy chân mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,12,2025-01-11 13:45,2025-01-14 13:45,,false
+5928,BH-005928/2026,27985,SN963329722389,39,4,kh noi cam sac khong vao dien may con bao hanh,3,TRUNG_BINH,HOAN_TAT,21,2026-08-04 17:15,2026-08-07 17:15,,false
+5944,BH-005944/2025,24582,SN316936721416,127,5,may bi may co tieng keu la ben trong,6,TRUNG_BINH,DANG_XU_LY,35,2025-03-22 12:45,2025-03-25 12:45,,false
+5969,BH-005969/2024,4307,SN446448465356,4,5,sạc đầy nhưng dùng 30 phút là sập nguồn đã thử khởi động lại không được,2,TRUNG_BINH,DA_PHAN_CONG,31,2024-09-13 09:00,2024-09-16 09:00,,true
+5971,BH-005971/2025,44787,SN988410216214,216,5,kh nói camera mở lên bị đen màn bị từ tuần trước,4,TRUNG_BINH,DA_PHAN_CONG,7,2025-11-08 15:15,2025-11-11 15:15,,false
+5979,BH-005979/2025,17818,SN251553345371,7,5,KH NÓI CẮM SẠC BÁO LỖI PHỤ KIỆN XẢY RA SAU KHI RƠI,3,TRUNG_BINH,CHO_LINH_KIEN,24,2025-05-14 13:15,2025-05-17 13:15,,true
+5981,BH-005981/2026,3446,SN483293396256,67,4,cảm ứng chỗ được chỗ không máy còn bảo hành,1,CAO,DA_PHAN_CONG,4,2026-06-25 08:45,2026-06-26 08:45,,true
+5984,BH-005984/2025,30067,SN708954992575,80,6,may bi màn hình chớp tắt liên tục đã thử khởi động lại không được,1,CAO,DANG_XU_LY,13,2025-06-21 15:45,2025-06-22 15:45,,true
+6002,BH-006002/2024,42204,SN863480921949,305,4,khach bao man hinh chop tat lien tuc moi bi 2 ngay nay,1,CAO,DA_DONG,4,2024-12-02 16:45,2024-12-03 16:45,2024-12-03 09:48,false
+6010,BH-006010/2026,12131,SN677928115939,87,4,khach bao pin tut rat nhanh dung 2 tieng da het xay ra sau khi roi,2,TRUNG_BINH,DANG_XU_LY,14,2026-08-27 17:45,2026-08-30 17:45,,true
+6013,BH-006013/2025,19191,SN764232647700,15,3,cảm ứng loạn không bấm được khách chưa từng sửa ở đâu,1,CAO,CHO_LINH_KIEN,36,2025-06-02 11:45,2025-06-03 11:45,,true
+6026,BH-006026/2024,35134,SN486627059451,266,2,tình trạng: ứng dụng tự thoát liên tục mới bị 2 ngày nay,4,THAP,HOAN_TAT,8,2024-10-18 13:30,2024-10-23 13:30,,false
+6031,BH-006031/2026,4012,SN785334014429,51,3,khách hàng phản ánh cảm ứng chỗ được chỗ không xảy ra sau khi rơi,1,TRUNG_BINH,CHO_LINH_KIEN,37,2026-07-17 15:30,2026-07-20 15:30,,true
+6037,BH-006037/2025,30264,SN464584271185,76,1,khách báo màn hình nứt sau khi rơi mới bị 2 ngày nay,1,THAP,DANG_XU_LY,20,2025-02-21 11:30,2025-02-26 11:30,,false
+6049,BH-006049/2024,11268,SN399287896671,157,5,kh nói cổng sạc bị gãy chân,3,TRUNG_BINH,DA_DONG,26,2024-10-29 14:15,2024-11-01 14:15,2024-10-31 10:52,true
+6059,BH-006059/2026,46226,SN814729801699,51,6,tình trạng: cắm sạc không vào điện bị từ tuần trước,3,THAP,HOAN_TAT,18,2026-02-05 08:00,2026-02-10 08:00,,true
+6074,BH-006074/2024,46078,SN989140728349,270,2,khach bao man hinh bi soc doc khach chua tung sua o dau,1,CAO,CHO_LINH_KIEN,25,2024-10-23 15:45,2024-10-24 15:45,,false
+6084,BH-006084/2025,7517,SN284706182913,265,5,KH NÓI QUÊN MẬT KHẨU KHÔNG MỞ ĐƯỢC MÁY BỊ TỪ TUẦN TRƯỚC,4,THAP,DANG_XU_LY,26,2025-12-12 14:30,2025-12-17 14:30,,true
+6086,BH-006086/2025,2118,SN250286695675,266,3,khách hàng phản ánh điểm chết trên màn hình bị từ tuần trước,1,CAO,DANG_XU_LY,37,2025-04-05 11:45,2025-04-06 11:45,,true
+6088,BH-006088/2025,15157,SN610067308247,266,5,khach hang phan anh cam sac khong vao dien,3,THAP,DANG_XU_LY,7,2025-05-10 14:45,2025-05-15 14:45,,false
+6094,BH-006094/2025,23006,SN148258033620,240,2,tình trạng: màn hình bị sọc dọc máy còn bảo hành,1,CAO,HOAN_TAT,30,2025-10-11 17:45,2025-10-12 17:45,,true
+6110,BH-006110/2025,9739,SN787507249801,209,5,kh nói màn hình xuất hiện vệt mực loang mới bị 2 ngày nay,1,CAO,DA_PHAN_CONG,17,2025-09-02 14:00,2025-09-03 14:00,,true
+6129,BH-006129/2025,22755,SN288176839609,293,2,tình trạng: màn hình bị ám vàng một góc xảy ra sau khi rơi,1,CAO,CHO_LINH_KIEN,30,2025-11-25 17:45,2025-11-26 17:45,,true
+6132,BH-006132/2025,43736,SN762686980086,215,2,may bi màn hình xuất hiện vệt mực loang đã thử khởi động lại không được,1,CAO,DA_PHAN_CONG,29,2025-10-25 10:45,2025-10-26 10:45,,true
+6136,BH-006136/2024,52491,SN514101469583,250,1,MAY BI DIEN THOAI DINH NUOC MUA LOA BI RE MAY CON BAO HANH,5,CAO,DA_PHAN_CONG,33,2024-12-10 17:30,2024-12-11 17:30,,false
+6143,BH-006143/2024,32317,SN433145319990,100,6,may bi may vao nuoc man hinh loang o moi bi 2 ngay nay,5,CAO,DANG_XU_LY,23,2024-11-10 09:45,2024-11-11 09:45,,true
+6149,BH-006149/2026,7450,SN690261247486,18,3,kh nói máy tự tắt khi còn 30% pin mới bị 2 ngày nay,2,TRUNG_BINH,DA_DONG,27,2026-06-08 15:15,2026-06-11 15:15,2026-06-10 20:57,true
+6153,BH-006153/2026,52210,SN241981871473,118,2,khách báo cắm sạc báo lỗi phụ kiện,3,TRUNG_BINH,DANG_XU_LY,8,2026-02-17 16:45,2026-02-20 16:45,,true
+6154,BH-006154/2026,50527,SN948486525350,182,5,tình trạng: chân sạc lỏng phải giữ mới sạc được khách chưa từng sửa ở đâu,3,TRUNG_BINH,DANG_XU_LY,9,2026-05-13 09:45,2026-05-16 09:45,,true
+6166,BH-006166/2026,8464,SN460486349970,146,4,tình trạng: sạc rất chậm mất cả đêm máy còn bảo hành,3,TRUNG_BINH,CHO_LINH_KIEN,34,2026-06-17 08:45,2026-06-20 08:45,,false
+6174,BH-006174/2026,46344,SN983896778579,169,6,KH NÓI MÀN HÌNH XUẤT HIỆN VỆT MỰC LOANG MÁY CÒN BẢO HÀNH,1,CAO,CHO_LINH_KIEN,11,2026-06-07 12:30,2026-06-08 12:30,,false
+6179,BH-006179/2025,11269,SN488818478081,295,5,tình trạng: máy phồng pin cấn màn hình,2,TRUNG_BINH,DANG_XU_LY,9,2025-12-05 11:15,2025-12-08 11:15,,true
+6200,BH-006200/2025,1267,SN976725180075,110,1,kh nói điện thoại dính nước mưa loa bị rè khách chưa từng sửa ở đâu,5,CAO,CHO_LINH_KIEN,20,2025-06-08 11:45,2025-06-09 11:45,,true
+6207,BH-006207/2026,50638,SN192491154185,111,2,TINH TRANG: MAY TU TAT KHI CON 30% PIN MOI BI 2 NGAY NAY,2,TRUNG_BINH,DA_PHAN_CONG,25,2026-08-26 10:15,2026-08-29 10:15,,false
+6217,BH-006217/2024,39846,SN231268645856,193,3,may bi rơi bồn rửa máy chập chờn đã thử khởi động lại không được,5,CAO,DA_DONG,36,2024-10-04 12:00,2024-10-05 12:00,2024-10-04 18:57,false
+6220,BH-006220/2026,42990,SN199858636522,195,4,khách báo wifi không kết nối được sau cập nhật khách chưa từng sửa ở đâu,4,CAO,DANG_XU_LY,21,2026-05-30 08:15,2026-05-31 08:15,,true
+6225,BH-006225/2025,17520,SN306223385239,152,3,khách báo pin chai chỉ còn dùng được nửa ngày bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,19,2025-03-10 15:15,2025-03-13 15:15,,true
+6228,BH-006228/2025,24863,SN693776681087,65,6,khách báo máy có tiếng kêu lạ bên trong mới bị 2 ngày nay,6,TRUNG_BINH,HOAN_TAT,11,2025-09-26 14:45,2025-09-29 14:45,,true
+6231,BH-006231/2025,19646,SN420837256089,126,5,cắm sạc báo lỗi phụ kiện khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_DONG,24,2025-02-03 08:00,2025-02-06 08:00,2025-02-05 22:38,true
+6242,BH-006242/2024,34097,SN780560359472,151,6,kh nói cắm sạc máy nóng bất thường khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_PHAN_CONG,18,2024-12-08 13:00,2024-12-11 13:00,,true
+6243,BH-006243/2025,13906,SN955588274952,14,4,man hinh nut sau khi roi moi bi 2 ngay nay,1,CAO,HOAN_TAT,14,2025-01-24 11:45,2025-01-25 11:45,,true
+6263,BH-006263/2026,20082,SN749849212309,209,4,may bi màn hình nứt sau khi rơi máy còn bảo hành,1,CAO,HOAN_TAT,4,2026-04-30 12:00,2026-05-01 12:00,,true
+6278,BH-006278/2024,47108,SN229737218388,47,1,kh nói cổng sạc bám bụi không tiếp xúc bị từ tuần trước,3,TRUNG_BINH,DA_PHAN_CONG,1,2024-10-13 08:30,2024-10-16 08:30,,false
+6280,BH-006280/2025,32820,SN681272695361,201,1,dien thoai dinh nuoc mua loa bi re xay ra sau khi roi,5,CAO,DA_PHAN_CONG,1,2025-03-06 13:45,2025-03-07 13:45,,false
+6287,BH-006287/2025,27832,SN689668068865,187,3,tình trạng: camera sau bị mờ như có sương xảy ra sau khi rơi,6,TRUNG_BINH,CHO_LINH_KIEN,3,2025-12-07 16:30,2025-12-10 16:30,,true
+6296,BH-006296/2025,36426,SN757920872822,112,4,khách báo màn hình đen không lên mới bị 2 ngày nay,1,CAO,DA_DONG,16,2025-02-04 16:00,2025-02-05 16:00,2025-02-05 00:42,true
+6303,BH-006303/2026,11035,SN216289385550,86,3,kh nói không cài được ứng dụng báo lỗi máy còn bảo hành,4,TRUNG_BINH,DANG_XU_LY,19,2026-06-08 11:00,2026-06-11 11:00,,false
+6308,BH-006308/2025,23128,SN341077245356,12,6,khách báo cảm ứng loạn không bấm được,1,CAO,DANG_XU_LY,28,2025-09-14 17:30,2025-09-15 17:30,,false
+6313,BH-006313/2026,29548,SN545010948834,151,1,may bi máy rơi vào nước không lên nguồn khách chưa từng sửa ở đâu,5,THAP,DA_PHAN_CONG,20,2026-07-07 17:15,2026-07-12 17:15,,true
+6325,BH-006325/2025,46081,SN648398734849,12,4,khach hang phan anh cam ung loan khong bam duoc moi bi 2 ngay nay,1,CAO,DANG_XU_LY,2,2025-06-27 11:15,2025-06-28 11:15,,true
+6328,BH-006328/2026,27261,SN689199201716,73,4,khách báo màn hình xuất hiện vệt mực loang bị từ tuần trước,1,CAO,HOAN_TAT,15,2026-05-09 15:45,2026-05-10 15:45,,true
+6331,BH-006331/2024,31655,SN585451485368,11,2,may bi wifi không kết nối được sau cập nhật mới bị 2 ngày nay,4,THAP,DA_PHAN_CONG,5,2024-09-22 08:00,2024-09-27 08:00,,false
+6333,BH-006333/2026,22783,SN826265915837,320,4,kh nói pin chai chỉ còn dùng được nửa ngày mới bị 2 ngày nay,2,TRUNG_BINH,DANG_XU_LY,2,2026-01-30 14:00,2026-02-02 14:00,,true
+6341,BH-006341/2025,51870,SN533828395961,96,3,tinh trang: pin nong bat thuong khi dung,2,THAP,DANG_XU_LY,32,2025-05-14 17:15,2025-05-19 17:15,,true
+6344,BH-006344/2025,40195,SN572770313021,69,4,khách hàng phản ánh màn hình đen không lên khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,4,2025-11-17 14:30,2025-11-18 14:30,,true
+6375,BH-006375/2025,12301,SN951979743102,31,4,TINH TRANG: MAY PHONG PIN CAN MAN HINH DA THU KHOI DONG LAI KHONG DUOC,2,TRUNG_BINH,CHO_LINH_KIEN,14,2025-07-03 09:45,2025-07-06 09:45,,true
+6378,BH-006378/2025,39856,SN202064534245,166,6,khách hàng phản ánh cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,DANG_XU_LY,23,2025-10-14 10:00,2025-10-15 10:00,,true
+6380,BH-006380/2025,14931,SN976040444980,243,5,may bi máy treo logo không vào được hệ điều hành khách chưa từng sửa ở đâu,4,THAP,DA_PHAN_CONG,9,2025-12-05 13:30,2025-12-10 13:30,,false
+6392,BH-006392/2026,48481,SN821648328292,170,1,tình trạng: sạc đầy nhưng dùng 30 phút là sập nguồn,2,TRUNG_BINH,CHO_LINH_KIEN,20,2026-06-07 17:15,2026-06-10 17:15,,true
+6400,BH-006400/2025,17511,SN545598875897,305,2,khách báo màn hình bị hở sáng viền dưới mới bị 2 ngày nay,1,CAO,DANG_XU_LY,29,2025-05-19 14:15,2025-05-20 14:15,,true
+6402,BH-006402/2025,39373,SN692733558032,183,5,khách báo máy có tiếng kêu lạ bên trong mới bị 2 ngày nay,6,TRUNG_BINH,DA_DONG,26,2025-11-01 10:00,2025-11-04 10:00,2025-11-02 06:16,false
+6411,BH-006411/2025,44982,SN143982334873,166,2,tình trạng: máy bị đổ nước ngọt vào không sạc được đã thử khởi động lại không được,5,CAO,DA_PHAN_CONG,29,2025-02-13 11:15,2025-02-14 11:15,,false
+6414,BH-006414/2025,12595,SN719756167317,177,3,khách báo cắm sạc báo lỗi phụ kiện mới bị 2 ngày nay,3,TRUNG_BINH,DANG_XU_LY,36,2025-08-23 08:00,2025-08-26 08:00,,true
+6420,BH-006420/2024,52274,SN758584637652,164,4,KH NÓI NÚT NGUỒN BỊ KẸT KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,6,THAP,DA_DONG,4,2024-11-03 17:30,2024-11-08 17:30,2024-11-08 02:14,true
+6421,BH-006421/2025,35162,SN259142387912,271,3,khach bao may roi vao nuoc khong len nguon moi bi 2 ngay nay,5,THAP,DA_DONG,32,2025-04-09 13:15,2025-04-14 13:15,2025-04-13 09:57,true
+6431,BH-006431/2026,37782,SN789642430516,213,1,tình trạng: cổng sạc bị gãy chân xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,1,2026-08-06 10:45,2026-08-09 10:45,,true
+6439,BH-006439/2026,41679,SN387669908289,18,5,may bi pin chai chi con dung duoc nua ngay may con bao hanh,2,TRUNG_BINH,HOAN_TAT,26,2026-03-12 16:30,2026-03-15 16:30,,true
+6441,BH-006441/2024,14251,SN143185230190,165,1,kh noi wifi khong ket noi duoc sau cap nhat bi tu tuan truoc,4,TRUNG_BINH,HOAN_TAT,33,2024-12-24 16:45,2024-12-27 16:45,,true
+6445,BH-006445/2026,32808,SN256438074171,161,3,KH NÓI MÁY CHẠY CHẬM GIẬT LAG SAU KHI CẬP NHẬT ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,4,THAP,DANG_XU_LY,37,2026-05-31 12:45,2026-06-05 12:45,,true
+6447,BH-006447/2026,27346,SN906689580192,43,6,may bi điểm chết trên màn hình đã thử khởi động lại không được,1,CAO,DA_PHAN_CONG,28,2026-06-29 13:15,2026-06-30 13:15,,true
+6457,BH-006457/2025,28925,SN903826230692,257,1,may bi máy phồng pin cấn màn hình đã thử khởi động lại không được,2,TRUNG_BINH,DA_PHAN_CONG,20,2025-02-18 09:45,2025-02-21 09:45,,true
+6472,BH-006472/2026,32711,SN635813384243,188,3,tinh trang: man hinh den khong len moi bi 2 ngay nay,1,CAO,HOAN_TAT,37,2026-08-15 17:45,2026-08-16 17:45,,false
+6473,BH-006473/2025,6327,SN232020342164,218,5,khach bao man hinh xuat hien vet muc loang moi bi 2 ngay nay,1,CAO,DA_PHAN_CONG,24,2025-05-04 16:45,2025-05-05 16:45,,false
+6477,BH-006477/2026,15772,SN577652441199,28,3,khách hàng phản ánh cảm ứng chỗ được chỗ không máy còn bảo hành,1,CAO,DANG_XU_LY,3,2026-03-27 15:15,2026-03-28 15:15,,true
+6481,BH-006481/2025,37360,SN793325413201,277,5,may bi man hinh bi soc doc bi tu tuan truoc,1,CAO,CHO_LINH_KIEN,17,2025-05-07 12:15,2025-05-08 12:15,,false
+6486,BH-006486/2026,2523,SN767254887890,185,2,may bi màn hình nứt sau khi rơi đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,30,2026-06-14 15:00,2026-06-15 15:00,,false
+6488,BH-006488/2026,51795,SN252128432642,23,3,kh nói sạc vào nhưng không nhận cáp đã thử khởi động lại không được,3,TRUNG_BINH,DA_DONG,22,2026-06-09 12:15,2026-06-12 12:15,2026-06-10 11:19,true
+6489,BH-006489/2026,36332,SN868756029552,188,2,khách báo cảm ứng chỗ được chỗ không đã thử khởi động lại không được,1,CAO,DANG_XU_LY,30,2026-01-31 10:30,2026-02-01 10:30,,true
+6492,BH-006492/2025,21880,SN154693670185,220,6,kh nói máy không giữ được pin qua đêm,2,TRUNG_BINH,DA_DONG,13,2025-06-26 14:30,2025-06-29 14:30,2025-07-03 13:24,true
+6498,BH-006498/2026,4890,SN796572308518,93,3,khách hàng phản ánh máy treo logo không vào được hệ điều hành bị từ tuần trước,4,THAP,DANG_XU_LY,27,2026-04-11 17:45,2026-04-16 17:45,,true
+6499,BH-006499/2025,25742,SN770233962834,136,6,tình trạng: máy chạy chậm giật lag sau khi cập nhật máy còn bảo hành,4,CAO,DA_PHAN_CONG,13,2025-01-31 17:45,2025-02-01 17:45,,false
+6503,BH-006503/2025,40478,SN872307545718,296,1,khách báo pin chai chỉ còn dùng được nửa ngày mới bị 2 ngày nay,2,TRUNG_BINH,DA_PHAN_CONG,20,2025-01-26 14:45,2025-01-29 14:45,,true
+6505,BH-006505/2025,13696,SN283916310753,184,3,khách báo sạc đầy nhưng dùng 30 phút là sập nguồn khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,38,2025-05-29 08:45,2025-06-01 08:45,,true
+6509,BH-006509/2024,47275,SN485524541356,122,1,khach hang phan anh may tu tat khi con 30% pin da thu khoi dong lai khong duoc,2,TRUNG_BINH,DA_PHAN_CONG,1,2024-12-02 11:00,2024-12-05 11:00,,false
+6515,BH-006515/2024,15662,SN484522074814,252,2,khách hàng phản ánh màn hình xuất hiện vệt mực loang khách chưa từng sửa ở đâu,1,CAO,DANG_XU_LY,5,2024-11-15 13:45,2024-11-16 13:45,,false
+6520,BH-006520/2025,1544,SN951397566689,74,1,kh nói wifi không kết nối được sau cập nhật máy còn bảo hành,4,THAP,CHO_LINH_KIEN,33,2025-01-24 11:00,2025-01-29 11:00,,true
+6536,BH-006536/2025,51090,SN264356816118,264,5,MAY BI CỔNG SẠC BÁM BỤI KHÔNG TIẾP XÚC XẢY RA SAU KHI RƠI,3,TRUNG_BINH,CHO_LINH_KIEN,31,2025-06-01 14:30,2025-06-04 14:30,,true
+6549,BH-006549/2024,6286,SN307000161061,225,4,điểm chết trên màn hình máy còn bảo hành,1,CAO,DANG_XU_LY,4,2024-10-05 08:00,2024-10-06 08:00,,true
+6554,BH-006554/2025,47326,SN206008196561,277,2,tình trạng: cắm sạc không vào điện máy còn bảo hành,3,TRUNG_BINH,DA_PHAN_CONG,29,2025-09-27 17:45,2025-09-30 17:45,,false
+6562,BH-006562/2025,45641,SN315353183592,288,5,khách báo máy tự tắt khi còn 30% pin khách chưa từng sửa ở đâu,2,TRUNG_BINH,DA_PHAN_CONG,26,2025-02-27 17:15,2025-03-02 17:15,,true
+6578,BH-006578/2025,27677,SN650708162006,275,4,kh nói pin sụt 20% chỉ sau vài phút máy còn bảo hành,2,TRUNG_BINH,DANG_XU_LY,4,2025-01-07 11:30,2025-01-10 11:30,,true
+6581,BH-006581/2026,29128,SN613244039666,47,3,cam ung loan khong bam duoc xay ra sau khi roi,1,TRUNG_BINH,DANG_XU_LY,38,2026-03-01 11:15,2026-03-04 11:15,,true
+6588,BH-006588/2024,36298,SN365437889117,46,2,tình trạng: máy tự tắt khi còn 30% pin mới bị 2 ngày nay,2,TRUNG_BINH,DANG_XU_LY,12,2024-10-22 13:45,2024-10-25 13:45,,true
+6589,BH-006589/2025,39090,SN384838750430,10,2,kh nói mic gọi điện đối phương không nghe được máy còn bảo hành,6,TRUNG_BINH,CHO_LINH_KIEN,8,2025-02-28 10:45,2025-03-03 10:45,,false
+6591,BH-006591/2024,42063,SN863401365140,136,3,khách báo máy tự tắt khi còn 30% pin xảy ra sau khi rơi,2,TRUNG_BINH,DA_PHAN_CONG,27,2024-09-28 16:00,2024-10-01 16:00,,true
+6599,BH-006599/2025,2164,SN647793632195,143,2,KH NÓI SẠC ĐẦY NHƯNG DÙNG 30 PHÚT LÀ SẬP NGUỒN,2,TRUNG_BINH,DANG_XU_LY,25,2025-09-11 08:30,2025-09-14 08:30,,false
+6605,BH-006605/2025,16401,SN711708748798,7,5,may bi wifi không kết nối được sau cập nhật khách chưa từng sửa ở đâu,4,CAO,DA_PHAN_CONG,24,2025-07-27 08:30,2025-07-28 08:30,,true
+6608,BH-006608/2025,4935,SN667696574080,128,6,may bi khong cai duoc ung dung bao loi bi tu tuan truoc,4,THAP,DA_PHAN_CONG,23,2025-03-26 13:00,2025-03-31 13:00,,true
+6614,BH-006614/2024,32231,SN401736440977,213,3,cảm ứng loạn không bấm được,1,CAO,CHO_LINH_KIEN,36,2024-09-10 16:45,2024-09-11 16:45,,false
+6628,BH-006628/2024,16742,SN947432543337,257,1,khách hàng phản ánh pin tụt rất nhanh dùng 2 tiếng đã hết bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,1,2024-12-28 10:45,2024-12-31 10:45,,true
+6655,BH-006655/2025,13994,SN467595482231,30,3,tình trạng: màn hình bị ám vàng một góc bị từ tuần trước,1,CAO,CHO_LINH_KIEN,38,2025-02-16 11:45,2025-02-17 11:45,,true
+6665,BH-006665/2024,26895,SN877491665349,282,5,tinh trang: cong sac bam bui khong tiep xuc bi tu tuan truoc,3,TRUNG_BINH,DA_PHAN_CONG,9,2024-11-14 08:00,2024-11-17 08:00,,true
+6689,BH-006689/2025,44387,SN221058716453,134,2,khách báo điện thoại dính nước mưa loa bị rè đã thử khởi động lại không được,5,CAO,DANG_XU_LY,8,2025-12-27 09:30,2025-12-28 09:30,,false
+6692,BH-006692/2025,18049,SN855054149619,36,5,khách báo điện thoại dính nước mưa loa bị rè đã thử khởi động lại không được,5,CAO,HOAN_TAT,24,2025-06-19 11:45,2025-06-20 11:45,,true
+6704,BH-006704/2026,39726,SN931185881608,272,4,kh nói màn hình bị sọc dọc máy còn bảo hành,1,CAO,DANG_XU_LY,34,2026-05-20 11:15,2026-05-21 11:15,,true
+6706,BH-006706/2025,577,SN197874318540,295,3,kh nói máy rung liên tục không dừng đã thử khởi động lại không được,6,TRUNG_BINH,DANG_XU_LY,37,2025-08-04 10:45,2025-08-07 10:45,,false
+6707,BH-006707/2025,24357,SN441671168855,215,1,khách hàng phản ánh cảm ứng loạn không bấm được xảy ra sau khi rơi,1,CAO,DA_PHAN_CONG,20,2025-05-28 16:45,2025-05-29 16:45,,true
+6709,BH-006709/2026,51304,SN680516353937,29,1,kh noi may vao nuoc man hinh loang o moi bi 2 ngay nay,5,CAO,HOAN_TAT,1,2026-06-01 11:15,2026-06-02 11:15,,true
+6715,BH-006715/2025,12350,SN403292908658,266,2,cổng sạc bị gãy chân mới bị 2 ngày nay,3,TRUNG_BINH,DA_DONG,30,2025-11-16 15:00,2025-11-19 15:00,2025-11-19 01:31,false
+6718,BH-006718/2025,52618,SN632416357598,64,1,KHÁCH BÁO MÁY BỊ ĐỔ NƯỚC NGỌT VÀO KHÔNG SẠC ĐƯỢC KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,5,CAO,DA_PHAN_CONG,1,2025-04-08 15:30,2025-04-09 15:30,,true
+6727,BH-006727/2025,40823,SN774934983535,192,2,máy phồng pin cấn màn hình mới bị 2 ngày nay,2,TRUNG_BINH,HOAN_TAT,8,2025-06-10 14:00,2025-06-13 14:00,,true
+6729,BH-006729/2024,26778,SN397864676980,32,3,khách báo màn hình bị ám vàng một góc khách chưa từng sửa ở đâu,1,CAO,DA_DONG,36,2024-12-04 12:30,2024-12-05 12:30,2024-12-05 03:19,true
+6731,BH-006731/2025,33185,SN942583599842,198,2,máy bị đổ nước ngọt vào không sạc được,5,TRUNG_BINH,DA_PHAN_CONG,8,2025-03-11 11:45,2025-03-14 11:45,,true
+6738,BH-006738/2025,25026,SN410959364644,307,3,may bi máy phồng pin cấn màn hình đã thử khởi động lại không được,2,TRUNG_BINH,DA_PHAN_CONG,3,2025-04-30 11:00,2025-05-03 11:00,,true
+6761,BH-006761/2024,49730,SN971252609847,178,2,may vao nuoc man hinh loang o moi bi 2 ngay nay,5,THAP,DA_PHAN_CONG,8,2024-10-09 16:45,2024-10-14 16:45,,true
+6765,BH-006765/2024,25123,SN141770268423,174,5,khách báo máy rung liên tục không dừng,6,TRUNG_BINH,DANG_XU_LY,24,2024-11-18 08:15,2024-11-21 08:15,,true
+6781,BH-006781/2025,17782,SN489696442518,93,4,KHÁCH HÀNG PHẢN ÁNH PIN CHAI CHỈ CÒN DÙNG ĐƯỢC NỬA NGÀY BỊ TỪ TUẦN TRƯỚC,2,TRUNG_BINH,DA_PHAN_CONG,14,2025-12-30 13:30,2026-01-02 13:30,,false
+6787,BH-006787/2025,14415,SN601121874338,286,6,may bi sạc đầy nhưng dùng 30 phút là sập nguồn đã thử khởi động lại không được,2,TRUNG_BINH,DA_DONG,11,2025-09-05 08:45,2025-09-08 08:45,2025-09-06 05:18,false
+6821,BH-006821/2025,31826,SN976186478427,302,6,máy treo logo không vào được hệ điều hành máy còn bảo hành,4,THAP,DA_DONG,10,2025-11-25 08:00,2025-11-30 08:00,2025-11-28 06:12,true
+6823,BH-006823/2026,42886,SN966879722184,83,5,khach bao cam ung cho duoc cho khong may con bao hanh,1,CAO,CHO_LINH_KIEN,7,2026-03-26 16:00,2026-03-27 16:00,,true
+6842,BH-006842/2026,22990,SN345330758552,61,4,kh nói máy không giữ được pin qua đêm đã thử khởi động lại không được,2,TRUNG_BINH,DANG_XU_LY,15,2026-03-17 08:15,2026-03-20 08:15,,true
+6851,BH-006851/2025,25652,SN828869413931,195,3,khach bao man hinh nut sau khi roi,1,CAO,HOAN_TAT,27,2025-04-10 11:45,2025-04-11 11:45,,true
+6869,BH-006869/2025,34379,SN741410646900,79,6,kh nói màn hình xuất hiện vệt mực loang khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,18,2025-10-16 16:00,2025-10-17 16:00,,true
+6888,BH-006888/2024,52217,SN714428194340,49,5,khách hàng phản ánh cổng sạc bám bụi không tiếp xúc,3,CAO,DANG_XU_LY,7,2024-10-09 17:15,2024-10-10 17:15,,true
+6893,BH-006893/2024,32143,SN323567783363,110,5,khách hàng phản ánh màn hình xuất hiện vệt mực loang đã thử khởi động lại không được,1,CAO,DANG_XU_LY,17,2024-09-22 12:30,2024-09-23 12:30,,true
+6897,BH-006897/2025,37427,SN863451433402,177,6,kh nói màn hình nứt sau khi rơi đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,13,2025-02-25 10:00,2025-02-26 10:00,,false
+6900,BH-006900/2026,35845,SN349239454867,69,2,kh noi dinh nuoc bien may nong va tat khach chua tung sua o dau,5,CAO,DA_PHAN_CONG,8,2026-04-07 11:00,2026-04-08 11:00,,true
+6911,BH-006911/2024,30455,SN769422902771,102,5,may bi máy tự tắt khi còn 30% pin máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,26,2024-11-15 10:15,2024-11-18 10:15,,true
+6917,BH-006917/2025,17471,SN542285490364,194,1,TÌNH TRẠNG: MÀN HÌNH ĐEN KHÔNG LÊN ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,1,CAO,CHO_LINH_KIEN,20,2025-11-17 14:30,2025-11-18 14:30,,true
+6920,BH-006920/2026,37134,SN119760640029,95,4,khách hàng phản ánh cắm sạc máy nóng bất thường khách chưa từng sửa ở đâu,3,TRUNG_BINH,DA_DONG,15,2026-08-02 15:30,2026-08-05 15:30,2026-08-10 00:51,false
+6923,BH-006923/2026,29046,SN938114130701,145,1,kh nói máy phồng pin cấn màn hình khách chưa từng sửa ở đâu,2,TRUNG_BINH,HOAN_TAT,33,2026-01-01 12:15,2026-01-04 12:15,,true
+6924,BH-006924/2026,50818,SN987636889243,16,5,may bi máy chạy chậm giật lag sau khi cập nhật bị từ tuần trước,4,TRUNG_BINH,DA_PHAN_CONG,35,2026-06-29 08:00,2026-07-02 08:00,,true
+6933,BH-006933/2024,52034,SN944672260287,320,1,tình trạng: màn hình xuất hiện vệt mực loang mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,20,2024-10-29 17:00,2024-10-30 17:00,,false
+6936,BH-006936/2025,22100,SN490383221782,232,4,may co tieng keu la ben trong,6,TRUNG_BINH,DA_PHAN_CONG,4,2025-07-10 09:45,2025-07-13 09:45,,true
+6950,BH-006950/2026,16080,SN483463442160,152,4,KHÁCH HÀNG PHẢN ÁNH MÁY VÀO NƯỚC MÀN HÌNH LOANG Ố KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,5,CAO,HOAN_TAT,6,2026-05-23 16:30,2026-05-24 16:30,,true
+6958,BH-006958/2025,7099,SN781386291879,292,3,khách báo màn hình bị sọc dọc,1,CAO,DA_DONG,19,2025-05-12 10:00,2025-05-13 10:00,2025-05-13 04:23,true
+6985,BH-006985/2025,17818,SN842445311137,46,5,khach bao man hinh bi soc doc khach chua tung sua o dau,1,CAO,DA_DONG,17,2025-06-10 14:00,2025-06-11 14:00,2025-06-11 05:41,true
+6986,BH-006986/2024,21431,SN105756058048,251,6,may bi cổng sạc bám bụi không tiếp xúc,3,TRUNG_BINH,CHO_LINH_KIEN,13,2024-09-09 11:45,2024-09-12 11:45,,true
+6987,BH-006987/2026,49613,SN589473178424,213,2,may bi wifi không kết nối được sau cập nhật khách chưa từng sửa ở đâu,4,THAP,DA_PHAN_CONG,12,2026-01-09 13:15,2026-01-14 13:15,,false
+6989,BH-006989/2025,22398,SN860861009706,229,3,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn máy còn bảo hành,2,TRUNG_BINH,DANG_XU_LY,36,2025-07-24 10:45,2025-07-27 10:45,,false
+6996,BH-006996/2025,35714,SN284102105313,259,4,khách hàng phản ánh màn hình chớp tắt liên tục đã thử khởi động lại không được,1,CAO,DA_DONG,34,2025-02-06 13:15,2025-02-07 13:15,2025-02-06 22:54,true
+7012,BH-007012/2025,25520,SN761990142774,190,3,khách hàng phản ánh màn hình nứt sau khi rơi khách chưa từng sửa ở đâu,1,CAO,HOAN_TAT,19,2025-10-29 14:00,2025-10-30 14:00,,true
+7014,BH-007014/2026,2563,SN476219991853,64,3,khach hang phan anh diem chet tren man hinh moi bi 2 ngay nay,1,CAO,DA_PHAN_CONG,19,2026-04-25 14:45,2026-04-26 14:45,,true
+7015,BH-007015/2025,37090,SN905620906355,239,5,máy tự tắt khi còn 30% pin xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,31,2025-11-18 09:15,2025-11-21 09:15,,true
+7020,BH-007020/2025,48484,SN474866894794,182,3,may bi pin tụt rất nhanh dùng 2 tiếng đã hết máy còn bảo hành,2,TRUNG_BINH,CHO_LINH_KIEN,19,2025-09-11 14:45,2025-09-14 14:45,,false
+7037,BH-007037/2026,50362,SN766726020820,207,1,kh nói quên mật khẩu không mở được máy,4,THAP,DA_DONG,33,2026-07-12 17:15,2026-07-17 17:15,2026-07-15 04:38,true
+7056,BH-007056/2026,35847,SN114896238419,94,4,man hinh chop tat lien tuc khach chua tung sua o dau,1,CAO,DANG_XU_LY,34,2026-08-07 17:15,2026-08-08 17:15,,true
+7062,BH-007062/2025,10287,SN598988189458,250,2,khách báo pin sụt 20% chỉ sau vài phút bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,5,2025-08-24 13:15,2025-08-27 13:15,,false
+7083,BH-007083/2026,44221,SN248091969230,110,1,may bi sạc vào nhưng không nhận cáp,3,TRUNG_BINH,DA_PHAN_CONG,1,2026-08-21 08:00,2026-08-24 08:00,,true
+7084,BH-007084/2025,41108,SN270639613227,48,3,máy phồng pin cấn màn hình,2,TRUNG_BINH,DA_DONG,22,2025-05-27 15:15,2025-05-30 15:15,2025-05-29 04:03,true
+7089,BH-007089/2024,10993,SN783661884954,268,5,MAY BI MÀN HÌNH BỊ ÁM VÀNG MỘT GÓC,1,CAO,CHO_LINH_KIEN,17,2024-12-03 11:15,2024-12-04 11:15,,true
+7093,BH-007093/2024,36526,SN888422077615,92,6,tinh trang: quen mat khau khong mo duoc may,4,THAP,DANG_XU_LY,28,2024-09-15 08:00,2024-09-20 08:00,,true
+7131,BH-007131/2026,34804,SN622120369280,106,4,tinh trang: pin tut rat nhanh dung 2 tieng da het bi tu tuan truoc,2,TRUNG_BINH,DA_PHAN_CONG,14,2026-03-06 17:30,2026-03-09 17:30,,false
+7140,BH-007140/2025,27406,SN548444013092,235,4,man hinh den khong len da thu khoi dong lai khong duoc,1,CAO,DA_PHAN_CONG,21,2025-01-25 16:00,2025-01-26 16:00,,true
+7153,BH-007153/2024,10949,SN202527185927,199,4,cắm sạc không vào điện xảy ra sau khi rơi,3,TRUNG_BINH,HOAN_TAT,15,2024-12-14 09:00,2024-12-17 09:00,,true
+7159,BH-007159/2026,38108,SN936606382113,103,1,khách báo máy tự tắt khi còn 30% pin bị từ tuần trước,2,TRUNG_BINH,DA_PHAN_CONG,20,2026-08-14 10:45,2026-08-17 10:45,,true
+7166,BH-007166/2025,52530,SN500474533274,47,6,khách hàng phản ánh loa ngoài rè không nghe rõ xảy ra sau khi rơi,6,THAP,DA_PHAN_CONG,10,2025-04-10 09:45,2025-04-15 09:45,,true
+7171,BH-007171/2025,31333,SN319857915056,254,1,tình trạng: máy phồng pin cấn màn hình mới bị 2 ngày nay,2,TRUNG_BINH,CHO_LINH_KIEN,1,2025-01-14 15:15,2025-01-17 15:15,,true
+7185,BH-007185/2025,39204,SN359155984015,118,4,màn hình chớp tắt liên tục đã thử khởi động lại không được,1,CAO,DANG_XU_LY,16,2025-09-28 12:45,2025-09-29 12:45,,true
+7188,BH-007188/2025,42511,SN460362330054,156,1,tình trạng: màn hình bị sọc dọc xảy ra sau khi rơi,1,CAO,CHO_LINH_KIEN,33,2025-12-19 12:15,2025-12-20 12:15,,true
+7189,BH-007189/2025,38628,SN594511781838,183,1,kh noi cong sac bi gay chan may con bao hanh,3,TRUNG_BINH,DANG_XU_LY,33,2025-03-27 15:00,2025-03-30 15:00,,false
+7199,BH-007199/2025,50344,SN782828313459,137,5,khách báo màn hình nứt sau khi rơi,1,CAO,CHO_LINH_KIEN,26,2025-12-09 11:00,2025-12-10 11:00,,true
+7209,BH-007209/2024,35830,SN124342975841,66,6,khách báo rơi bồn rửa máy chập chờn đã thử khởi động lại không được,5,CAO,DA_DONG,28,2024-10-08 12:30,2024-10-09 12:30,2024-10-09 10:30,true
+7210,BH-007210/2026,8700,SN469227317346,3,2,khách báo điểm chết trên màn hình khách chưa từng sửa ở đâu,1,CAO,DA_DONG,5,2026-07-29 09:45,2026-07-30 09:45,2026-07-30 02:12,true
+7230,BH-007230/2025,31121,SN418489836049,86,4,khách báo màn hình đen không lên bị từ tuần trước,1,CAO,DA_DONG,14,2025-09-20 14:45,2025-09-21 14:45,2025-09-20 21:07,true
+7241,BH-007241/2025,13119,SN926495333514,98,3,may bi màn hình đen không lên khách chưa từng sửa ở đâu,1,CAO,CHO_LINH_KIEN,32,2025-09-12 16:00,2025-09-13 16:00,,true
+7252,BH-007252/2024,34888,SN113413863934,251,3,tình trạng: máy tự tắt khi còn 30% pin máy còn bảo hành,2,TRUNG_BINH,DA_PHAN_CONG,37,2024-11-30 11:00,2024-12-03 11:00,,true
+7257,BH-007257/2025,37497,SN284299052873,24,3,kh nói cắm sạc máy nóng bất thường bị từ tuần trước,3,TRUNG_BINH,DA_DONG,36,2025-08-20 14:45,2025-08-23 14:45,2025-08-22 18:53,true
+7263,BH-007263/2025,18812,SN210065879309,316,2,khách hàng phản ánh cảm ứng loạn không bấm được bị từ tuần trước,1,CAO,DA_PHAN_CONG,5,2025-04-03 13:15,2025-04-04 13:15,,true
+7264,BH-007264/2026,48236,SN963608770703,261,4,kh nói wifi không kết nối được sau cập nhật máy còn bảo hành,4,CAO,CHO_LINH_KIEN,34,2026-04-25 13:45,2026-04-26 13:45,,true
+7269,BH-007269/2025,47606,SN457334021871,156,2,không nhận sim bị từ tuần trước,6,CAO,DA_PHAN_CONG,8,2025-12-12 15:45,2025-12-13 15:45,,true
+7276,BH-007276/2026,27299,SN523337346365,226,2,khách báo màn hình đen không lên đã thử khởi động lại không được,1,CAO,DANG_XU_LY,25,2026-04-03 13:30,2026-04-04 13:30,,true
+7290,BH-007290/2026,38371,SN864564427368,189,2,cắm sạc báo lỗi phụ kiện xảy ra sau khi rơi,3,TRUNG_BINH,DANG_XU_LY,8,2026-02-20 08:45,2026-02-23 08:45,,true
+7295,BH-007295/2026,29409,SN268258812357,224,2,khách hàng phản ánh điểm chết trên màn hình,1,THAP,DA_PHAN_CONG,12,2026-06-29 09:15,2026-07-04 09:15,,true
+7313,BH-007313/2025,17555,SN216538994934,23,5,kh nói máy chạy chậm giật lag sau khi cập nhật xảy ra sau khi rơi,4,THAP,HOAN_TAT,31,2025-02-02 15:30,2025-02-07 15:30,,true
+7314,BH-007314/2026,2109,SN547581383071,134,4,khách báo máy có tiếng kêu lạ bên trong mới bị 2 ngày nay,6,TRUNG_BINH,DA_DONG,6,2026-07-17 08:30,2026-07-20 08:30,2026-07-22 23:49,false
+7316,BH-007316/2025,21128,SN981085866484,8,3,tình trạng: ứng dụng tự thoát liên tục mới bị 2 ngày nay,4,TRUNG_BINH,HOAN_TAT,3,2025-03-10 10:45,2025-03-13 10:45,,true
+7346,BH-007346/2025,26252,SN302950637225,216,3,khách báo máy tự tắt khi còn 30% pin bị từ tuần trước,2,TRUNG_BINH,DANG_XU_LY,32,2025-01-31 13:15,2025-02-03 13:15,,true
+7356,BH-007356/2025,8854,SN548420008236,317,2,kh nói cảm ứng chỗ được chỗ không đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,29,2025-02-07 08:45,2025-02-08 08:45,,true
+7360,BH-007360/2025,46063,SN820893518749,124,5,kh noi cam ung loan khong bam duoc da thu khoi dong lai khong duoc,1,CAO,HOAN_TAT,9,2025-01-09 17:45,2025-01-10 17:45,,false
+7376,BH-007376/2025,5852,SN709875131950,311,5,khách hàng phản ánh điểm chết trên màn hình,1,CAO,DA_PHAN_CONG,9,2025-05-11 08:00,2025-05-12 08:00,,true
+7383,BH-007383/2025,7268,SN949039775010,1,5,KH NÓI SẠC ĐẦY NHƯNG DÙNG 30 PHÚT LÀ SẬP NGUỒN XẢY RA SAU KHI RƠI,2,TRUNG_BINH,DA_PHAN_CONG,26,2025-04-01 16:30,2025-04-04 16:30,,true
+7392,BH-007392/2024,26956,SN245247533909,199,4,KH NÓI MÀN HÌNH XUẤT HIỆN VỆT MỰC LOANG MỚI BỊ 2 NGÀY NAY,1,THAP,CHO_LINH_KIEN,21,2024-11-23 10:15,2024-11-28 10:15,,true
+7403,BH-007403/2026,34199,SN871405758043,287,2,khách báo pin nóng bất thường khi dùng đã thử khởi động lại không được,2,TRUNG_BINH,DA_PHAN_CONG,29,2026-06-13 08:15,2026-06-16 08:15,,true
+7406,BH-007406/2024,41492,SN365838710749,295,1,khach hang phan anh pin tut rat nhanh dung 2 tieng da het may con bao hanh,2,TRUNG_BINH,DANG_XU_LY,33,2024-12-07 10:45,2024-12-10 10:45,,true
+7417,BH-007417/2025,46161,SN688331925901,103,4,tình trạng: ứng dụng tự thoát liên tục đã thử khởi động lại không được,4,THAP,DANG_XU_LY,14,2025-10-09 14:00,2025-10-14 14:00,,true
+7423,BH-007423/2025,27941,SN159108101656,138,3,KH NÓI CAMERA MỞ LÊN BỊ ĐEN MÀN XẢY RA SAU KHI RƠI,4,THAP,DA_PHAN_CONG,37,2025-02-25 12:30,2025-03-02 12:30,,true
+7426,BH-007426/2025,40355,SN375207307451,188,1,sạc rất chậm mất cả đêm bị từ tuần trước,3,TRUNG_BINH,HOAN_TAT,20,2025-10-19 15:15,2025-10-22 15:15,,true
+7427,BH-007427/2024,15583,SN327966167562,38,2,tình trạng: wifi không kết nối được sau cập nhật đã thử khởi động lại không được,4,THAP,DA_PHAN_CONG,5,2024-09-23 17:15,2024-09-28 17:15,,true
+7447,BH-007447/2026,22157,SN728871063988,307,4,kh nói điểm chết trên màn hình mới bị 2 ngày nay,1,CAO,CHO_LINH_KIEN,4,2026-04-19 12:15,2026-04-20 12:15,,true
+7456,BH-007456/2025,29079,SN516141141522,291,4,cổng sạc bám bụi không tiếp xúc mới bị 2 ngày nay,3,TRUNG_BINH,HOAN_TAT,16,2025-09-27 17:45,2025-09-30 17:45,,true
+7470,BH-007470/2024,36022,SN463758768965,49,2,pin nóng bất thường khi dùng bị từ tuần trước,2,TRUNG_BINH,DANG_XU_LY,30,2024-11-26 13:45,2024-11-29 13:45,,true
+7482,BH-007482/2025,8527,SN322508961508,96,4,kh nói điểm chết trên màn hình,1,TRUNG_BINH,HOAN_TAT,34,2025-12-21 12:00,2025-12-24 12:00,,false
+7494,BH-007494/2026,39771,SN852273460300,311,1,may bi máy bị đổ nước ngọt vào không sạc được bị từ tuần trước,5,CAO,HOAN_TAT,1,2026-05-17 15:45,2026-05-18 15:45,,true
+7505,BH-007505/2025,51332,SN426162140683,300,1,khach bao camera mo len bi den man,4,THAP,CHO_LINH_KIEN,33,2025-03-02 11:15,2025-03-07 11:15,,false
+7509,BH-007509/2025,2577,SN808736040910,282,1,tình trạng: màn hình bị hở sáng viền dưới mới bị 2 ngày nay,1,THAP,DA_DONG,33,2025-08-27 08:00,2025-09-01 08:00,2025-09-05 00:16,true
+7521,BH-007521/2026,39872,SN991147610734,244,2,may bi màn hình bị hở sáng viền dưới bị từ tuần trước,1,CAO,CHO_LINH_KIEN,12,2026-01-13 08:00,2026-01-14 08:00,,true
+7542,BH-007542/2024,2214,SN769566640330,117,6,khách hàng phản ánh sạc đầy nhưng dùng 30 phút là sập nguồn máy còn bảo hành,2,TRUNG_BINH,DA_DONG,10,2024-09-03 12:45,2024-09-06 12:45,2024-09-04 22:46,true
+7557,BH-007557/2026,36588,SN127671023344,44,6,may bi pin nóng bất thường khi dùng mới bị 2 ngày nay,2,TRUNG_BINH,DA_PHAN_CONG,11,2026-05-16 17:45,2026-05-19 17:45,,true
+7561,BH-007561/2026,32995,SN137731358929,176,5,khách hàng phản ánh máy tự khởi động lại nhiều lần trong ngày bị từ tuần trước,4,THAP,DA_PHAN_CONG,35,2026-02-16 08:15,2026-02-21 08:15,,true
+7571,BH-007571/2026,22685,SN252025562199,122,2,khách báo không cài được ứng dụng báo lỗi mới bị 2 ngày nay,4,THAP,HOAN_TAT,29,2026-04-28 14:15,2026-05-03 14:15,,false
+7578,BH-007578/2026,11277,SN536549443068,176,5,kh nói màn hình đen không lên khách chưa từng sửa ở đâu,1,CAO,DA_PHAN_CONG,26,2026-01-16 17:45,2026-01-17 17:45,,true
+7582,BH-007582/2026,51089,SN876393883956,154,4,may bi cảm ứng loạn không bấm được,1,CAO,DA_PHAN_CONG,2,2026-01-29 11:30,2026-01-30 11:30,,false
+7584,BH-007584/2025,30583,SN381051086341,74,2,màn hình đen không lên mới bị 2 ngày nay,1,CAO,DANG_XU_LY,25,2025-01-31 17:30,2025-02-01 17:30,,false
+7594,BH-007594/2025,50023,SN587504856857,124,3,khách hàng phản ánh máy chạy chậm giật lag sau khi cập nhật đã thử khởi động lại không được,4,THAP,DA_PHAN_CONG,32,2025-02-07 08:30,2025-02-12 08:30,,true
+7612,BH-007612/2025,39416,SN194270084940,58,5,may bi máy chạy chậm giật lag sau khi cập nhật đã thử khởi động lại không được,4,THAP,HOAN_TAT,26,2025-03-20 09:15,2025-03-25 09:15,,false
+7613,BH-007613/2025,11626,SN514873438099,221,5,khách hàng phản ánh màn hình xuất hiện vệt mực loang mới bị 2 ngày nay,1,CAO,DA_DONG,9,2025-09-23 17:45,2025-09-24 17:45,2025-09-24 06:57,false
+7614,BH-007614/2025,22687,SN613637906447,251,6,kh nói không nhận sim,6,TRUNG_BINH,DANG_XU_LY,23,2025-10-25 16:45,2025-10-28 16:45,,false
+7619,BH-007619/2026,25851,SN999709174237,228,5,may bi man hinh xuat hien vet muc loang bi tu tuan truoc,1,CAO,DA_PHAN_CONG,26,2026-04-01 14:45,2026-04-02 14:45,,true
+7629,BH-007629/2025,49431,SN830079177196,68,6,khách hàng phản ánh máy tự khởi động lại nhiều lần trong ngày,4,THAP,DA_PHAN_CONG,10,2025-03-31 09:00,2025-04-05 09:00,,false
+7635,BH-007635/2025,47459,SN960541494696,43,6,KH NOI BAO PIN SAI PHAN TRAM NHAY LOAN XAY RA SAU KHI ROI,2,TRUNG_BINH,DANG_XU_LY,13,2025-02-21 09:45,2025-02-24 09:45,,true
+7642,BH-007642/2026,16364,SN294239598228,71,4,bao pin sai phan tram nhay loan khach chua tung sua o dau,2,TRUNG_BINH,HOAN_TAT,4,2026-01-16 15:45,2026-01-19 15:45,,true
+7645,BH-007645/2026,47397,SN769624384592,184,6,kh nói pin nóng bất thường khi dùng mới bị 2 ngày nay,2,TRUNG_BINH,CHO_LINH_KIEN,10,2026-06-21 09:45,2026-06-24 09:45,,true
+7653,BH-007653/2025,32236,SN833085758270,151,6,khách báo ứng dụng tự thoát liên tục đã thử khởi động lại không được,4,TRUNG_BINH,CHO_LINH_KIEN,18,2025-01-19 12:30,2025-01-22 12:30,,true
+7658,BH-007658/2024,38535,SN776405621148,141,4,khach bao bao pin sai phan tram nhay loan bi tu tuan truoc,2,TRUNG_BINH,CHO_LINH_KIEN,4,2024-09-17 14:00,2024-09-20 14:00,,true
+7663,BH-007663/2024,12597,SN396481774798,261,2,tình trạng: màn hình nứt sau khi rơi bị từ tuần trước,1,CAO,CHO_LINH_KIEN,12,2024-08-30 14:30,2024-08-31 14:30,,false
+7666,BH-007666/2026,35212,SN806750769535,141,1,khach hang phan anh sac day nhung dung 30 phut la sap nguon,2,CAO,DA_DONG,20,2026-01-31 11:00,2026-02-01 11:00,2026-01-31 18:34,true
+7670,BH-007670/2024,43527,SN985416388042,15,4,kh nói cắm sạc báo lỗi phụ kiện mới bị 2 ngày nay,3,TRUNG_BINH,HOAN_TAT,14,2024-11-24 09:15,2024-11-27 09:15,,true
+7682,BH-007682/2025,47260,SN409642175543,164,2,khách báo máy vào nước màn hình loang ố khách chưa từng sửa ở đâu,5,CAO,HOAN_TAT,25,2025-03-20 10:30,2025-03-21 10:30,,true
+7688,BH-007688/2025,22500,SN682132608820,205,4,KHÁCH HÀNG PHẢN ÁNH MÀN HÌNH BỊ SỌC DỌC ĐÃ THỬ KHỞI ĐỘNG LẠI KHÔNG ĐƯỢC,1,CAO,HOAN_TAT,16,2025-01-17 10:00,2025-01-18 10:00,,true
+7696,BH-007696/2025,18077,SN221275840159,117,6,tinh trang: man hinh nut sau khi roi bi tu tuan truoc,1,CAO,HOAN_TAT,10,2025-07-29 11:30,2025-07-30 11:30,,true
+7704,BH-007704/2025,13470,SN860551329331,125,6,wifi không kết nối được sau cập nhật đã thử khởi động lại không được,4,THAP,DA_DONG,23,2025-09-26 17:45,2025-10-01 17:45,2025-09-29 02:15,true
+7709,BH-007709/2025,12528,SN627898296237,48,3,khach bao pin sut 20% chi sau vai phut da thu khoi dong lai khong duoc,2,TRUNG_BINH,DA_PHAN_CONG,36,2025-01-25 16:15,2025-01-28 16:15,,false
+7714,BH-007714/2026,48256,SN634273810323,88,2,tình trạng: màn hình chớp tắt liên tục đã thử khởi động lại không được,1,CAO,CHO_LINH_KIEN,8,2026-03-26 14:30,2026-03-27 14:30,,false
+7723,BH-007723/2026,13182,SN886720270375,241,5,khách hàng phản ánh không cài được ứng dụng báo lỗi,4,THAP,DA_PHAN_CONG,24,2026-04-22 15:15,2026-04-27 15:15,,true
+7740,BH-007740/2026,5424,SN124847149655,254,2,may bi chân sạc lỏng phải giữ mới sạc được xảy ra sau khi rơi,3,TRUNG_BINH,DA_PHAN_CONG,5,2026-08-31 09:30,2026-09-03 09:30,,true
+7754,BH-007754/2025,45767,SN425347275130,305,6,MÀN HÌNH BỊ SỌC DỌC KHÁCH CHƯA TỪNG SỬA Ở ĐÂU,1,CAO,CHO_LINH_KIEN,11,2025-12-02 12:15,2025-12-03 12:15,,true
+7758,BH-007758/2025,48,SN668898772575,55,5,dính nước biển máy nóng và tắt bị từ tuần trước,5,CAO,DA_PHAN_CONG,24,2025-07-05 14:00,2025-07-06 14:00,,false
+7765,BH-007765/2026,39429,SN152585124042,10,5,may bi máy phồng pin cấn màn hình bị từ tuần trước,2,TRUNG_BINH,CHO_LINH_KIEN,9,2026-06-28 08:00,2026-07-01 08:00,,true
+7780,BH-007780/2025,8076,SN985800538249,192,4,khách hàng phản ánh wifi không kết nối được sau cập nhật bị từ tuần trước,4,THAP,HOAN_TAT,14,2025-08-18 09:30,2025-08-23 09:30,,true
+7798,BH-007798/2025,42990,SN391716283347,141,4,khách báo máy không giữ được pin qua đêm xảy ra sau khi rơi,2,TRUNG_BINH,CHO_LINH_KIEN,14,2025-06-16 08:45,2025-06-19 08:45,,true
+7800,BH-007800/2025,4161,SN409263572128,8,2,KH NÓI KHÔNG CÀI ĐƯỢC ỨNG DỤNG BÁO LỖI,4,THAP,CHO_LINH_KIEN,8,2025-10-09 15:30,2025-10-14 15:30,,true
