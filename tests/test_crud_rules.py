@@ -17,9 +17,36 @@ from app.services.ticket_rules import (
     check_ticket_cancellable,
     check_ticket_editable,
     normalize_phone,
+    require_text_fields,
 )
 
 NOW = datetime(2026, 11, 6, 9, 0, tzinfo=timezone.utc)
+
+
+# --- Required text fields (BUG-08) -----------------------------------------------
+
+TEXT_OK = {"customer_name": "  Nguyễn Văn An ", "serial_no": "SN10293A", "issue_desc": "Không lên nguồn"}
+
+
+def test_required_text_fields_are_trimmed() -> None:
+    """Luồng đúng: tên, serial, mô tả có chữ được giữ lại và cắt khoảng trắng hai đầu"""
+    assert require_text_fields(TEXT_OK)["customer_name"] == "Nguyễn Văn An"
+
+
+@pytest.mark.parametrize(
+    ("blank", "expected"),
+    [({"customer_name": "   "}, ["customer_name"]),
+     ({"serial_no": "\t"}, ["serial_no"]),
+     ({"customer_name": " ", "serial_no": "  ", "issue_desc": "\n"},
+      ["customer_name", "serial_no", "issue_desc"])],
+)
+def test_blank_required_text_field_is_rejected(blank: dict, expected: list[str]) -> None:
+    """Dữ liệu sai (BUG-08): trường bắt buộc chỉ có khoảng trắng bị từ chối và được nêu tên"""
+    with pytest.raises(DomainError) as error:
+        require_text_fields({**TEXT_OK, **blank})
+    assert error.value.kind is ErrorKind.INVALID
+    assert error.value.code == "REQUIRED_FIELD_BLANK"
+    assert error.value.details["fields"] == expected
 
 
 # --- Phone number (QT-02) --------------------------------------------------------

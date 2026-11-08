@@ -141,6 +141,26 @@ def check_technician_change(ticket: Mapping[str, Any], new_technician_id: int) -
 
 # --- Ticket CRUD rules ---------------------------------------------------------
 
+REQUIRED_TEXT_FIELDS = ("customer_name", "serial_no", "issue_desc")
+
+
+def require_text_fields(data: Mapping[str, Any]) -> dict[str, str]:
+    """Return the required text fields trimmed, or reject the ones that are blank.
+
+    The request schema only checks a minimum length, so "   " passes it; a ticket
+    with no customer name, serial or issue description cannot be worked on.
+    """
+    trimmed = {name: str(data[name]).strip() for name in REQUIRED_TEXT_FIELDS}
+    blank = [name for name, value in trimmed.items() if not value]
+    if blank:
+        raise DomainError(
+            ErrorKind.INVALID,
+            "REQUIRED_FIELD_BLANK",
+            f"Các trường bắt buộc không được để trống hoặc chỉ có khoảng trắng: {', '.join(blank)}.",
+            fields=blank,
+        )
+    return trimmed
+
 
 def normalize_phone(raw: str) -> str:
     """Return a 10-digit phone starting with 0 (QT-02) or reject the input.

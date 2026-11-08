@@ -156,13 +156,14 @@ def update_status(user: User, ticket_id: int, to_status: str, note: str | None) 
 
 def _clean_fields(data: Mapping[str, Any]) -> dict[str, Any]:
     """Validate and normalize the customer-facing fields shared by create and update."""
+    text = rules.require_text_fields(data)
     rules.check_category(data["category_code"])
     rules.check_priority(data["priority"])
     return {
-        "customer_name": data["customer_name"].strip(),
+        "customer_name": text["customer_name"],
         "customer_phone": rules.normalize_phone(data["customer_phone"]),
-        "serial_no": data["serial_no"].strip(),
-        "issue_desc": data["issue_desc"].strip(),
+        "serial_no": text["serial_no"],
+        "issue_desc": text["issue_desc"],
         "category_code": data["category_code"],
         "priority": data["priority"],
         "due_date": data["due_date"],
