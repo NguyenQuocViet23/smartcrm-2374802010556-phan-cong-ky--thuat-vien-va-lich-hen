@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ci-postgres-password
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      # Throw-away values for the CI database only; no real secret is used here.
+      DB_HOST: localhost
+      DB_PORT: "5432"
+      DB_NAME: smartcrm
+      DB_USER: postgres
+      DB_PASSWORD: ci-postgres-password
+      TEST_DB_NAME: smartcrm_test
+      DATA_DIR: data/sample
+      SECRET_KEY: ci-only-secret-key-at-least-32-characters-long
+      DEMO_PASSWORD: ci-demo-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install locked dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Unit tests
+        run: python -m pytest
+      - name: Build smartcrm and smartcrm_test from the committed sample
+        run: python scripts/setup_all.py --with-test-db
+      - name: Integration tests on PostgreSQL
+        run: python -m pytest tests/integration -m integration
