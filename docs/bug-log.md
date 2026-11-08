@@ -1,76 +1,145 @@
-# Nhật ký lỗi (bug log)
-
-Mỗi lỗi ghi theo quy trình 4 bước của Buổi 11: tái lập → khoanh vùng → sửa nguyên nhân → xác nhận. Link commit trỏ tới repo GitHub.
+# Nhật ký lỗi (Bug Log)
 
 Repo: https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen
 
-## BUG-01 – pytest dừng hẳn khi tên test có tiếng Việt
+Mỗi bug ghi đủ **bảy dòng** theo mẫu Buổi 13 và được gỡ theo bốn bước của Buổi 11 (tái lập → khoanh vùng →
+sửa nguyên nhân → xác nhận). Mức độ phân loại bằng ba câu hỏi: *người dùng có làm được việc không · dữ liệu có sai
+hay bị lộ không · có cách làm tạm không*.
 
-- **Triệu chứng:** `python -m pytest` báo `INTERNALERROR UnicodeEncodeError: 'charmap' codec can't encode character '\u1ed3'`, dừng sau test đầu tiên có docstring tiếng Việt; số test pass bị đếm thiếu (33 thay vì 58).
-- **Tái lập:** chạy pytest trong Git Bash hoặc chuyển hướng đầu ra (`> log.txt`), khi đó stdout dùng bảng mã cp1252.
-- **Khoanh vùng:** traceback chỉ vào `print(...)` trong hook `pytest_runtest_makereport` của `tests/conftest.py`, không phải trong test.
-- **Nguyên nhân:** dòng in kết quả `[TCxx] PASS <tên test>` ghi thẳng tiếng Việt ra stdout cp1252.
-- **Cách sửa:** hàm `_echo()` mã hoá theo bảng mã của stdout với `errors="replace"`.
-- **Xác nhận:** chạy lại với stdout cp1252 và UTF-8 đều 58 passed, không còn INTERNALERROR.
-- **Commit:** [eae4931](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/eae4931)
+| Mã | Mức độ | Phát hiện bởi | Tóm tắt | Commit sửa (riêng cho bug) |
+|---|---|---|---|---|
+| [BUG-08](#bug-08) | **Major** | TC-07 (BT3) | Phiếu được tạo với tên khách, serial, mô tả chỉ có khoảng trắng | [224fd69](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/224fd6902da028a096100d077e80a1e752fbf600) |
+| [BUG-07](#bug-07) | **Major** | Phép thử CSDL tắt (BT2, ảnh BT2_07) | API treo hơn 2 phút khi không kết nối được CSDL | [25e3d1e](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/25e3d1ebaa7eeba552f7bc05d0d379181a082546) |
+| [BUG-03](#bug-03) | **Major** | Phép thử clone thư mục trống theo README | Bản clone mới không dựng được hệ thống theo README | [a947ed7](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/a947ed735765dc34ccd58b37b222f9b6c4cbdcf5) |
 
-## BUG-02 – Màn hình M3 nhấp nháy "Đang tải dữ liệu…" khi chọn phiếu
+Ba bug trên là ba bug nộp cho BT3: mỗi bug có một commit `fix…` chỉ chứa thay đổi của bug đó. Các bug BUG-01,
+02, 04, 05, 06 ở cuối tệp là lịch sử Buổi 10–12; commit của chúng gộp với việc khác hoặc không phải commit `fix`,
+nên không dùng làm minh chứng “một bug – một commit”.
 
-- **Triệu chứng:** mỗi lần kỹ thuật viên chọn phiếu hoặc bấm đổi trạng thái, cả danh sách biến mất rồi hiện lại.
-- **Tái lập:** đăng nhập KT033 (437 phiếu), lọc "Đang làm", bấm một phiếu.
-- **Khoanh vùng:** trong `MyTicketsPage.jsx`, `load` được bọc `useCallback(..., [selected])` và `useEffect(() => load(), [load])`.
-- **Nguyên nhân:** đổi `selected` tạo `load` mới → effect chạy lại → bật trạng thái loading cho toàn trang.
-- **Cách sửa:** `load` không phụ thuộc `selected`; làm mới "ngầm" (`load({ silent: true })`) sau khi đổi trạng thái.
-- **Xác nhận:** test e2e gắn `MutationObserver` theo dõi `[data-testid=state-loading]`; đưa lại mã cũ thì test FAIL đúng chỗ, mã mới thì PASS.
-- **Commit:** [ebfbb35](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/ebfbb35)
+---
 
-## BUG-03 – Clone mới không chạy được bước chép dữ liệu trong README
+## BUG-08
 
-- **Triệu chứng:** làm đúng README trên thư mục clone trống, lệnh `Copy-Item <thư-mục-CSV>\*.csv data\raw\` báo "The directory name is invalid".
-- **Tái lập:** `git clone` repo vào thư mục mới, chạy đến bước 9 của README.
-- **Khoanh vùng:** `data/raw/` không tồn tại trong bản clone dù có trên máy phát triển.
-- **Nguyên nhân:** `.gitignore` bỏ qua cả thư mục `data/raw/`, Git không lưu thư mục rỗng.
-- **Cách sửa:** đổi thành `data/raw/*` + `!data/raw/.gitkeep`; CSV vẫn không bị commit.
-- **Xác nhận:** clone lại từ đầu, bước 9 chạy được; về sau bổ sung bộ mẫu `data/sample/` để clone không cần CSV từ LMS.
-- **Commit:** [a947ed7](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/a947ed7)
+**BUG-08 — Phiếu được tạo khi tên khách, serial và mô tả chỉ có khoảng trắng**
 
-## BUG-04 – Test PASS trên máy em nhưng lỗi trên bản clone ở thư mục sâu
+1. **Mã và mức độ:** BUG-08 · **MAJOR** — dữ liệu sai được lưu thật vào bảng `ticket`: phiếu không có tên khách,
+   serial, mô tả nên kỹ thuật viên không biết máy nào, lỗi gì (người dùng phía sau *không làm được việc*). Không phải
+   Critical vì không lộ dữ liệu, không mất dữ liệu cũ, và có cách làm tạm (Quản lý sửa lại phiếu khi còn MỚI).
+2. **Phát hiện bởi:** TC-07 (b), lần chạy 1 ngày 08/11/2026, commit `9cccebd` — mong đợi 400, nhận 201.
+3. **Triệu chứng:** `POST /api/tickets` trả **201** và tạo phiếu BH-007801/2026 với `customer_name = ""`,
+   `serial_no = ""`, `issue_desc = ""`; bảng ticket 7317 → 7318. `PUT /api/tickets/{id}` có cùng lỗi (dùng chung hàm).
+4. **Cách tái lập:** đăng nhập QL_TT01; gọi `POST /api/tickets` với
+   `{"customer_name": "   ", "customer_phone": "0912345678", "serial_no": "   ", "issue_desc": "   ",
+   "category_code": "PIN", "priority": "CAO", "due_date": "<hôm nay + 3 ngày>+07:00"}`;
+   `SELECT count(*) FROM ticket WHERE btrim(customer_name) = ''` ra 1. Ảnh:
+   [trước sửa (a)](screenshots/BUG-08_truoc-sua_TC-07.png), [trước sửa (b)](screenshots/BUG-08_truoc-sua_TC-07_b.png),
+   [kết quả lần chạy 1](screenshots/BUG-08_truoc-sua_ket-qua-chay.md).
+5. **Nguyên nhân:** `TicketRequest` (`src/backend/app/schemas/tickets.py`) chỉ kiểm `min_length=1`, mà `"   "` dài
+   3 ký tự nên qua được; sau đó `_clean_fields` trong `src/backend/app/services/ticket_service.py` gọi `.strip()` biến
+   chúng thành chuỗi rỗng nhưng không kiểm lại. Cột trong CSDL là `NOT NULL` nên chuỗi rỗng vẫn được nhận.
+6. **Cách sửa:** thêm quy tắc thuần `require_text_fields()` trong `src/backend/app/services/ticket_rules.py`: cắt khoảng
+   trắng ba trường và ném `DomainError(INVALID, "REQUIRED_FIELD_BLANK", …, fields=[…])` nêu tên mọi trường trống;
+   `_clean_fields` dùng kết quả của hàm này cho cả tạo và sửa phiếu; `app/main.py` đã ánh xạ sẵn INVALID → 400.
+   Thêm 4 unit test trong `tests/test_crud_rules.py` (một luồng đúng, ba dữ liệu sai) để bug không quay lại.
+7. **Commit và xác nhận:**
+   [224fd69](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/224fd6902da028a096100d077e80a1e752fbf600)
+   · chạy lại TC-07 → (b) HTTP 400 `REQUIRED_FIELD_BLANK`, `fields = [customer_name, serial_no, issue_desc]`, bảng
+   ticket 7317 → 7317 → **PASS** ([TC-07_b.png](screenshots/TC-07_b.png)). Luồng đúng không hỏng: TC-11 vẫn tạo được
+   phiếu hợp lệ (201) → PASS; integration `test_ticket_create_read_update_cancel` → PASS; toàn bộ unit
+   `python -m pytest` → 104 passed ([BUG-08-fixed.png](screenshots/BUG-08-fixed.png)).
 
-- **Triệu chứng:** trên bản clone từ GitHub, `python -m pytest` báo 5 errors `DLL load failed while importing _immutabledict_cy: The filename or extension is too long`.
-- **Tái lập:** clone vào thư mục có đường dẫn dài khoảng 174 ký tự, tạo venv, chạy pytest.
-- **Khoanh vùng:** lỗi xảy ra khi import SQLAlchemy, không liên quan mã của dự án; đo đường dẫn tệp sâu nhất trong `.venv` là 297 ký tự.
-- **Nguyên nhân:** Windows giới hạn 260 ký tự khi nạp DLL, kể cả khi đã bật LongPathsEnabled.
-- **Cách sửa:** README thêm lưu ý clone vào thư mục có đường dẫn ngắn (ví dụ `D:\Projects`).
-- **Xác nhận:** clone lại vào đường dẫn 97 ký tự: unit, UI, integration, e2e đều pass.
-- **Commit:** [2febebd](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/2febebd)
+## BUG-07
 
-## BUG-05 – Danh sách "Phiếu của tôi" dài hơn 20.000 px và hiện mã thô DA_DONG
+**BUG-07 — API treo vài phút khi cơ sở dữ liệu không kết nối được**
 
-- **Triệu chứng:** chạy luồng chính trên dữ liệu thật, M3 của KT033 hiện 437 dòng; cột trạng thái có chữ `DA_DONG` thay vì nhãn tiếng Việt.
-- **Tái lập:** đăng nhập KT033 trên dữ liệu case-study đầy đủ, mở M3.
-- **Khoanh vùng:** API `GET /api/technicians/me/tickets` trả mọi phiếu của kỹ thuật viên (đúng đặc tả); frontend chỉ có nhãn cho 4/7 mã trạng thái.
-- **Nguyên nhân:** lỗi hợp đồng dữ liệu (thiếu nhãn) cộng với dữ liệu thật lớn hơn giả định (trung bình 192, tối đa 443 phiếu mỗi KTV).
-- **Cách sửa:** thêm nhãn cho mọi mã; thêm bộ lọc trạng thái ở M3 (mặc định Tất cả), không ẩn phiếu đã đóng/đã hủy của chính kỹ thuật viên (TD-13).
-- **Xác nhận:** test e2e lọc "Đã đóng" ra đúng 359/437 phiếu, bằng số phiếu `DA_DONG` của KT033 đếm bằng SQL.
-- **Commit:** [7707702](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/7707702)
+1. **Mã và mức độ:** BUG-07 · **MAJOR** — khi CSDL gặp sự cố, mọi màn hình quay chờ hơn 2 phút rồi mới lỗi:
+   người dùng *không làm được việc* và không biết hệ thống đang hỏng; không có cách làm tạm phía người dùng. Không
+   Critical vì không sai hay lộ dữ liệu.
+2. **Phát hiện bởi:** phép thử “suy giảm có kiểm soát” của BT2 (tắt CSDL rồi gọi API, ảnh
+   `docs/bt2-evidence/BT2_07_M1_csdl_tat_503_thu_lai.png`); nay được giữ bởi unit test
+   `test_database_connection_has_a_timeout`.
+3. **Triệu chứng:** backend trỏ tới cổng CSDL không có PostgreSQL; `GET /api/tickets` không trả lời sau hơn 2 phút,
+   giao diện M1 hiện “Đang tải…” mãi.
+4. **Cách tái lập:** đặt `DB_PORT=1` trong `.env`, chạy backend, đăng nhập QL_TT01 rồi gọi `GET /api/tickets`.
+5. **Nguyên nhân:** engine SQLAlchemy không đặt thời gian chờ kết nối; trên Windows kết nối tới cổng đóng không bị
+   từ chối ngay. Đo riêng `psycopg.connect(port=1)`: không `connect_timeout` thì treo > 2 phút, có `connect_timeout=3`
+   thì lỗi sau 3 giây.
+6. **Cách sửa:** `get_engine()` trong `src/backend/app/core/database.py` truyền
+   `connect_args={"connect_timeout": DB_CONNECT_TIMEOUT}` (mặc định 3 giây, khai báo trong `.env.example`);
+   lỗi kết nối đã được `app/main.py` ánh xạ thành 503 `DATABASE_UNAVAILABLE`.
+7. **Commit và xác nhận:**
+   [25e3d1e](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/25e3d1ebaa7eeba552f7bc05d0d379181a082546)
+   · gọi lại API: HTTP 503 `DATABASE_UNAVAILABLE` sau 3,0 giây, có dòng log; unit test
+   `test_database_connection_has_a_timeout` → PASS (nằm trong 104 passed ngày 08/11/2026).
 
-## BUG-06 – Service trả mã lỗi HTTP, vi phạm tách lớp
+## BUG-03
 
-- **Triệu chứng:** rà mã theo tiêu chí C2 thấy `services/ticket_rules.py` raise `APIError(409, ...)`, router `tickets.py` chứa 15 câu SQL.
-- **Tái lập:** `grep -n "APIError" src/backend/app/services` và `grep -n "text(" src/backend/app/routers`.
-- **Khoanh vùng:** quy tắc nghiệp vụ, SQL và HTTP nằm chung trong router; service biết mã trạng thái HTTP.
-- **Nguyên nhân:** lúc đầu dựng API nhanh trong router, chưa tách lớp repository và lỗi miền.
-- **Cách sửa:** `DomainError(kind, code, message)` không có số HTTP; SQL chuyển sang `repositories/`; chỉ `app/main.py` ánh xạ `kind` → HTTP (TD-18).
-- **Xác nhận:** hai lệnh `grep` trên trả rỗng; 18 TC, e2e, integration vẫn pass nên phản hồi API không đổi.
-- **Commit:** [ee4013f](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/ee4013f)
+**BUG-03 — Bản clone mới không dựng được hệ thống theo README**
 
-## BUG-07 – API treo vài phút khi cơ sở dữ liệu không kết nối được
+1. **Mã và mức độ:** BUG-03 · **MAJOR** — người khác (giảng viên) làm đúng README trên thư mục trống thì *không dựng
+   được hệ thống*; không sai/lộ dữ liệu; cách làm tạm là tự tạo thư mục `data/raw` (người mới không biết).
+2. **Phát hiện bởi:** phép thử clone vào thư mục trống và làm theo README từng bước (Buổi 11).
+3. **Triệu chứng:** đến bước chép dữ liệu, `Copy-Item <thư-mục-CSV>\*.csv data\raw\` báo “The directory name is invalid”.
+4. **Cách tái lập:** `git clone` repo vào thư mục mới, làm theo README đến bước chép CSV vào `data\raw\`.
+5. **Nguyên nhân:** `.gitignore` có dòng `data/raw/` bỏ qua cả thư mục; Git không lưu thư mục rỗng nên bản clone
+   không có `data/raw/`.
+6. **Cách sửa:** `.gitignore` đổi thành `data/raw/*` + `!data/raw/.gitkeep` và thêm `data/raw/.gitkeep`; CSV vẫn
+   không bị commit. (Về sau thêm bộ mẫu `data/sample/` để clone không cần CSV từ LMS – TD-19.)
+7. **Commit và xác nhận:**
+   [a947ed7](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/a947ed735765dc34ccd58b37b222f9b6c4cbdcf5)
+   · clone lại từ đầu: bản clone có `data/raw/`, bước chép dữ liệu chạy được, `setup_all.py` nạp xong. Hiện TC-12 kiểm
+   bước dựng CSDL từ bộ mẫu chạy hai lần không nhân đôi → PASS.
 
-- **Triệu chứng:** thử "suy giảm có kiểm soát" bằng cách cho backend trỏ tới cổng CSDL không có PostgreSQL; `GET /api/tickets` không trả lời sau hơn 2 phút.
-- **Tái lập:** đặt `DB_PORT=1`, chạy backend, đăng nhập rồi gọi `GET /api/tickets`.
-- **Khoanh vùng:** đo riêng `psycopg.connect(port=1)`: không có `connect_timeout` thì treo > 2 phút; có `connect_timeout=3` thì báo lỗi sau 3 giây (6 giây với `localhost` vì thử cả IPv6 và IPv4).
-- **Nguyên nhân:** engine SQLAlchemy không đặt thời gian chờ kết nối; trên Windows kết nối tới cổng đóng không bị từ chối ngay.
-- **Cách sửa:** `get_engine()` truyền `connect_args={"connect_timeout": DB_CONNECT_TIMEOUT}` (mặc định 3 giây, khai báo trong `.env.example`).
-- **Xác nhận:** gọi lại API: HTTP 503 `DATABASE_UNAVAILABLE` sau 3,0 giây, có dòng log; unit test `test_database_connection_has_a_timeout`.
-- **Commit:** [25e3d1e](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/25e3d1e)
+---
 
+## Lịch sử Buổi 10–12 (không dùng làm bug nộp BT3)
+
+### BUG-01 — pytest dừng hẳn khi tên test có tiếng Việt
+
+1. **Mã và mức độ:** BUG-01 · Minor — chỉ ảnh hưởng người chạy test trong Git Bash; làm tạm bằng terminal UTF-8.
+2. **Phát hiện bởi:** chạy `python -m pytest` trong Git Bash / chuyển hướng ra tệp.
+3. **Triệu chứng:** `INTERNALERROR UnicodeEncodeError: 'charmap' codec can't encode character 'ồ'`; đếm 33 thay vì 58 test.
+4. **Cách tái lập:** chạy pytest với stdout cp1252 (`> log.txt`).
+5. **Nguyên nhân:** `print(...)` trong hook `pytest_runtest_makereport` của `tests/conftest.py` ghi tiếng Việt ra stdout cp1252.
+6. **Cách sửa:** hàm `_echo()` mã hoá theo bảng mã của stdout với `errors="replace"`.
+7. **Commit và xác nhận:** [eae4931](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/eae4931) (gộp với commit thêm unit test) · cp1252 và UTF-8 đều 58 passed.
+
+### BUG-02 — Màn hình M3 nhấp nháy “Đang tải dữ liệu…” khi chọn phiếu
+
+1. **Mã và mức độ:** BUG-02 · Minor — gây khó chịu, kỹ thuật viên vẫn làm được việc.
+2. **Phát hiện bởi:** test e2e luồng chính trên M3.
+3. **Triệu chứng:** mỗi lần chọn phiếu hoặc đổi trạng thái, cả danh sách biến mất rồi hiện lại.
+4. **Cách tái lập:** đăng nhập KT033, lọc “Đang làm”, bấm một phiếu.
+5. **Nguyên nhân:** `load` trong `MyTicketsPage.jsx` phụ thuộc `selected` → đổi phiếu tạo `load` mới → effect chạy lại, bật loading toàn trang.
+6. **Cách sửa:** `load` không phụ thuộc `selected`; làm mới ngầm `load({ silent: true })` sau khi đổi trạng thái.
+7. **Commit và xác nhận:** [ebfbb35](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/ebfbb35) (gộp ba thay đổi giao diện) · test e2e với `MutationObserver` PASS, mã cũ FAIL.
+
+### BUG-04 — Test lỗi trên bản clone ở thư mục đường dẫn dài
+
+1. **Mã và mức độ:** BUG-04 · Minor — làm tạm bằng cách clone vào đường dẫn ngắn.
+2. **Phát hiện bởi:** phép thử clone từ GitHub.
+3. **Triệu chứng:** `DLL load failed while importing _immutabledict_cy: The filename or extension is too long`.
+4. **Cách tái lập:** clone vào thư mục đường dẫn khoảng 174 ký tự, tạo venv, chạy pytest.
+5. **Nguyên nhân:** Windows giới hạn 260 ký tự khi nạp DLL; tệp sâu nhất trong `.venv` dài 297 ký tự.
+6. **Cách sửa:** README cảnh báo clone vào đường dẫn ngắn.
+7. **Commit và xác nhận:** [2febebd](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/2febebd) (commit tài liệu) · clone vào đường dẫn 97 ký tự: mọi nhóm test pass.
+
+### BUG-05 — “Phiếu của tôi” dài hơn 20.000 px và hiện mã thô DA_DONG
+
+1. **Mã và mức độ:** BUG-05 · Minor — dùng được nhưng khó tìm phiếu; không sai dữ liệu.
+2. **Phát hiện bởi:** e2e luồng chính trên dữ liệu thật.
+3. **Triệu chứng:** M3 của KT033 hiện 437 dòng, cột trạng thái có chữ `DA_DONG`.
+4. **Cách tái lập:** đăng nhập KT033 trên dữ liệu đầy đủ, mở M3.
+5. **Nguyên nhân:** frontend chỉ có nhãn cho 4/7 mã trạng thái; dữ liệu thật lớn hơn giả định.
+6. **Cách sửa:** nhãn cho mọi mã và bộ lọc trạng thái ở M3 (TD-13).
+7. **Commit và xác nhận:** [7707702](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/7707702) (commit `feat`) · lọc “Đã đóng” ra 359/437, khớp SQL.
+
+### BUG-06 — Service trả mã lỗi HTTP, vi phạm tách lớp
+
+1. **Mã và mức độ:** BUG-06 · Minor — lỗi thiết kế, người dùng không thấy.
+2. **Phát hiện bởi:** rà mã theo tiêu chí C2 của BT2.
+3. **Triệu chứng:** `services/ticket_rules.py` raise `APIError(409, …)`, router chứa 15 câu SQL.
+4. **Cách tái lập:** `grep -n "APIError" src/backend/app/services` và `grep -n "text(" src/backend/app/routers`.
+5. **Nguyên nhân:** API dựng nhanh trong router, chưa có lớp repository và lỗi miền.
+6. **Cách sửa:** `DomainError` không mang mã HTTP, SQL sang `repositories/`, chỉ `app/main.py` ánh xạ (TD-18).
+7. **Commit và xác nhận:** [ee4013f](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/ee4013f) (commit `refactor`) · hai lệnh grep rỗng; 18 TC, e2e, integration pass.

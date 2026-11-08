@@ -144,3 +144,43 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
 - **Quyết định:** **SỬA** – thêm `data/sample/` (462 KB) do `scripts/make_sample_data.py` trích từ dữ liệu thật: đủ trung tâm, KTV, tay nghề; mọi phiếu ĐÃ PHÂN CÔNG (để 30 phiếu MOI theo seed 20260901 trùng dữ liệu đầy đủ); mọi phiếu mà `appointments.csv` tham chiếu. Loader dùng `data/raw/` khi đủ 7 CSV, ngược lại dùng bộ mẫu (`scripts/data_source.py`). `scripts/setup_all.py` tạo database nếu chưa có → migrate → nạp → tạo tài khoản, chạy lại không nhân đôi. Khoá `requirements*.txt` bằng `pip freeze` từ venv sạch; `.env.example` đủ tên biến với giá trị mẫu. Xoá `scripts/legacy/seed_real_data.py` (đã thay bằng pipeline mới), chuyển phần ánh xạ trạng thái có dấu sang `load_tickets.py`.
 - **Lý do:** Mục CỐT LÕI C1 (clone chạy theo README) và C5 (chạy lại không nhân đôi).
 - **Ảnh hưởng:** Bộ mẫu cho 939 phiếu, 3.237 dòng log, 300 lịch hẹn; fixture integration chấp nhận cả số dòng của bộ mẫu và bộ đầy đủ; `tests/integration/test_idempotent_load.py` chạy `setup_all.py` hai lần và so số dòng.
+
+## Buổi 14 – Phản hồi BT2 và quyết định xử lý (BT3)
+
+Không có văn bản nhận xét riêng cho BT2; các mục dưới đây đối chiếu sáu phản hồi thường gặp mà giảng viên nêu ở
+Buổi 14 với repo này, mỗi mục có quyết định và dẫn chứng.
+
+## TD-20 – Tệp khoá phiên bản
+
+- **Phản hồi:** “Chưa commit tệp khoá phiên bản.”
+- **Quyết định:** **GIỮ** – đã có từ Buổi 12 (TD-19).
+- **Lý do / dẫn chứng:** `requirements.txt`, `requirements-dev.txt` ghi phiên bản cố định (`pip freeze` từ venv sạch); `src/frontend/package-lock.json` được Git theo dõi (`git ls-files | grep lock`). Ngày 08/11/2026 cài lại `requirements-dev.txt` vào venv rồi chạy `python -m pytest`: 100 passed.
+- **Ảnh hưởng:** không đổi.
+
+## TD-21 – Secret trong lịch sử commit
+
+- **Phản hồi:** “Có secret trong lịch sử commit” (repo BT3 phải PUBLIC).
+- **Quyết định:** **GIỮ** – không có secret cần đổi khoá.
+- **Lý do / dẫn chứng:** `git log --all -- .env` rỗng (tệp `.env` chưa từng được commit, `.gitignore` dòng đầu); quét `git log --all -p` tìm dòng thêm `…PASSWORD=`/`SECRET_KEY=` có giá trị (trừ `.env.example`): 0 kết quả. `.env.example` chỉ chứa giá trị mẫu (`doi-mat-khau-…`, `thay-bang-chuoi-…`). Mật khẩu demo chỉ lưu dạng băm PBKDF2 trong `data/processed/demo_accounts.json` (cũng bị `.gitignore`).
+- **Ảnh hưởng:** ghi vào [security-checklist.md](security-checklist.md) mục 1–2.
+
+## TD-22 – “Test quá ít, chỉ test luồng đúng”
+
+- **Phản hồi:** cần thêm test biên, dữ liệu sai, bảo mật.
+- **Quyết định:** **SỬA** – thêm bộ 12 test case BT3 (`tests/bt3/`, marker `bt3`) theo năm loại, chạy trên backend thật và dữ liệu thật, có ảnh Swagger trong `docs/screenshots/` ([test-plan.md](test-plan.md), [test-report.md](test-report.md)).
+- **Lý do:** Buổi 13–14 yêu cầu ít nhất hai test biên, hai test dữ liệu sai kiểm cả mã và nội dung, và năm mục OWASP.
+- **Ảnh hưởng:** TC-07 phát hiện BUG-08 (phiếu nhận trường bắt buộc chỉ có khoảng trắng), đã sửa ở commit `224fd69` và thêm quy tắc `require_text_fields()` (mã lỗi mới `REQUIRED_FIELD_BLANK`, 400). Không đổi schema.
+
+## TD-23 – Mâu thuẫn đặt lịch cho phiếu HOÀN TẤT (tiếp TD-10)
+
+- **Phản hồi:** TD-10 ghi `L04_TieuChi_GWT EX-7.3` chỉ từ chối `MOI`, `DA_DONG`, `DA_HUY`, mâu thuẫn SRS UC6, “cần sửa ở BT3”.
+- **Quyết định:** **GIỮ** hành vi của mã, theo SRS: không đặt lịch cho phiếu chưa có KTV (`TICKET_NOT_ASSIGNED`) hoặc đã kết thúc `HOAN_TAT`/`DA_DONG`/`DA_HUY` (`TICKET_CLOSED`), cả hai trả 400 (`appointment_rules.check_ticket_accepts_appointment`, unit test `test_ticket_without_technician_or_finished_cannot_be_booked`).
+- **Lý do:** SRS là tài liệu đặc tả được duy trì trong repo; GWT EX-7.3 là bảng tiêu chí nộp ở BT1, không nằm trong repo. Ghi nhận EX-7.3 phải hiểu là bao gồm `HOAN_TAT`.
+- **Ảnh hưởng:** không đổi mã.
+
+## TD-24 – Đóng gói dựng lại bằng ≤ 2 lệnh (TP4)
+
+- **Phản hồi:** BT3 TP4 yêu cầu dựng lại hệ thống từ thư mục trống bằng tối đa hai lệnh; README BT2 cần Python, PostgreSQL cài sẵn và khoảng mười lệnh.
+- **Quyết định:** **SỬA** – Docker Compose có thêm dịch vụ `init` chạy `scripts/setup_all.py` (tạo DB → migrate → nạp bộ mẫu → sinh tài khoản demo vào volume dùng chung), backend chờ `init` xong; healthcheck cho db, backend, frontend. Hai lệnh: `cp .env.example .env` và `docker compose up -d --build` ([deployment-guide.md](deployment-guide.md)).
+- **Lý do:** người chấm không cần cài Python/PostgreSQL; bộ mẫu `data/sample/` có sẵn trong repo.
+- **Ảnh hưởng:** cách dựng thủ công ở README vẫn giữ cho phát triển và chạy test.

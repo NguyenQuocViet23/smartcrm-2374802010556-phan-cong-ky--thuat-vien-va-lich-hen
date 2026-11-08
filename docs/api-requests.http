@@ -1,0 +1,88 @@
+### Smart CRM – manual API checks (VS Code "REST Client" or JetBrains HTTP Client)
+### Fill in @password with DEMO_PASSWORD from .env. Ticket 9 = BH-000009/2026 (DA_PHAN_CONG, KT008, center TT01).
+
+@base = http://localhost:8000
+@password = doi-mat-khau-demo
+
+### 1. Log in as manager QL_TT01
+# @name managerLogin
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{"username": "QL_TT01", "password": "{{password}}"}
+
+###
+@manager = {{managerLogin.response.body.access_token}}
+
+### 2. New tickets of my center
+GET {{base}}/api/tickets?status=MOI
+Authorization: Bearer {{manager}}
+
+### 3. TC-07 (a): wrong phone -> 400 INVALID_PHONE
+POST {{base}}/api/tickets
+Authorization: Bearer {{manager}}
+Content-Type: application/json
+
+{"customer_name": "Nguyễn Văn An", "customer_phone": "09123", "serial_no": "SN10293A",
+ "issue_desc": "Máy không lên nguồn", "category_code": "PIN", "priority": "CAO",
+ "due_date": "2027-01-15T17:00:00+07:00"}
+
+### 4. TC-07 (b) / BUG-08: blank required fields -> 400 REQUIRED_FIELD_BLANK
+POST {{base}}/api/tickets
+Authorization: Bearer {{manager}}
+Content-Type: application/json
+
+{"customer_name": "   ", "customer_phone": "0912345678", "serial_no": "   ",
+ "issue_desc": "   ", "category_code": "PIN", "priority": "CAO",
+ "due_date": "2027-01-15T17:00:00+07:00"}
+
+### 5. Suggestions for ticket 9
+GET {{base}}/api/tickets/9/technician-suggestions
+Authorization: Bearer {{manager}}
+
+### 6. TC-06: change technician with a blank reason -> 400 REASON_REQUIRED
+PUT {{base}}/api/tickets/9/assignment
+Authorization: Bearer {{manager}}
+Content-Type: application/json
+
+{"technician_id": 12, "reason": "   "}
+
+### 7. Book an appointment (choose a free Monday–Saturday slot in the future)
+POST {{base}}/api/appointments
+Authorization: Bearer {{manager}}
+Content-Type: application/json
+
+{"ticket_id": 9, "appointment_type": "NHAN",
+ "start_at": "2027-01-12T09:00:00+07:00", "end_at": "2027-01-12T10:00:00+07:00"}
+
+### 8. TC-08: unknown ticket -> 404 TICKET_NOT_FOUND
+GET {{base}}/api/tickets/99999999
+Authorization: Bearer {{manager}}
+
+### 9. TC-11 (a): injection in a filter -> 400 INVALID_STATUS
+GET {{base}}/api/tickets?status=' OR 1=1 --
+Authorization: Bearer {{manager}}
+
+### 10. TC-10 (a): no token -> 401
+GET {{base}}/api/auth/me
+
+### 11. Log in as technician KT002
+# @name techLogin
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{"username": "KT002", "password": "{{password}}"}
+
+###
+@tech = {{techLogin.response.body.access_token}}
+
+### 12. TC-09 (a): KT002 changes KT008's ticket -> 403 FORBIDDEN
+PATCH {{base}}/api/tickets/9/status
+Authorization: Bearer {{tech}}
+Content-Type: application/json
+
+{"to_status": "DANG_XU_LY"}
+
+### 13. My tickets (phone numbers masked)
+GET {{base}}/api/technicians/me/tickets
+Authorization: Bearer {{tech}}

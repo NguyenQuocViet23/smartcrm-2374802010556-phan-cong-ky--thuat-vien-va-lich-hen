@@ -2,7 +2,7 @@
 
 **Đơn vị mô phỏng:** Mekong Mobile
 **Sinh viên:** Nguyễn Quốc Việt – MSSV 2374802010556 – Lớp 261_71ITGR40203_05
-**Track:** SE · Chuyên đề Tốt nghiệp 1 – Trường ĐH Văn Lang · Bài tập 2: tag `v0.2`
+**Track:** SE · Chuyên đề Tốt nghiệp 1 – Trường ĐH Văn Lang · Bài tập 3: tag `v1.0` (Bài tập 2: tag `v0.2`)
 
 ## 1. Mô tả bài toán và phạm vi
 
@@ -48,7 +48,7 @@ Cần cài sẵn: **Git**, **Python 3.12+**, **Node.js 22+**, **PostgreSQL 16+**
 
 ```powershell
 # 1. Lấy mã nguồn đúng phiên bản nộp bài
-git clone --branch v0.2 https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git smartcrm
+git clone --branch v1.0 https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git smartcrm
 # 2. Vào thư mục repo
 Set-Location smartcrm
 # 3. Tạo tệp cấu hình từ mẫu
@@ -61,7 +61,7 @@ py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 # 7. Cài thư viện (phiên bản đã khoá)
 python -m pip install -r requirements-dev.txt
-# 8. Chạy kiểm thử đơn vị: phải thấy "100 passed"
+# 8. Chạy kiểm thử đơn vị: phải thấy "104 passed"
 python -m pytest
 # 9. Dựng database: tạo DB smartcrm nếu chưa có, migrate, nạp dữ liệu, tạo tài khoản demo
 python scripts\setup_all.py
@@ -85,7 +85,7 @@ Kết quả mong đợi của bước 9 (in ra màn hình): `NGUỒN DỮ LIỆU
 ### 3.2. macOS / Linux
 
 ```bash
-git clone --branch v0.2 https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git smartcrm
+git clone --branch v1.0 https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git smartcrm
 cd smartcrm
 cp .env.example .env                      # rồi sửa DB_USER, DB_PASSWORD, SECRET_KEY, DEMO_PASSWORD
 python3 -m venv .venv
@@ -97,22 +97,18 @@ python -m uvicorn app.main:app --app-dir src/backend   # terminal 1
 cd src/frontend && npm ci && npm run dev               # terminal 2
 ```
 
-### 3.3. Tùy chọn: Docker Compose
+### 3.3. Cách nhanh nhất: Docker Compose (2 lệnh, không cần cài Python/PostgreSQL/Node)
 
-Thay cho bước 10–13 của mục 3.1 (vẫn cần bước 1–7 để có `.env` và môi trường Python chạy script nạp). Cần Docker Desktop đang chạy; cổng 5173, 8000, 5433 phải trống.
+Cần Docker Desktop đang chạy; cổng 5173, 8000 và 5433 phải trống. Sau bước 1–2 của mục 3.1:
 
 ```powershell
-# 1. Dựng PostgreSQL (cổng host 5433), backend (tự chạy migration) và frontend
+# 1. Tạo tệp cấu hình (giá trị mẫu đủ cho chạy thử; đổi mật khẩu/khoá khi triển khai thật)
+Copy-Item .env.example .env
+# 2. Dựng PostgreSQL → nạp bộ mẫu + tạo tài khoản demo (dịch vụ init) → backend → frontend
 docker compose up -d --build
-# 2. Trỏ script nạp dữ liệu vào PostgreSQL trong Docker
-$env:DB_PORT = "5433"
-# 3. Nạp dữ liệu và tạo tài khoản demo
-python scripts\setup_all.py
-# 4. Trả lại cổng mặc định
-Remove-Item Env:DB_PORT
 ```
 
-Mở http://localhost:5173. Backend đọc `data/processed/demo_accounts.json` qua volume ở mỗi lần đăng nhập. Dừng: `docker compose down` (dữ liệu giữ trong volume `postgres_data`).
+Kiểm tra: `docker compose ps` (db, backend, frontend `healthy`; init `exited (0)`), mở http://localhost:5173, đăng nhập `QL_TT01` / `DEMO_PASSWORD`. Dừng: `docker compose down`; xoá cả dữ liệu: `docker compose down -v`. Chi tiết, xử lý sự cố: [docs/deployment-guide.md](docs/deployment-guide.md) (TD-24).
 
 ### 3.4. Lệnh tham khảo
 
@@ -144,7 +140,8 @@ Lỗi trả về dạng `{"error": "<MÃ>", "message": "<thông báo>"}`: dữ l
 
 | Nhóm | Lệnh | Cần gì | Kết quả gần nhất |
 |---|---|---|---|
-| **Unit** (quy tắc nghiệp vụ, ánh xạ lỗi, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 100 passed |
+| **Unit** (quy tắc nghiệp vụ, ánh xạ lỗi, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 104 passed |
+| **12 test case BT3 TC-01…TC-12** (5 loại, Swagger thật, ảnh `docs/screenshots/`) | `python -m pytest -m bt3` (một case: `-k tc05`) | `.env` có `TEST_DB_NAME=smartcrm_test`, `smartcrm_test` đã nạp, cổng 8000 trống, frontend chạy (TC-11) | 12 passed sau khi sửa BUG-08 |
 | Integration PostgreSQL (CRUD, chạy lại không nhân đôi, TC22–TC25) | `python scripts\setup_all.py --with-test-db` một lần, rồi `python -m pytest tests\integration -m integration` | PostgreSQL | 7 passed |
 | **18 test case TC01–TC18** (nghiệp vụ + giao diện + e2e) | `python -m pytest -m system` | Frontend đang chạy, cổng 8000 trống, `smartcrm_test` đã nạp | 18 passed (~4 phút) |
 | End-to-end luồng chính (có tắt backend thật) | `python -m pytest tests\e2e -m e2e` | như trên | 1 passed |
@@ -157,8 +154,9 @@ Lỗi trả về dạng `{"error": "<MÃ>", "message": "<thông báo>"}`: dữ l
 
 ## 6. Tài liệu
 
+- **Bài tập 3:** [Test Plan](docs/test-plan.md) · [Test Report](docs/test-report.md) · [Bug Log](docs/bug-log.md) · [Deployment Guide (EN)](docs/deployment-guide.md) · [Security checklist (EN)](docs/security-checklist.md) · [API reference (EN)](docs/api.md) · [tệp .http](docs/api-requests.http) · ảnh [docs/screenshots/](docs/screenshots/)
 - Báo cáo Bài tập 2: [docs/BT2_2374802010556_NguyenQuocViet_V.0.2.1.pdf](docs/BT2_2374802010556_NguyenQuocViet_V.0.2.1.pdf) (ảnh minh chứng gốc: [docs/bt2-evidence/](docs/bt2-evidence/))
-- Thay đổi so với thiết kế BT1: [docs/thay-doi-thiet-ke.md](docs/thay-doi-thiet-ke.md) (TD-01 … TD-19)
+- Thay đổi so với thiết kế BT1: [docs/thay-doi-thiet-ke.md](docs/thay-doi-thiet-ke.md) (TD-01 … TD-24; phản hồi BT2: TD-20 … TD-24)
 - Nhật ký lỗi: [docs/bug-log.md](docs/bug-log.md)
 - Khai báo sử dụng công cụ AI: [docs/ai-disclosure.md](docs/ai-disclosure.md)
 - Tích hợp luồng chính và chạy thử clone mới: [docs/tich-hop-end-to-end.md](docs/tich-hop-end-to-end.md)
