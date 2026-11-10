@@ -14,7 +14,8 @@ Sinh viên: Nguyễn Quốc Việt – MSSV 2374802010556 · Track SE · L04 · 
 | Lần chạy | Commit | Số TC | PASS | FAIL | Ghi chú |
 |---|---|---|---|---|---|
 | Lần 1 (08/11/2026 16:35) | `9cccebd` | 12 | 11 | 1 | TC-07 FAIL → BUG-08 ([kết quả lần 1](screenshots/BUG-08_truoc-sua_ket-qua-chay.md)) |
-| Lần 2 sau khi sửa BUG-08 | `224fd69` | 12 | 12 | 0 | TC-07 chạy lại PASS |
+| Lần 2 sau khi sửa BUG-08 (08/11/2026) | `224fd69` | 12 | 12 | 0 | TC-07 chạy lại PASS |
+| Lần 3 (10/11/2026 14:29–14:34), lần chạy cho ảnh hiện tại | `4e16cf3` | 12 | 12 | 0 | Kết quả như lần 2; TC-03, TC-05 đặt lịch ngày 10/12/2026 vì test chọn ngày trống cách ngày chạy ~30 ngày ([ảnh terminal](screenshots/BT3-12-passed.png)) |
 
 | Loại (5 loại BT3) | Test case |
 |---|---|
@@ -71,9 +72,9 @@ Mỗi khối ghi đủ tám cột: **Mã · Tiền điều kiện · Các bướ
 
 | Cột | Nội dung |
 |---|---|
-| Tiền điều kiện | Phiếu thật BH-000009/2026 ở `DA_PHAN_CONG`, KTV KT008 (id 8), trung tâm 1. Ngày thứ Hai–Bảy đầu tiên cách hôm nay ≥ 30 ngày mà KT008 trống 09:00–10:00 (08/12/2026). |
+| Tiền điều kiện | Phiếu thật BH-000009/2026 ở `DA_PHAN_CONG`, KTV KT008 (id 8), trung tâm 1. Ngày thứ Hai–Bảy đầu tiên cách hôm nay ≥ 30 ngày mà KT008 trống 09:00–10:00 (10/12/2026 ở lần chạy 3; ngày thay đổi theo ngày chạy). |
 | Các bước | 1. Đăng nhập QL_TT01. 2. Đếm bảng `appointment`. 3. Gọi `POST /api/appointments`. 4. Đếm lại. |
-| Dữ liệu thử | `{"ticket_id": 9, "appointment_type": "NHAN", "start_at": "2026-12-08T09:00:00+07:00", "end_at": "2026-12-08T10:00:00+07:00", "note": "BT3 TC-03"}` |
+| Dữ liệu thử | `{"ticket_id": 9, "appointment_type": "NHAN", "start_at": "2026-12-10T09:00:00+07:00", "end_at": "2026-12-10T10:00:00+07:00", "note": "BT3 TC-03"}` |
 | Kết quả mong đợi | HTTP 201; lịch `status = DA_HEN`, `technician_id = 8` (theo KTV của phiếu); bảng appointment +1 |
 | Ưu tiên | Cao |
 | Kết quả thực tế | HTTP 201; status = DA_HEN, technician_id = 8; appointment 300 → 301 |
@@ -95,7 +96,7 @@ Mỗi khối ghi đủ tám cột: **Mã · Tiền điều kiện · Các bướ
 
 | Cột | Nội dung |
 |---|---|
-| Tiền điều kiện | Phiếu BH-000009/2026, KT008; ngày 08/12/2026 KT008 trống 08:00–11:00; tạo trước lịch A 09:00–10:00 qua API. |
+| Tiền điều kiện | Phiếu BH-000009/2026, KT008; ngày 10/12/2026 KT008 trống 08:00–11:00; tạo trước lịch A 09:00–10:00 qua API. |
 | Các bước | 1. Đăng nhập QL_TT01. 2. Đếm lịch `DA_HEN` của KT008. 3. `POST /api/appointments` 10:00–11:00. 4. `POST /api/appointments` 08:00–09:01. 5. Đếm lại. |
 | Dữ liệu thử | (a) start 10:00 = end của A (khoảng nửa mở `[)`); (b) 08:00–09:01, chồng A đúng 1 phút |
 | Kết quả mong đợi | (a) 201. (b) 409 `APPOINTMENT_OVERLAP` kèm khung trống gợi ý. Lịch DA_HEN của KTV chỉ tăng 1 |
