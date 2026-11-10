@@ -29,6 +29,7 @@ Các thay đổi thiết kế phát sinh khi hiện thực Sprint 2 (Buổi 10),
 - **Quyết định:** **GIỮ** cấu trúc thư mục hiện tại; đọc/dùng wireframe ở vị trí thực tế, không di chuyển tệp đã nộp.
 - **Lý do:** Tránh thay đổi cấu trúc dự án nếu chưa có yêu cầu riêng.
 - **Ảnh hưởng:** Các nhãn M1/M2/M3 và ngoại lệ được triển khai dựa trên tệp wireframe đang có.
+- **Cập nhật (BT3, 10/11/2026):** bốn sơ đồ `wireframe`, `erd`, `usecase`, `architecture` (.drawio) đã chuyển vào `docs/diagrams/`, khớp đường dẫn trong prompt.
 
 ## TD-05 – Phạm vi giao diện và quy tắc xung đột trạng thái
 
