@@ -6,7 +6,7 @@
 | **Học phần** | Chuyên đề Tốt nghiệp 1 (71ITGR40203) – Trường ĐH Văn Lang |
 | **Đề tài** | Smart CRM – Mekong Mobile, luồng L04: Phân công kỹ thuật viên và lịch hẹn (track SE) |
 | **Phạm vi** | BT1 (đặc tả, thiết kế), BT2 (hệ thống chạy được, tag `v0.2`) và BT3 (kiểm thử, sửa lỗi, đóng gói, tag `v1.0`) |
-| **Cập nhật** | 08/11/2026 |
+| **Cập nhật** | 15/11/2026 |
 
 Nguyên tắc: mọi phần có AI hỗ trợ đều được em đọc lại, chạy lại và giải thích được; kết quả ghi trong repo là kết quả chạy thật, phần chưa làm được ghi rõ là chưa làm.
 
@@ -23,10 +23,10 @@ Nguyên tắc: mọi phần có AI hỗ trợ đều được em đọc lại, c
 | Claude Code | Bộ dữ liệu mẫu và dựng hệ thống một lệnh | `scripts/make_sample_data.py`, `scripts/data_source.py`, `scripts/setup_all.py`, `data/sample/*.csv`, `tests/integration/test_idempotent_load.py` | Chạy `setup_all.py` hai lần, số dòng không đổi; so 30 phiếu MOI của bộ mẫu trùng dữ liệu đầy đủ |
 | Claude Code | 18 test case TC01–TC18 trên hệ thống thật, test e2e, ảnh minh chứng | `tests/service/*`, `tests/ui/test_states.py`, `tests/ui/test_e2e_main_flow.py`, `tests/e2e/test_main_flow.py`, `tests/real_system.py` | Chạy `python -m pytest -m system` (18 passed); mở từng ảnh trong `docs/test-evidence/`; thử phá hành vi cũ để chắc test bắt được lỗi |
 | Claude Code | README, khoá phiên bản, `.env.example`, nhật ký lỗi, báo cáo | `README.md`, `requirements*.txt`, `.env.example`, `docs/bug-log.md`, `docs/thay-doi-thiet-ke.md`, báo cáo Word/PDF | Clone repo vào thư mục trống và làm đúng từng bước README; quét toàn bộ lịch sử Git không có secret |
-
 | Claude Code | BT3: kế hoạch thực hiện từ slide Buổi 14 và tài liệu tự học Buổi 13; Test Plan; 12 test case TC-01…TC-12 chạy trên backend thật với ảnh Swagger | `docs/test-plan.md`, `tests/bt3/test_bt3.py`, `tests/bt3/conftest.py`, `docs/screenshots/*` | Chạy `python -m pytest -m bt3`: lần 1 11/12 (TC-07 FAIL, ghi trung thực), sau sửa 12/12; mở từng ảnh xem lệnh curl và phản hồi thật; kết quả thực tế lấy từ tệp test tự ghi `bt3-ket-qua-chay.md` |
 | Claude Code | BT3: sửa BUG-08 (trường bắt buộc chỉ có khoảng trắng) và 4 unit test | `app/services/ticket_rules.py: require_text_fields`, `ticket_service._clean_fields`, `tests/test_crud_rules.py` | TC-07 FAIL trước sửa, PASS sau sửa; TC-11 và integration CRUD vẫn tạo được phiếu hợp lệ; `python -m pytest` 104 passed |
 | Claude Code | BT3: Test Report, Bug Log 7 dòng, TD-20…TD-24, Deployment Guide, checklist bảo mật, tài liệu API (tiếng Anh), tệp `.http`, Docker Compose 2 lệnh, CI | `docs/test-report.md`, `docs/bug-log.md`, `docs/thay-doi-thiet-ke.md`, `docs/deployment-guide.md`, `docs/security-checklist.md`, `docs/api.md`, `docs/api-requests.http`, `docker-compose.yml`, `Dockerfile.backend`, `.github/workflows/ci.yml` | Đối chiếu từng số trong Test Report với lần chạy thật; kiểm link commit; Docker Compose: phép thử máy trắng ngày 10/11/2026 trong `C:\BT3test` – 2 lệnh, mã thoát 0, `db`/`backend`/`frontend` healthy, `init` thoát 0, đăng nhập QL_TT01 được; CI: lần chạy #1 Success |
+| Claude Code | BT3 Buổi 16: dịch vụ `test` trong Docker Compose; viết lại Deployment Guide theo năm mục; checklist bảo mật với nhãn ĐÃ LÀM/CHƯA LÀM; script chụp ví dụ API và tài liệu API bảy mục cho mỗi endpoint; sửa bảng khai báo này | `Dockerfile.backend`, `docker-compose.yml`, `docs/deployment-guide.md`, `docs/security-checklist.md`, `scripts/capture_api_examples.py`, `docs/api-examples.md`, `docs/api.md` | `docker compose run --rm test`: 104 passed; chạy script trên stack Docker thật (44 yêu cầu), ví dụ trong `docs/api.md` được chép nguyên từ kết quả đó; so 20 route trong mã với 20 endpoint trong tài liệu; chạy lại từng lệnh minh chứng của checklist |
 
 ## 2. Quyết định do em đưa ra khi rà soát kết quả AI
 
@@ -39,6 +39,8 @@ Nguyên tắc: mọi phần có AI hỗ trợ đều được em đọc lại, c
 - BT3: ảnh minh chứng chụp bằng Playwright trên Swagger/giao diện thật; ảnh terminal (TC-12, BUG-08-fixed) em tự chụp.
 - BT3: săn bug mới bằng test case thay vì chỉ dùng lại bug cũ; không ghi bug nào chưa tái lập được (giả thuyết TC-08 trả 500 đã chạy và không đúng, nên không ghi bug).
 - BT3: đóng gói Docker Compose hai lệnh (`cp .env.example .env`, `docker compose up -d --build`).
+- BT3 Buổi 16: ví dụ request/response trong tài liệu API được chép từ lần chạy thật của script, không viết tay; mã lỗi nào chưa chạy thật thì đánh dấu rõ trong bảng.
+- BT3 Buổi 16: chạy unit test trong container riêng (`docker compose run --rm test`) để người chấm không cần cài Python.
 
 ## 3. Phần do em tự làm
 
@@ -46,8 +48,9 @@ Nguyên tắc: mọi phần có AI hỗ trợ đều được em đọc lại, c
 - Cung cấp case study, tài liệu các buổi và bộ CSV cho công cụ.
 - Chỉnh bố cục các sơ đồ `erd.drawio`, `architecture.drawio` trong draw.io.
 - Kiểm thử thủ công MT01–MT11 trong báo cáo Buổi 10.
-- [Bổ sung các việc khác em đã thật sự làm.]
 
 ## 4. Cam kết
 
-Em đã đọc, hiểu và chịu trách nhiệm về toàn bộ nội dung nộp, kể cả phần có AI hỗ trợ, và giải thích được từng hàm khi được hỏi. [Ký tên / ghi rõ họ tên.]
+Em đã đọc, hiểu và chịu trách nhiệm về toàn bộ nội dung nộp, kể cả phần có AI hỗ trợ, và giải thích được từng hàm khi được hỏi. 
+
+Họ tên: Nguyễn Quốc Việt – MSSV 2374802010556.

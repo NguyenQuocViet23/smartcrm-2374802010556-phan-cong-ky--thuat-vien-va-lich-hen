@@ -185,3 +185,14 @@ Buổi 14 với repo này, mỗi mục có quyết định và dẫn chứng.
 - **Quyết định:** **SỬA** – Docker Compose có thêm dịch vụ `init` chạy `scripts/setup_all.py` (tạo DB → migrate → nạp bộ mẫu → sinh tài khoản demo vào volume dùng chung), backend chờ `init` xong; healthcheck cho db, backend, frontend. Hai lệnh: `cp .env.example .env` và `docker compose up -d --build` ([deployment-guide.md](deployment-guide.md)).
 - **Lý do:** người chấm không cần cài Python/PostgreSQL; bộ mẫu `data/sample/` có sẵn trong repo.
 - **Ảnh hưởng:** cách dựng thủ công ở README vẫn giữ cho phát triển và chạy test.
+
+## TD-25 – Hoàn thiện gói nộp theo Buổi 16
+
+- **Phản hồi:** slide Buổi 16 (bảng tiêu chí C1–C9) và đối chiếu repo với từng mục.
+- **Quyết định:** **SỬA** bốn chỗ còn thiếu so với tiêu chí:
+  1. C3: thêm dịch vụ `test` (profile `test`) và stage `test` trong `Dockerfile.backend` để chạy unit test bằng `docker compose run --rm test`; `docker compose up` không khởi chạy nó, và stage `app` được đặt cuối nên bản dựng mặc định vẫn là dịch vụ.
+  2. C5: Deployment Guide viết lại thành năm mục Requirements · Setup steps · Environment variables · Sample data · Verify it works.
+  3. C6: checklist bảo mật dùng nhãn ĐÃ LÀM / CHƯA LÀM / KHÔNG ÁP DỤNG, mỗi mục một dòng minh chứng, chạy lại từng lệnh kiểm.
+  4. C9 / S1: [api.md](api.md) có bảy mục cho mỗi trong 20 endpoint, ví dụ chép từ lần chạy thật của `scripts/capture_api_examples.py` ([api-examples.md](api-examples.md)).
+- **Lý do:** người chấm làm đúng theo tài liệu trên máy trắng; tài liệu mô tả đúng 20 route thật, không mô tả chức năng chưa có.
+- **Ảnh hưởng:** không đổi mã ứng dụng, không đổi schema; README mục 3 đưa cách Docker Compose hai lệnh lên đầu, cách thủ công giữ lại bên dưới.
