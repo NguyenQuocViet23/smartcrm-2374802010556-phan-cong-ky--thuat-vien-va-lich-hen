@@ -400,16 +400,16 @@
       "Dữ liệu thật đã nạp; đã chạy bước tạo phiếu MỚI; có Quản lý và kỹ thuật viên phù hợp (tài khoản trong data/processed/demo_accounts.json)."
     ],
     "when": [
-      "b1: Quản lý đăng nhập, mở M1.",
+      "b1: Quản lý đăng nhập, mở M1 (menu Phiếu, tab Chờ phân công mặc định).",
       "b2: Bấm \"Phân công\" ở dòng phiếu đầu tiên, mở M2 và xem danh sách gợi ý.",
       "b3: Chọn kỹ thuật viên đầu danh sách, bấm \"Xác nhận phân công\".",
       "b4: Bấm \"Đặt lịch hẹn\", chọn loại, ngày D, 09:00–09:30, bấm \"Lưu lịch hẹn\".",
       "b5: Đăng xuất, đăng nhập bằng kỹ thuật viên vừa được phân công, mở M3.",
       "b6: Chọn phiếu, bấm \"Bắt đầu sửa\".",
-      "b7: Bấm \"Hoàn tất\"."
+      "b7: Bấm \"Hoàn tất\", hộp xác nhận hiện ra, bấm \"Xác nhận\"."
     ],
     "then": [
-      "b1: M1 chỉ có phiếu MỚI của trung tâm, sắp CAO → TRUNG_BINH → THAP.",
+      "b1: Tab Chờ phân công của M1 chỉ có phiếu MỚI của trung tâm, sắp CAO → TRUNG_BINH → THAP.",
       "b2: M2 hiển thị thông tin phiếu và bảng gợi ý (tay nghề ≥ 3, khối lượng tăng dần).",
       "b3: Thông báo thành công; trạng thái phiếu ĐÃ PHÂN CÔNG; bảng lịch sử thêm 1 dòng.",
       "b4: Lịch hẹn lưu thành công, hiển thị với trạng thái ĐÃ HẸN.",
