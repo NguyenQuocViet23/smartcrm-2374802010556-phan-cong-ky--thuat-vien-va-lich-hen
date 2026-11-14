@@ -6,7 +6,7 @@
 | **Học phần** | Chuyên đề Tốt nghiệp 1 (71ITGR40203) – Trường ĐH Văn Lang |
 | **Đề tài** | Smart CRM – Mekong Mobile, luồng L04: Phân công kỹ thuật viên và lịch hẹn (track SE) |
 | **Phạm vi** | BT1 (đặc tả, thiết kế), BT2 (hệ thống chạy được, tag `v0.2`) và BT3 (kiểm thử, sửa lỗi, đóng gói, tag `v1.0`) |
-| **Cập nhật** | 15/11/2026 |
+| **Cập nhật** | 15/11/2026 (sau phép thử máy trắng trên v1.0) |
 
 Nguyên tắc: mọi phần có AI hỗ trợ đều được em đọc lại, chạy lại và giải thích được; kết quả ghi trong repo là kết quả chạy thật, phần chưa làm được ghi rõ là chưa làm.
 
@@ -27,6 +27,7 @@ Nguyên tắc: mọi phần có AI hỗ trợ đều được em đọc lại, c
 | Claude Code | BT3: sửa BUG-08 (trường bắt buộc chỉ có khoảng trắng) và 4 unit test | `app/services/ticket_rules.py: require_text_fields`, `ticket_service._clean_fields`, `tests/test_crud_rules.py` | TC-07 FAIL trước sửa, PASS sau sửa; TC-11 và integration CRUD vẫn tạo được phiếu hợp lệ; `python -m pytest` 104 passed |
 | Claude Code | BT3: Test Report, Bug Log 7 dòng, TD-20…TD-24, Deployment Guide, checklist bảo mật, tài liệu API (tiếng Anh), tệp `.http`, Docker Compose 2 lệnh, CI | `docs/test-report.md`, `docs/bug-log.md`, `docs/thay-doi-thiet-ke.md`, `docs/deployment-guide.md`, `docs/security-checklist.md`, `docs/api.md`, `docs/api-requests.http`, `docker-compose.yml`, `Dockerfile.backend`, `.github/workflows/ci.yml` | Đối chiếu từng số trong Test Report với lần chạy thật; kiểm link commit; Docker Compose: phép thử máy trắng ngày 10/11/2026 trong `C:\BT3test` – 2 lệnh, mã thoát 0, `db`/`backend`/`frontend` healthy, `init` thoát 0, đăng nhập QL_TT01 được; CI: lần chạy #1 Success |
 | Claude Code | BT3 Buổi 16: dịch vụ `test` trong Docker Compose; viết lại Deployment Guide theo năm mục; checklist bảo mật với nhãn ĐÃ LÀM/CHƯA LÀM; script chụp ví dụ API và tài liệu API bảy mục cho mỗi endpoint; sửa bảng khai báo này | `Dockerfile.backend`, `docker-compose.yml`, `docs/deployment-guide.md`, `docs/security-checklist.md`, `scripts/capture_api_examples.py`, `docs/api-examples.md`, `docs/api.md` | `docker compose run --rm test`: 104 passed; chạy script trên stack Docker thật (44 yêu cầu), ví dụ trong `docs/api.md` được chép nguyên từ kết quả đó; so 20 route trong mã với 20 endpoint trong tài liệu; chạy lại từng lệnh minh chứng của checklist |
+| Claude Code | BT3 Buổi 16: README mục 5 "Hướng dẫn chạy test" (một lệnh cho mỗi test case TC-01…TC-12 và lệnh chạy toàn bộ); tìm và sửa BUG-09; phép thử máy trắng trên tag v1.0; chụp ảnh terminal và trình duyệt cho Mục 7 của báo cáo | `README.md`, `docs/bug-log.md`, `docs/screenshots/v1-*.png`, `docs/BT3_2374802010556_NguyenQuocViet_HoanChinh.docx` | Làm đúng từng lệnh README mục 5 trên bản clone sạch: unit 104, integration 7, BT3 12/12 PASS; ảnh terminal là ảnh chụp cửa sổ PowerShell thật (Claude Code tự chụp), em mở xem từng ảnh và kiểm không lộ secret |
 
 ## 2. Quyết định do em đưa ra khi rà soát kết quả AI
 
