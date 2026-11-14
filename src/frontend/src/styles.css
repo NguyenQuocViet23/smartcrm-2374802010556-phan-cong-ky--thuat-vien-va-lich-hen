@@ -91,6 +91,7 @@ td.row-actions > * + * { margin-left: 6px; }
 .button.danger-outline { background: #fff; color: var(--danger); border: 1px solid #e2a4a4; }
 .button.danger-outline:hover { background: #fff2f2; }
 .link-button { border: 0; padding: 0; color: #075da2; background: none; text-decoration: underline; font-weight: 600; }
+td a, td .link-button { white-space: nowrap; }
 
 /* ---------- toolbar and tabs ---------- */
 .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -119,7 +120,7 @@ td.row-actions > * + * { margin-left: 6px; }
 .ticket-details h2, .panel h3 { margin-top: 0; }
 .ticket-details h3 { margin-top: 22px; }
 .detail-grid { display: grid; grid-template-columns: minmax(130px, 180px) 1fr; gap: 10px; margin-bottom: 20px; }
-.detail-grid span { color: #526b83; }
+.detail-grid > span { color: #526b83; }
 .notice { margin: 0; padding: 12px; border-radius: 5px; background: #f3f7fb; border: 1px solid var(--line); }
 .notice.error { border: 1px solid #e2a4a4; background: #fff2f2; }
 .notice.success { border: 1px solid #8cc9a5; background: #eefaf2; color: #17532f; }
