@@ -196,3 +196,16 @@ Buổi 14 với repo này, mỗi mục có quyết định và dẫn chứng.
   4. C9 / S1: [api.md](api.md) có bảy mục cho mỗi trong 20 endpoint, ví dụ chép từ lần chạy thật của `scripts/capture_api_examples.py` ([api-examples.md](api-examples.md)).
 - **Lý do:** người chấm làm đúng theo tài liệu trên máy trắng; tài liệu mô tả đúng 20 route thật, không mô tả chức năng chưa có.
 - **Ảnh hưởng:** không đổi mã ứng dụng, không đổi schema; README mục 3 đưa cách Docker Compose hai lệnh lên đầu, cách thủ công giữ lại bên dưới.
+
+## TD-26 – Cải tiến giao diện sau bản nộp (tag v1.1)
+
+- **Phản hồi:** dùng thử thấy giao diện khó dùng và thiếu nút: M1 chỉ hiện phiếu MỚI nên phiếu đã phân công không mở lại được; không có nút tạo, sửa, hủy phiếu; lịch hẹn chỉ thêm được, không đổi giờ hay hủy được; các trang không có menu, không liên kết với nhau; trang đăng nhập không nói tên đăng nhập là gì.
+- **Quyết định:** **SỬA giao diện, giữ nguyên backend và schema.** Mọi nút mới gọi API đã có từ BT2/BT3 (`docs/api.md`):
+  1. Menu trên thanh tiêu đề: Phiếu · Lịch hẹn (quản lý), Phiếu của tôi · Lịch hẹn của tôi (kỹ thuật viên).
+  2. Danh sách phiếu có tab cho cả 7 trạng thái kèm số đếm; tạo, sửa, hủy mềm phiếu MỚI; mã phiếu dẫn tới trang chi tiết `/tickets/{id}` (vẫn giữ `/tickets/{id}/assign`).
+  3. Trang chi tiết phiếu: quay lại đúng tab, sửa/hủy phiếu MỚI, ẩn phần phân công khi phiếu đã kết thúc, đổi giờ và hủy từng lịch hẹn.
+  4. Trang mới `/appointments` cho cả hai vai trò; phạm vi xem do backend giới hạn như cũ.
+  5. Phiếu của tôi: ô tổng hợp, danh sách và chi tiết cạnh nhau, lịch sử phiếu, hỏi xác nhận trước khi Hoàn tất, mở phiếu từ liên kết `?ticket=`.
+  6. Nhãn tiếng Việt cho nhóm sự cố và loại lịch (vẫn hiện mã `GIAO`/`NHAN`), huy hiệu màu theo trạng thái, form lịch hẹn chọn thời lượng và mặc định ngày làm việc kế tiếp.
+- **Lý do:** người dùng phải làm được trọn luồng L04 trên giao diện mà không cần Swagger; "xoá" trên giao diện là hủy mềm theo QT-13.
+- **Ảnh hưởng:** bản nộp BT3 vẫn là tag `v1.0` (ảnh minh chứng chụp giao diện cũ); giao diện mới ở tag `v1.1`. Test giao diện cũ giữ nguyên kỳ vọng; hai chỗ đổi: bấm "Xác nhận" sau "Hoàn tất", selector "Hủy" dùng `exact=True`. Thêm 3 test UI cho các màn hình mới. Danh sách phiếu và lịch hẹn không có cột kỹ thuật viên vì API danh sách chỉ trả `technician_id`; kỹ thuật viên hiện ở trang chi tiết phiếu.

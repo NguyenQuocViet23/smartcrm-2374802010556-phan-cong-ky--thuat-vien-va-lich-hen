@@ -3,6 +3,7 @@
 **Đơn vị mô phỏng:** Mekong Mobile
 **Sinh viên:** Nguyễn Quốc Việt – MSSV 2374802010556 – Lớp 261_71ITGR40203_05
 **Track:** SE · Chuyên đề Tốt nghiệp 1 – Trường ĐH Văn Lang · Bài tập 3: tag `v1.0` (Bài tập 2: tag `v0.2`)
+**Phiên bản:** bản nộp Bài tập 3 là tag `v1.0`; tag `v1.1` giữ nguyên backend và cơ sở dữ liệu, chỉ cải tiến giao diện (mục 4, TD-26).
 
 ## 1. Mô tả bài toán và phạm vi
 
@@ -127,10 +128,12 @@ cd src/frontend && npm ci && npm run dev               # terminal 2
 
 Mật khẩu mọi tài khoản demo là giá trị `DEMO_PASSWORD` trong `.env`.
 
-| Vai trò | Tên đăng nhập | Màn hình |
+| Vai trò | Tên đăng nhập | Màn hình (từ v1.1, có menu trên thanh tiêu đề) |
 |---|---|---|
-| Quản lý trung tâm | `QL_TT01` … `QL_TT06` | M1 Phiếu chờ phân công → M2 Phân công kỹ thuật viên |
-| Kỹ thuật viên | Mã `technician_code` từ `KT001` đến `KT038`, trừ 3 người đã nghỉ việc (`KT001`, `KT011`, `KT031`) | M3 Phiếu của tôi |
+| Quản lý trung tâm | `QL_TT01` … `QL_TT06` | **Phiếu** (`/tickets`): tab theo trạng thái có số đếm, nút *+ Tạo phiếu mới*, mỗi dòng có *Phân công*, *Sửa*, *Hủy phiếu* (phiếu MỚI) hoặc *Chi tiết / Đổi KTV*, *Xem* → **Chi tiết phiếu** (`/tickets/{id}`): phân công/đổi kỹ thuật viên, đặt lịch, *Đổi giờ*/*Hủy lịch* từng lịch hẹn, lịch sử · **Lịch hẹn** (`/appointments`): mọi lịch của trung tâm, lọc trạng thái/thời gian, đổi giờ, hủy lịch |
+| Kỹ thuật viên | Mã `technician_code` từ `KT001` đến `KT038`, trừ 3 người đã nghỉ việc (`KT001`, `KT011`, `KT031`) | **Phiếu của tôi** (`/my-tickets`): ô tổng hợp (đang làm, quá hạn, đã xong, lịch hôm nay), danh sách và chi tiết cạnh nhau, chuyển trạng thái (hỏi xác nhận trước khi *Hoàn tất*), đặt/đổi/hủy lịch hẹn · **Lịch hẹn của tôi** (`/appointments`) |
+
+Tên đăng nhập là mã tài khoản, gõ đúng chữ hoa (`QL_TT01`, `KT002`). "Xoá" phiếu hay lịch hẹn trên giao diện là **hủy mềm** (QT-13): bản ghi chuyển sang `DA_HUY`, không bị xoá khỏi cơ sở dữ liệu.
 
 Quản lý chỉ thấy phiếu của trung tâm mình; kỹ thuật viên chỉ thấy phiếu của chính mình (kể cả phiếu đã đóng/đã hủy, lọc bằng ô "Trạng thái"). Thử API trực tiếp tại http://localhost:8000/docs (đăng nhập `POST /api/auth/login`, dán token vào nút Authorize).
 
