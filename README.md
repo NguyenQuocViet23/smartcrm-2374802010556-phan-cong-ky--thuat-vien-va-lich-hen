@@ -143,21 +143,92 @@ Nghiệp vụ khác: `GET /api/tickets/{id}/technician-suggestions` (gợi ý), 
 
 Lỗi trả về dạng `{"error": "<MÃ>", "message": "<thông báo>"}`: dữ liệu sai 400, chưa đăng nhập 401, không có quyền 403, không tìm thấy 404, xung đột trạng thái/trùng lịch 409, CSDL tạm thời không khả dụng 503.
 
-## 5. Kiểm thử và minh chứng
+## 5. Hướng dẫn chạy test
+
+Mọi lệnh chạy từ **thư mục gốc repo**, viết cho Windows PowerShell (macOS/Linux: đổi `\` thành `/`, `.\.venv\Scripts\Activate.ps1` thành `source .venv/bin/activate`). Mỗi lệnh dán thẳng vào terminal là chạy được.
+
+### 5.1. Chạy nhanh, chỉ cần Docker (unit test)
+
+Cần stack Docker đã dựng theo mục 3.1. Không cần cài Python.
+
+```powershell
+# Toàn bộ unit test (mong đợi dòng cuối: 104 passed)
+docker compose run --rm test
+# Chỉ một tệp test
+docker compose run --rm test python -m pytest tests/test_ticket_rules.py
+# Chỉ một test theo tên (ví dụ: biên tay nghề đúng bằng 3)
+docker compose run --rm test python -m pytest -k proficiency_exactly_three
+```
+
+### 5.2. Chuẩn bị một lần cho 12 test case BT3 (TC-01…TC-12)
+
+12 test case của [Test Report](docs/test-report.md) chạy trên **backend thật và Swagger/giao diện thật** bằng Playwright. Mỗi test tự tạo bản sao `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend riêng ở cổng 8000 trên bản sao đó, chụp ảnh rồi mới so kết quả. Cách dưới dùng luôn PostgreSQL và frontend trong Docker, **không cần cài PostgreSQL hay Node.js**:
+
+```powershell
+# 1. Dựng stack (bỏ qua nếu đã chạy) rồi tắt backend của Docker để trả cổng 8000 cho test.
+#    Frontend Docker gọi localhost:8000 nên sẽ dùng backend do test tự chạy (TC-11 cần giao diện).
+docker compose up -d --build
+docker compose stop backend
+# 2. Trỏ script và test tới PostgreSQL của Docker: mở .env, sửa DB_HOST=localhost và DB_PORT=5433 rồi lưu
+notepad .env
+# 3. Môi trường Python (phiên bản đã khoá) và trình duyệt cho Playwright
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements-dev.txt
+python -m playwright install chromium
+# 4. Dựng database kiểm thử smartcrm_test (từ bộ mẫu data/sample, hoặc data/raw nếu có đủ 7 CSV) và tài khoản demo
+python scripts\setup_all.py --with-test-db
+```
+
+Nếu dùng PostgreSQL và frontend cài trên máy (mục 3.2): `.env` trỏ tới PostgreSQL đó, chạy `npm run dev` trong `src\frontend`, cổng 8000 phải trống; các bước 3–4 giữ nguyên.
+
+### 5.3. Chạy từng test case
+
+| Mã | Test case | Loại | Lệnh |
+|---|---|---|---|
+| TC-01 | Gợi ý kỹ thuật viên đúng thứ tự khối lượng | Luồng đúng | `python -m pytest -m bt3 -k tc01` |
+| TC-02 | Phân công thành công và ghi lịch sử | Luồng đúng | `python -m pytest -m bt3 -k tc02` |
+| TC-03 | Đặt lịch hẹn hợp lệ | Luồng đúng | `python -m pytest -m bt3 -k tc03` |
+| TC-04 | Biên tay nghề 3 \| 2 | Giá trị biên | `python -m pytest -m bt3 -k tc04` |
+| TC-05 | Biên lịch liền kề \| chồng 1 phút | Giá trị biên | `python -m pytest -m bt3 -k tc05` |
+| TC-06 | Đổi kỹ thuật viên với lý do chỉ có khoảng trắng | Dữ liệu sai | `python -m pytest -m bt3 -k tc06` |
+| TC-07 | Tạo phiếu SĐT sai / trường bắt buộc chỉ có khoảng trắng (BUG-08) | Dữ liệu sai | `python -m pytest -m bt3 -k tc07` |
+| TC-08 | Mã phiếu không tồn tại / vượt BIGINT | Dữ liệu sai | `python -m pytest -m bt3 -k tc08` |
+| TC-09 | A01 – sửa phiếu không thuộc quyền mình | Bảo mật | `python -m pytest -m bt3 -k tc09` |
+| TC-10 | A07 – token thiếu, hết hạn, bị sửa | Bảo mật | `python -m pytest -m bt3 -k tc10` |
+| TC-11 | A05 injection và XSS, A02 CORS và lộ lỗi | Bảo mật | `python -m pytest -m bt3 -k tc11` |
+| TC-12 | Dựng CSDL hai lần không nhân đôi | Tái lập | `python -m pytest -m bt3 -k tc12` |
+
+Mỗi lệnh chọn đúng một test (dòng cuối: `1 passed`). Kết quả thực tế mà test ghi lại nằm trong `docs/screenshots/bt3-ket-qua-chay.md`, ảnh trong `docs/screenshots/TC-xx*.png`.
+
+### 5.4. Chạy toàn bộ test case một lần
+
+```powershell
+# Cả 12 test case BT3 (mong đợi: 12 passed, khoảng 5 phút)
+python -m pytest -m bt3
+# Mọi tầng liên tiếp: unit (104 passed) → integration PostgreSQL (7 passed) → 12 test case BT3 (12 passed)
+python -m pytest; python -m pytest tests\integration -m integration; python -m pytest -m bt3
+```
+
+Lưu ý khi chạy:
+
+- Chạy test ghi đè ảnh `docs/screenshots/TC-xx*.png` và tệp `bt3-ket-qua-chay.md`. Muốn trả lại minh chứng đã nộp: `git checkout -- docs/screenshots`.
+- Xem trình duyệt chạy: thêm `--headed --slowmo 500` vào cuối lệnh.
+- Database kiểm thử phải có tên kết thúc bằng `_test`; test không bao giờ ghi vào `smartcrm`.
+- Báo "Cổng 8000 đang có backend khác": chạy `docker compose stop backend` (hoặc tắt backend đang chạy tay).
+- Integration báo database đang có kết nối khác: đóng Query Tool/Disconnect trong pgAdmin rồi chạy lại.
+- Chạy xong, bật lại backend Docker: `docker compose start backend`.
+
+### 5.5. Các bộ test khác
 
 | Nhóm | Lệnh | Cần gì | Kết quả gần nhất |
 |---|---|---|---|
-| **Unit** (quy tắc nghiệp vụ, ánh xạ lỗi, API bằng TestClient) | `python -m pytest` | Không cần DB/frontend | 104 passed |
-| **12 test case BT3 TC-01…TC-12** (5 loại, Swagger thật, ảnh `docs/screenshots/`) | `python -m pytest -m bt3` (một case: `-k tc05`) | `.env` có `TEST_DB_NAME=smartcrm_test`, `smartcrm_test` đã nạp, cổng 8000 trống, frontend chạy (TC-11) | 12 passed sau khi sửa BUG-08 |
-| Integration PostgreSQL (CRUD, chạy lại không nhân đôi, TC22–TC25) | `python scripts\setup_all.py --with-test-db` một lần, rồi `python -m pytest tests\integration -m integration` | PostgreSQL | 7 passed |
-| **18 test case TC01–TC18** (nghiệp vụ + giao diện + e2e) | `python -m pytest -m system` | Frontend đang chạy, cổng 8000 trống, `smartcrm_test` đã nạp | 18 passed (~4 phút) |
-| End-to-end luồng chính (có tắt backend thật) | `python -m pytest tests\e2e -m e2e` | như trên | 1 passed |
+| 18 test case TC01–TC18 của Buổi 10 (nghiệp vụ, giao diện, e2e) | `python -m pytest -m system` (một case: `python -m pytest -m system -k tc05`) | Như mục 5.2 | 18 passed (~4 phút) |
+| End-to-end luồng chính (có tắt backend thật) | `python -m pytest tests\e2e -m e2e` | Như mục 5.2 | 1 passed |
 | UI với API giả lập (TC19–TC21) | `python -m pytest tests\ui -m ui` | Frontend đang chạy | 3 passed |
 
 - Unit test gồm ba loại (luồng đúng, giá trị biên, dữ liệu sai): `tests/test_ticket_rules.py` (vòng đời trạng thái, tay nghề đúng bằng 3, phạm vi xem phiếu), `tests/test_crud_rules.py` (SĐT, hạn cam kết, sửa/hủy phiếu và lịch hẹn, khung giờ trống), `tests/test_appointment_validation.py` (giờ làm việc, biên 17:30–18:00), `tests/test_error_handling.py` (ánh xạ lỗi, 503 khi CSDL tắt, 500 không lộ traceback).
-- TC01–TC18 giữ nguyên mã, tên và kỳ vọng của báo cáo Buổi 10 (`tests/tc_catalog.json`); mỗi test tạo lại `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend trên bản sao và chụp ảnh trình duyệt thật vào [docs/test-evidence/](docs/test-evidence/) kèm báo cáo tự sinh [testcase.md](docs/test-evidence/testcase.md). Cách chạy từng test: TD-16.
-- Database kiểm thử phải có tên kết thúc bằng `_test`; test không bao giờ ghi vào `smartcrm`.
-- Thêm `--headed --slowmo 500` để xem trình duyệt chạy. Integration/e2e báo database đang có kết nối khác: đóng Query Tool/Disconnect rồi chạy lại.
+- TC01–TC18 giữ nguyên mã, tên và kỳ vọng của báo cáo Buổi 10 (`tests/tc_catalog.json`); ảnh trình duyệt thật ở [docs/test-evidence/](docs/test-evidence/) kèm báo cáo tự sinh [testcase.md](docs/test-evidence/testcase.md). Cách chạy từng test: TD-16.
 
 ## 6. Tài liệu
 
