@@ -169,7 +169,8 @@ docker compose run --rm test python -m pytest -k proficiency_exactly_three
 #    Frontend Docker gọi localhost:8000 nên sẽ dùng backend do test tự chạy (TC-11 cần giao diện).
 docker compose up -d --build
 docker compose stop backend
-# 2. Trỏ script và test tới PostgreSQL của Docker: mở .env, sửa DB_HOST=localhost và DB_PORT=5433 rồi lưu
+# 2. Trỏ script và test tới PostgreSQL của Docker: mở .env, sửa DB_HOST=127.0.0.1 và DB_PORT=5433 rồi lưu
+#    (phải là 127.0.0.1, không dùng localhost: xem ghi chú BUG-09 bên dưới)
 notepad .env
 # 3. Môi trường Python (phiên bản đã khoá) và trình duyệt cho Playwright
 py -m venv .venv
@@ -179,6 +180,8 @@ python -m playwright install chromium
 # 4. Dựng database kiểm thử smartcrm_test (từ bộ mẫu data/sample, hoặc data/raw nếu có đủ 7 CSV) và tài khoản demo
 python scripts\setup_all.py --with-test-db
 ```
+
+Vì sao là `127.0.0.1` (BUG-09): Docker chỉ mở cổng 5433 trên `127.0.0.1`, còn `localhost` được phân giải sang `::1` (IPv6) trước. Trên Windows, kết nối tới cổng đóng không bị từ chối ngay mà phải chờ hết thời gian chờ, nên mỗi kết nối qua `localhost` mất khoảng 60 giây và bước 4 gần như treo.
 
 Nếu dùng PostgreSQL và frontend cài trên máy (mục 3.2): `.env` trỏ tới PostgreSQL đó, chạy `npm run dev` trong `src\frontend`, cổng 8000 phải trống; các bước 3–4 giữ nguyên.
 
