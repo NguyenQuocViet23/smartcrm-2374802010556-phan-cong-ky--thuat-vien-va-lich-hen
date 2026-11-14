@@ -40,11 +40,31 @@ docs/                        SRS, sơ đồ, thay đổi thiết kế, nhật k�
 
 ## 3. Các bước dựng hệ thống
 
-Cần cài sẵn: **Git**, **Python 3.12+**, **Node.js 22+**, **PostgreSQL 16+** đang chạy (biết user/mật khẩu, mặc định `postgres`). Không cần tải thêm dữ liệu: repo có sẵn bộ mẫu `data/sample/`. Nếu có bộ 7 CSV case-study đầy đủ từ LMS, chép vào `data/raw/` trước bước 9 thì hệ thống tự dùng bộ đầy đủ.
-
 > **Windows:** clone vào thư mục có đường dẫn ngắn (ví dụ `D:\Projects`). Tên repo đã dài 66 ký tự; nếu đường dẫn tới thư mục repo vượt khoảng 130 ký tự, tệp trong `.venv` vượt giới hạn 260 ký tự và pytest báo `DLL load failed ... The filename or extension is too long` (BUG-04).
 
-### 3.1. Windows PowerShell (mỗi dòng một lệnh, chạy từ thư mục gốc repo)
+### 3.1. Cách chính: Docker Compose – đúng 2 lệnh (không cần cài Python, PostgreSQL, Node)
+
+Cần Git và Docker Desktop đang chạy; cổng 5173, 8000 và 5433 phải trống. Lấy mã nguồn đúng phiên bản nộp bài vào thư mục trống:
+
+```powershell
+git clone --branch v1.0 https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git smartcrm
+Set-Location smartcrm
+```
+
+Rồi chạy **hai lệnh dựng hệ thống**:
+
+```powershell
+# 1. Tạo tệp cấu hình (giá trị mẫu đủ cho chạy thử; đổi mật khẩu/khoá khi triển khai thật)
+Copy-Item .env.example .env          # macOS/Linux: cp .env.example .env
+# 2. Dựng PostgreSQL → nạp bộ mẫu + tạo tài khoản demo (dịch vụ init) → backend → frontend
+docker compose up -d --build
+```
+
+Kiểm tra: `docker compose ps` (db, backend, frontend `healthy`; init `exited (0)`), mở http://localhost:5173, đăng nhập `QL_TT01` / `DEMO_PASSWORD`. Chạy kiểm thử đơn vị trong container: `docker compose run --rm test` (phải thấy `104 passed`). Dừng: `docker compose down`; xoá cả dữ liệu: `docker compose down -v`. Từng bước kiểm tra, biến môi trường, dữ liệu mẫu và xử lý sự cố: [docs/deployment-guide.md](docs/deployment-guide.md) (TD-24).
+
+### 3.2. Cách thủ công không dùng Docker: Windows PowerShell (mỗi dòng một lệnh, chạy từ thư mục gốc repo)
+
+Cần cài sẵn: **Git**, **Python 3.12+**, **Node.js 22+**, **PostgreSQL 16+** đang chạy (biết user/mật khẩu, mặc định `postgres`). Không cần tải thêm dữ liệu: repo có sẵn bộ mẫu `data/sample/`. Nếu có bộ 7 CSV case-study đầy đủ từ LMS, chép vào `data/raw/` trước bước 9 thì hệ thống tự dùng bộ đầy đủ.
 
 ```powershell
 # 1. Lấy mã nguồn đúng phiên bản nộp bài
@@ -82,7 +102,7 @@ npm run dev
 
 Kết quả mong đợi của bước 9 (in ra màn hình): `NGUỒN DỮ LIỆU: data/sample (bộ mẫu trong repo)`, `ticket=939, ticket_status_log=3237`, `appointment=300`, 30 phiếu MOI (mỗi trung tâm 5), các truy vấn bất biến đều 0. Chạy lại bước 9 lần hai: mọi dòng `NẠP: … = 0`, số dòng không đổi (không nhân đôi). Với bộ CSV đầy đủ trong `data/raw/`: `ticket=7317, ticket_status_log=35719`.
 
-### 3.2. macOS / Linux
+### 3.3. Cách thủ công không dùng Docker: macOS / Linux
 
 ```bash
 git clone --branch v1.0 https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen.git smartcrm
@@ -96,19 +116,6 @@ python scripts/setup_all.py
 python -m uvicorn app.main:app --app-dir src/backend   # terminal 1
 cd src/frontend && npm ci && npm run dev               # terminal 2
 ```
-
-### 3.3. Cách nhanh nhất: Docker Compose (2 lệnh, không cần cài Python/PostgreSQL/Node)
-
-Cần Docker Desktop đang chạy; cổng 5173, 8000 và 5433 phải trống. Sau bước 1–2 của mục 3.1:
-
-```powershell
-# 1. Tạo tệp cấu hình (giá trị mẫu đủ cho chạy thử; đổi mật khẩu/khoá khi triển khai thật)
-Copy-Item .env.example .env
-# 2. Dựng PostgreSQL → nạp bộ mẫu + tạo tài khoản demo (dịch vụ init) → backend → frontend
-docker compose up -d --build
-```
-
-Kiểm tra: `docker compose ps` (db, backend, frontend `healthy`; init `exited (0)`), mở http://localhost:5173, đăng nhập `QL_TT01` / `DEMO_PASSWORD`. Dừng: `docker compose down`; xoá cả dữ liệu: `docker compose down -v`. Chi tiết, xử lý sự cố: [docs/deployment-guide.md](docs/deployment-guide.md) (TD-24).
 
 ### 3.4. Lệnh tham khảo
 
