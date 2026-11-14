@@ -460,8 +460,9 @@ def test_manager_status_tabs_create_edit_cancel_ticket(page: Page) -> None:
             fulfill(route, 200, MANAGER)
         elif parsed.path == "/api/tickets" and request.method == "GET":
             status = query.get("status", ["MOI"])[0]
+            # The real list endpoint returns serial_no and issue_desc too (LIST_COLUMNS), which the edit form needs.
             rows = {
-                "MOI": [ticket_summary()] + created,
+                "MOI": [{**ticket_summary(), "serial_no": "SN-001", "issue_desc": "Màn hình không hiển thị"}] + created,
                 "DA_PHAN_CONG": [{**ticket_summary("DA_PHAN_CONG"), "ticket_id": 102, "ticket_code": "BH-2026-00102"}],
             }.get(status, [])
             fulfill(route, 200, {"items": rows, "total": len(rows), "page": 1, "page_size": 20})
