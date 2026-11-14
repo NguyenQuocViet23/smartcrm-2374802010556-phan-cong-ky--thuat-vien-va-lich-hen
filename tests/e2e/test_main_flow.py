@@ -271,6 +271,8 @@ def test_main_flow_from_assignment_to_completion(page: Page, backend: Backend) -
     page.get_by_label("Ghi chú (tối đa 255 ký tự)").fill("Đã kiểm tra thiết bị")
     page.get_by_role("button", name="Bắt đầu sửa").click()
     page.get_by_role("button", name="Hoàn tất").click()
+    # v1.1: finishing a ticket asks for confirmation first.
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận").click()
     expect(page.get_by_role("button", name="Đặt lịch hẹn")).to_be_hidden()
     assert page.evaluate("window.__sawLoading") is False, "M3 nhấp nháy trạng thái Đang tải khi chọn phiếu/đổi trạng thái"
     status_filter.select_option("HOAN_TAT")

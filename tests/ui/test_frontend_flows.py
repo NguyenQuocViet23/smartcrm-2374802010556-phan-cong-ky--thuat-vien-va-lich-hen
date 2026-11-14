@@ -152,7 +152,7 @@ def test_manager_login_filters_pagination_navigation_and_logout(page: Page) -> N
 
     page.get_by_role("button", name="Phân công").click()
     expect(page.get_by_role("heading", name="BH-2026-00101")).to_be_visible()
-    page.get_by_role("button", name="Hủy").click()
+    page.get_by_role("button", name="Hủy", exact=True).click()
     expect(page.get_by_text("Phiếu chờ phân công")).to_be_visible()
 
     page.get_by_role("button", name="Đăng xuất").click()
@@ -271,7 +271,7 @@ def test_assignment_errors_reason_validation_and_appointment_buttons(page: Page)
 
     page.get_by_role("button", name="Đặt lịch hẹn").click()
     expect(page.get_by_role("heading", name="Đặt lịch hẹn giao/nhận thiết bị")).to_be_visible()
-    page.get_by_role("button", name="Hủy").last.click()
+    page.get_by_role("button", name="Hủy", exact=True).last.click()
     expect(page.get_by_role("heading", name="Đặt lịch hẹn giao/nhận thiết bị")).to_have_count(0)
 
     page.get_by_role("button", name="Đặt lịch hẹn").click()
@@ -405,7 +405,7 @@ def test_technician_status_transitions_and_appointment_errors(page: Page) -> Non
     expect(page.get_by_role("button", name="Thiếu linh kiện")).to_be_visible()
 
     page.get_by_role("button", name="Đặt lịch hẹn").click()
-    page.get_by_role("button", name="Hủy").last.click()
+    page.get_by_role("button", name="Hủy", exact=True).last.click()
     page.get_by_role("button", name="Đặt lịch hẹn").click()
     date_input = page.get_by_label("Ngày")
     date_input.fill("2026-11-23")
@@ -421,8 +421,250 @@ def test_technician_status_transitions_and_appointment_errors(page: Page) -> Non
 
     page.get_by_role("button", name="Thiếu linh kiện").click()
     page.get_by_role("button", name="Hoàn tất").click()
+    # v1.1: finishing a ticket asks for confirmation first.
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận").click()
     expect(page.get_by_role("cell", name="HOÀN TẤT", exact=True)).to_be_visible()
     expect(page.get_by_role("button", name="Đặt lịch hẹn")).to_have_count(0)
 
     page.get_by_role("button", name="Đăng xuất").click()
     expect(page.get_by_role("heading", name="Smart CRM")).to_be_visible()
+
+
+# --- v1.1 interface: ticket tabs and CRUD, appointments page, technician dashboard ----------------
+
+def install_token(page: Page, token: str) -> None:
+    page.add_init_script(
+        "if (!sessionStorage.getItem('ui-test-token-installed')) {"
+        f"localStorage.setItem('access_token', '{token}');"
+        "sessionStorage.setItem('ui-test-token-installed', 'true');"
+        "}"
+    )
+
+
+def vn_now():
+    from datetime import datetime, timedelta, timezone
+    return datetime.now(timezone(timedelta(hours=7)))
+
+
+@pytest.mark.ui
+def test_manager_status_tabs_create_edit_cancel_ticket(page: Page) -> None:
+    created = []
+    calls = []
+
+    def mock_api(route) -> None:
+        request = route.request
+        parsed = urlparse(request.url)
+        query = parse_qs(parsed.query)
+        calls.append((request.method, parsed.path, query, request.post_data))
+        if parsed.path == "/api/auth/me":
+            fulfill(route, 200, MANAGER)
+        elif parsed.path == "/api/tickets" and request.method == "GET":
+            status = query.get("status", ["MOI"])[0]
+            rows = {
+                "MOI": [ticket_summary()] + created,
+                "DA_PHAN_CONG": [{**ticket_summary("DA_PHAN_CONG"), "ticket_id": 102, "ticket_code": "BH-2026-00102"}],
+            }.get(status, [])
+            fulfill(route, 200, {"items": rows, "total": len(rows), "page": 1, "page_size": 20})
+        elif parsed.path == "/api/tickets" and request.method == "POST":
+            body = json.loads(request.post_data)
+            if body["customer_phone"] == "09123":
+                fulfill(route, 400, {"error": "INVALID_PHONE", "message": "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng 0."})
+            else:
+                ticket = {**ticket_summary(), **body, "ticket_id": 200, "ticket_code": "BH-2026-00200"}
+                created.append(ticket)
+                fulfill(route, 201, ticket)
+        elif parsed.path == "/api/tickets/101" and request.method == "PUT":
+            fulfill(route, 200, {**ticket_details(), **json.loads(request.post_data)})
+        elif parsed.path == "/api/tickets/101" and request.method == "DELETE":
+            fulfill(route, 200, {**ticket_details(), "status": "DA_HUY"})
+        else:
+            fulfill(route, 404, {"message": f"Unexpected request: {parsed.path}"})
+
+    install_token(page, "manager-test-token")
+    page.route(API_URL, mock_api)
+    page.goto(f"{BASE_URL}/tickets")
+
+    # Tabs show how many tickets each status has; another tab lists assigned tickets with their own action.
+    expect(page.get_by_role("tab", name="Chờ phân công")).to_contain_text("1")
+    expect(page.get_by_role("tab", name="Đã phân công")).to_contain_text("1")
+    page.get_by_role("tab", name="Đã phân công").click()
+    expect(page).to_have_url(f"{BASE_URL}/tickets?status=DA_PHAN_CONG")
+    expect(page.get_by_text("Phiếu – Đã phân công")).to_be_visible()
+    expect(page.get_by_role("button", name="Chi tiết / Đổi KTV")).to_be_visible()
+    expect(page.get_by_role("link", name="BH-2026-00102")).to_have_attribute("href", "/tickets/102")
+    page.get_by_role("tab", name="Chờ phân công").click()
+
+    # Create: a wrong phone is rejected and the field is marked, then the corrected ticket is saved.
+    page.get_by_role("button", name="+ Tạo phiếu mới").click()
+    dialog = page.get_by_role("dialog")
+    dialog.get_by_label("Khách hàng").fill("Lê Thu")
+    dialog.get_by_label("Số điện thoại").fill("09123")
+    dialog.get_by_label("Serial máy").fill("SN-200")
+    dialog.get_by_label("Mô tả lỗi").fill("Không sạc được")
+    dialog.get_by_label("Nhóm sự cố").select_option("SAC")
+    dialog.get_by_role("button", name="Tạo phiếu").click()
+    expect(dialog).to_contain_text("Số điện thoại phải gồm 10 chữ số")
+    expect(dialog.get_by_label("Số điện thoại")).to_have_class("invalid")
+    dialog.get_by_label("Số điện thoại").fill("0912 345 678")
+    dialog.get_by_role("button", name="Tạo phiếu").click()
+    expect(page.get_by_role("dialog")).to_have_count(0)
+    expect(page.get_by_role("status")).to_contain_text("Đã tạo phiếu BH-2026-00200")
+    posted = json.loads([c for c in calls if c[0] == "POST"][-1][3])
+    assert posted["category_code"] == "SAC" and posted["customer_phone"] == "0912 345 678"
+    assert posted["due_date"].endswith("Z")
+
+    # Edit a MOI ticket.
+    row = page.get_by_role("row", name="BH-2026-00101")
+    row.get_by_role("button", name="Sửa").click()
+    expect(page.get_by_role("dialog").get_by_label("Khách hàng")).to_have_value("Trần Minh")
+    page.get_by_role("dialog").get_by_label("Mô tả lỗi").fill("Màn hình sọc ngang")
+    page.get_by_role("dialog").get_by_role("button", name="Lưu thay đổi").click()
+    expect(page.get_by_role("status")).to_contain_text("Đã lưu thay đổi phiếu")
+    put = [c for c in calls if c[0] == "PUT"][-1]
+    assert json.loads(put[3])["issue_desc"] == "Màn hình sọc ngang"
+
+    # Cancel (soft delete) asks for confirmation; "Quay lại" sends nothing.
+    row.get_by_role("button", name="Hủy phiếu").click()
+    page.get_by_role("dialog").get_by_role("button", name="Quay lại").click()
+    assert not [c for c in calls if c[0] == "DELETE"]
+    row.get_by_role("button", name="Hủy phiếu").click()
+    page.get_by_role("dialog").get_by_label("Lý do hủy (không bắt buộc)").fill("Khách đổi ý")
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận hủy phiếu").click()
+    expect(page.get_by_role("status")).to_contain_text("Đã hủy phiếu BH-2026-00101")
+    deleted = [c for c in calls if c[0] == "DELETE"]
+    assert deleted[-1][1] == "/api/tickets/101" and deleted[-1][2]["reason"] == ["Khách đổi ý"]
+
+
+@pytest.mark.ui
+def test_appointments_page_reschedule_and_cancel(page: Page) -> None:
+    from datetime import timedelta
+    day = (vn_now() + timedelta(days=40)).date()
+    while day.weekday() == 6:
+        day += timedelta(days=1)
+    appointment = {
+        "appointment_id": 31, "ticket_id": 101, "ticket_code": "BH-2026-00101", "technician_id": 5,
+        "appointment_type": "NHAN", "start_at": f"{day}T09:00:00+07:00", "end_at": f"{day}T09:30:00+07:00",
+        "status": "DA_HEN", "note": "Gọi trước 15 phút",
+    }
+    puts, deletes = [], []
+
+    def mock_api(route) -> None:
+        request = route.request
+        parsed = urlparse(request.url)
+        if parsed.path == "/api/auth/me":
+            fulfill(route, 200, MANAGER)
+        elif parsed.path == "/api/appointments" and request.method == "GET":
+            items = [appointment] if appointment["status"] == "DA_HEN" else []
+            fulfill(route, 200, {"items": items, "total": len(items), "page": 1, "page_size": 100})
+        elif parsed.path == "/api/appointments/31" and request.method == "PUT":
+            body = json.loads(request.post_data)
+            puts.append(body)
+            if len(puts) == 1:
+                fulfill(route, 409, {
+                    "error": "APPOINTMENT_OVERLAP", "message": "Khung giờ này đã có lịch hẹn.",
+                    "conflicts": [{"appointment_id": 7, "ticket_code": "BH-2026-00007",
+                                   "start_at": f"{day}T10:00:00+07:00", "end_at": f"{day}T10:30:00+07:00"}],
+                    "free_slots": [{"start_at": f"{day}T11:00:00+07:00", "end_at": f"{day}T11:30:00+07:00"}],
+                })
+            else:
+                appointment.update(start_at=body["start_at"], end_at=body["end_at"])
+                fulfill(route, 200, appointment)
+        elif parsed.path == "/api/appointments/31" and request.method == "DELETE":
+            deletes.append(parsed.path)
+            appointment["status"] = "DA_HUY"
+            fulfill(route, 200, appointment)
+        else:
+            fulfill(route, 404, {"message": f"Unexpected request: {parsed.path}"})
+
+    install_token(page, "manager-test-token")
+    page.route(API_URL, mock_api)
+    page.goto(f"{BASE_URL}/appointments")
+
+    row = page.get_by_role("row", name="BH-2026-00101")
+    expect(row).to_contain_text("Nhận máy (NHAN)")
+    expect(row).to_contain_text("ĐÃ HẸN")
+    expect(row.get_by_role("link", name="BH-2026-00101")).to_have_attribute("href", "/tickets/101")
+
+    # Reschedule: the form opens on the current slot; an overlap offers free slots.
+    row.get_by_role("button", name="Đổi giờ").click()
+    dialog = page.get_by_role("dialog")
+    expect(dialog.get_by_label("Ngày")).to_have_value(str(day))
+    expect(dialog.get_by_label("Giờ bắt đầu")).to_have_value("09:00")
+    dialog.get_by_label("Giờ bắt đầu").fill("10:00")
+    dialog.get_by_role("button", name="Lưu lịch hẹn").click()
+    expect(dialog.get_by_text("Khung giờ này đã có lịch hẹn.")).to_be_visible()
+    dialog.get_by_role("button", name="11:00–11:30").click()
+    dialog.get_by_role("button", name="Lưu lịch hẹn").click()
+    expect(page.get_by_role("dialog")).to_have_count(0)
+    expect(page.get_by_role("status")).to_contain_text("Đã đổi lịch hẹn của phiếu BH-2026-00101")
+    assert puts[-1]["appointment_type"] == "NHAN" and puts[-1]["start_at"].startswith(f"{day}T04:00:00")
+
+    # Cancel (soft delete) after confirmation; the row leaves the "Đã hẹn" list.
+    page.get_by_role("row", name="BH-2026-00101").get_by_role("button", name="Hủy lịch").click()
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận hủy lịch").click()
+    expect(page.get_by_role("status")).to_contain_text("Đã hủy lịch hẹn")
+    expect(page.get_by_test_id("state-empty")).to_be_visible()
+    assert deletes == ["/api/appointments/31"]
+
+
+@pytest.mark.ui
+def test_technician_dashboard_link_and_confirm_complete(page: Page) -> None:
+    today = vn_now().date()
+    status = "DANG_XU_LY"
+    appointments = [{
+        "appointment_id": 41, "ticket_id": 101, "ticket_code": "BH-2026-00101",
+        "appointment_type": "GIAO", "start_at": f"{today}T15:00:00+07:00", "end_at": f"{today}T15:30:00+07:00",
+        "status": "DA_HEN",
+    }]
+    patches = []
+
+    def mock_api(route) -> None:
+        nonlocal status, appointments
+        request = route.request
+        parsed = urlparse(request.url)
+        if parsed.path == "/api/auth/me":
+            fulfill(route, 200, TECHNICIAN)
+        elif parsed.path == "/api/technicians/me/tickets":
+            fulfill(route, 200, [{**ticket_summary(status), "is_overdue": True},
+                                 {**ticket_summary("HOAN_TAT"), "ticket_id": 102, "ticket_code": "BH-2026-00102"}])
+        elif parsed.path == "/api/tickets/101":
+            fulfill(route, 200, ticket_details(5, status))
+        elif parsed.path == "/api/tickets/101/appointments":
+            fulfill(route, 200, appointments)
+        elif parsed.path == "/api/appointments" and request.method == "GET":
+            items = [a for a in appointments if a["status"] == "DA_HEN"]
+            fulfill(route, 200, {"items": items, "total": len(items), "page": 1, "page_size": 100})
+        elif parsed.path == "/api/appointments/41" and request.method == "DELETE":
+            appointments = []
+            fulfill(route, 200, {"appointment_id": 41, "status": "DA_HUY"})
+        elif parsed.path == "/api/tickets/101/status" and request.method == "PATCH":
+            patches.append(json.loads(request.post_data))
+            status = patches[-1]["to_status"]
+            fulfill(route, 200, {"ticket_id": 101, "status": status})
+        else:
+            fulfill(route, 404, {"message": f"Unexpected request: {parsed.path}"})
+
+    install_token(page, "technician-test-token")
+    page.route(API_URL, mock_api)
+    # A link from the appointments page opens the ticket directly.
+    page.goto(f"{BASE_URL}/my-tickets?ticket=101")
+    expect(page.get_by_role("heading", name="BH-2026-00101")).to_be_visible()
+    expect(page.locator(".stat", has_text="Đang làm")).to_contain_text("1")
+    expect(page.locator(".stat", has_text="Quá hạn")).to_contain_text("1")
+    expect(page.locator(".stat", has_text="Đã xong")).to_contain_text("1")
+    expect(page.locator(".stat", has_text="Lịch hẹn hôm nay")).to_contain_text("1")
+
+    # Cancel the appointment of the ticket.
+    page.locator(".ticket-details").get_by_role("button", name="Hủy lịch").click()
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận hủy lịch").click()
+    expect(page.locator(".ticket-details")).to_contain_text("Chưa có lịch hẹn.")
+    expect(page.locator(".stat", has_text="Lịch hẹn hôm nay")).to_contain_text("0")
+
+    # Finishing asks first: "Quay lại" changes nothing, "Xác nhận" completes the ticket.
+    page.get_by_role("button", name="Hoàn tất").click()
+    page.get_by_role("dialog").get_by_role("button", name="Quay lại").click()
+    assert patches == []
+    page.get_by_role("button", name="Hoàn tất").click()
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận").click()
+    expect(page.get_by_role("status")).to_have_text("Đã chuyển trạng thái sang HOÀN TẤT.")
+    assert patches == [{"to_status": "HOAN_TAT", "note": ""}]

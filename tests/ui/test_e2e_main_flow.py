@@ -97,6 +97,8 @@ def test_tc18_ui_e2e_luong_chinh(page: Page, system: System) -> None:
 
     # b7 – complete the ticket.
     page.get_by_role("button", name="Hoàn tất").click()
+    # v1.1: finishing a ticket asks for confirmation first.
+    page.get_by_role("dialog").get_by_role("button", name="Xác nhận").click()
     expect(page.get_by_role("status")).to_have_text("Đã chuyển trạng thái sang HOÀN TẤT.")
     status_filter.select_option("HOAN_TAT")
     expect(page.locator("table").first.locator("tbody tr").filter(has_text=ticket_code)).to_contain_text("HOÀN TẤT")
