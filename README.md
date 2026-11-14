@@ -207,7 +207,7 @@ Mỗi lệnh chọn đúng một test (dòng cuối: `1 passed`). Kết quả th
 ### 5.4. Chạy toàn bộ test case một lần
 
 ```powershell
-# Cả 12 test case BT3 (mong đợi: 12 passed, khoảng 5 phút)
+# Cả 12 test case BT3 (mong đợi: 12 passed, khoảng 3 phút)
 python -m pytest -m bt3
 # Mọi tầng liên tiếp: unit (104 passed) → integration PostgreSQL (7 passed) → 12 test case BT3 (12 passed)
 python -m pytest; python -m pytest tests\integration -m integration; python -m pytest -m bt3

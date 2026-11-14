@@ -11,12 +11,33 @@ hay bị lộ không · có cách làm tạm không*.
 | [BUG-08](#bug-08) | **Major** | TC-07 (BT3) | Phiếu được tạo với tên khách, serial, mô tả chỉ có khoảng trắng | [224fd69](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/224fd6902da028a096100d077e80a1e752fbf600) |
 | [BUG-07](#bug-07) | **Major** | Phép thử CSDL tắt (BT2, ảnh BT2_07) | API treo hơn 2 phút khi không kết nối được CSDL | [25e3d1e](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/25e3d1ebaa7eeba552f7bc05d0d379181a082546) |
 | [BUG-03](#bug-03) | **Major** | Phép thử clone thư mục trống theo README | Bản clone mới không dựng được hệ thống theo README | [a947ed7](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/a947ed735765dc34ccd58b37b222f9b6c4cbdcf5) |
+| [BUG-09](#bug-09) | Minor | Phép thử máy trắng Buổi 16 theo README mục 5.2 | Dựng DB kiểm thử qua `localhost` gần như treo (mỗi kết nối ~60 giây) | [146e4a5](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/146e4a5b28b5a312fd74e8733b10b496345375a2) |
 
-Ba bug trên là ba bug nộp cho BT3: mỗi bug có một commit `fix…` chỉ chứa thay đổi của bug đó. Các bug BUG-01,
+Ba bug Major (BUG-08, 07, 03) là ba bug nộp cho BT3; BUG-09 (Minor) được tìm thêm ở phép thử máy trắng Buổi 16. Cả bốn bug: mỗi bug có một commit `fix…` chỉ chứa thay đổi của bug đó. Các bug BUG-01,
 02, 04, 05, 06 ở cuối tệp là lịch sử Buổi 10–12; commit của chúng gộp với việc khác hoặc không phải commit `fix`,
 nên không dùng làm minh chứng “một bug – một commit”.
 
 ---
+
+## BUG-09
+
+**BUG-09 — Hướng dẫn chạy test trỏ tới `localhost`, mỗi kết nối PostgreSQL của Docker mất khoảng 60 giây**
+
+1. **Mã và mức độ:** BUG-09 · **MINOR** — người làm theo README mục 5.2 vẫn chạy được test nhưng bước dựng database
+   kiểm thử gần như treo, rất dễ bỏ cuộc; không sai hay lộ dữ liệu, sản phẩm chạy trong Docker không bị ảnh hưởng, có
+   cách làm tạm (dùng `127.0.0.1`).
+2. **Phát hiện bởi:** phép thử máy trắng Buổi 16 (15/11/2026): clone sạch vào `C:\BT3pre`, làm đúng README mục 5.2.
+3. **Triệu chứng:** `python scripts\setup_all.py --with-test-db` chạy hơn 10 phút chưa xong, trong khi `pg_stat_activity`
+   không có truy vấn nào; tiến trình `load_appointments.py` đứng ở bước kết nối.
+4. **Cách tái lập:** stack Docker đang chạy; `.env` đặt `DB_HOST=localhost`, `DB_PORT=5433`; đo
+   `psycopg.connect(host=..., port=5433, connect_timeout=60)`: `127.0.0.1` → 0,0 giây, `localhost` → 60,0 giây.
+5. **Nguyên nhân:** `docker-compose.yml` chỉ mở cổng PostgreSQL trên `127.0.0.1` (cố ý, mục 7 checklist bảo mật), còn
+   `localhost` được phân giải thành `['::1', '127.0.0.1']`. Kết nối tới `::1:5433` (cổng đóng) trên Windows không bị từ chối
+   ngay mà chờ hết thời gian chờ rồi mới thử IPv4 (cùng hiện tượng nền của BUG-07).
+6. **Cách sửa:** README mục 5.2 hướng dẫn `DB_HOST=127.0.0.1` và giải thích lý do; không đổi cấu hình cổng của Docker để
+   PostgreSQL vẫn chỉ nghe trên máy này.
+7. **Commit và xác nhận:** [146e4a5](https://github.com/NguyenQuocViet23/smartcrm-2374802010556-phan-cong-ky--thuat-vien-va-lich-hen/commit/146e4a5b28b5a312fd74e8733b10b496345375a2) · làm lại mục 5.2 trên bản clone: `setup_all.py --with-test-db`
+   xong trong 10 giây; `python -m pytest -m bt3` → 12 passed (145 giây), unit 104 passed, integration 7 passed.
 
 ## BUG-08
 
