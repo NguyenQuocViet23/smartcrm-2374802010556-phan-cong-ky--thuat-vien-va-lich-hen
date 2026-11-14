@@ -66,6 +66,19 @@ services:
       init:
         condition: service_completed_successfully
 
+  # Unit tests in a container (no database needed): docker compose run --rm test
+  # Not started by `docker compose up` because of the "test" profile.
+  test:
+    profiles: ["test"]
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      target: test
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?Set DEMO_PASSWORD in .env}
+      TEST_DB_NAME: smartcrm_test
+
   frontend:
     build:
       context: ./src/frontend
