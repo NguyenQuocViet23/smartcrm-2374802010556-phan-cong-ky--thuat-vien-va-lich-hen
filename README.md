@@ -3,7 +3,7 @@
 **Đơn vị mô phỏng:** Mekong Mobile
 **Sinh viên:** Nguyễn Quốc Việt – MSSV 2374802010556 – Lớp 261_71ITGR40203_05
 **Track:** SE · Chuyên đề Tốt nghiệp 1 – Trường ĐH Văn Lang · Bài tập 3: tag `v1.0` (Bài tập 2: tag `v0.2`)
-**Phiên bản:** bản nộp Bài tập 3 là tag `v1.0`; tag `v1.1` giữ nguyên backend và cơ sở dữ liệu, chỉ cải tiến giao diện (mục 4, TD-26).
+**Phiên bản:** bản nộp Bài tập 3 là tag `v1.0`, đã gồm giao diện cải tiến (mục 4, TD-26) và bộ 25 test case (mục 5, TD-27). Tag `v1.1` tạm thời trước đó đã gộp vào `v1.0` và được xoá.
 
 ## 1. Mô tả bài toán và phạm vi
 
@@ -35,7 +35,7 @@ scripts/setup_all.py         dựng database một lệnh (tạo DB → migrate 
 scripts/                     migrate, load_catalog, load_tickets, load_appointments, …
 src/backend/app/             routers/, services/, repositories/, domain/, core/
 src/frontend/src/            api/ (client.js + *.api.js), components/, pages/
-tests/                       unit test; integration/; service/ + ui/ (TC01–TC18); e2e/
+tests/                       unit test; integration/; service/ + ui/ (TC01–TC21); bt3/ (TC-01…TC-25)
 docs/                        SRS, sơ đồ, thay đổi thiết kế, nhật ký lỗi, khai báo AI, minh chứng
 ```
 
@@ -163,9 +163,9 @@ docker compose run --rm test python -m pytest tests/test_ticket_rules.py
 docker compose run --rm test python -m pytest -k proficiency_exactly_three
 ```
 
-### 5.2. Chuẩn bị một lần cho 12 test case BT3 (TC-01…TC-12)
+### 5.2. Chuẩn bị một lần cho 25 test case BT3 (TC-01…TC-25)
 
-12 test case của [Test Report](docs/test-report.md) chạy trên **backend thật và Swagger/giao diện thật** bằng Playwright. Mỗi test tự tạo bản sao `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend riêng ở cổng 8000 trên bản sao đó, chụp ảnh rồi mới so kết quả. Cách dưới dùng luôn PostgreSQL và frontend trong Docker, **không cần cài PostgreSQL hay Node.js**:
+25 test case của [Test Report](docs/test-report.md) (12 cốt lõi TC-01…TC-12 và 13 bổ sung TC-13…TC-25) chạy trên **backend thật và Swagger/giao diện thật** bằng Playwright. Mỗi test tự tạo bản sao `smartcrm_work_test` từ `smartcrm_test`, tự chạy backend riêng ở cổng 8000 trên bản sao đó, chụp ảnh rồi mới so kết quả. Cách dưới dùng luôn PostgreSQL và frontend trong Docker, **không cần cài PostgreSQL hay Node.js**:
 
 ```powershell
 # 1. Dựng stack (bỏ qua nếu đã chạy) rồi tắt backend của Docker để trả cổng 8000 cho test.
@@ -204,15 +204,28 @@ Nếu dùng PostgreSQL và frontend cài trên máy (mục 3.2): `.env` trỏ t�
 | TC-10 | A07 – token thiếu, hết hạn, bị sửa | Bảo mật | `python -m pytest -m bt3 -k tc10` |
 | TC-11 | A05 injection và XSS, A02 CORS và lộ lỗi | Bảo mật | `python -m pytest -m bt3 -k tc11` |
 | TC-12 | Dựng CSDL hai lần không nhân đôi | Tái lập | `python -m pytest -m bt3 -k tc12` |
+| TC-13 | Quản lý tạo phiếu bằng "+ Tạo phiếu mới" | Luồng đúng | `python -m pytest -m bt3 -k tc13` |
+| TC-14 | Quản lý sửa phiếu MỚI (mô tả, ưu tiên) | Luồng đúng | `python -m pytest -m bt3 -k tc14` |
+| TC-15 | Kỹ thuật viên đổi giờ lịch trên trang Lịch hẹn của tôi | Luồng đúng | `python -m pytest -m bt3 -k tc15` |
+| TC-16 | Quản lý hủy lịch hẹn (hủy mềm, giải phóng khung giờ) | Luồng đúng | `python -m pytest -m bt3 -k tc16` |
+| TC-17 | Hoàn tất phiếu phải xác nhận | Luồng đúng | `python -m pytest -m bt3 -k tc17` |
+| TC-18 | Biên giờ làm việc 17:30–18:00 \| 17:31–18:01 khi đổi giờ | Giá trị biên | `python -m pytest -m bt3 -k tc18` |
+| TC-19 | Biên phân trang 20 \| 21 phiếu | Giá trị biên | `python -m pytest -m bt3 -k tc19` |
+| TC-20 | Tạo phiếu trên giao diện: SĐT sai, hạn cam kết đã qua | Dữ liệu sai | `python -m pytest -m bt3 -k tc20` |
+| TC-21 | Đổi giờ lịch trùng lịch khác trên giao diện | Dữ liệu sai | `python -m pytest -m bt3 -k tc21` |
+| TC-22 | Hủy phiếu đã phân công, hủy lịch đã hủy | Dữ liệu sai | `python -m pytest -m bt3 -k tc22` |
+| TC-23 | A01 – phạm vi danh sách lịch hẹn, KTV khác sửa/hủy lịch | Bảo mật | `python -m pytest -m bt3 -k tc23` |
+| TC-24 | A01 – điều hướng giao diện theo vai trò | Bảo mật | `python -m pytest -m bt3 -k tc24` |
+| TC-25 | Nạp lại dữ liệu không ghi đè thao tác của người dùng | Tái lập | `python -m pytest -m bt3 -k tc25` |
 
 Mỗi lệnh chọn đúng một test (dòng cuối: `1 passed`). Kết quả thực tế mà test ghi lại nằm trong `docs/screenshots/bt3-ket-qua-chay.md`, ảnh trong `docs/screenshots/TC-xx*.png`.
 
 ### 5.4. Chạy toàn bộ test case một lần
 
 ```powershell
-# Cả 12 test case BT3 (mong đợi: 12 passed, khoảng 3 phút)
+# Cả 25 test case BT3 (mong đợi: 25 passed, khoảng 6 phút)
 python -m pytest -m bt3
-# Mọi tầng liên tiếp: unit (104 passed) → integration PostgreSQL (7 passed) → 12 test case BT3 (12 passed)
+# Mọi tầng liên tiếp: unit (104 passed) → integration PostgreSQL (7 passed) → 25 test case BT3 (25 passed)
 python -m pytest; python -m pytest tests\integration -m integration; python -m pytest -m bt3
 ```
 
@@ -229,9 +242,8 @@ Lưu ý khi chạy:
 
 | Nhóm | Lệnh | Cần gì | Kết quả gần nhất |
 |---|---|---|---|
-| 18 test case TC01–TC18 của Buổi 10 (nghiệp vụ, giao diện, e2e) | `python -m pytest -m system` (một case: `python -m pytest -m system -k tc05`) | Như mục 5.2 | 18 passed (~4 phút) |
-| End-to-end luồng chính (có tắt backend thật) | `python -m pytest tests\e2e -m e2e` | Như mục 5.2 | 1 passed |
-| UI với API giả lập (TC19–TC21) | `python -m pytest tests\ui -m ui` | Frontend đang chạy | 3 passed |
+| 18 test case TC01–TC18 của Buổi 10 (nghiệp vụ, giao diện, luồng chính TC18) | `python -m pytest -m system` (một case: `python -m pytest -m system -k tc05`) | Như mục 5.2 | 18 passed (~4 phút) |
+| UI với API giả lập (TC19–TC21 và 3 test màn hình v1.1) | `python -m pytest tests\ui -m ui` | Frontend đang chạy | 6 passed |
 
 - Unit test gồm ba loại (luồng đúng, giá trị biên, dữ liệu sai): `tests/test_ticket_rules.py` (vòng đời trạng thái, tay nghề đúng bằng 3, phạm vi xem phiếu), `tests/test_crud_rules.py` (SĐT, hạn cam kết, sửa/hủy phiếu và lịch hẹn, khung giờ trống), `tests/test_appointment_validation.py` (giờ làm việc, biên 17:30–18:00), `tests/test_error_handling.py` (ánh xạ lỗi, 503 khi CSDL tắt, 500 không lộ traceback).
 - TC01–TC18 giữ nguyên mã, tên và kỳ vọng của báo cáo Buổi 10 (`tests/tc_catalog.json`); ảnh trình duyệt thật ở [docs/test-evidence/](docs/test-evidence/) kèm báo cáo tự sinh [testcase.md](docs/test-evidence/testcase.md). Cách chạy từng test: TD-16.

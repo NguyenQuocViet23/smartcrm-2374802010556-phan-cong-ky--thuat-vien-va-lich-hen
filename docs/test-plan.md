@@ -9,14 +9,14 @@ Kết quả chạy: [test-report.md](test-report.md) · Bug Log: [bug-log.md](bu
 gợi ý kỹ thuật viên (FR2, QT-08), phân công và đổi kỹ thuật viên (FR3, FR4, QT-07), đặt lịch hẹn và
 chống trùng (FR6, FR7), vòng đời trạng thái (FR8, QT-06), tạo/sửa phiếu (QT-02), phân quyền theo trung
 tâm/kỹ thuật viên (QT-14), che số điện thoại (QT-15), hợp đồng lỗi của API (400/401/403/404/409, không 500),
-năm mục OWASP mức nhận biết (A01, A02, A04, A05, A07) và tính tái lập của bước dựng CSDL.
+năm mục OWASP mức nhận biết (A01, A02, A04, A05, A07) và tính tái lập của bước dựng CSDL. Từ giao diện cải tiến (TD-26) kiểm thêm: tạo/sửa/hủy mềm phiếu, đổi giờ/hủy lịch hẹn, hộp xác nhận Hoàn tất, phân trang, chặn điều hướng theo vai trò và phạm vi của `GET /api/appointments` (trang Lịch hẹn).
 
 **Chủ ý KHÔNG kiểm (và lý do):**
 
 | Không kiểm | Lý do |
 |---|---|
 | Hiệu năng, tải đồng thời lớn | Prototype một người dùng; NFR hiệu năng ngoài phạm vi BT3 |
-| Giao diện trên nhiều trình duyệt / thiết bị di động | Chỉ kiểm Chromium; giao diện đã có TC14–TC18 (Buổi 10) |
+| Giao diện trên nhiều trình duyệt / thiết bị di động | Chỉ kiểm Chromium, khung 1280 px; giao diện đã có TC-13…TC-24, TC14–TC18 (Buổi 10) và 6 test UI giả lập |
 | UC8 báo cáo khối lượng, SMS/Zalo, tồn kho linh kiện | Ngoài phạm vi L04 (TD-05, TD-15) |
 | Luồng tiếp nhận phiếu L2 đầy đủ | Ngoài phạm vi; tạo phiếu chỉ là CRUD tối giản (TD-17) |
 | Rà soát bảo mật đầy đủ, kiểm thử xâm nhập | Thuộc Chuyên đề tốt nghiệp 2; BT3 chỉ kiểm năm mục OWASP bằng tay/tự động |
@@ -24,7 +24,7 @@ năm mục OWASP mức nhận biết (A01, A02, A04, A05, A07) và tính tái l�
 
 **Kỹ thuật chọn dữ liệu:** phân vùng tương đương (hợp lệ / sai định dạng / sai quyền) và giá trị biên hai
 bên ranh giới: tay nghề **3 | 2** (TC-04), lịch liền kề **10:00 = 10:00 | chồng 1 phút 09:01** (TC-05),
-mã phiếu **không tồn tại | vượt BIGINT** (TC-08), chuỗi **có chữ | chỉ khoảng trắng** (TC-06, TC-07).
+mã phiếu **không tồn tại | vượt BIGINT** (TC-08), chuỗi **có chữ | chỉ khoảng trắng** (TC-06, TC-07), giờ làm việc **17:30–18:00 | 17:31–18:01** (TC-18), phân trang **20 | 21** phiếu (TC-19).
 
 ## 2. Loại test và số lượng mỗi tầng
 
@@ -32,17 +32,21 @@ mã phiếu **không tồn tại | vượt BIGINT** (TC-08), chuỗi **có chữ
 |---|---|---|---|
 | Unit (lớp service, không CSDL) | pytest | 104 test (quy tắc phiếu, lịch hẹn, ánh xạ lỗi, xác thực) | `python -m pytest` |
 | Integration (PostgreSQL thật) | pytest + TestClient | 7 test (CRUD, chạy lại không nhân đôi, TC22–TC25) | `python -m pytest tests/integration -m integration` |
-| API / end-to-end (HTTP thật, Swagger, UI) | pytest + Playwright | **12 test case TC-01…TC-12 của Test Report** | `python -m pytest -m bt3` |
+| API / end-to-end (HTTP thật, Swagger, UI) | pytest + Playwright | **25 test case của Test Report: 12 cốt lõi TC-01…TC-12 + 13 bổ sung TC-13…TC-25** | `python -m pytest -m bt3` |
+| Giao diện trên hệ thống thật (Buổi 10) | pytest + Playwright | 18 test case TC01–TC18 | `python -m pytest -m system` |
+| Giao diện với API giả lập | pytest + Playwright | 6 test (TC19–TC21 và 3 màn hình mới) | `python -m pytest tests\ui -m ui` |
 
-12 test case phủ đủ năm loại: luồng đúng (TC-01, TC-02, TC-03) · giá trị biên (TC-04, TC-05) · dữ liệu sai
-(TC-06, TC-07, TC-08) · bảo mật/chất lượng dữ liệu (TC-09, TC-10, TC-11) · tái lập (TC-12). Mỗi quy tắc
-nghiệp vụ đã hiện thực có ít nhất một test. TC01–TC18 của Buổi 10 (`-m system`) vẫn giữ để kiểm giao diện.
+12 test case cốt lõi phủ đủ năm loại: luồng đúng (TC-01, TC-02, TC-03) · giá trị biên (TC-04, TC-05) · dữ liệu sai
+(TC-06, TC-07, TC-08) · bảo mật/chất lượng dữ liệu (TC-09, TC-10, TC-11) · tái lập (TC-12). 13 test case bổ sung
+cho giao diện cải tiến cũng phủ đủ năm loại: luồng đúng (TC-13…TC-17) · biên (TC-18, TC-19) · dữ liệu sai
+(TC-20…TC-22) · bảo mật (TC-23, TC-24) · tái lập (TC-25). Mỗi quy tắc nghiệp vụ đã hiện thực có ít nhất một test.
+TC01–TC18 của Buổi 10 (`-m system`) vẫn giữ để kiểm giao diện; bộ e2e cũ trùng TC18 đã gỡ (TD-27).
 
 ## 3. Tiêu chí thành công đo được
 
-1. 12/12 test case đã **chạy thật**, mỗi case có kết quả thực tế cụ thể (mã HTTP, mã lỗi, đếm bản ghi
+1. 25/25 test case đã **chạy thật**, mỗi case có kết quả thực tế cụ thể (mã HTTP, mã lỗi, đếm bản ghi
    trước/sau) và ảnh chụp trong `docs/screenshots/TC-xx*.png` (TC-12: ảnh terminal).
-2. Sau khi sửa bug: `python -m pytest` (unit), `-m integration` và `-m bt3` đều **0 FAIL**.
+2. Sau khi sửa bug: `python -m pytest` (unit), `-m integration`, `-m bt3`, `-m system` và `tests\ui -m ui` đều **0 FAIL**.
 3. Không còn bug Critical mở; mọi bug Major trở lên có commit sửa riêng và test case chạy lại PASS.
 4. Mọi lỗi nghiệp vụ biết trước trả đúng 400/401/403/404/409 – **không có phản hồi 500**; phản hồi lỗi
    không chứa traceback, tên bảng hay câu SQL.
@@ -57,5 +61,6 @@ nghiệp vụ đã hiện thực có ít nhất một test. TC01–TC18 của Bu
 | Cô lập | Mỗi test case tạo lại `smartcrm_work_test` từ `smartcrm_test` và chạy backend riêng trên bản sao (TD-12); không ghi vào `smartcrm` |
 | Tiền điều kiện | Dựng bằng SQL trên bản sao từ bản ghi thật (ví dụ khối lượng 5/2/8, tay nghề 3/2), không dựa vào dữ liệu còn sót |
 | TC-12 | Bộ mẫu trong repo `data/sample` nạp vào `smartcrm_load_test` (xoá trước và sau khi chạy) |
+| TC-25 | Chạy lại `scripts/setup_all.py` vào chính bản sao `smartcrm_work_test` sau khi đã tạo và hủy phiếu qua API |
 | Tài khoản | Tài khoản demo `QL_TT01…06`, `KT002…` sinh từ `DEMO_PASSWORD` trong `.env`; token ký bằng `SECRET_KEY` |
-| Cần chạy trước | `.env` có `TEST_DB_NAME=smartcrm_test`; `python scripts/setup_all.py --with-test-db`; frontend `npm run dev` (cho TC-11); cổng 8000 trống |
+| Cần chạy trước | `.env` có `TEST_DB_NAME=smartcrm_test`; `python scripts/setup_all.py --with-test-db`; frontend chạy ở `http://localhost:5173` (`docker compose` hoặc `npm run dev`, cho TC-11 và TC-13…TC-25); cổng 8000 trống (`docker compose stop backend`). Cách chuẩn bị đầy đủ: README mục 5.2 |

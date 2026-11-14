@@ -22,7 +22,7 @@ Tài liệu ghi lại cách ghép các module thành luồng chính L04, các ch
 2. **Ghép frontend ↔ backend:** đăng nhập + M1 trên backend thật.
 3. **Ghép thêm M2:** gợi ý → phân công → đặt lịch, đối chiếu bằng SQL.
 4. **Ghép thêm M3:** đăng nhập kỹ thuật viên được phân công → cập nhật trạng thái.
-5. **Toàn luồng:** `tests/e2e/test_main_flow.py` chạy một lần từ bước 1 đến 7, không can thiệp tay.
+5. **Toàn luồng** (nhật ký Buổi 11; bộ `tests/e2e` và ảnh `E2E_*` đã gỡ ở TD-27 vì trùng TC18): `tests/e2e/test_main_flow.py` chạy một lần từ bước 1 đến 7, không can thiệp tay.
 
 ## 3. Chỗ đứt gãy đã gặp và cách xử lý
 

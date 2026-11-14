@@ -209,3 +209,14 @@ Buổi 14 với repo này, mỗi mục có quyết định và dẫn chứng.
   6. Nhãn tiếng Việt cho nhóm sự cố và loại lịch (vẫn hiện mã `GIAO`/`NHAN`), huy hiệu màu theo trạng thái, form lịch hẹn chọn thời lượng và mặc định ngày làm việc kế tiếp.
 - **Lý do:** người dùng phải làm được trọn luồng L04 trên giao diện mà không cần Swagger; "xoá" trên giao diện là hủy mềm theo QT-13.
 - **Ảnh hưởng:** bản nộp BT3 vẫn là tag `v1.0` (ảnh minh chứng chụp giao diện cũ); giao diện mới ở tag `v1.1`. Test giao diện cũ giữ nguyên kỳ vọng; hai chỗ đổi: bấm "Xác nhận" sau "Hoàn tất", selector "Hủy" dùng `exact=True`. Thêm 3 test UI cho các màn hình mới. Danh sách phiếu và lịch hẹn không có cột kỹ thuật viên vì API danh sách chỉ trả `technician_id`; kỹ thuật viên hiện ở trang chi tiết phiếu.
+
+## TD-27 – Bộ test khớp giao diện mới: 25 test case BT3, gỡ e2e trùng, dời tag v1.0
+
+- **Phản hồi:** sau TD-26, test cũ vẫn PASS nhưng mô tả và ảnh minh chứng còn theo giao diện cũ; chức năng mới (tạo/sửa/hủy phiếu, trang Lịch hẹn, đổi giờ/hủy lịch, hộp xác nhận, chặn điều hướng) chỉ có test giả lập API; `GET /api/appointments` chưa có test nào.
+- **Quyết định:**
+  1. **Test Report giữ 12 test case cốt lõi** (đúng tiêu chí C2 của BT3: 10–12) và thêm mục **test case bổ sung TC-13…TC-25** (`tests/bt3/test_bt3_v2.py`), cùng tám cột, chạy thật trên backend và giao diện thật, có ảnh; phủ đủ năm loại.
+  2. **Gỡ `tests/e2e/`** (luồng M1 → M2 → M3 trùng TC18; tình huống tắt backend đã có ở TC16) cùng ảnh `E2E_*`.
+  3. **Xoá ảnh minh chứng giao diện cũ** (`docs/test-evidence/TC*.png`, `export/`) và sinh lại bằng lần chạy mới trên giao diện mới; mô tả TC18 trong `tests/tc_catalog.json` thêm bước "Xác nhận" khi Hoàn tất.
+  4. **Dời tag `v1.0`** lên bản có giao diện mới và 25 test case (theo slide Buổi 16: xoá tag, commit, tạo lại, đẩy lại), chạy lại phép thử máy trắng trên tag mới; **xoá tag `v1.1`** để chỉ còn một bản nộp.
+- **Lý do:** bản giảng viên chấm (tag v1.0) phải khớp báo cáo; chức năng có trên giao diện phải có test chạy thật; không để hai bộ test kiểm cùng một luồng.
+- **Ảnh hưởng:** không đổi backend, không đổi schema. README mục 5 có lệnh chạy riêng cho cả 25 test case; Test Plan cập nhật phạm vi và số lượng.
